@@ -51,9 +51,6 @@
   #   plymouth.enable = true;
   # };
 
-  # Networking
-  networking.networkmanager.enable = true;
-
   # Timezone
   time = {
     timeZone = "America/Bogota";

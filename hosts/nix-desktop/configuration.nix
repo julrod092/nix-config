@@ -11,6 +11,7 @@
     ../modules/common.nix
     ../modules/gnome.nix
     ../modules/nvidia.nix
+    ../modules/network.nix
   ];
 
   # Set hostname
