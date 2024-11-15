@@ -1,6 +1,12 @@
 {pkgs, ...}: {
-  # Ensure required packages for OCR installed
-  home.packages = with pkgs; [
-    vscode
-  ];
+  # Install VSCode with expected extensions
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      ms-azuretools.vscode-docker
+      vscode-infra.image-viewer
+      bbenoist.Nix
+      christian-kohler.path-intellisense
+    ];
+  };
 }
