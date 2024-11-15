@@ -102,7 +102,7 @@
       };
   in {
     nixosConfigurations = {
-      nix-desktop = mkNixosConfiguration "nix-desktop" "julrod"
+      nix-desktop = mkNixosConfiguration "nix-desktop" "julrod";
     };
 
     homeConfigurations = {
