@@ -3,7 +3,6 @@
 in
   with lib.hm.gvariant; {
     imports = [
-      ./flameshot.nix
       ./gtk.nix
       ./ocr-x11.nix
       ./pop-shell.nix
@@ -77,9 +76,9 @@ in
 
       "org/gnome/desktop/input-sources" = {
         "current" = mkUint32 0;
-        "mru-sources" = [(mkTuple ["xkb" "pl"]) (mkTuple ["xkb" "ru"])];
+        "mru-sources" = [(mkTuple ["xkb" "us"])];
         "show-all-sources" = false;
-        "sources" = [(mkTuple ["xkb" "pl"]) (mkTuple ["xkb" "ru"])];
+        "sources" = [(mkTuple ["xkb" "us"])];
         "xkb-options" = ["terminate:ctrl_alt_bksp"];
       };
 
@@ -170,9 +169,6 @@ in
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/"
         ];
         "screensaver" = ["<Alt><Ctrl>l"];
       };
@@ -184,48 +180,30 @@ in
       };
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-        "binding" = "<Shift><Super>s";
-        "command" = "flameshot gui";
-        "name" = "Flameshot";
-      };
-
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
         "binding" = "<Shift><Alt>2";
         "command" = "ocr";
         "name" = "OCR";
       };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
         "binding" = "<Shift><Super>Return";
         "command" = "alacritty";
         "name" = "Alacritty";
       };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
-        "binding" = "<Shift><Super>b";
-        "command" = "brave";
-        "name" = "Brave";
-      };
-
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
         "binding" = "<Shift><Super>f";
         "command" = "nautilus";
         "name" = "Files";
       };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6" = {
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
         "binding" = "<Alt><Ctrl>q";
         "command" = "gnome-session-quit";
         "name" = "Logout";
       };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7" = {
-        "binding" = "<Shift><Super>t";
-        "command" = "telegram-desktop";
-        "name" = "Telegram";
-      };
-
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8" = {
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
         "binding" = "<Alt><Ctrl>p";
         "command" = "gnome-pomodoro --start-stop";
         "name" = "Pomodoro";

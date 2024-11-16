@@ -254,7 +254,6 @@ This setup includes a wide range of custom modules and configurations to enhance
 
    - `corectrl.nix`: GPU controls and monitoring
    - `easyeffects.nix`: Audio effects for PipeWire
-   - `flameshot.nix`: Screenshot tool
    - `normcap.nix`: OCR tool
    - `spicetify.nix`: Spotify client customization
    - `swappy.nix`: Wayland screenshot editing tool

@@ -31,6 +31,21 @@
 
     # Homebrew
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
+    # Firefox browser addons
+    nur.url = "github:nix-community/NUR";
+
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+
+    # Neovim flake
+    neovim-flake = {
+      url = github:gvolpe/neovim-flake;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    
+    # VsCode extensions
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
   outputs = {
@@ -46,18 +61,11 @@
 
     # Define user configurations
     users = {
-      nabokikh = {
-        avatar = ./files/avatar/face;
-        email = "alexander.nabokikh@olx.pl";
-        fullName = "Alexander Nabokikh";
-        gitKey = "C5810093";
-        name = "nabokikh";
-      };
       julrod = {
         avatar = ./files/avatar/face;
         email = "jrodriguezrpo@pm.me";
         fullName = "Julian Rodriguez";
-        gitKey = "C5810093";
+        # gitKey = "C5810093";
         name = "julrod";
       };
     };
@@ -92,7 +100,7 @@
       home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {inherit system;};
         extraSpecialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs system;
           userConfig = users.${username};
         };
         modules = [

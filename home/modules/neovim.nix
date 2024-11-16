@@ -44,6 +44,7 @@
           clang = false;
           go = false;
         };
+        tide.enable = false;
         hurl.enable = true;
         plantuml.enable = true;
         fx.automaton.enable = true;
