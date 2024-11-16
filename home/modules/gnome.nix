@@ -9,20 +9,6 @@ in
     ];
 
     dconf.settings = {
-      "org/gnome/calculator" = {
-        "accuracy" = 9;
-        "angle-units" = "degrees";
-        "base" = 10;
-        "button-mode" = "basic";
-        "number-format" = "automatic";
-        "show-thousands" = false;
-        "show-zeroes" = false;
-        "source-currency" = "";
-        "source-units" = "degree";
-        "target-currency" = "";
-        "target-units" = "radian";
-        "window-maximized" = false;
-      };
 
       "org/gnome/desktop/interface" = {
         "cursor-theme" = "Yaru";
@@ -231,22 +217,9 @@ in
         ];
         "favorite-apps" = [
           "org.gnome.Nautilus.desktop"
-          "brave-browser.desktop"
+          "firefox.desktop"
           "Alacritty.desktop"
-          "org.telegram.desktop.desktop"
           "spotify.desktop"
-        ];
-      };
-
-      "org/gnome/shell/extensions/auto-move-windows" = {
-        "application-list" = [
-          "brave-browser.desktop:1"
-          "Alacritty.desktop:2"
-          "org.telegram.desktop.desktop:3"
-          "com.obsproject.Studio.desktop:4"
-          "spotify.desktop:4"
-          "steam.desktop:4"
-          "Zoom.desktop:5"
         ];
       };
 
