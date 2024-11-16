@@ -11,7 +11,6 @@ in
     dconf.settings = {
 
       "org/gnome/desktop/interface" = {
-        "cursor-theme" = "Yaru";
         "font-name" = "Roboto 11";
         "icon-theme" = "Tela-circle-dark";
         "color-scheme" = "prefer-dark";

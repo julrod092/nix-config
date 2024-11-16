@@ -158,6 +158,7 @@
     wl-clipboard
     stable.zoom-us
     home-manager
+    synergy
   ];
 
   # Docker configuration
