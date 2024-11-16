@@ -157,6 +157,7 @@
     unzip
     wl-clipboard
     stable.zoom-us
+    home-manager
   ];
 
   # Docker configuration
