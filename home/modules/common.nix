@@ -1,7 +1,7 @@
 {outputs, ...}: {
   imports = [
     ../modules/alacritty.nix
-    ../modules/atuin.nix
+    # ../modules/atuin.nix
     ../modules/bat.nix
     ../modules/btop.nix
     ../modules/fastfetch.nix
@@ -29,11 +29,5 @@
     config = {
       allowUnfree = true;
     };
-  };
-
-  # Catpuccin flavor and accent
-  catppuccin = {
-    flavor = "macchiato";
-    accent = "lavender";
   };
 }

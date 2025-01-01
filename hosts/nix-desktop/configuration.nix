@@ -9,7 +9,7 @@
 
     ./hardware-configuration.nix
     ../modules/common.nix
-    ../modules/hyprland.nix
+    ../modules/gnome.nix
     ../modules/nvidia.nix
     ../modules/network.nix
   ];

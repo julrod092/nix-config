@@ -16,7 +16,6 @@
     gnome-tour
     snapshot
     atomix # puzzle game
-    baobab # disk usage analyzer
     cheese # webcam tool
     epiphany # web browser
     evince # document viewer
@@ -43,7 +42,6 @@
 
   # List of Gnome specific packages
   environment.systemPackages = with pkgs; [
-    gnome-pomodoro
     gnome-tweaks
     gnomeExtensions.auto-move-windows
     gnomeExtensions.blur-my-shell

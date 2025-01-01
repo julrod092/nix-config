@@ -10,7 +10,6 @@ in
 {
   imports = [
     ../modules/common.nix
-    ../modules/hyprland.nix
     ../modules/firefox.nix
 
     inputs.neovim-flake.homeManagerModules.${system}.default
