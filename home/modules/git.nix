@@ -21,6 +21,7 @@
     };
     extraConfig = {
       pull.rebase = "true";
+      core.editor = "vim";
     };
   };
 }

@@ -85,7 +85,10 @@
   };
 
   # PATH configuration
-  environment.localBinInPath = true;
+  environment = {
+    localBinInPath = true;
+    variables.EDITOR = "neovim";
+  };
 
   # Disable CUPS printing
   services.printing.enable = false;
