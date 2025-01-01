@@ -7,7 +7,7 @@
     # syntaxHighlighting.enable = true;
 
     shellAliases = {
-      updatex = "sudo nixos-rebuild switch --flake ~/.nix-config#julrod-nix-desktop && source ~/.zshrc";
+      updatex = "sudo nixos-rebuild switch --flake ~/.nix-config#julrod-nix-desktop && home-manager switch --flake ~/.nix-config#julrod@nix-desktop && source ~/.zshrc";
     };
 
     # history = {
