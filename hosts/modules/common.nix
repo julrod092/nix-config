@@ -37,19 +37,17 @@
   };
 
   # Boot settings
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.efi.canTouchEfiVariables = true;
-  # boot = {
-  #   # kernelPackages = pkgs.linuxPackages_latest;
-  #   consoleLogLevel = 0;
-  #   initrd.verbose = false;
-  #   kernelParams = ["quiet" "splash"];
-  #   loader.efi.canTouchEfiVariables = true;
-  #   loader.systemd-boot.enable = true;
-  #   loader.timeout = 0;
-  #   plymouth.enable = true;
-  # };
+  boot = {
+    kernelParams = ["quiet" "splash"];
+    loader = {
+        timeout = 10;
+        systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   # Timezone
   time = {
@@ -105,6 +103,57 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+
+    configPackages = [
+      (pkgs.writeTextDir "share/alsa-card-profile/mixer/paths/razer-nari-input.conf" ''
+        [General]
+        description-key = analog-input-microphone-headset
+
+        [Element Headset]
+        volume = merge
+        switch = mute
+        override-map.1 = all
+        override-map.2 = all-left,all-right
+      '')
+      (pkgs.writeTextDir "share/alsa-card-profile/mixer/paths/razer-nari-output-game.conf" ''
+        [General]
+        priority = 99
+        description-key = steelseries-arctis-output-game-common
+
+        [Element PCM]
+        switch = mute
+        volume = merge
+      '')
+      (pkgs.writeTextDir "share/alsa-card-profile/mixer/profile-sets/razer-nari-usb-audio.conf" ''
+        [General]
+        auto-profiles = yes
+
+        [Mapping analog-chat]
+        description = Chat
+        device-strings = hw:%f,0,0
+        channel-map = mono
+        paths-input = razer-nari-input
+        paths-output = razer-nari-output-chat
+
+        [Mapping analog-game]
+        description = Game
+        device-strings = hw:%f,1,0
+        channel-map = left,right
+        paths-output = razer-nari-output-game
+        direction = output
+
+        [Profile output:analog-chat+output:analog-game+input:analog-chat]
+        output-mappings = analog-chat analog-game
+        input-mappings = analog-chat
+        priority = 5100
+        skip-probe = yes
+      '')
+      (pkgs.writeTextDir "lib/udev/rules.d/91-pulseaudio-razer-nari.rules" ''
+        ATTRS{idVendor}=="1532", ATTRS{idProduct}=="051a", ENV{ACP_PROFILE_SET}="razer-nari-usb-audio.conf"
+        ATTRS{idVendor}=="1532", ATTRS{idProduct}=="051c", ENV{ACP_PROFILE_SET}="razer-nari-usb-audio.conf"
+        ATTRS{idVendor}=="1532", ATTRS{idProduct}=="051d", ENV{ACP_PROFILE_SET}="razer-nari-usb-audio.conf"
+      '')
+    ];
   };
 
   # User configuration
@@ -115,36 +164,13 @@
     shell = pkgs.zsh;
   };
 
-  # Set User's avatar
-  system.activationScripts.script.text = ''
-    mkdir -p /var/lib/AccountsService/{icons,users}
-    cp ${userConfig.avatar} /var/lib/AccountsService/icons/${userConfig.name}
-
-    touch /var/lib/AccountsService/users/${userConfig.name}
-
-    if ! grep -q "^Icon=" /var/lib/AccountsService/users/${userConfig.name}; then
-      if ! grep -q "^\[User\]" /var/lib/AccountsService/users/${userConfig.name}; then
-        echo "[User]" >> /var/lib/AccountsService/users/${userConfig.name}
-      fi
-      echo "Icon=/var/lib/AccountsService/icons/${userConfig.name}" >> /var/lib/AccountsService/users/${userConfig.name}
-    fi
-  '';
-
-  # Passwordless sudo
-  security.sudo.wheelNeedsPassword = false;
-
   # System packages
   environment.systemPackages = with pkgs; [
-    anki
     delta
     dig
-    docker-compose
     du-dust
     eza
     fd
-    gcc
-    glib
-    gnumake
     jq
     killall
     kubectl
@@ -159,28 +185,20 @@
     ripgrep
     unzip
     wl-clipboard
-    stable.zoom-us
     home-manager
-    synergy
   ];
-
-  # Docker configuration
-  virtualisation.docker.enable = true;
-  virtualisation.docker.rootless.enable = true;
-  virtualisation.docker.rootless.setSocketVariable = true;
 
   # Zsh configuration
   programs.zsh.enable = true;
 
-  # Fonts configuration
-  fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["Meslo" "JetBrainsMono"];})
-    roboto
-  ];
+  # # Fonts configuration
+  # nerdFonts = with (pkgs.nerd-fonts); [
+  #   jetbrains-mono
+  #   meslo
+  # ];
 
   # Additional services
   services.locate.enable = true;
-  services.locate.localuser = null;
 
   # OpenSSH daemon
   services.openssh.enable = true;

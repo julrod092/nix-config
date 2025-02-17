@@ -10,7 +10,7 @@ in
 {
   imports = [
     ../modules/common.nix
-    ../modules/firefox.nix
+    ../modules/horizon-client.nix
 
     inputs.neovim-flake.homeManagerModules.${system}.default
   ];
