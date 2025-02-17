@@ -13,13 +13,7 @@
     gnome-connections
     gnome-console
     gnome-photos
-    gnome-tour
     snapshot
-    atomix # puzzle game
-    cheese # webcam tool
-    epiphany # web browser
-    evince # document viewer
-    geary # email reader
     gnome-calendar
     gnome-characters
     gnome-clocks
@@ -32,11 +26,7 @@
     gnome-shell-extensions
     gnome-system-monitor
     gnome-terminal
-    gnome-weather
-    hitori # sudoku game
-    iagno # go game
     simple-scan
-    tali # poker game
     yelp # help viewer
   ];
 

@@ -2,7 +2,7 @@
 let 
   overlays = [
     inputs.neovim-nightly-overlay.overlays.default
-    inputs.nur.overlay.default
+    inputs.nur.overlays.default
     inputs.alacritty-theme.overlays.default
     inputs.neovim-flake.overlays.${system}.default
   ];
