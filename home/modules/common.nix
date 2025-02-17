@@ -8,7 +8,7 @@
     ../modules/home.nix
     ../modules/krew.nix
     ../modules/lazygit.nix
-    ../modules/neovim.nix
+    ../modules/neovim-ide/neovim.nix
     ../modules/scripts.nix
     ../modules/spicetify.nix
     ../modules/tmux.nix

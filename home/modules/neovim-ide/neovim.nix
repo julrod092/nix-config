@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: 
+{ config, pkgs, ... }:
 
 {
   programs.neovim-ide = {
@@ -13,6 +13,7 @@
           vim-mergetool
           vim-repeat
         ];
+        #neovim.package = pkgs.neovim-nightly;
         lsp = {
           enable = true;
           folds = true;
@@ -28,14 +29,23 @@
           };
           scala = {
             enable = true;
-            metals = pkgs.metalsBuilder {
-              version = "1.3.5";
-              outputHash = "sha256-86/zeoOO5kSAwh7uQTV7nGUGQoIux1rlH5eUgvn3kvY=";
+            metals = {
+              # using snapshot for https://github.com/scalameta/metals/pull/7097
+              package = pkgs.callPackage ./metals.nix { };
+              # best effort compilation + vs code default settings: https://github.com/scalameta/metals-vscode/blob/1e10e1a71cf81569ea65329ec2aa0aa1cb6ad682/packages/metals-vscode/package.json#L232
+              serverProperties = [
+                "-Dmetals.enable-best-effort=true"
+                "-Xmx2G"
+                "-XX:+UseZGC"
+                "-XX:ZUncommitDelay=30"
+                "-XX:ZCollectionInterval=5"
+                "-XX:+IgnoreUnrecognizedVMOptions"
+              ];
             };
           };
           ts = true;
           smithy.enable = true;
-          rust.enable = true;
+          rust.enable = false;
           dhall = false;
           elm = true;
           haskell = false;
@@ -44,10 +54,10 @@
           clang = false;
           go = false;
         };
-        tide.enable = false;
         hurl.enable = true;
         plantuml.enable = true;
         fx.automaton.enable = true;
+        snacks.enable = true;
         visuals = {
           enable = true;
           noice.enable = true;
@@ -64,18 +74,6 @@
             lineTimeout = 0;
           };
         };
-        chatgpt.enable = false;
-        autopairs.enable = true;
-        autocomplete.enable = true;
-        neoclip.enable = true;
-        dial.enable = true;
-        harpoon.enable = true;
-        hop.enable = true;
-        notifications.enable = true;
-        snippets.vsnip.enable = true;
-        todo.enable = true;
-        tabline.nvimBufferline.enable = true;
-        zen.enable = true;
         statusline.lualine = {
           enable = true;
           theme = "onedark";
@@ -86,16 +84,33 @@
           style = "deep";
           transparency = true;
         };
-        treesitter = {
-          enable = true;
-          autotagHtml = true;
-          context.enable = true;
-        };
+        autopairs.enable = true;
+        autocomplete.enable = true;
         filetree.nvimTreeLua = {
           enable = true;
           hideDotFiles = false;
           hideFiles = [ "node_modules" ".cache" ];
           openOnSetup = false;
+        };
+        mini.enable = true;
+        neoclip.enable = true;
+        dial.enable = true;
+        harpoon.enable = true;
+        hop.enable = true;
+        notifications.enable = true;
+        snippets.vsnip.enable = true;
+        tide = {
+          enable = true;
+          keys.splits.vertical = "~";
+        };
+        todo.enable = true;
+        tabline.nvimBufferline.enable = true;
+        zen.enable = true;
+        treesitter = {
+          enable = true;
+          autotagHtml = true;
+          context.enable = true;
+          textobjects.enable = false;
         };
         keys = {
           enable = true;
@@ -113,12 +128,17 @@
         };
         telescope = {
           enable = true;
+          mediaFiles.enable = true;
           tabs.enable = true;
         };
         markdown = {
           enable = true;
           glow.enable = true;
           render.enable = true;
+        };
+        chatgpt = {
+          enable = false;
+          # inherit (config.secrets) openaiApiKey;
         };
         git = {
           enable = true;
@@ -128,6 +148,14 @@
         spider = {
           enable = false;
           skipInsignificantPunctuation = true;
+        };
+        mind = {
+          enable = false;
+          # Documents dir is synced to the cloud
+          # persistence = {
+          #   dataDir = "~/Documents/mind.nvim/data";
+          #   statePath = "~/Documents/mind.nvim/mind.json";
+          # };
         };
       };
     };
