@@ -2,7 +2,7 @@
 let 
   overlays = [
     inputs.neovim-nightly-overlay.overlays.default
-    inputs.nur.overlay
+    inputs.nur.overlay.default
     inputs.alacritty-theme.overlays.default
     inputs.neovim-flake.overlays.${system}.default
   ];
@@ -11,6 +11,7 @@ in
   imports = [
     ../modules/common.nix
     ../modules/horizon-client.nix
+    ../modules/catppuccin.nix
 
     inputs.neovim-flake.homeManagerModules.${system}.default
   ];

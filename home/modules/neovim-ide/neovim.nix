@@ -47,7 +47,7 @@
           smithy.enable = true;
           rust.enable = false;
           dhall = false;
-          elm = true;
+          elm = false;
           haskell = false;
           sql = false;
           python = false;

@@ -191,11 +191,12 @@
   # Zsh configuration
   programs.zsh.enable = true;
 
-  # # Fonts configuration
-  # nerdFonts = with (pkgs.nerd-fonts); [
-  #   jetbrains-mono
-  #   meslo
-  # ];
+  # Fonts configuration
+  fonts.packages = [
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.meslo-lg
+  ];
+
 
   # Additional services
   services.locate.enable = true;
