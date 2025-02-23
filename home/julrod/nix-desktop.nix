@@ -10,7 +10,6 @@ in
 {
   imports = [
     ../modules/common.nix
-    ../modules/horizon-client.nix
     ../modules/catppuccin.nix
 
     inputs.neovim-flake.homeManagerModules.${system}.default
