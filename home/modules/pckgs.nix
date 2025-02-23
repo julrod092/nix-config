@@ -1,6 +1,7 @@
 {pkgs, ...}: {
-  # Ensure normcap package installed
+  
   home.packages = with pkgs; [
+    zed-editor
     vmware-horizon-client
   ];
 }

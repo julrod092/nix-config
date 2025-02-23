@@ -1,5 +1,9 @@
 {outputs, ...}: {
   imports = [
+    # Common packages install
+    ../modules/pckgs.nix
+
+    # Add specific package, services and configurations
     ../modules/alacritty.nix
     ../modules/bat.nix
     ../modules/btop.nix
