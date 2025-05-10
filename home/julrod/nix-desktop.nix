@@ -1,28 +1,12 @@
-{ inputs, system, ...}: 
-let 
-  overlays = [
-    inputs.neovim-nightly-overlay.overlays.default
-    inputs.nur.overlays.default
-    inputs.alacritty-theme.overlays.default
-    inputs.neovim-flake.overlays.${system}.default
-  ];
-in
-{
+{nhModules, ...}: {
   imports = [
-    ../modules/common.nix
-    ../modules/catppuccin.nix
-
-    inputs.neovim-flake.homeManagerModules.${system}.default
+    "${nhModules}/common"
+    "${nhModules}/desktop/hyprland"
   ];
-  
-  nixpkgs.overlays = overlays;
 
   # Enable home-manager
   programs.home-manager.enable = true;
 
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 }

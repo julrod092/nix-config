@@ -25,17 +25,26 @@
 
     # Nix Darwin (for MacOS machines)
     darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Homebrew
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-
-    # Firefox browser addons
-    nur.url = "github:nix-community/NUR";
-
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
 
     # Neovim flake
     neovim-flake = {
@@ -43,9 +52,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    
-    # VsCode extensions
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    # Temporal Zen browser flake
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
   };
 
   outputs = {
@@ -53,8 +62,11 @@
     catppuccin,
     darwin,
     home-manager,
-    nix-homebrew,
     nixpkgs,
+    nix-homebrew,
+    homebrew-bundle,
+    homebrew-core,
+    homebrew-cask,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -63,7 +75,7 @@
     users = {
       julrod = {
         avatar = ./files/avatar/face;
-        email = "jrodriguezrpo@pm.me";
+        email = "jrodriguezrpo@proton.me";
         fullName = "Julian Rodriguez";
         # gitKey = "C5810093";
         name = "julrod";
@@ -76,8 +88,9 @@
         specialArgs = {
           inherit inputs outputs hostname;
           userConfig = users.${username};
+          nixosModules = "${self}/modules/nixos";
         };
-        modules = [./hosts/${hostname}/configuration.nix];
+        modules = [./hosts/${hostname}];
       };
 
     # Function for nix-darwin system configuration
@@ -89,9 +102,23 @@
           userConfig = users.${username};
         };
         modules = [
-          ./hosts/${hostname}/configuration.nix
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "${username}";
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "homebrew/homebrew-bundle" = homebrew-bundle;
+              };
+              mutableTaps = false;
+              autoMigrate = true;
+            };
+          }
+          ./hosts/${hostname}
         ];
       };
 
@@ -102,18 +129,25 @@
         extraSpecialArgs = {
           inherit inputs outputs system;
           userConfig = users.${username};
+          nhModules = "${self}/modules/home-manager";
         };
+
         modules = [
-          ./home/${username}/${hostname}.nix
-          catppuccin.homeManagerModules.catppuccin
+          ./home/${username}/${hostname}
+          catppuccin.homeModules.catppuccin
         ];
       };
   in {
     nixosConfigurations = {
-      nix-desktop = mkNixosConfiguration "nix-desktop" "julrod";
+      "nix-desktop" = mkNixosConfiguration "nix-desktop" "julrod";
+    };
+
+    darwinConfigurations = {
+      "julrod-mac" = mkDarwinConfiguration "julrod-mac" "julrod";
     };
 
     homeConfigurations = {
+      "julrod@julrod-mac" = mkHomeConfiguration "aarch64-darwin" "julrod" "julrod-mac";
       "julrod@nix-desktop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-desktop";
     };
 
