@@ -63,16 +63,16 @@
           fail_timeout = 1000
       }
 
-      # DP-1 Conifg
+      # DP-3 Conifg
       input-field {
-          monitor = DP-1
+          monitor = DP-3
           size = 250, 60
           outline_thickness = 2
           dots_size = 0.2 # Scale of input-field height, 0.2 - 0.8
           dots_spacing = 0.2 # Scale of dots' absolute size, 0.0 - 1.0
           dots_center = true
           outer_color = rgba(0, 0, 0, 0)
-          inner_color = rgba(0, 0, 0, 0.5)
+          maxxwindo inner_color = rgba(0, 0, 0, 0.5)
           font_color = rgb(200, 200, 200)
           fade_on_empty = false
           capslock_color = -1
@@ -86,7 +86,7 @@
 
       # Date
       label {
-        monitor = DP-1
+        monitor = DP-3
         text = cmd[update:1000] echo "<span>$(date '+%A, %d %B')</span>"
         color = rgba(255, 255, 255, 0.8)
         font_size = 15
@@ -98,7 +98,7 @@
 
       # Time
       label {
-          monitor = DP-1
+          monitor = DP-3
           text = cmd[update:1000] echo "<span>$(date '+%H:%M')</span>"
           color = rgba(255, 255, 255, 0.8)
           font_size = 120
@@ -110,7 +110,7 @@
 
       # Keyboard layout
       label {
-        monitor = DP-1
+        monitor = DP-3
         text = $LAYOUT
         color = rgba(255, 255, 255, 0.9)
         font_size = 10
