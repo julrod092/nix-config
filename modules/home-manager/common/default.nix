@@ -27,6 +27,7 @@ in
     ../programs/tmux
     ../programs/zsh
     ../programs/packages
+    ../programs/neovim-ide
     ../scripts
     ../services/easyeffects
     ../services/ulauncher

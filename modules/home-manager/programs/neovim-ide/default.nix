@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.neovim-ide = {
@@ -25,7 +25,7 @@
           lspSignature.enable = false;
           nix = {
             enable = true;
-            type = "nil";
+            type = "nixd";
           };
           scala = {
             enable = true;
@@ -47,8 +47,9 @@
           smithy.enable = true;
           rust.enable = false;
           dhall = false;
-          elm = false;
+          elm = true;
           haskell = false;
+          unison = true;
           sql = false;
           python = false;
           clang = false;
@@ -152,10 +153,10 @@
         mind = {
           enable = false;
           # Documents dir is synced to the cloud
-          # persistence = {
-          #   dataDir = "~/Documents/mind.nvim/data";
-          #   statePath = "~/Documents/mind.nvim/mind.json";
-          # };
+          #persistence = {
+          #  dataDir = "~/Documents/mind.nvim/data";
+          #  statePath = "~/Documents/mind.nvim/mind.json";
+          #};
         };
       };
     };
