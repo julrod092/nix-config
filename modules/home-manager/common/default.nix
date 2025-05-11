@@ -29,6 +29,7 @@ in
     ../programs/packages
     ../scripts
     ../services/easyeffects
+    ../services/ulauncher
   ];
 
   # Nixpkgs configuration

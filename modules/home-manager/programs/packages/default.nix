@@ -41,5 +41,6 @@ in
       wl-clipboard
       rclone
       inputs.zen-browser.packages."${system}".default
+      arandr
     ];
 }
