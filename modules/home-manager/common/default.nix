@@ -3,6 +3,7 @@
   outputs,
   userConfig,
   pkgs,
+  system,
   ...
 }:
 let
