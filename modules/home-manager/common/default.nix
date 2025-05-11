@@ -23,7 +23,6 @@ in
     ../programs/fastfetch
     ../programs/git
     ../programs/lazygit
-    ../programs/neovim-ide
     ../programs/starship
     ../programs/tmux
     ../programs/zsh
