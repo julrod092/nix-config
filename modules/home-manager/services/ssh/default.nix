@@ -3,21 +3,13 @@
   programs.ssh = {
     enable = true;
     matchBlocks = lib.mkIf (!pkgs.stdenv.isDarwin) {
-      "ncl" = {
+      "jandresrodriguez-ncl.github.com" = {
         hostname = "github.com";
         user = "jandresrodriguez-ncl";
       };
-      "personal" = {
-        hostname = "github.com";
-        user = "julrod092";
-      };
-      work = lib.hm.dag.entryBefore ["ncl"] {
+      work = lib.hm.dag.entryBefore ["jandresrodriguez-ncl.github.com"] {
         hostname = "github.com";
         identityFile = "~/.ssh/ncl-ssh";
-      };
-      xebia = lib.hm.dag.entryBefore ["personal"] {
-        hostname = "github.com";
-        identityFile = "~/.ssh/id_ed25519";
       };
     };
   };
