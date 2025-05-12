@@ -31,6 +31,7 @@ in
     ../scripts
     ../services/easyeffects
     ../services/ulauncher
+    ../services/ssh
   ];
 
   # Nixpkgs configuration
