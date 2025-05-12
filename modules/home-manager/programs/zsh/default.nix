@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
 
   programs.zsh = {
     enable = true;
@@ -19,7 +19,10 @@
     };
 
     localVariables = {
-      NPM_GITHUB_TOKEN="REMOVED_GITHUB_PAT";
+      NPM_GITHUB_TOKEN =
+        if pkgs.stdenv.isDarwin
+        then "REMOVED_GITHUB_PAT"
+        else "";
       JAVA_HOME="${pkgs.stable.zulu11}/bin";
     };
 
