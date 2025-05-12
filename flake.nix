@@ -50,7 +50,7 @@
     neovim-flake = {
       url = "github:gvolpe/neovim-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-schemas.follows = "flake-schemas";
+      # inputs.flake-schemas.follows = "flake-schemas";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
