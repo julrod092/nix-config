@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
 
   programs.zsh = {
     enable = true;
@@ -19,7 +19,10 @@
     };
 
     localVariables = {
-      NPM_GITHUB_TOKEN="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";
+      NPM_GITHUB_TOKEN =
+        if pkgs.stdenv.isDarwin
+        then "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"
+        else "";
       JAVA_HOME="${pkgs.stable.zulu11}/bin";
     };
 
