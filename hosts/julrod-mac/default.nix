@@ -131,6 +131,7 @@
       { path = "${pkgs.stable.synergy}/Applications/Synergy.app/"; }
       { path = "${pkgs.stable.jetbrains.idea-ultimate}/Applications/IntelliJ\ IDEA.app/"; }
       { path = "${pkgs.stable.zed-editor}/Applications/Zed.app/"; }
+      { path = "${pkgs.cursor}/Applications/Cursor.app/"; }
       {
         path = "/Users/${userConfig.name}/Downloads";
         section = "others";
