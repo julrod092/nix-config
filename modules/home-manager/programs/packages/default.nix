@@ -25,6 +25,7 @@ in
       (sbt.override { jre = jdk; })
       nixd
       maven
+      code-cursor
     ]
     ++ lib.optionals stdenv.isDarwin [
       dockutil
