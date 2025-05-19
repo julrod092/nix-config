@@ -26,6 +26,7 @@ in
       nixd
       maven
       code-cursor
+      lmstudio
     ]
     ++ lib.optionals stdenv.isDarwin [
       dockutil
@@ -42,5 +43,7 @@ in
       wl-clipboard
       rclone
       inputs.zen-browser.packages."${system}".specific
+      libei
+      libportal
     ];
 }

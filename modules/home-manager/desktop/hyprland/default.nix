@@ -35,7 +35,8 @@
     "hypr/hyprpaper.conf".text = ''
       splash = false
       preload = ${config.wallpaper}
-      wallpaper = DP-1, ${config.wallpaper}
+      wallpaper = DP-2, ${config.wallpaper}
+      wallpaper = DP-3, ${config.wallpaper}
       wallpaper = eDP-1, ${config.wallpaper}
     '';
 
