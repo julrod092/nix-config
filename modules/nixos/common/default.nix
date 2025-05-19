@@ -93,7 +93,7 @@
   # PATH configuration
   environment = {
     localBinInPath = true;
-    variables.EDITOR = "neovim";
+    variables.EDITOR = "nano";
   };
 
   # Disable CUPS printing

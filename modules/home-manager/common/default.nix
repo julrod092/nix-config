@@ -5,16 +5,12 @@
   pkgs,
   system,
   ...
-}:
-let
-  vimOverlays = [
-    inputs.neovim-nightly-overlay.overlays.default
-    # inputs.alacritty-theme.overlays.default
-    inputs.neovim-flake.overlays.${system}.default
-  ];
-in
-{
+}: {
   imports = [
+    # Overlay and flake imports
+    inputs.zen-browser.packages.${system}.twilight
+
+    # Packages and services
     ../programs/aerospace
     ../programs/alacritty
     ../programs/atuin
@@ -38,7 +34,9 @@ in
   nixpkgs = {
     overlays = [
       outputs.overlays.stable-packages
-    ] ++ vimOverlays;
+      inputs.neovim-nightly-overlay.overlays.default
+      inputs.neovim-flake.overlays.${system}.default
+    ];
 
     config = {
       allowUnfree = true;
@@ -61,5 +59,14 @@ in
   catppuccin = {
     flavor = "macchiato";
     accent = "lavender";
+  };
+
+  programs.zen-browser = {
+    enable = true;
+    policies = {
+      DisableAppUpdate = true;
+      DisableTelemetry = true;
+      # find more options here: https://mozilla.github.io/policy-templates/
+    };
   };
 }
