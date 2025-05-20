@@ -8,6 +8,7 @@
 }: {
   imports = [
     # Overlay and flake imports
+    inputs.zen-browser.homeModules.beta
 
     # Packages and services
     ../programs/aerospace
@@ -25,7 +26,6 @@
     # ../programs/neovim-ide
     ../programs/zen
     ../scripts
-    ../services/easyeffects
     ../services/ulauncher
     ../services/ssh
   ];
