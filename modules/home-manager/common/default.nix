@@ -8,7 +8,6 @@
 }: {
   imports = [
     # Overlay and flake imports
-    inputs.zen-browser.packages.${system}.twilight
 
     # Packages and services
     ../programs/aerospace
@@ -24,6 +23,7 @@
     ../programs/zsh
     ../programs/packages
     # ../programs/neovim-ide
+    ../programs/zen
     ../scripts
     ../services/easyeffects
     ../services/ulauncher
@@ -59,14 +59,5 @@
   catppuccin = {
     flavor = "macchiato";
     accent = "lavender";
-  };
-
-  programs.zen-browser = {
-    enable = true;
-    policies = {
-      DisableAppUpdate = true;
-      DisableTelemetry = true;
-      # find more options here: https://mozilla.github.io/policy-templates/
-    };
   };
 }

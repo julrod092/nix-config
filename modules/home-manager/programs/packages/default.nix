@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, ...}:
+{ pkgs, ...}:
 let
   node = pkgs.stable.nodejs_23;
   jdk = pkgs.stable.zulu11;
@@ -27,6 +27,7 @@ in
       maven
       code-cursor
       lmstudio
+      devenv
     ]
     ++ lib.optionals stdenv.isDarwin [
       dockutil
@@ -42,7 +43,6 @@ in
       unzip
       wl-clipboard
       rclone
-      inputs.zen-browser.packages."${system}".specific
       libei
       libportal
     ];
