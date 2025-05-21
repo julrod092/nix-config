@@ -13,7 +13,7 @@
     # Packages and services
     ../programs/aerospace
     ../programs/alacritty
-    ../programs/atuin
+#    ../programs/atuin
     ../programs/bat
     ../programs/btop
     ../programs/fastfetch
