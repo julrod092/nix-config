@@ -8,7 +8,7 @@
 }: {
   imports = [
     # Overlay and flake imports
-    inputs.zen-browser.homeModules.beta
+    inputs.zen-browser.homeModules.twilight
 
     # Packages and services
     ../programs/aerospace
