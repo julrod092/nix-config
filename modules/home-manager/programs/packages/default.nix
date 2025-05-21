@@ -44,6 +44,6 @@ in
       wl-clipboard
       rclone
       libei
-      libportal
+      libgbm
     ];
 }
