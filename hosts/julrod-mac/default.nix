@@ -124,6 +124,7 @@
 
   local = {
     dock.enable = true;
+    dock.username = userConfig.name;
     dock.entries = [
       { path = "/Applications/Zen.app/"; }
       { path = "/Applications/Microsoft\ Teams.app/"; }
