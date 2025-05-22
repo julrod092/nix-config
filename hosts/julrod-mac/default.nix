@@ -53,6 +53,7 @@
 
   # System settings
   system = {
+    primaryUser = userConfig.name;
     defaults = {
       CustomUserPreferences = {
         NSGlobalDomain."com.apple.mouse.linear" = true;
