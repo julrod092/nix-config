@@ -26,7 +26,6 @@ in
       nixd
       maven
       code-cursor
-      lmstudio
       devenv
     ]
     ++ lib.optionals stdenv.isDarwin [
@@ -43,6 +42,7 @@ in
       unzip
       wl-clipboard
       rclone
+      lmstudio
       libei
       libgbm
     ];
