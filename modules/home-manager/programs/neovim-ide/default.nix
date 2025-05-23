@@ -6,7 +6,7 @@
     inputs.neovim-flake.homeManagerModules.${system}.default
   ];
 
-  programs = lib.mkIf (!pkgs.system.isDarwin) {
+  programs = {
     neovim-ide = {
       enable = true;
       settings = {
