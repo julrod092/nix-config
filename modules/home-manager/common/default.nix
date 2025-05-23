@@ -7,11 +7,6 @@
   ...
 }: {
   imports = [
-    # Overlay and flake imports
-    inputs.zen-browser.homeModules.twilight
-    inputs.neovim-flake.homeManagerModules.default
-
-    # Packages and services
     ../programs/aerospace
     ../programs/alacritty
     ../programs/bat
