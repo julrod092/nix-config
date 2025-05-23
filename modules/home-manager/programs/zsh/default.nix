@@ -8,7 +8,7 @@
       ff = "fastfetch";
       updatex =
       if pkgs.stdenv.isDarwin
-      then "darwin-rebuild switch --flake ~/.nix-config#julrod-mac && home-manager switch --flake ~/.nix-config#julrod@julrod-mac && source ~/.zshrc"
+      then "sudo darwin-rebuild switch --flake ~/.nix-config#julrod-mac && home-manager switch --flake ~/.nix-config#julrod@julrod-mac && source ~/.zshrc"
       else "sudo nixos-rebuild switch --flake ~/.nix-config#nix-desktop && home-manager switch --flake ~/.nix-config#julrod@nix-desktop && source ~/.zshrc";
     };
 
