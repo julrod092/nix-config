@@ -45,7 +45,7 @@
           };
           ts = true;
           smithy.enable = true;
-          rust.enable = false;
+          rust.enable = true;
           dhall = false;
           elm = true;
           haskell = false;

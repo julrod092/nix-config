@@ -9,11 +9,11 @@
   imports = [
     # Overlay and flake imports
     inputs.zen-browser.homeModules.twilight
+    inputs.neovim-flake.homeManagerModules.default
 
     # Packages and services
     ../programs/aerospace
     ../programs/alacritty
-#    ../programs/atuin
     ../programs/bat
     ../programs/btop
     ../programs/fastfetch
@@ -23,7 +23,7 @@
     ../programs/tmux
     ../programs/zsh
     ../programs/packages
-    # ../programs/neovim-ide
+    ../programs/neovim-ide
     ../programs/zen
     ../scripts
     ../services/ulauncher
