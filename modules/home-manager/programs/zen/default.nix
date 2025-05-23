@@ -1,5 +1,11 @@
 # 
-{pkgs, lib, ...}: {
+{pkgs, lib, inputs, outputs, ...}: 
+{
+
+  imports = [
+    inputs.zen-browser.homeModules.twilight
+  ];
+
   programs = lib.mkIf (!pkgs.stdenv.isDarwin) {
     zen-browser = {
       enable = true;
