@@ -144,6 +144,7 @@
   in {
     nixosConfigurations = {
       "nix-desktop" = mkNixosConfiguration "nix-desktop" "julrod";
+      "nix-laptop" = mkNixosConfiguration "nix-laptop" "julrod";
     };
 
     darwinConfigurations = {
@@ -153,6 +154,7 @@
     homeConfigurations = {
       "julrod@julrod-mac" = mkHomeConfiguration "aarch64-darwin" "julrod" "julrod-mac";
       "julrod@nix-desktop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-desktop";
+      "julrod@nix-laptop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-laptop";
     };
 
     overlays = import ./overlays {inherit inputs;};
