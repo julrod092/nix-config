@@ -50,7 +50,9 @@
             ts = true;
             smithy.enable = true;
             rust.enable = false;
-            elm = false;
+            elm = if (!pkgs.stdenv.isDarwin) 
+              then false 
+              else true;
             unison = true;
           };
           hurl.enable = true;
