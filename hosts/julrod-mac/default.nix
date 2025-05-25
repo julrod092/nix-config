@@ -51,6 +51,9 @@
 
   # Add ability to use TouchID for sudo
   # security.pam.services.sudo_local.touchIdAuth = true;
+  environment.variables = {
+    EDITOR = "vim";
+  };
 
   # System settings
   system = {

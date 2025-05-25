@@ -48,6 +48,9 @@
       if pkgs.stdenv.isDarwin
       then "/Users/${userConfig.name}"
       else "/home/${userConfig.name}";
+    sessionVariables = {
+       EDITOR = "nvim";
+     };
   };
 
   # Catpuccin flavor and accent

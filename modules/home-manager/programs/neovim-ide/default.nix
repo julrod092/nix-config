@@ -25,10 +25,8 @@
             folds = true;
             formatOnSave = false;
             lightbulb.enable = true;
-            lspsaga.enable = false;
             nvimCodeActionMenu.enable = true;
             trouble.enable = true;
-            lspSignature.enable = false;
             nix = {
               enable = true;
               type = "nixd";
@@ -52,14 +50,8 @@
             ts = true;
             smithy.enable = true;
             rust.enable = false;
-            dhall = false;
-            elm = true;
-            haskell = false;
+            elm = false;
             unison = true;
-            sql = false;
-            python = false;
-            clang = false;
-            go = false;
           };
           hurl.enable = true;
           plantuml.enable = true;
@@ -145,7 +137,6 @@
           };
           chatgpt = {
             enable = false;
-            # inherit (config.secrets) openaiApiKey;
           };
           git = {
             enable = true;
@@ -155,14 +146,6 @@
           spider = {
             enable = false;
             skipInsignificantPunctuation = true;
-          };
-          mind = {
-            enable = false;
-            # Documents dir is synced to the cloud
-            # persistence = {
-            #   dataDir = "~/Documents/mind.nvim/data";
-            #   statePath = "~/Documents/mind.nvim/mind.json";
-            # };
           };
         };
       };
