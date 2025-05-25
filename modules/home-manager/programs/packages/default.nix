@@ -1,6 +1,6 @@
 { inputs, pkgs, lib, system, ...}:
 let
-  node = pkgs.stable.nodejs_23;
+  node = pkgs.stable.nodejs_24;
   jdk = pkgs.stable.zulu11;
 in
 {
