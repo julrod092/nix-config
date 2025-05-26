@@ -4,20 +4,6 @@ This repository contains NixOS and nix-darwin configurations for my machines, ma
 
 It is structured to easily accommodate multiple machines and user configurations, leveraging [nixpkgs](https://github.com/NixOS/nixpkgs), [home-manager](https://github.com/nix-community/home-manager), [nix-darwin](https://github.com/LnL7/nix-darwin), and various other community contributions for a seamless experience across NixOS and macOS.
 
-## Showcase
-
-### Hyprland
-
-![hyprland](./files/screenshots/hyprland.png)
-
-### Gnome
-
-![gnome](./files/screenshots/gnome.png)
-
-### macOS
-
-![macos](./files/screenshots/mac.png)
-
 ## Structure
 
 - `flake.nix`: The flake itself, defining inputs and outputs for NixOS, nix-darwin, and Home Manager configurations.
