@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, system, ... }:
+{ inputs, pkgs, system, ... }:
 
 {
 
@@ -50,9 +50,9 @@
             ts = true;
             smithy.enable = true;
             rust.enable = false;
-            elm = if (!pkgs.stdenv.isDarwin) 
-              then false 
-              else true;
+            elm = if (!pkgs.stdenv.isDarwin)
+              then true
+              else false;
             unison = true;
           };
           hurl.enable = true;
