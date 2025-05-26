@@ -48,7 +48,7 @@
 
     # Neovim flake
     neovim-flake = {
-      url = github:gvolpe/neovim-flake;
+      url = "github:gvolpe/neovim-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

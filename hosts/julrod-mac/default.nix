@@ -2,7 +2,6 @@
   pkgs,
   outputs,
   userConfig,
-  system,
   ...
 }: {
 

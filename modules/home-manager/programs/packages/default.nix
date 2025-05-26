@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, system, ...}:
+{ pkgs, lib,  ...}:
 let
   node = pkgs.stable.nodejs_24;
   jdk = pkgs.stable.zulu11;
