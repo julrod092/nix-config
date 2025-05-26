@@ -25,7 +25,6 @@ in
       (sbt.override { jre = jdk; })
       nixd
       maven
-      code-cursor
       devenv
     ]
     ++ lib.optionals stdenv.isDarwin [
@@ -43,6 +42,7 @@ in
       wl-clipboard
       rclone
       lmstudio
+      code-cursor
       libei
       libgbm
     ];
