@@ -27,13 +27,14 @@ in
       maven
       devenv
     ]
-    ++ lib.optionals stdenv.isDarwin [
+    ++ lib.lists.optionals stdenv.isDarwin [
       dockutil
       colima
       docker
       hidden-bar
+      docker-compose
     ]
-    ++ lib.optionals (!stdenv.isDarwin) [
+    ++ lib.lists.optionals (!stdenv.isDarwin) [
       pavucontrol
       pulseaudio
       tesseract
