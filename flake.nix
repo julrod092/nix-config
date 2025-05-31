@@ -131,7 +131,7 @@
       home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {inherit system;};
         extraSpecialArgs = {
-          inherit inputs outputs system;
+          inherit inputs outputs system hostname;
           userConfig = users.${username};
           nhModules = "${self}/modules/home-manager";
         };

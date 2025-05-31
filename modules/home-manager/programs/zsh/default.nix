@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, hostname, userConfig, ... }: 
+let
+  system-rebuild = if pkgs.stdenv.isDarwin
+  then "darwin-rebuild"
+  else "nixos-rebuild";
+in
+{
 
   programs.zsh = {
     enable = true;
@@ -6,10 +12,11 @@
 
     shellAliases = {
       ff = "fastfetch";
-      updatex =
-      if pkgs.stdenv.isDarwin
-      then "sudo darwin-rebuild switch --flake ~/.nix-config#julrod-mac && home-manager switch --flake ~/.nix-config#julrod@julrod-mac && source ~/.zshrc"
-      else "sudo nixos-rebuild switch --flake ~/.nix-config#nix-desktop && home-manager switch --flake ~/.nix-config#julrod@nix-desktop && source ~/.zshrc";
+      nix-clean = "sudo nix-env --delete-generations old && nix-env --delete-generations old && sudo  nix-collect-garbage -d && nix-collect-garbage -d";
+      nix-update = "sudo ${system-rebuild} switch --flake ~/.nix-config#${hostname}";
+      hm-update = "home-manager switch --flake ~/.nix-config#${userConfig.name}@${hostname} && source ~/.zshrc";
+      flake-update = "nix flake update --flake ~/.nix-config";
+      full-update = "flake-update && nix-update && hm-update && nix-clean";
     };
 
     oh-my-zsh = {
