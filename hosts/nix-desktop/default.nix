@@ -13,6 +13,7 @@
     "${nixosModules}/desktop/hyprland"
     "${nixosModules}/services/nvidia"
     "${nixosModules}/services/network"
+    "${nixosModules}/services/podman"
   ];
 
   # Set hostname
