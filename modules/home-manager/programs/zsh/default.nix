@@ -16,7 +16,7 @@ in
       nix-update = "sudo ${system-rebuild} switch --flake ~/.nix-config#${hostname}";
       hm-update = "home-manager switch --flake ~/.nix-config#${userConfig.name}@${hostname} && source ~/.zshrc";
       flake-update = "nix flake update --flake ~/.nix-config";
-      full-update = "flake-update && nix-update && hm-update && nix-clean";
+      nix-full-update = "flake-update && nix-update && hm-update && nix-clean";
     };
 
     oh-my-zsh = {
