@@ -17,7 +17,7 @@ in
       nh
       openconnect
       ripgrep
-      waynergy
+      synergy
       stable.zed-editor
       stable.jetbrains.idea-ultimate
       node
