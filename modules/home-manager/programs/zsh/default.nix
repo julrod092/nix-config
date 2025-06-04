@@ -1,4 +1,4 @@
-{ pkgs, hostname, userConfig, ... }: 
+{ pkgs, hostname, userConfig, ... }:
 let
   system-rebuild = if pkgs.stdenv.isDarwin
   then "darwin-rebuild"
@@ -28,7 +28,7 @@ in
     localVariables = {
       NPM_GITHUB_TOKEN =
         if pkgs.stdenv.isDarwin
-        then "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"
+        then "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"
         else "";
       JAVA_HOME="${pkgs.stable.zulu11}/bin";
     };
