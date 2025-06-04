@@ -136,9 +136,13 @@
       { path = "${pkgs.stable.synergy}/Applications/Synergy.app/"; }
       { path = "${pkgs.stable.jetbrains.idea-ultimate}/Applications/IntelliJ\ IDEA.app/"; }
       { path = "${pkgs.stable.zed-editor}/Applications/Zed.app/"; }
-      { path = "${pkgs.code-cursor}/Applications/Cursor.app/"; }
       {
         path = "/Users/${userConfig.name}/Downloads";
+        section = "others";
+        options = "--sort name --view grid --display stack";
+      }
+      {
+        path = "/Users/${userConfig.name}/Applications";
         section = "others";
         options = "--sort name --view grid --display stack";
       }

@@ -4,7 +4,6 @@ let
   jdk = pkgs.stable.zulu11;
 in
 {
-
   home.packages = with pkgs;
     [
       dig
