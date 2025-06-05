@@ -4,6 +4,7 @@ let
   jdk = if (pkgs.stdenv.isDarwin)
     then pkgs.stable.zulu11
     else pkgs.stable.zulu21;
+  
 in
 {
   home.packages = with pkgs;
@@ -18,7 +19,6 @@ in
       nh
       openconnect
       ripgrep
-      synergy
       stable.zed-editor
       stable.jetbrains.idea-ultimate
       jdk
@@ -36,6 +36,7 @@ in
       hidden-bar
       docker-compose
       node
+      synergy
     ]
     ++ lib.lists.optionals (!stdenv.isDarwin) [
       pavucontrol
