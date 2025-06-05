@@ -1,7 +1,9 @@
 { pkgs, lib,  ...}:
 let
   node = pkgs.stable.nodejs_24;
-  jdk = pkgs.stable.zulu11;
+  jdk = if (pkgs.stdenv.isDarwin)
+    then pkgs.stable.zulu11
+    else pkgs.stable.zulu21;
 in
 {
   home.packages = with pkgs;
@@ -19,12 +21,13 @@ in
       synergy
       stable.zed-editor
       stable.jetbrains.idea-ultimate
-      node
       jdk
       (sbt.override { jre = jdk; })
       nixd
       maven
       devenv
+      scala-cli
+      openssl
     ]
     ++ lib.lists.optionals stdenv.isDarwin [
       dockutil
@@ -32,6 +35,7 @@ in
       docker
       hidden-bar
       docker-compose
+      node
     ]
     ++ lib.lists.optionals (!stdenv.isDarwin) [
       pavucontrol
