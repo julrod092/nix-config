@@ -5,9 +5,14 @@
     synergy
   ];
 
-  # Copy synergy configuration files
+  # Copy synergy configuration files with proper permissions
   environment.etc."synergy/synergy.conf".source = ../../../../files/synergy.conf;
-  environment.etc."synergy/SSL/Synergy.pem".source = ../../../../files/synergy-ssl/Synergy.pem;
+  environment.etc."synergy/SSL/Synergy.pem" = {
+    source = ../../../../files/synergy-ssl/Synergy.pem;
+    mode = "0600";
+    user = "root";
+    group = "users";
+  };
 
   # Synergy server systemd user service template
   systemd.user.services.synergy-server = {
@@ -47,10 +52,4 @@
     allowedTCPPorts = [ 24800 ];
     allowedUDPPorts = [ 24800 ];
   };
-
-  # Set proper permissions for SSL certificate
-  system.activationScripts.synergy-ssl = ''
-    chmod 600 /etc/synergy/SSL/Synergy.pem
-    chown root:users /etc/synergy/SSL/Synergy.pem
-  '';
 } 
