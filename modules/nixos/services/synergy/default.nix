@@ -6,9 +6,9 @@
   ];
 
   # Copy synergy configuration files with proper permissions
-  environment.etc."synergy/synergy.conf".source = ../../../../files/synergy.conf;
+  environment.etc."synergy/synergy.conf".source = ./../../../../files/synergy.conf;
   environment.etc."synergy/SSL/Synergy.pem" = {
-    source = ../../../../files/synergy-ssl/Synergy.pem;
+    source = ./../../../../files/synergy-ssl/Synergy.pem;
     mode = "0600";
     user = "root";
     group = "users";
