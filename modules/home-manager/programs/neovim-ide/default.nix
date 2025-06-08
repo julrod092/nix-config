@@ -96,7 +96,7 @@
           mini.enable = true;
           neoclip.enable = true;
           dial.enable = true;
-          harpoon.enable = true;
+          harpoon.enable = false;
           hop.enable = true;
           notifications.enable = true;
           snippets.vsnip.enable = true;
