@@ -19,7 +19,7 @@
     ../programs/zsh
     ../programs/packages
     ../programs/neovim-ide
-    ../programs/zen
+    #../programs/zen
     ../scripts
     ../services/ulauncher
     ../services/ssh

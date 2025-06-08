@@ -82,12 +82,14 @@
   services.libinput.enable = true;
 
   # X11 settings
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
-    excludePackages = with pkgs; [xterm];
+  services = {
     displayManager.gdm.enable = true;
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+      xkb.variant = "";
+      excludePackages = with pkgs; [xterm];
+    };
   };
 
   # PATH configuration
