@@ -47,13 +47,13 @@
         configurationLimit = 5;
       };
       efi.canTouchEfiVariables = true;
-      grub = {
-        enable = true;
-        version = 2;
-        device = "nodev";
-        efiSupport = true;
-        useOSProber = true;
-      };
+#      grub = {
+#        enable = true;
+#        version = 2;
+#        device = "nodev";
+#        efiSupport = true;
+#        useOSProber = true;
+#      };
     };
     plymouth.enable = true;
   };
