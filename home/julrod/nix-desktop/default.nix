@@ -2,6 +2,7 @@
   imports = [
     "${nhModules}/common"
     "${nhModules}/desktop/hyprland"
+    "${nhModules}/services/synergy"
   ];
   
   # Enable home-manager
