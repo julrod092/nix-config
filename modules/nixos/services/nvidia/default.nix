@@ -13,6 +13,18 @@
     ];
   };
 
+  # Configure OpenGL
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+
   # Configure NVIDIA settings
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -32,5 +44,10 @@
   environment.sessionVariables = lib.mkForce {
     CUDA_PATH = "${pkgs.stable.cudaPackages.cuda_cudart}";
     LD_LIBRARY_PATH = "${pkgs.stable.cudaPackages.cuda_cudart}/lib:${pkgs.stable.cudaPackages.cuda_nvcc}/lib:/run/opengl-driver/lib";
+    # Add variables to help with EGL/OpenGL issues
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 }
