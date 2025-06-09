@@ -23,6 +23,7 @@
     ../scripts
     ../services/ulauncher
     ../services/ssh
+    ../services/synergy
   ];
 
   # Nixpkgs configuration
