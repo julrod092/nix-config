@@ -34,8 +34,8 @@
           listToAttrs [
             (extension "ublock-origin" "uBlock0@raymondhill.net")
             (extension "proton-pass" "78272b6fa58f4a1abaac99321d503a20@proton.me")
-            (extension "privacy-badger" "jid1-MnnxcxisBPnSXQ@jetpack")
-            (extension "alternate-player-for-twitch" "overclockersru@coolcmd")
+            (extension "privacy-badger17" "jid1-MnnxcxisBPnSXQ@jetpack")
+            (extension "twitch_5" "twitch5@coolcmd")
           ];
         # find more options here: https://mozilla.github.io/policy-templates/`
       };
