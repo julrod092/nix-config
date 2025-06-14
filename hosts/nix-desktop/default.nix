@@ -2,7 +2,6 @@
   inputs,
   hostname,
   nixosModules,
-  pkgs,
   ...
 }: {
   imports = [
@@ -20,10 +19,6 @@
   # Set hostname
   networking.hostName = hostname;
 
-  services = {
-    pcscd.enable = true;
-    udev.packages = [pkgs.yubikey-personalization];
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
