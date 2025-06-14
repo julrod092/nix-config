@@ -104,22 +104,36 @@
     localBinInPath = true;
     variables.EDITOR = "nvim";
   };
-
-  # Disable CUPS printing
-  services.printing.enable = false;
-
-  # Enable devmon for device management
-  services.devmon.enable = true;
-
-  # Enable PipeWire for sound
-  services.pulseaudio.enable = false;
+  
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
+
+  services = {
+    # Disable CUPS printing
+    printing.enable = false;
+    
+    # Enable devmon for device management
+    devmon.enable = true;
+
+    # Enable PipeWire for sound
+    pulseaudio.enable = false;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+    };
+
+    # Enable PC/SC daemon for YubiKey support
+    pcscd.enable = true;
+    udev.packages = [pkgs.yubikey-personalization];
+
+    # Additional services
+    locate.enable = true;
+
+    # OpenSSH daemon
+    openssh.enable = true;
   };
 
   # User configuration
@@ -148,11 +162,4 @@
     nerd-fonts.meslo-lg
     roboto
   ];
-
-
-  # Additional services
-  services.locate.enable = true;
-
-  # OpenSSH daemon
-  services.openssh.enable = true;
 }

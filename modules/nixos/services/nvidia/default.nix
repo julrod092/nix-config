@@ -4,32 +4,25 @@
   # Enable NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Configure Graphics
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      stable.cudaPackages.cuda_nvcc
-      stable.cudaPackages.cuda_cudart
-    ];
-  };
+  hardware = {
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        stable.cudaPackages.cuda_nvcc
+        stable.cudaPackages.cuda_cudart
+        nvidia-vaapi-driver
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    };
 
-  # Configure OpenGL
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      nvidia-vaapi-driver
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
-
-  # Configure NVIDIA settings
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    nvidiaSettings = true;
-    open = true;
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      nvidiaSettings = true;
+      open = true;
+    };
   };
 
   # Install CUDA tools
