@@ -20,6 +20,7 @@
     ../programs/packages
     ../programs/neovim-ide
     ../programs/zen
+    ../programs/gpg
     ../scripts
     ../services/ulauncher
     ../services/ssh
