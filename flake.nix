@@ -81,7 +81,7 @@
         avatar = ./files/avatar/face;
         email = "jrodriguezrpo@proton.me";
         fullName = "Julian Rodriguez";
-        # gitKey = "C5810093";
+        gitKey = "CC597166004906B8";
         name = "julrod";
       };
     };
