@@ -79,7 +79,7 @@
     users = {
       julrod = {
         avatar = ./files/avatar/face;
-        email = "jrodriguezrpo@proton.me";
+        email = "jrodriguezrpo@pm.me";
         fullName = "Julian Rodriguez";
         gitKey = "CC597166004906B8";
         name = "julrod";
