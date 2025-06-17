@@ -12,7 +12,6 @@
     # yubikey-personalization
     # yubikey-personalization-gui
     yubico-piv-tool
-    yubioath-flutter
     # yubikeyGuide
 
     # Password generation tools
@@ -21,6 +20,8 @@
     # Other tools
     cfssl
     pcsctools
+  ] ++ lib.lists.optionals (!stdenv.isDarwin) [
+    yubioath-flutter
   ];
 
   programs = {
