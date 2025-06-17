@@ -8,4 +8,7 @@ _:
   # Browsers
   "zen"
   "google-chrome"
+
+  # Yubikey
+  "yubico-authenticator"
 ]
