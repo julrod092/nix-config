@@ -14,14 +14,13 @@
     yubico-piv-tool
     # yubikeyGuide
 
-    # Password generation tools
-    rng-tools
-
     # Other tools
     cfssl
     pcsctools
   ] ++ lib.lists.optionals (!stdenv.isDarwin) [
     yubioath-flutter
+    # Password generation tools
+    rng-tools
   ];
 
   programs = {
