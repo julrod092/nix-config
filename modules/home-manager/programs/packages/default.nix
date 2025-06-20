@@ -37,7 +37,7 @@ in
       docker-compose
       node
       synergy
-
+      vscode
     ]
     ++ lib.lists.optionals (!stdenv.isDarwin) [
       pavucontrol
