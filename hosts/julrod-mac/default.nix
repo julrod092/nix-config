@@ -132,7 +132,7 @@
       { path = "/Applications/Zen.app/"; }
       { path = "/Applications/Microsoft\ Teams.app/"; }
       { path = "/Applications/AppCleaner.app/"; }
-      # { path = "/Applications/IntelliJ\ IDEA.app/"; }
+      { path = "/Applications/IntelliJ\ IDEA.app/"; }
       { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
       # { path = "${pkgs.stable.synergy}/Applications/Synergy.app/"; }
       # { path = "${pkgs.stable.jetbrains.idea-ultimate}/Applications/IntelliJ\ IDEA.app/"; }
