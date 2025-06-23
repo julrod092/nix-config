@@ -1,9 +1,9 @@
 { pkgs, lib,  ...}:
 let
-  node = pkgs.stable.nodejs_24;
+  node = pkgs.nodejs_24;
   jdk = if (pkgs.stdenv.isDarwin)
-    then pkgs.stable.zulu11
-    else pkgs.stable.zulu21;
+    then pkgs.zulu11
+    else pkgs.zulu21;
 
 in
 {
@@ -19,11 +19,10 @@ in
       nh
       openconnect
       ripgrep
-      stable.zed-editor
       jdk
       (sbt.override { jre = jdk; })
       nixd
-      stable.maven
+      maven
       devenv
       scala-cli
       openssl
@@ -37,6 +36,7 @@ in
       node
       synergy
       vscode
+      raycast
     ]
     ++ lib.lists.optionals (!stdenv.isDarwin) [
       pavucontrol
@@ -49,6 +49,7 @@ in
       code-cursor
       libei
       libgbm
-      stable.jetbrains.idea-ultimate
+      jetbrains.idea-ultimate
+      zed-editor
     ];
 }

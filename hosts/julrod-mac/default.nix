@@ -11,7 +11,7 @@
   # Nixpkgs configuration
   nixpkgs = {
     overlays = [
-      outputs.overlays.stable-packages
+      outputs.overlays.unstable-packages
     ];
 
     config = {
@@ -132,10 +132,11 @@
       { path = "/Applications/Zen.app/"; }
       { path = "/Applications/Microsoft\ Teams.app/"; }
       { path = "/Applications/AppCleaner.app/"; }
+      # { path = "/Applications/IntelliJ\ IDEA.app/"; }
       { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      { path = "${pkgs.stable.synergy}/Applications/Synergy.app/"; }
-      { path = "${pkgs.stable.jetbrains.idea-ultimate}/Applications/IntelliJ\ IDEA.app/"; }
-      { path = "${pkgs.stable.zed-editor}/Applications/Zed.app/"; }
+      # { path = "${pkgs.stable.synergy}/Applications/Synergy.app/"; }
+      # { path = "${pkgs.stable.jetbrains.idea-ultimate}/Applications/IntelliJ\ IDEA.app/"; }
+      # { path = "${pkgs.stable.zed-editor}/Applications/Zed.app/"; }
       {
         path = "/Users/${userConfig.name}/Downloads";
         section = "others";

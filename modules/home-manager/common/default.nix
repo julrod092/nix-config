@@ -30,7 +30,7 @@
   # Nixpkgs configuration
   nixpkgs = {
     overlays = [
-      outputs.overlays.stable-packages
+      outputs.overlays.unstable-packages
       inputs.neovim-nightly-overlay.overlays.default
       inputs.neovim-flake.overlays.${system}.default
     ];
