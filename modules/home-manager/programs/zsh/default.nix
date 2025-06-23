@@ -35,8 +35,8 @@ in
         if pkgs.stdenv.isDarwin
         then "REMOVED_GITHUB_PAT"
         else "";
-      JAVA_HOME="${pkgs.stable.zulu11}/bin";
-      M2_HOME="${pkgs.stable.maven}/bin";
+      JAVA_HOME="${pkgs.zulu11}/bin";
+      M2_HOME="${pkgs.maven}/bin";
     };
 
     initContent = ''

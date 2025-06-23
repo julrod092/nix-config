@@ -11,6 +11,6 @@ _:
   "zen"
   "google-chrome"
 
-  # Yubikey
+  # Yubi
   "yubico-authenticator"
 ]
