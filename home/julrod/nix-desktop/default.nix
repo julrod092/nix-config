@@ -4,7 +4,7 @@
     "${nhModules}/desktop/hyprland"
     "${nhModules}/services/synergy"
   ];
-  
+
   # Enable home-manager
   programs.home-manager.enable = true;
 

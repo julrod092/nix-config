@@ -1,5 +1,5 @@
-# 
-{pkgs, lib, inputs, outputs, ...}: 
+#
+{pkgs, lib, inputs, ...}:
 {
 
   imports = [
@@ -40,5 +40,5 @@
         # find more options here: https://mozilla.github.io/policy-templates/`
       };
     };
-  }; 
+  };
 }

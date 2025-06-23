@@ -36,6 +36,7 @@ in
         then "REMOVED_GITHUB_PAT"
         else "";
       JAVA_HOME="${pkgs.stable.zulu11}/bin";
+      M2_HOME="${pkgs.stable.maven}/bin";
     };
 
     initContent = ''
