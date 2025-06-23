@@ -36,6 +36,7 @@ in
         then "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"
         else "";
       JAVA_HOME="${pkgs.stable.zulu11}/bin";
+      M2_HOME="${pkgs.stable.maven}/bin";
     };
 
     initContent = ''

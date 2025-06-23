@@ -20,11 +20,10 @@ in
       openconnect
       ripgrep
       stable.zed-editor
-      stable.jetbrains.idea-ultimate
       jdk
       (sbt.override { jre = jdk; })
       nixd
-      maven
+      stable.maven
       devenv
       scala-cli
       openssl
@@ -50,5 +49,6 @@ in
       code-cursor
       libei
       libgbm
+      stable.jetbrains.idea-ultimate
     ];
 }
