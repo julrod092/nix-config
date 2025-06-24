@@ -134,8 +134,8 @@
       { path = "/Applications/AppCleaner.app/"; }
       { path = "/Applications/IntelliJ\ IDEA.app/"; }
       { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      # { path = "${pkgs.stable.synergy}/Applications/Synergy.app/"; }
-      # { path = "${pkgs.stable.jetbrains.idea-ultimate}/Applications/IntelliJ\ IDEA.app/"; }
+      { path = "${pkgs.synergy}/Applications/Synergy.app/"; }
+      # { path = "${pkgs.jetbrains.idea-ultimate}/Applications/IntelliJ\ IDEA.app/"; }
       # { path = "${pkgs.stable.zed-editor}/Applications/Zed.app/"; }
       {
         path = "/Users/${userConfig.name}/Downloads";
@@ -143,7 +143,7 @@
         options = "--sort name --view grid --display stack";
       }
       {
-        path = "/Users/${userConfig.name}/Applications";
+        path = "/Applications";
         section = "others";
         options = "--sort name --view grid --display stack";
       }
