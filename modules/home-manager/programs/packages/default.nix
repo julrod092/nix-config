@@ -34,7 +34,6 @@ in
       hidden-bar
       docker-compose
       node
-      synergy
       vscode
       raycast
     ]
