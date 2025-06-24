@@ -26,7 +26,7 @@ in
       scala-cli
       openssl
       synergy
-      jetbrains.idea-ultimate
+      unstable.jetbrains.idea-ultimate
     ]
     ++ lib.lists.optionals stdenv.isDarwin [
       dockutil
