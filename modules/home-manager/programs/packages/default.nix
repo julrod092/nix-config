@@ -4,7 +4,6 @@ let
   jdk = if (pkgs.stdenv.isDarwin)
     then pkgs.zulu11
     else pkgs.zulu21;
-
 in
 {
   home.packages = with pkgs;
@@ -26,6 +25,8 @@ in
       devenv
       scala-cli
       openssl
+      synergy
+      jetbrains.idea-ultimate
     ]
     ++ lib.lists.optionals stdenv.isDarwin [
       dockutil
@@ -48,7 +49,6 @@ in
       code-cursor
       libei
       libgbm
-      jetbrains.idea-ultimate
       zed-editor
     ];
 }

@@ -1,9 +1,6 @@
 _:
 
 [
-  # Ides
-  "intellij-idea"
-
   # Misc
   "appcleaner"
 
