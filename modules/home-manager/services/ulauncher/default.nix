@@ -56,7 +56,7 @@ in {
   config = lib.mkIf (!pkgs.stdenv.isDarwin) {
     # Ulauncher package
     home.packages = with pkgs; [
-      stable.ulauncher
+      ulauncher
     ];
 
     # Ulauncher service configuration

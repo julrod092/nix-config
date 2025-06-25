@@ -10,7 +10,7 @@
   # Nixpkgs configuration
   nixpkgs = {
     overlays = [
-      outputs.overlays.stable-packages
+      outputs.overlays.unstable-packages
     ];
 
     config = {
@@ -90,7 +90,8 @@
 
   # X11 settings
   services = {
-    displayManager.gdm.enable = true;
+    # Ly display manager (lightweight TUI display manager)
+    displayManager.ly.enable = true;
     xserver = {
       enable = true;
       xkb.layout = "us";
@@ -150,6 +151,7 @@
     glib
     gnumake
     killall
+    ly
     mesa
   ];
 

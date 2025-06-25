@@ -8,8 +8,8 @@
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
-        stable.cudaPackages.cuda_nvcc
-        stable.cudaPackages.cuda_cudart
+        cudaPackages.cuda_nvcc
+        cudaPackages.cuda_cudart
         nvidia-vaapi-driver
         vaapiVdpau
         libvdpau-va-gl
@@ -27,14 +27,14 @@
 
   # Install CUDA tools
   environment.systemPackages = with pkgs; [
-    stable.cudaPackages.cuda_nvcc
-    stable.cudaPackages.cuda_cudart
+    cudaPackages.cuda_nvcc
+    cudaPackages.cuda_cudart
   ];
 
   # Set necessary environment variables
   environment.sessionVariables = lib.mkForce {
-    CUDA_PATH = "${pkgs.stable.cudaPackages.cuda_cudart}";
-    LD_LIBRARY_PATH = "${pkgs.stable.cudaPackages.cuda_cudart}/lib:${pkgs.stable.cudaPackages.cuda_nvcc}/lib:/run/opengl-driver/lib";
+    CUDA_PATH = "${pkgs.cudaPackages.cuda_cudart}";
+    LD_LIBRARY_PATH = "${pkgs.cudaPackages.cuda_cudart}/lib:${pkgs.cudaPackages.cuda_nvcc}/lib:/run/opengl-driver/lib";
     # Add variables to help with EGL/OpenGL issues
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
