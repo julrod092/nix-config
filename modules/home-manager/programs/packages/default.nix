@@ -22,7 +22,7 @@ in
       (sbt.override { jre = jdk; })
       nixd
       maven
-      devenv
+      # devenv  # Temporarily disabled due to Nix 2.24 patch issues
       scala-cli
       openssl
       synergy
