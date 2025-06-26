@@ -104,6 +104,7 @@
         specialArgs = {
           inherit inputs outputs hostname;
           userConfig = users.${username};
+          nixosModules = "${self}/modules/nixos";
         };
         modules = [
           home-manager.darwinModules.home-manager
