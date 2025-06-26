@@ -1,8 +1,8 @@
 { config, pkgs, userConfig, ... }:
 let 
   osHomePath = if (pkgs.stdenv.isDarwin) 
-  then "/User/${userConfig.name}"
-  else "home/${userConfig.name}";
+  then "/Users/${userConfig.name}"
+  else "/home/${userConfig.name}";
 in
 {
   programs.nh = {
