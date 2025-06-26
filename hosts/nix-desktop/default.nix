@@ -14,6 +14,7 @@
     "${nixosModules}/services/nvidia"
     "${nixosModules}/services/podman"
     "${nixosModules}/services/network"
+    "${nixosModules}/programs/nh"
   ];
 
   # Set hostname

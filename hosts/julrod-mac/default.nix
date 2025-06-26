@@ -2,11 +2,13 @@
   pkgs,
   outputs,
   userConfig,
+  nixosModules,
   ...
 }: {
 
   imports = [
     ./dock
+    "${nixosModules}/programs/nh"
   ];
   # Nixpkgs configuration
   nixpkgs = {
@@ -142,7 +144,7 @@
         options = "--sort name --view grid --display stack";
       }
       {
-        path = "/Applications";
+        path = "/Users/${userConfig.name}/Applications/";
         section = "others";
         options = "--sort name --view grid --display stack";
       }
