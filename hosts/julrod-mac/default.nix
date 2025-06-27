@@ -8,7 +8,6 @@
 
   imports = [
     ./dock
-    "${nixosModules}/programs/nh"
   ];
   # Nixpkgs configuration
   nixpkgs = {
