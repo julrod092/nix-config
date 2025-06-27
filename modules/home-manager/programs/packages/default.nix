@@ -49,5 +49,6 @@ in
       libei
       libgbm
       zed-editor
+      baobab
     ];
 }

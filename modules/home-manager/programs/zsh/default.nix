@@ -16,7 +16,7 @@ in
       nix-update = "sudo ${system-rebuild} switch --flake ~/.nix-config#${hostname}";
       hm-update = "home-manager switch --flake ~/.nix-config#${userConfig.name}@${hostname} && source ~/.zshrc";
       flake-update = "nix flake update --flake ~/.nix-config";
-      nix-full-update = "flake-update && nix-update && hm-update && nix-clean";s
+      nix-full-update = "flake-update && nix-update && hm-update && nix-clean";
       # Synergy service management
       synergy-start = "systemctl --user start synergy-server";
       synergy-stop = "systemctl --user stop synergy-server";
