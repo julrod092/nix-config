@@ -16,7 +16,6 @@ in
       kubectl
       lazydocker
       nh
-      openconnect
       ripgrep
       jdk
       (sbt.override { jre = jdk; })
@@ -44,8 +43,6 @@ in
       tesseract
       unzip
       wl-clipboard
-      rclone
-      lmstudio
       code-cursor
       libei
       libgbm
