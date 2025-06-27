@@ -43,6 +43,8 @@ in
       tesseract
       unzip
       wl-clipboard
+      rclone
+      lmstudio
       code-cursor
       libei
       libgbm
