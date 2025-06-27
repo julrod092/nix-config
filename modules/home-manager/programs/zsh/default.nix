@@ -16,12 +16,7 @@ in
       nix-update = "sudo ${system-rebuild} switch --flake ~/.nix-config#${hostname}";
       hm-update = "home-manager switch --flake ~/.nix-config#${userConfig.name}@${hostname} && source ~/.zshrc";
       flake-update = "nix flake update --flake ~/.nix-config";
-      nix-full-update = "flake-update && nix-update && hm-update && nix-clean";
-      # nh aliases for easier Nix management
-      nh-os = "nh os switch";
-      nh-home = "nh home switch";
-      nh-clean = "nh clean all";
-      nh-search = "nh search";
+      nix-full-update = "flake-update && nix-update && hm-update && nix-clean";s
       # Synergy service management
       synergy-start = "systemctl --user start synergy-server";
       synergy-stop = "systemctl --user stop synergy-server";
