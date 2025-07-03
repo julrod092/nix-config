@@ -99,6 +99,7 @@
           inherit inputs outputs hostname;
           userConfig = users.${username};
           nixosModules = "${self}/modules/nixos";
+          secretsModule = "${self}/modules/secrets";
         };
         modules = [./hosts/${hostname}];
       };
