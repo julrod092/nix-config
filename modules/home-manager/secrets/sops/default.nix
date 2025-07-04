@@ -1,4 +1,4 @@
-{ config, pkgs, hostname, userConfig, ... }:
+{ config, pkgs, hostname, userConfig, lib, ... }:
 {
   sops = {
     defaultSymlinkPath = "/run/user/1000/secrets";
@@ -6,10 +6,8 @@
     gnupg.home = "/home/${userConfig.name}/.gnupg";
 
     secrets = {
-      "synergy_key" = {
-        path = "~/.synergy/SSL/Synergy.pem";
-        owner = userConfig.name;
-        group = userConfig.name;
+      "synergy_key" = lib.mkIf (!pkgs.stdenv.isDarwin) {
+        path = "/home/${userConfig.name}/.synergy/SSL/Synergy.pem";
         mode = "0644";
       };
     };
