@@ -9,6 +9,7 @@ let
       path = "/home/${userConfig.name}/.synergy/SSL/Synergy.pem";
       mode = "0600";
     };
+    "test" = {};
   };
 
   # Shared secrets for all platforms
