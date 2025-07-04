@@ -3,6 +3,17 @@ let
   system-rebuild = if pkgs.stdenv.isDarwin
   then "darwin-rebuild"
   else "nixos-rebuild";
+
+  sharedVariables = {
+    JAVA_HOME="${pkgs.zulu11}/bin";
+  };
+
+  darwinVariables = {
+    NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets.npm_github_token.path} 2>/dev/null || echo '')";
+    M2_HOME = "${pkgs.maven}/bin";
+  };
+
+  linuxVariables = {};
 in
 {
 
@@ -30,11 +41,9 @@ in
       theme = "agnoster";
     };
 
-    localVariables = {
-      NPM_GITHUB_TOKEN = lib.mkIf (pkgs.stdenv.isDarwin) ''$(cat ${config.secrets.npm_github_token.path})'';
-      JAVA_HOME = "${pkgs.zulu11}/bin";
-      M2_HOME = "${pkgs.maven}/bin";
-    };
+    localVariables = sharedVariables 
+      // (lib.optionalAttrs pkgs.stdenv.isDarwin darwinVariables)
+      // (lib.optionalAttrs (!pkgs.stdenv.isDarwin) linuxVariables);
 
     initContent = ''
       # extra lines for zsh config file
