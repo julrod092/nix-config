@@ -1,4 +1,4 @@
-{ pkgs, hostname, userConfig, ... }:
+{ pkgs, hostname, userConfig, config, ... }:
 let
   system-rebuild = if pkgs.stdenv.isDarwin
   then "darwin-rebuild"
@@ -37,6 +37,7 @@ in
         else "";
       JAVA_HOME="${pkgs.zulu11}/bin";
       M2_HOME="${pkgs.maven}/bin";
+      TEST=config.sops.secrets.test.path;
     };
 
     initContent = ''

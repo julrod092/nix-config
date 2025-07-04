@@ -77,6 +77,7 @@
     homebrew-bundle,
     homebrew-core,
     homebrew-cask,
+    sops-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -99,9 +100,11 @@
           inherit inputs outputs hostname;
           userConfig = users.${username};
           nixosModules = "${self}/modules/nixos";
-          secretsModule = "${self}/modules/secrets";
         };
-        modules = [./hosts/${hostname}];
+        modules = [
+          sops-nix.nixosModules.sops
+          ./hosts/${hostname}
+        ];
       };
 
     # Function for nix-darwin system configuration
@@ -114,6 +117,7 @@
           nixosModules = "${self}/modules/nixos";
         };
         modules = [
+          sops-nix.darwinModules.sops
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
           {
@@ -145,8 +149,9 @@
         };
 
         modules = [
-          ./home/${username}/${hostname}
+          sops-nix.homeManagerModules.sops
           catppuccin.homeModules.catppuccin
+          ./home/${username}/${hostname}
         ];
       };
   in {
