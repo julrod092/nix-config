@@ -1,16 +1,17 @@
-{ config, pkgs, hostname, userConfig,... }:
-let
-  basePath = if pkgs.stdenv.isDarwin 
-             then "/Users/${userConfig.name}" 
-             else "/home/${userConfig.name}";
-in 
+{ config, pkgs, hostname, userConfig, ... }:
 {
   sops = {
     defaultSymlinkPath = "/run/user/1000/secrets";
-    defaultSecretsMountPoint = "/run/user/1000/secrets.d";
-    defaultSopsFile = "${basePath}/.nix-config/home/${userConfig.name}/${hostname}/secrets/secrets.yaml";
-    gnupg.home = "${basePath}/${userConfig.name}/.gnupg";
+    defaultSopsFile = ./../../../../home/${userConfig.name}/${hostname}/secrets/secrets.yaml;
+    gnupg.home = "/home/${userConfig.name}/.gnupg";
 
-    secrets.test = {};
+    secrets = {
+      "synergy_key" = {
+        path = "~/.synergy/SSL/Synergy.pem";
+        owner = userConfig.name;
+        group = userConfig.name;
+        mode = "0644";
+      };
+    };
   };
 }

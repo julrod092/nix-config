@@ -37,7 +37,6 @@ in
         else "";
       JAVA_HOME="${pkgs.zulu11}/bin";
       M2_HOME="${pkgs.maven}/bin";
-      TEST=config.sops.secrets.test.path;
     };
 
     initContent = ''
