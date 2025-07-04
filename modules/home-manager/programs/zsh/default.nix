@@ -13,7 +13,9 @@ let
     M2_HOME = "${pkgs.maven}/bin";
   };
 
-  linuxVariables = {};
+  linuxVariables = {
+    TEST = "$(cat ${config.sops.secrets.test.path} 2>/dev/null || echo '')";
+  };
 in
 {
 
