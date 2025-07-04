@@ -1,4 +1,4 @@
-{ pkgs, hostname, userConfig, ... }:
+{ pkgs, hostname, userConfig, config, ... }:
 let
   system-rebuild = if pkgs.stdenv.isDarwin
   then "darwin-rebuild"

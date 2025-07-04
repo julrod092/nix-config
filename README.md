@@ -1,5 +1,9 @@
 # NixOS and nix-darwin Configurations for My Machines
 
+---
+**Note:** This Repository is based on [AlexNabokikh - nix-config](https://github.com/AlexNabokikh/nix-config). Go there first and take a look as it is the based structure of this 
+---
+
 This repository contains NixOS and nix-darwin configurations for my machines, managed through [Nix Flakes](https://nixos.wiki/wiki/Flakes).
 
 It is structured to easily accommodate multiple machines and user configurations, leveraging [nixpkgs](https://github.com/NixOS/nixpkgs), [home-manager](https://github.com/nix-community/home-manager), [nix-darwin](https://github.com/LnL7/nix-darwin), and various other community contributions for a seamless experience across NixOS and macOS.
@@ -226,11 +230,3 @@ nix flake update
 
 4. **macOS Specific**:
    - `programs/aerospace.nix`: macOS window management
-
-## Contributing
-
-Contributions are welcome! If you have improvements or suggestions, please open an issue or submit a pull request.
-
-## License
-
-This repository is licensed under MIT License. Feel free to use, modify, and distribute according to the license terms.

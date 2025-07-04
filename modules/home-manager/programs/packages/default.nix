@@ -26,6 +26,8 @@ in
       openssl
       synergy
       unstable.jetbrains.idea-ultimate
+      sops
+      age
     ]
     ++ lib.lists.optionals stdenv.isDarwin [
       dockutil
