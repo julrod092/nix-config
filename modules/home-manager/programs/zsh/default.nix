@@ -1,4 +1,4 @@
-{ pkgs, hostname, userConfig, config, ... }:
+{ pkgs, hostname, userConfig, config, lib, ... }:
 let
   system-rebuild = if pkgs.stdenv.isDarwin
   then "darwin-rebuild"
@@ -31,12 +31,9 @@ in
     };
 
     localVariables = {
-      NPM_GITHUB_TOKEN =
-        if pkgs.stdenv.isDarwin
-        then "REMOVED_GITHUB_PAT"
-        else "";
-      JAVA_HOME="${pkgs.zulu11}/bin";
-      M2_HOME="${pkgs.maven}/bin";
+      NPM_GITHUB_TOKEN = lib.mkIf (pkgs.stdenv.isDarwin) ''$(cat ${config.secrets.npm_github_token.path})'';
+      JAVA_HOME = "${pkgs.zulu11}/bin";
+      M2_HOME = "${pkgs.maven}/bin";
     };
 
     initContent = ''
