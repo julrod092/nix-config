@@ -9,7 +9,7 @@ let
   };
 
   darwinVariables = {
-    NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets.npm_github_token.path} 2>/dev/null || echo '')";
+    #NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets.npm_github_token.path} 2>/dev/null || echo '')";
     M2_HOME = "${pkgs.maven}/bin";
   };
 
