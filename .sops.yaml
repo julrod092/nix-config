@@ -13,3 +13,10 @@ creation_rules:
       - *nix-desktop
       - *nix-laptop
       - *julrod-mac
+
+  - path_regex: shared/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - pgp:
+      - *nix-desktop
+      - *nix-laptop
+      - *julrod-mac

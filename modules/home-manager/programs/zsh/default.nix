@@ -14,9 +14,8 @@ let
   };
 
   linuxVariables = {
-  } // (lib.optionalAttrs (config.sops.secrets ? test) {
-    TEST = "$(cat ${config.sops.secrets.test.path} 2>/dev/null || echo '')";
-  });
+    TEST = "$(cat ${config.sops.secrets.hello.path} 2>/dev/null || echo '')";
+  };
 in
 {
 
