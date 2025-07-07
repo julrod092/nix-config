@@ -21,7 +21,9 @@ let
 
   # Shared secrets for all platforms
   sharedSecrets = {
-    "test" = {};
+    "hello" = {
+      sopsFile = ./../shared/secrets.yaml;
+    };
   };
 in
 {
