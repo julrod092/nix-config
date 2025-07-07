@@ -52,5 +52,6 @@ in
       libgbm
       zed-editor
       baobab
+      stremio
     ];
 }
