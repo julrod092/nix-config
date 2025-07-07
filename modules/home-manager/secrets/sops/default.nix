@@ -1,5 +1,13 @@
 { config, pkgs, hostname, userConfig, lib, ... }:
 let
+  homeDirectory = if pkgs.stdenv.isDarwin
+    then "/Users/${userConfig.name}"
+    else "/home/${userConfig.name}";
+
+  secretsPath = if pkgs.stdenv.isDarwin 
+    then "${homeDirectory}/.config/sops/secrets"
+    else "/run/user/1000/secrets";
+
   darwinSecrets = {
     "npm_github_token" = {};
   };
@@ -9,17 +17,18 @@ let
       path = "/home/${userConfig.name}/.synergy/SSL/Synergy.pem";
       mode = "0600";
     };
-    "test" = {};
   };
 
   # Shared secrets for all platforms
-  sharedSecrets = {};
+  sharedSecrets = {
+    "test" = {};
+  };
 in
 {
   sops = {
-    defaultSymlinkPath = "/run/user/1000/secrets";
+    defaultSymlinkPath = secretsPath;
     defaultSopsFile = ./../../../../home/${userConfig.name}/${hostname}/secrets/secrets.yaml;
-    gnupg.home = "/home/${userConfig.name}/.gnupg";
+    gnupg.home = "${homeDirectory}/.gnupg";
 
     secrets = sharedSecrets 
       // (lib.optionalAttrs pkgs.stdenv.isDarwin darwinSecrets)
