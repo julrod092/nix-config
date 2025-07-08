@@ -19,7 +19,6 @@ in
       ripgrep
       jdk
       (sbt.override { jre = jdk; })
-      nixd
       maven
       # devenv  # Temporarily disabled due to Nix 2.24 patch issues
       scala-cli
@@ -29,6 +28,10 @@ in
       sops
       age
       vscode
+
+      # Nix servers
+      nixd
+      nil
     ]
     ++ lib.lists.optionals stdenv.isDarwin [
       dockutil
