@@ -28,6 +28,7 @@ in
       unstable.jetbrains.idea-ultimate
       sops
       age
+      vscode
     ]
     ++ lib.lists.optionals stdenv.isDarwin [
       dockutil
@@ -36,7 +37,6 @@ in
       hidden-bar
       docker-compose
       node
-      vscode
       raycast
     ]
     ++ lib.lists.optionals (!stdenv.isDarwin) [
@@ -48,9 +48,6 @@ in
       rclone
       lmstudio
       code-cursor
-      libei
-      libgbm
-      zed-editor
       baobab
       stremio
     ];
