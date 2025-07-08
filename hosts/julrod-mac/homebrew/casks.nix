@@ -3,6 +3,7 @@ _:
 [
   # Misc
   "appcleaner"
+  "zoom"
 
   # Browsers
   "zen"

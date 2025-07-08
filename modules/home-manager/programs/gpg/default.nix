@@ -56,7 +56,7 @@
       };
     };
     zsh = {
-      localVariables = {
+      localVariables = lib.mkIf (!pkgs.stdenv.isDarwin) {
         SSH_AUTH_SOCK = "$(gpgconf --list-dirs agent-ssh-socket)";
       };
     };
