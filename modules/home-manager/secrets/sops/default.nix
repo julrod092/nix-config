@@ -10,6 +10,7 @@ let
 
   darwinSecrets = {
     "npm_github_token" = {};
+    "github_repo_token_access" = {};
   };
 
   linuxSecrets = {
