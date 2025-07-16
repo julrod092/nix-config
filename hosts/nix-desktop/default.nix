@@ -16,10 +16,14 @@
     "${nixosModules}/services/podman"
     "${nixosModules}/services/network"
     "${nixosModules}/programs/nh"
+    "${nixosModules}/hardware/razer-nari"
   ];
 
   # Set hostname
   networking.hostName = hostname;
+
+  # Enable Razer Nari Ultimate headset profiles
+  hardware.razer-nari.enable = true;
 
 
   # This value determines the NixOS release from which the default
