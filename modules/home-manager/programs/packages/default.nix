@@ -24,7 +24,7 @@ in
       scala-cli
       openssl
       synergy
-      unstable.jetbrains.idea-community
+      jetbrains.idea-community
       sops
       age
       vscode
