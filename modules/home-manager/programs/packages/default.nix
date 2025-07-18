@@ -53,5 +53,6 @@ in
       code-cursor
       baobab
       stremio
+      codecrafters-cli
     ];
 }
