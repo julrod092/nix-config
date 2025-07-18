@@ -28,6 +28,7 @@ in
       sops
       age
       vscode
+      opencode
 
       # Nix servers
       nixd

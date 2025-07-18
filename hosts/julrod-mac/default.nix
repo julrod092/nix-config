@@ -133,7 +133,7 @@
       { path = "/Applications/Zen.app/"; }
       { path = "/Applications/Microsoft\ Teams.app/"; }
       { path = "/Applications/AppCleaner.app/"; }
-      { path = "${pkgs.unstable.jetbrains.idea-community}/Applications/IntelliJ\ IDEA.app/"; }
+      { path = "${pkgs.unstable.jetbrains.idea-community}/Applications/IntelliJ\ IDEA\ CE.app/"; }
       { path = "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app/"; }
       { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
       { path = "${pkgs.synergy}/Applications/Synergy.app/"; }
