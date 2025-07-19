@@ -34,6 +34,11 @@ in
       synergy-stop = "systemctl --user stop synergy-server";
       synergy-restart = "systemctl --user restart synergy-server";
       synergy-status = "systemctl --user status synergy-server";
+      # Synergy client management
+      synergy-client-start = "systemctl --user start synergy-client";
+      synergy-client-stop = "systemctl --user stop synergy-client";
+      synergy-client-restart = "systemctl --user restart synergy-client";
+      synergy-client-status = "systemctl --user status synergy-client";
     };
 
     oh-my-zsh = {
