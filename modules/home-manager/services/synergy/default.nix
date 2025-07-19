@@ -10,7 +10,7 @@ let
 
       Service = {
         Type = "forking";
-        ExecStart = "${pkgs.synergy}/bin/synergys -f --config %h/.config/synergy/synergy.conf";
+        ExecStart = "${pkgs.synergy}/bin/synergys -f --config %h/.config/synergy/synergy.conf --enable-crypto";
         Restart = "always";
         RestartSec = "10";
         Environment = [
@@ -36,7 +36,7 @@ let
 
       Service = {
         Type = "forking";
-        ExecStart = "${pkgs.synergy}/bin/synergyc --name ${hostname} 192.168.68.58";
+        ExecStart = "${pkgs.synergy}/bin/synergyc --enable-crypto --name ${hostname} 192.168.68.58";
         Restart = "always";
         RestartSec = "10";
         Environment = [
