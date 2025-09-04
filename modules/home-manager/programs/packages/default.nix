@@ -20,15 +20,14 @@ in
       jdk
       (sbt.override { jre = jdk; })
       maven
-      # devenv  # Temporarily disabled due to Nix 2.24 patch issues
+      devenv
       scala-cli
       openssl
       synergy
-      jetbrains.idea-community
+      unstable.jetbrains.idea-community
       sops
       age
       vscode
-      opencode
 
       # Nix servers
       nixd
@@ -55,5 +54,7 @@ in
       baobab
       stremio
       codecrafters-cli
+      unstable.opencode
+      unstable.claude-code
     ];
 }
