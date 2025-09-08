@@ -9,8 +9,8 @@ let
   };
 
   darwinVariables = {
-    REPO_ACCESS = "$(cat ${config.sops.secrets.github_repo_token_access.path} 2>/dev/null || echo '')";
-    NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets.npm_github_token.path} 2>/dev/null || echo '')";
+    REPO_ACCESS = "$(cat ${config.sops.secrets."github_repo_token_access".path} 2>/dev/null || echo '')";
+    NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets."npm_github_token".path} 2>/dev/null || echo '')";
     M2_HOME = "${pkgs.maven}/bin";
   };
 
@@ -34,11 +34,6 @@ in
       synergy-stop = "systemctl --user stop synergy-server";
       synergy-restart = "systemctl --user restart synergy-server";
       synergy-status = "systemctl --user status synergy-server";
-      # Synergy client management
-      synergy-client-start = "systemctl --user start synergy-client";
-      synergy-client-stop = "systemctl --user stop synergy-client";
-      synergy-client-restart = "systemctl --user restart synergy-client";
-      synergy-client-status = "systemctl --user status synergy-client";
     };
 
     oh-my-zsh = {
