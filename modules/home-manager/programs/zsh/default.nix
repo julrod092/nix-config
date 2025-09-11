@@ -1,10 +1,8 @@
-{ pkgs, hostname, userConfig, config, lib, ... }:
+{ pkgs, hostname, userConfig, ... }:
 let
   system-rebuild = if pkgs.stdenv.isDarwin
   then "darwin-rebuild"
   else "nixos-rebuild";
-
-  
 in
 {
 
