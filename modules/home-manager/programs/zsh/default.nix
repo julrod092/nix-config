@@ -4,11 +4,10 @@ let
   then "darwin-rebuild"
   else "nixos-rebuild";
 
-  sharedVariables = {
-    JAVA_HOME="${pkgs.zulu11}/bin";
-  };
+  sharedVariables = {};
 
   darwinVariables = {
+    JAVA_HOME="${pkgs.zulu11}/bin";
     REPO_ACCESS = "$(cat ${config.sops.secrets."github_repo_token_access".path} 2>/dev/null || echo '')";
     NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets."npm_github_token".path} 2>/dev/null || echo '')";
     M2_HOME = "${pkgs.maven}/bin";
@@ -21,6 +20,10 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+
+    sessionVariables = sharedVariables 
+      // (lib.optionalAttrs pkgs.stdenv.isDarwin darwinVariables)
+      // (lib.optionalAttrs (!pkgs.stdenv.isDarwin) linuxVariables);
 
     shellAliases = {
       ff = "fastfetch";
@@ -41,10 +44,6 @@ in
       plugins = [ "git" ];
       theme = "agnoster";
     };
-
-    localVariables = sharedVariables 
-      // (lib.optionalAttrs pkgs.stdenv.isDarwin darwinVariables)
-      // (lib.optionalAttrs (!pkgs.stdenv.isDarwin) linuxVariables);
 
     initContent = ''
       # extra lines for zsh config file
