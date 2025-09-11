@@ -5,7 +5,22 @@
   pkgs,
   system,
   ...
-}: {
+}: 
+let 
+  sharedVariables = {
+    EDITOR = "nvim";
+  };
+
+  darwinVariables = {
+    JAVA_HOME = "${pkgs.zulu11}/bin";
+    REPO_ACCESS = "$(cat ${config.sops.secrets."github_repo_token_access".path})";
+    NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets."npm_github_token".path})";
+    M2_HOME = "${pkgs.maven}/bin";
+  };
+
+  linuxVariables = {};
+in
+{
   imports = [
     ../programs/aerospace
     ../programs/alacritty
@@ -50,9 +65,9 @@
       if pkgs.stdenv.isDarwin
       then "/Users/${userConfig.name}"
       else "/home/${userConfig.name}";
-    sessionVariables = {
-       EDITOR = "nvim";
-     };
+    sessionVariables = sharedVariables 
+      // (lib.optionalAttrs pkgs.stdenv.isDarwin darwinVariables)
+      // (lib.optionalAttrs (!pkgs.stdenv.isDarwin) linuxVariables);
   };
 
   # Catpuccin flavor and accent
