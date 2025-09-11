@@ -50,9 +50,9 @@
       if pkgs.stdenv.isDarwin
       then "/Users/${userConfig.name}"
       else "/home/${userConfig.name}";
-    sessionVariables = sharedVariables 
-      // (lib.optionalAttrs pkgs.stdenv.isDarwin darwinVariables)
-      // (lib.optionalAttrs (!pkgs.stdenv.isDarwin) linuxVariables);
+    sessionVariables = {
+       EDITOR = "nvim";
+     };
   };
 
   # Catpuccin flavor and accent
