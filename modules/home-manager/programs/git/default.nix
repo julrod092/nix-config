@@ -13,6 +13,7 @@
       # Devenv
       ".devenv*"
       "devenv.local.nix"
+      "devenv*"
 
       # direnv
       ".direnv"
