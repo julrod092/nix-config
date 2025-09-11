@@ -10,8 +10,6 @@ in
     enable = true;
     enableCompletion = true;
 
-    sessionVariables = 
-
     shellAliases = {
       ff = "fastfetch";
       nix-clean = "sudo nix-env --delete-generations old && nix-env --delete-generations old && sudo  nix-collect-garbage -d && nix-collect-garbage -d";
