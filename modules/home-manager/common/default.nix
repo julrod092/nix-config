@@ -4,25 +4,8 @@
   userConfig,
   pkgs,
   system,
-  config,
-  lib,
   ...
-}: 
-let
-  sharedVariables = {
-    EDITOR = "nvim";
-  };
-
-  darwinVariables = {
-    JAVA_HOME = "${pkgs.zulu11}/bin";
-    REPO_ACCESS = "$(cat ${config.sops.secrets."github_repo_token_access".path} 2>/dev/null || echo '')";
-    NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets."npm_github_token".path} 2>/dev/null || echo '')";
-    M2_HOME = "${pkgs.maven}/bin";
-  };
-
-  linuxVariables = {};
-in
-{
+}: {
   imports = [
     ../programs/aerospace
     ../programs/alacritty
