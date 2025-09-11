@@ -3,7 +3,7 @@
 {
   imports = [
     "${nhModules}/common"
-    "${nhModules}/secrets/sops"
+    "${nhModules}/secrets"
   ];
 
   # Enable home-manager
