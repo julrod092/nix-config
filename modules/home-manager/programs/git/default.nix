@@ -1,5 +1,6 @@
 {userConfig, lib, pkgs, ...}: {
   # Install git via home-manager module
+
   programs.git = {
     enable = true;
     userName = userConfig.fullName;
@@ -8,6 +9,17 @@
       key = userConfig.gitKey;
       signByDefault = true;
     };
+    ignores = [
+      # Devenv
+      ".devenv*"
+      "devenv.local.nix"
+
+      # direnv
+      ".direnv"
+
+      #env
+      ".envrc"
+    ];
     delta = {
       enable = true;
       options = {
