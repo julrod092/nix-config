@@ -3,6 +3,17 @@ let
   system-rebuild = if pkgs.stdenv.isDarwin
   then "darwin-rebuild"
   else "nixos-rebuild";
+
+  sharedVariables = {};
+
+  darwinVariables = {
+    JAVA_HOME = "${pkgs.zulu11}/bin";
+    REPO_ACCESS = "$(cat ${config.sops.secrets."github_repo_token_access".path})";
+    NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets."npm_github_token".path})";
+    M2_HOME = "${pkgs.maven}/bin";
+  };
+
+  linuxVariables = {};
 in
 {
 
@@ -37,6 +48,9 @@ in
           prompt_segment black default "%(!.%{%F{yellow}%}.) λ "
         fi
       }
+
+      export REPO_ACCESS="$(cat ${config.sops.secrets.github_repo_token_access.path})"
+      export NPM_GITHUB_TOKEN="$(cat ${config.sops.secrets.npm_github_token.path})"
     '';
   };
 }
