@@ -20,6 +20,9 @@
 
       #env
       ".envrc"
+
+      # Local configs
+      "local*"
     ];
     delta = {
       enable = true;

@@ -18,7 +18,7 @@
     ../programs/tmux
     ../programs/zsh
     ../programs/packages
-    ../programs/neovim-ide
+    ../programs/nvim  
     ../programs/zen
     ../programs/gpg
     ../scripts
@@ -31,8 +31,7 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.unstable-packages
-      inputs.neovim-nightly-overlay.overlays.default
-      inputs.neovim-flake.overlays.${system}.default
+      outputs.overlays.expected-package-revision
     ];
 
     config = {

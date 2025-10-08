@@ -10,8 +10,8 @@ let
 
   macos = {
     secrets = {
-      "npm_github_token" = {};
-      "github_repo_token_access" = {};
+      # "npm_github_token" = {};
+      # "github_repo_token_access" = {};
     };
     templates = {};
   };
