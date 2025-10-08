@@ -1,29 +1,5 @@
 { pkgs, lib,  ...}:
 let
-  nodejs = pkgs.stdenv.mkDerivation rec {
-    pname = "nodejs";
-    version = "20.18.1";
-    # Validate sha256 nix-prefetch-url https://nodejs.org/dist/v20.18.1/node-v20.18.1.tar.gz
-    src = if pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64 then
-      pkgs.fetchurl {
-        url = "https://nodejs.org/dist/v${version}/node-v${version}-darwin-arm64.tar.gz";
-        sha256 = "sha256-npLOEDJFWpzEGf5x6QiyeuR3eZNxtFoIRO7bAieZIqQ=";
-      }
-    else pkgs.stdenv.isDarwin 
-      pkgs.fetchurl {
-        url = "https://nodejs.org/dist/v${version}/node-v${version}-darwin-x64.tar.gz";
-        sha256 = "sha256-PLACEHOLDER";
-      };
-    
-    installPhase = ''
-      mkdir -p $out
-      cp -R * $out/
-    '';
-    
-    dontBuild = true;
-    dontConfigure = true;
-    dontStrip = true;
-  };
   jdk = if (pkgs.stdenv.isDarwin)
     then pkgs.zulu11
     else pkgs.zulu21;
@@ -51,7 +27,7 @@ in
       sops
       age
       vscode
-
+      
       # Nix servers
       nixd
       nil
@@ -62,8 +38,10 @@ in
       docker
       hidden-bar
       docker-compose
-      nodejs
+      (expected-rev "e518d4ad2bcad74f98fec028cf21ce5b1e5020dd" "${pkgs.system}").nodejs_20
       raycast
+      (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.system}").haproxy
+      charles
     ]
     ++ lib.lists.optionals (!stdenv.isDarwin) [
       pavucontrol

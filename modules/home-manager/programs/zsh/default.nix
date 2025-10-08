@@ -48,9 +48,6 @@ in
           prompt_segment black default "%(!.%{%F{yellow}%}.) λ "
         fi
       }
-
-      export REPO_ACCESS="$(cat ${config.sops.secrets.github_repo_token_access.path})"
-      export NPM_GITHUB_TOKEN="$(cat ${config.sops.secrets.npm_github_token.path})"
     '';
   };
 }

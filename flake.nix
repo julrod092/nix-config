@@ -15,7 +15,7 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Global catppuccin theme
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin.url = "github:catppuccin/nix/release-25.05";
 
     # NixOS Spicetify
     spicetify-nix = {
@@ -46,14 +46,6 @@
       flake = false;
     };
 
-    # Neovim flake
-    neovim-flake = {
-      url = "github:gvolpe/neovim-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
     # Temporal Zen browser flake
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -63,6 +55,15 @@
     # Secrets managements
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # NVIM nix community scratch 
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.05";
+      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+      # url = "github:nix-community/nixvim/nixos-25.05";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -78,6 +79,7 @@
     homebrew-core,
     homebrew-cask,
     sops-nix,
+    nixvim,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -151,6 +153,7 @@
         modules = [
           sops-nix.homeManagerModules.sops
           catppuccin.homeModules.catppuccin
+          nixvim.homeManagerModules.nixvim
           ./home/${username}/${hostname}
         ];
       };
