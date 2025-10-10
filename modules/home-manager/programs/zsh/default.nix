@@ -1,19 +1,19 @@
-{ pkgs, hostname, userConfig, config, lib, ... }:
+{ pkgs, hostname, userConfig, ... }:
 let
   system-rebuild = if pkgs.stdenv.isDarwin
   then "darwin-rebuild"
   else "nixos-rebuild";
 
-  sharedVariables = {};
+  # sharedVariables = {};
 
-  darwinVariables = {
-    JAVA_HOME = "${pkgs.zulu11}/bin";
-    REPO_ACCESS = "$(cat ${config.sops.secrets."github_repo_token_access".path})";
-    NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets."npm_github_token".path})";
-    M2_HOME = "${pkgs.maven}/bin";
-  };
+  # darwinVariables = {
+  #  JAVA_HOME = "${pkgs.zulu11}/bin";
+  #   REPO_ACCESS = "$(cat ${config.sops.secrets."github_repo_token_access".path})";
+  #  NPM_GITHUB_TOKEN = "$(cat ${config.sops.secrets."npm_github_token".path})";
+  #  M2_HOME = "${pkgs.maven}/bin";
+  #};
 
-  linuxVariables = {};
+  # linuxVariables = {};
 in
 {
 

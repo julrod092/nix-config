@@ -27,6 +27,7 @@ in
       sops
       age
       vscode
+      fzf
       
       # Nix servers
       nixd
@@ -38,10 +39,10 @@ in
       docker
       hidden-bar
       docker-compose
-      (expected-rev "e518d4ad2bcad74f98fec028cf21ce5b1e5020dd" "${pkgs.system}").nodejs_20
       raycast
+      charles4
+      (expected-rev "e518d4ad2bcad74f98fec028cf21ce5b1e5020dd" "${pkgs.system}").nodejs_20
       (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.system}").haproxy
-      charles
     ]
     ++ lib.lists.optionals (!stdenv.isDarwin) [
       pavucontrol
