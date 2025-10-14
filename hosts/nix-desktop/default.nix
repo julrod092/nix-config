@@ -2,7 +2,6 @@
   inputs,
   hostname,
   nixosModules,
-  secretsModule,
   ...
 }: {
   imports = [
