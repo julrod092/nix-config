@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-selected="~/.nix-config\n$(find ~/workspace -mindepth 1 -maxdepth 2 -type d -not -iwholename '*.git*')" | sort -r | fzf
+selected=$(echo "~/.nix-config\n$(find ~/workspace -mindepth 1 -maxdepth 2 -type d -not -iwholename '*.git*')" | sort -r | fzf)
 
 if [ -n "$selected" ]; then
 	tmux new-window -c "$selected" -n "$(basename "$selected")" || exit

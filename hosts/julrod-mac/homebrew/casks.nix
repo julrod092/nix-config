@@ -4,6 +4,7 @@ _:
   # Misc
   "appcleaner"
   "zoom"
+  "charles@4"
 
   # Browsers
   "zen"
