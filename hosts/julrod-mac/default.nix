@@ -40,6 +40,7 @@
     # Homebrew is *installed* via the flake input nix-homebrew
     enable = true;
     casks = pkgs.callPackage ./homebrew/casks.nix {};
+    brews = pkgs.callPackage ./homebrew/brews.nix {};
 
     # These app IDs are from using the mas CLI app
     # mas = mac app store
