@@ -39,8 +39,8 @@
     # This is a module from nix-darwin
     # Homebrew is *installed* via the flake input nix-homebrew
     enable = true;
-    casks = pkgs.callPackage ./homebrew/casks.nix {};
-    brews = pkgs.callPackage ./homebrew/brews.nix {};
+    casks = pkgs.callPackage ./homebrew/casks.nix {}; # GUI apps
+    brews = pkgs.callPackage ./homebrew/brews.nix {}; # CLI apps
 
     # These app IDs are from using the mas CLI app
     # mas = mac app store
