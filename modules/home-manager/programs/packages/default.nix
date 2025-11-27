@@ -1,6 +1,6 @@
 { pkgs, lib,  ...}:
 let
-  jdk = pkgs.zulu21;
+  jdk = pkgs.zulu11;
 in
 {
   home.packages = with pkgs;
@@ -47,9 +47,6 @@ in
       tesseract
       unzip
       wl-clipboard
-      rclone
-      lmstudio
-      code-cursor
       baobab
       stremio
       codecrafters-cli
