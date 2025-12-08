@@ -1,29 +1,37 @@
 {userConfig, lib, pkgs, ...}: {
   # Install git via home-manager module
 
-  programs.git = {
-    enable = true;
-    userName = userConfig.fullName;
-    userEmail = userConfig.email;
-    signing = lib.mkIf (!pkgs.stdenv.isDarwin) {
-      key = userConfig.gitKey;
-      signByDefault = true;
+  programs = {
+    git = {
+      enable = true;
+      settings = {
+        user = {
+          namne = userConfig.fullName;
+          email =  userConfig.email;
+        };
+        pull.rebase = "true";
+      };
+      signing = lib.mkIf (!pkgs.stdenv.isDarwin) {
+        key = userConfig.gitKey;
+        signByDefault = true;
+      };
+      ignores = [
+        # Devenv
+        ".devenv*"
+        "devenv.local.nix"
+        "devenv*"
+
+        # direnv
+        ".direnv"
+
+        #env
+        ".envrc"
+
+        # Local configs
+        "local*"
+      ];
     };
-    ignores = [
-      # Devenv
-      ".devenv*"
-      "devenv.local.nix"
-      "devenv*"
 
-      # direnv
-      ".direnv"
-
-      #env
-      ".envrc"
-
-      # Local configs
-      "local*"
-    ];
     delta = {
       enable = true;
       options = {
@@ -33,9 +41,6 @@
         navigate = true;
         width = 280;
       };
-    };
-    extraConfig = {
-      pull.rebase = "true";
     };
   };
 
