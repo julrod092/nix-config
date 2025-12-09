@@ -16,7 +16,7 @@
 
     # Other tools
     cfssl
-    pcsctools
+    pcsc-tools
   ] ++ lib.lists.optionals (!stdenv.isDarwin) [
     yubioath-flutter
     # Password generation tools
