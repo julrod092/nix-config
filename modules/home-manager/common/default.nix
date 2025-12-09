@@ -1,9 +1,7 @@
 {
-  inputs,
   outputs,
   userConfig,
   pkgs,
-  system,
   ...
 }: {
   imports = [

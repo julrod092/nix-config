@@ -6,7 +6,7 @@ in
   home.packages = with pkgs;
     [
       dig
-      du-dust
+      dust
       eza
       fd
       jq
