@@ -28,11 +28,6 @@ in
       hm-update = "home-manager switch --flake ~/.nix-config#${userConfig.name}@${hostname} && source ~/.zshrc";
       flake-update = "nix flake update --flake ~/.nix-config";
       nix-full-update = "flake-update && nix-update && hm-update && nix-clean";
-      # Synergy service management
-      synergy-start = "systemctl --user start synergy-server";
-      synergy-stop = "systemctl --user stop synergy-server";
-      synergy-restart = "systemctl --user restart synergy-server";
-      synergy-status = "systemctl --user status synergy-server";
     };
 
     oh-my-zsh = {

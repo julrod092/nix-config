@@ -1,9 +1,8 @@
 {nhModules, ...}: {
   imports = [
     "${nhModules}/common"
-    "${nhModules}/desktop/hyprland"
-    "${nhModules}/services/synergy"
-    "${nhModules}/secrets/sops"
+    # "${nhModules}/desktop/hyprland"
+    # "${nhModules}/secrets/sops"
   ];
   
   # Enable home-manager

@@ -11,10 +11,10 @@
         };
         pull.rebase = "true";
       };
-      signing = lib.mkIf (!pkgs.stdenv.isDarwin) {
-        key = userConfig.gitKey;
-        signByDefault = true;
-      };
+      # signing = lib.mkIf (!pkgs.stdenv.isDarwin) {
+      #   key = userConfig.gitKey;
+      #   signByDefault = true;
+      # };
       ignores = [
         # Devenv
         ".devenv*"
