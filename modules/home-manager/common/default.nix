@@ -20,6 +20,8 @@
     ../programs/zen
     ../programs/gpg
     ../scripts
+
+    # Services
     ../services/ulauncher
     ../services/ssh
   ];
