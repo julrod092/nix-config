@@ -48,7 +48,7 @@ in
       unzip
       wl-clipboard
       baobab
-      stremio
+      # stremio
       codecrafters-cli
       unstable.opencode
       unstable.claude-code

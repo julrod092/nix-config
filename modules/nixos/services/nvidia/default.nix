@@ -11,7 +11,7 @@
         cudaPackages.cuda_nvcc
         cudaPackages.cuda_cudart
         nvidia-vaapi-driver
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
       ];
     };

@@ -88,18 +88,6 @@
   # Input settings
   services.libinput.enable = true;
 
-  # X11 settings
-  services = {
-    # Ly display manager (lightweight TUI display manager)
-    displayManager.ly.enable = true;
-    xserver = {
-      enable = true;
-      xkb.layout = "us";
-      xkb.variant = "";
-      excludePackages = with pkgs; [xterm];
-    };
-  };
-
   # PATH configuration
   environment = {
     localBinInPath = true;

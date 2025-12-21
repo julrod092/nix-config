@@ -17,12 +17,7 @@ let
   };
 
   desktop = {
-    secrets = {
-      "synergy_key" = {
-        path = "/home/${userConfig.name}/.synergy/SSL/Synergy.pem";
-        mode = "0600";
-      };
-    };
+    secrets = {};
     templates = {};
   };
 
