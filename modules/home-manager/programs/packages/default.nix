@@ -1,6 +1,6 @@
 { pkgs, lib, outputs, ...}:
 let
-  jdk = pkgs.zulu21;
+  jdk = pkgs.zulu17;
 in
 {
   home.packages = with pkgs;
@@ -17,7 +17,7 @@ in
       jdk
       (sbt.override { jre = jdk; })
       maven
-      devenv
+      unstable.devenv
       scala-cli
       openssl
       unstable.jetbrains.idea-community
