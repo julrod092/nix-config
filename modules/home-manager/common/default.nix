@@ -31,6 +31,7 @@
     overlays = [
       outputs.overlays.unstable-packages
       outputs.overlays.expected-package-revision
+      outputs.overlays.synergy
     ];
 
     config = {
@@ -50,6 +51,9 @@
       else "/home/${userConfig.name}";
     sessionVariables = {
       EDITOR = "nvim";
+      # Help Synergy and other Qt applications use Wayland
+      # Falls back to X11 if Wayland is not available
+      QT_QPA_PLATFORM = "wayland;xcb";
     };
   };
 

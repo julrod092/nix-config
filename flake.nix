@@ -63,6 +63,12 @@
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Synergy 1.17.1 with Wayland support
+    synergy = {
+      url = "git+ssh://git@github.com/julrod092/synergy-flake.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -170,6 +176,8 @@
       "julrod@nix-laptop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-laptop";
     };
 
-    overlays = import ./overlays { inherit inputs; };
+    overlays = import ./overlays { inherit inputs; } // {
+      synergy = inputs.synergy.overlays.default;
+    };
   };
 }
