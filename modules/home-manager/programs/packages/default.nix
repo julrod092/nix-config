@@ -1,6 +1,6 @@
 { pkgs, lib, outputs, ...}:
 let
-  jdk = pkgs.zulu17;
+  jdk = pkgs.zulu21;
 in
 {
   home.packages = with pkgs;
