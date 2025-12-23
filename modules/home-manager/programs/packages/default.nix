@@ -25,6 +25,7 @@ in
       age
       vscode
       fzf
+      synergy-wayland
       
       # Nix servers
       nixd
@@ -50,6 +51,5 @@ in
       # stremio
       codecrafters-cli
       code-cursor
-      synergy-wayland
     ];
 }
