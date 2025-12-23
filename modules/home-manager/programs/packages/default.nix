@@ -20,7 +20,6 @@ in
       devenv
       scala-cli
       openssl
-      synergy
       unstable.jetbrains.idea-community
       sops
       age
@@ -51,5 +50,6 @@ in
       # stremio
       codecrafters-cli
       code-cursor
+      synergy-wayland
     ];
 }

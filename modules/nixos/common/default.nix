@@ -96,6 +96,14 @@
   
   security.rtkit.enable = true;
 
+  # Enable XDG Desktop Portal for Wayland applications (needed for Synergy GUI)
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
+
   services = {
     # Disable CUPS printing
     printing.enable = false;
@@ -128,7 +136,7 @@
   # User configuration
   users.users.${userConfig.name} = {
     description = userConfig.fullName;
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "input"];
     isNormalUser = true;
     shell = pkgs.zsh;
   };
@@ -141,6 +149,9 @@
     killall
     ly
     mesa
+    # Libraries needed for Synergy Wayland support
+    libei
+    libportal
   ];
 
   # Zsh configuration

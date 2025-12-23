@@ -6,8 +6,10 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+
+  # Use ly as the display manager instead of GDM
+  services.displayManager.ly.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
