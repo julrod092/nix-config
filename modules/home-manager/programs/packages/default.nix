@@ -51,5 +51,6 @@ in
       # stremio
       codecrafters-cli
       code-cursor
+      unstable.discord
     ];
 }

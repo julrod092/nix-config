@@ -16,6 +16,7 @@
     "${nixosModules}/services/podman"
     "${nixosModules}/services/network"
     "${nixosModules}/programs/nh"
+    "${nixosModules}/programs/steam"
     "${nixosModules}/hardware/razer-nari"
   ];
 
