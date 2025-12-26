@@ -14,7 +14,7 @@
     "${nhModules}/services/cliphist"
     "${nhModules}/services/kanshi"
     "${nhModules}/services/swaync"
-    "${nhModules}/services/waybar"
+    # "${nhModules}/services/waybar"  # Disabled - using Caelestia Shell instead
   ];
 
   # Consistent cursor theme across all applications.

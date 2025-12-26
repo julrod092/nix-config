@@ -87,6 +87,8 @@
 
   # Input settings
   services.libinput.enable = true;
+  # Use ly as the display manager instead of GDM
+  services.displayManager.ly.enable = true;
 
   # PATH configuration
   environment = {
@@ -101,6 +103,7 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland  # Required for InputCapture portal (needed by Synergy)
     ];
   };
 
@@ -152,6 +155,8 @@
     # Libraries needed for Synergy Wayland support
     libei
     libportal
+    # XKB data for Synergy (fixes "failed to open /usr/share/X11/xkb/rules/evdev.xml" warning)
+    xorg.xkeyboardconfig
   ];
 
   # Zsh configuration
