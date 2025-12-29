@@ -113,6 +113,9 @@
     
     # Enable devmon for device management
     devmon.enable = true;
+    
+    # Enable geoclue for location services (needed for gammastep/night light)
+    geoclue2.enable = true;
 
     # Enable PipeWire for sound
     pulseaudio.enable = false;
@@ -157,6 +160,9 @@
     libportal
     # XKB data for Synergy (fixes "failed to open /usr/share/X11/xkb/rules/evdev.xml" warning)
     xorg.xkeyboardconfig
+    # Caelestia shell dependencies
+    polkit_gnome
+    geoclue2
   ];
 
   # Zsh configuration

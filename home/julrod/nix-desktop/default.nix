@@ -1,8 +1,7 @@
 {nhModules,...}: {
   imports = [
     "${nhModules}/common"
-    "${nhModules}/desktop/hyprland"
-    "${nhModules}/desktop/celestia"   # Caelestia Shell (replaces waybar)
+    "${nhModules}/desktop/hyprland" 
     # "${nhModules}/secrets/sops"
   ];
 

@@ -52,5 +52,10 @@ in
       codecrafters-cli
       code-cursor
       unstable.discord
+      # Caelestia shell dependencies
+      app2unit
+      trash-cli
+      gammastep
+      # mpris-proxy is provided by bluez package (usually already installed)
     ];
 }

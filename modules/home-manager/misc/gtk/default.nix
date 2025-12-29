@@ -11,7 +11,7 @@
       package = pkgs.tela-circle-icon-theme;
     };
     cursorTheme = {
-      name = "Yaru";
+      name = "Yaru";  # Using Yaru as sweet-cursors is not in nixpkgs
       package = pkgs.yaru-theme;
       size = 24;
     };
