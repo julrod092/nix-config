@@ -24,11 +24,11 @@
     gdm.enableGnomeKeyring = true;
   };
 
-  # Enable Ozone Wayland support in Chromium and Electron based applications
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     XCURSOR_SIZE = "24";
+    # XKB environment variables for Synergy
+    XKB_DEFAULT_LAYOUT = "us";
   };
 
   # List of Hyprland specific packages
