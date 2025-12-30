@@ -25,6 +25,6 @@
   };
 
   synergy-package = final: _prev: {
-    synergy = import inputs.synergy.overlays.default;
+    synergy = inputs.synergy.overlays.default final _prev;
   };
 }
