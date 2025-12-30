@@ -90,6 +90,12 @@
   # Use ly as the display manager instead of GDM
   services.displayManager.ly.enable = true;
 
+  # Configure XKB keyboard layout (shared by both GNOME and Hyprland)
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
   # PATH configuration
   environment = {
     localBinInPath = true;
