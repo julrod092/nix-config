@@ -31,7 +31,7 @@
     overlays = [
       outputs.overlays.unstable-packages
       outputs.overlays.expected-package-revision
-      outputs.overlays.synergy
+      outputs.overlays.synergy-package
     ];
 
     config = {

@@ -24,7 +24,7 @@
       };
   };
 
-  synergy-latest = final: _prev: {
-    latest = import inputs.synergy.overlays.default;
+  synergy-package = final: _prev: {
+    synergy = import inputs.synergy.overlays.default;
   };
 }
