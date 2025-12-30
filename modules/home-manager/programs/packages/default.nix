@@ -1,4 +1,4 @@
-{ pkgs, lib, outputs, ...}:
+{ pkgs, lib, ...}:
 let
   jdk = pkgs.zulu21;
 in

@@ -12,6 +12,7 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.unstable-packages
+      outputs.overlays.synergy-latest
     ];
 
     config = {
@@ -137,7 +138,7 @@
       { path = "${pkgs.unstable.jetbrains.idea-community}/Applications/IntelliJ\ IDEA\ CE.app/"; }
       { path = "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app/"; }
       { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      { path = "${pkgs.synergy}/Applications/Synergy.app/"; }
+      { path = "${pkgs.latest.synergy_1_20}/Applications/Synergy.app/"; }
       {
         path = "/Users/${userConfig.name}/Downloads";
         section = "others";
