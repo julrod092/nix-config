@@ -101,7 +101,6 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland  # Required for InputCapture portal (needed by Synergy)
     ];
   };
 
@@ -151,13 +150,10 @@
     glib
     gnumake
     killall
-    ly
     mesa
     # Libraries needed for Synergy Wayland support
     libei
     libportal
-    # XKB data for Synergy (fixes "failed to open /usr/share/X11/xkb/rules/evdev.xml" warning)
-    xorg.xkeyboardconfig
     # Caelestia shell dependencies
     polkit_gnome
     geoclue2

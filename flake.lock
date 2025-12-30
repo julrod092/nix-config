@@ -218,11 +218,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1767111308,
-        "narHash": "sha256-kxYR3+sProSXuD4hNtPgt4HmX2ScHe6UA7YG4hw2dEY=",
+        "lastModified": 1767111841,
+        "narHash": "sha256-q6F61RsMQF8UflNMKhZplXwQKm0+KKCFK8IfJ1/NuwA=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "d9e731ea13f492e8086341531ec640e0aab10333",
+        "rev": "c902bd54f54bbc3c6782083c168aa23d9c7fe24b",
         "type": "github"
       },
       "original": {
@@ -234,11 +234,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1767109830,
-        "narHash": "sha256-jJuTvpgaI4X0/cpN6+k7RgPX6cvcFQkL5sSHc5GUyIs=",
+        "lastModified": 1767111898,
+        "narHash": "sha256-+KLzUw8aE2z4WuyMa2iI/xdcxdUzyaSWkXqgvsfusPY=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "9e58dc8fbfacf43e2ad2968ead35e87d2415cfa4",
+        "rev": "510b6956efe80df9976e0d89f7486ce6aa3dc275",
         "type": "github"
       },
       "original": {
@@ -477,11 +477,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767105339,
-        "narHash": "sha256-UEoI50/CYfRdLsUsP8YwzQ3fC7tJYdNObF9RuupJcZg=",
+        "lastModified": 1767114654,
+        "narHash": "sha256-pQs89dMl3wf8EViqAGMPuRDlLMEzz4O528Rmpj704fI=",
         "ref": "refs/heads/master",
-        "rev": "fe40bf685eb86f913ed3cb87f27f7cf328140491",
-        "revCount": 3,
+        "rev": "ec5e47a9b729bac96c665994c9c1d36f836eacda",
+        "revCount": 5,
         "type": "git",
         "url": "ssh://git@github.com/julrod092/synergy-flake.git"
       },
