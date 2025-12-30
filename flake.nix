@@ -64,7 +64,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Synergy 1.17.1 with Wayland support
+    # Synergy 1.20.0 with Wayland support
     synergy = {
       url = "git+ssh://git@github.com/julrod092/synergy-flake.git";
       inputs.nixpkgs.follows = "nixpkgs";

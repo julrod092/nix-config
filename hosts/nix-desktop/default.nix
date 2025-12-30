@@ -10,7 +10,6 @@
 
     ./hardware-configuration.nix
     "${nixosModules}/common"
-    # "${nixosModules}/desktop/hyprland"
     "${nixosModules}/desktop/gnome"
     "${nixosModules}/services/nvidia"
     "${nixosModules}/services/podman"

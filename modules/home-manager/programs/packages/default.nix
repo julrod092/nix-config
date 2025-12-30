@@ -25,7 +25,6 @@ in
       age
       vscode
       fzf
-      synergy-wayland
       
       # Nix servers
       nixd
@@ -57,5 +56,7 @@ in
       trash-cli
       gammastep
       # mpris-proxy is provided by bluez package (usually already installed)
+
+      synergy
     ];
 }
