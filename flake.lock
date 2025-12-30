@@ -218,11 +218,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1767103866,
-        "narHash": "sha256-e6oXUueVPzXbimFxXfNvuzMAFiAaj6KPte0gZPKpFhA=",
+        "lastModified": 1767107379,
+        "narHash": "sha256-qSmHbxWsZPcNjAa4THTf7XU/kn5QehKzdmUYfZqoxis=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "cef99339f6d06ef49b7d006b5b47f9b1ae761f80",
+        "rev": "05652b8b2b22fe8337026e3042aeb16728ebfbd8",
         "type": "github"
       },
       "original": {
@@ -234,11 +234,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1767099963,
-        "narHash": "sha256-almvrRrra+xSr8oKJ/kVlx0VS0sXagcUYZx1rSbHjBo=",
+        "lastModified": 1767109032,
+        "narHash": "sha256-e4ly/2z+hqkTFV/wEvRZ8kCubr0iKLouSH0Iao2mOTQ=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "e4c3c5e0c479c8a09484fa8dea086ee5a46eba7e",
+        "rev": "96b097661306a2a7ef75035084b30cbd6c2f7936",
         "type": "github"
       },
       "original": {
@@ -425,7 +425,6 @@
         "nixvim": "nixvim",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
-        "synergy": "synergy",
         "zen-browser": "zen-browser"
       }
     },
@@ -468,26 +467,6 @@
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
         "type": "github"
-      }
-    },
-    "synergy": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1767105339,
-        "narHash": "sha256-UEoI50/CYfRdLsUsP8YwzQ3fC7tJYdNObF9RuupJcZg=",
-        "ref": "refs/heads/master",
-        "rev": "fe40bf685eb86f913ed3cb87f27f7cf328140491",
-        "revCount": 3,
-        "type": "git",
-        "url": "ssh://git@github.com/julrod092/synergy-flake.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/julrod092/synergy-flake.git"
       }
     },
     "systems": {

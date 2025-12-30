@@ -1,7 +1,6 @@
 {nhModules,...}: {
   imports = [
     "${nhModules}/common"
-    # "${nhModules}/desktop/hyprland" 
     # "${nhModules}/secrets/sops"
   ];
 
