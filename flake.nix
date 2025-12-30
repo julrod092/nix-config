@@ -182,8 +182,6 @@
       "julrod@nix-laptop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-laptop";
     };
 
-    overlays = import ./overlays { inherit inputs; } // {
-      synergy = inputs.synergy.overlays.default;
-    };
+    overlays = import ./overlays { inherit inputs; };
   };
 }

@@ -23,4 +23,8 @@
         system = "${_system}"; 
       };
   };
+
+  synergy-latest = final: _prev: {
+    latest = import inputs.synergy.overlays.default;
+  };
 }
