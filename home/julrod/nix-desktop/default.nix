@@ -1,6 +1,9 @@
 {nhModules,...}: {
   imports = [
     "${nhModules}/common"
+    "${nhModules}/misc/gtk"
+    "${nhModules}/misc/xdg"
+    "${nhModules}/misc/qt"
     # "${nhModules}/secrets/sops"
   ];
 

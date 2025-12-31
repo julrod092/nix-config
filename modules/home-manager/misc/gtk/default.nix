@@ -12,8 +12,8 @@
     };
     cursorTheme = {
       name = "Yaru";  # Using Yaru as sweet-cursors is not in nixpkgs
-      package = pkgs.yaru-theme;
-      size = 24;
+      package = pkgs.apple-cursor;
+      size = 18;
     };
     font = {
       name = "Roboto";
@@ -25,8 +25,7 @@
         "file:///home/${userConfig.name}/Downloads"
         "file:///home/${userConfig.name}/Pictures"
         "file:///home/${userConfig.name}/Videos"
-        "file:///home/${userConfig.name}/Downloads/temp"
-        "file:///home/${userConfig.name}/Documents/repositories"
+        "file:///home/${userConfig.name}/workspace/repositories"
       ];
     };
   };
