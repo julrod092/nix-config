@@ -154,9 +154,6 @@
     # Libraries needed for Synergy Wayland support
     libei
     libportal
-    # Caelestia shell dependencies
-    polkit_gnome
-    geoclue2
   ];
 
   # Zsh configuration

@@ -69,11 +69,6 @@
       url = "git+ssh://git@github.com/julrod092/synergy-flake.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -156,7 +151,6 @@
           inherit inputs outputs system hostname;
           userConfig = users.${username};
           nhModules = "${self}/modules/home-manager";
-          caelestia-shell = inputs.caelestia-shell;  # Add this line
         };
 
         modules = [
