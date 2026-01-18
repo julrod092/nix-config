@@ -12,7 +12,7 @@
     };
     cursorTheme = {
       name = "Yaru";  # Using Yaru as sweet-cursors is not in nixpkgs
-      package = pkgs.apple-cursor;
+      package = pkgs.yaru-theme;
       size = 18;
     };
     font = {

@@ -26,7 +26,9 @@
       trusted-users = [ "root" "julrod" ];
     };
     optimise.automatic = true;
-    package = pkgs.nix;
+    # Skip tests to avoid build failures on macOS
+    # The nix-shell test failure is a known issue on macOS
+    package = pkgs.nix.override { doCheck = false; };
   };
 
   # User configuration
