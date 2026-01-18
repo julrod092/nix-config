@@ -58,7 +58,7 @@ in
       codecrafters-cli
       code-cursor
       unstable.discord
-      
+      nautilus
       synergy.synergy_1_20
     ];
   };
