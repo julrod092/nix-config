@@ -61,6 +61,7 @@ in
       nautilus
       synergy.synergy_1_20
       obsidian
+      libheif
     ];
   };
 }

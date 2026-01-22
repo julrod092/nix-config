@@ -14,7 +14,7 @@
 
     gnome = {
       games.enable = false;
-      core-utilities.enable = false;
+      core-apps.enable = false;
     };
     
     xserver = {

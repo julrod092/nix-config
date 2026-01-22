@@ -15,7 +15,7 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Global catppuccin theme
-    catppuccin.url = "github:catppuccin/nix/release-25.05";
+    catppuccin.url = "github:catppuccin/nix/release-25.11";
 
     # NixOS Spicetify
     spicetify-nix = {
