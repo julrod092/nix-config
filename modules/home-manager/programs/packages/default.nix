@@ -60,6 +60,7 @@ in
       unstable.discord
       nautilus
       synergy.synergy_1_20
+      obsidian
     ];
   };
 }
