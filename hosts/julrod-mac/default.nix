@@ -136,9 +136,6 @@
       { path = "/Applications/Zen.app/"; }
       { path = "/Applications/Microsoft\ Teams.app/"; }
       { path = "/Applications/AppCleaner.app/"; }
-      { path = "${pkgs.unstable.jetbrains.idea}/Applications/IntelliJ\ IDEA.app/"; }
-      { path = "${pkgs.vscode}/Applications/Visual\ Studio\ Code.app/"; }
-      { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
       {
         path = "/Users/${userConfig.name}/Downloads";
         section = "others";
