@@ -69,6 +69,8 @@
       url = "git+ssh://git@github.com/julrod092/synergy-flake.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
   };
 
   outputs = {
@@ -83,6 +85,7 @@
     homebrew-cask,
     sops-nix,
     nixvim,
+    quadlet-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -157,6 +160,7 @@
           sops-nix.homeManagerModules.sops
           catppuccin.homeModules.catppuccin
           nixvim.homeModules.nixvim
+          quadlet-nix.nixosModules.quadlet
           ./home/${username}/${hostname}
         ];
       };
