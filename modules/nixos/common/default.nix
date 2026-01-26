@@ -22,7 +22,11 @@
   nix.registry = lib.mapAttrs (_: flake: {inherit flake;}) (lib.filterAttrs (_: lib.isType "flake") inputs);
 
   # Add inputs to legacy channels
-  nix.nixPath = ["/etc/nix/path"];
+  # This allows nix-shell -p to work with flakes
+  nix.nixPath = [
+    "/etc/nix/path"
+    "nixpkgs=flake:nixpkgs"
+  ];
   environment.etc =
     lib.mapAttrs' (name: value: {
       name = "nix/path/${name}";
@@ -47,13 +51,6 @@
         configurationLimit = 5;
       };
       efi.canTouchEfiVariables = true;
-#      grub = {
-#        enable = true;
-#        version = 2;
-#        device = "nodev";
-#        efiSupport = true;
-#        useOSProber = true;
-#      };
     };
     plymouth.enable = true;
   };
