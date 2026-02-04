@@ -10,20 +10,21 @@
 
     ./hardware-configuration.nix
     "${nixosModules}/common"
-    "${nixosModules}/desktop/gnome"
+    # "${nixosModules}/desktop/gnome"
+    "${nixosModules}/desktop/niri"
     "${nixosModules}/services/nvidia"
     "${nixosModules}/services/podman"
     "${nixosModules}/services/network"
     "${nixosModules}/programs/nh"
     "${nixosModules}/programs/steam"
-    "${nixosModules}/hardware/razer-nari"
+
   ];
 
   # Set hostname
   networking.hostName = hostname;
 
   # Enable Razer Nari Ultimate headset profiles
-  hardware.razer-nari.enable = true;
+  # hardware.razer-nari.enable = true;
 
 
   # This value determines the NixOS release from which the default

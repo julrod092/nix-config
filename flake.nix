@@ -70,7 +70,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -85,7 +88,6 @@
     homebrew-cask,
     sops-nix,
     nixvim,
-    quadlet-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -160,7 +162,6 @@
           sops-nix.homeManagerModules.sops
           catppuccin.homeModules.catppuccin
           nixvim.homeModules.nixvim
-          quadlet-nix.nixosModules.quadlet
           ./home/${username}/${hostname}
         ];
       };

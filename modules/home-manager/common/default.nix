@@ -19,6 +19,7 @@
     ../programs/nvim  
     ../programs/zen
     ../programs/gpg
+    ../programs/spicetify
     ../scripts
 
     # Services

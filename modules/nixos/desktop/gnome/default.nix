@@ -16,13 +16,5 @@
       games.enable = false;
       core-apps.enable = false;
     };
-    
-    xserver = {
-      enable = true;
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-    };
   };
 }
