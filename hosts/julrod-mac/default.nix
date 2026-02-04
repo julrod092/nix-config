@@ -28,8 +28,7 @@
     optimise.automatic = true;
     # Skip tests to avoid build failures on macOS
     # The nix-shell test failure is a known issue on macOS
-    package = pkgs.nix.override { doCheck = false; };
-    # Configure NIX_PATH for nix-shell -p to work with flakes
+    package = pkgs.nix;
     nixPath = [ "nixpkgs=flake:nixpkgs" ];
   };
 

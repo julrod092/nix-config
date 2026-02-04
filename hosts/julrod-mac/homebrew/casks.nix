@@ -5,6 +5,7 @@ _:
   "appcleaner"
   "zoom"
   "charles@4"
+  "slack"
 
   # Browsers
   "zen"
