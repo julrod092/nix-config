@@ -84,6 +84,15 @@
 
   # Input settings
   services.libinput.enable = true;
+  services = {
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
+  };
 
   # PATH configuration
   environment = {

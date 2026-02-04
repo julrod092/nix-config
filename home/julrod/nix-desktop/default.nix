@@ -4,6 +4,7 @@
     "${nhModules}/misc/gtk"
     "${nhModules}/misc/xdg"
     "${nhModules}/misc/qt"
+    "${nhModules}/misc/niri"
     # "${nhModules}/secrets/sops"
   ];
 

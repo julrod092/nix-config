@@ -1,0 +1,69 @@
+{ config, pkgs, inputs, ... }:
+
+{
+
+  imports = [
+    inputs.noctalia.homeModules.default
+  ];
+
+  xdg.configFile."niri/config.kdl".source = ./config.kdl;
+  xdg.configFile."swaylock/config".source = ./swaylock.conf;
+  home.file.".local/bin/nws.sh".source = ./nws.sh;
+
+  programs.noctalia-shell = {
+    enable = true;
+    systemd.enable = true;
+    settings = {
+      # configure noctalia here
+      bar = {
+        density = "compact";
+        position = "right";
+        showCapsule = false;
+        widgets = {
+          left = [
+            {
+              id = "ControlCenter";
+              useDistroLogo = true;
+            }
+            {
+              id = "Network";
+            }
+            {
+              id = "Bluetooth";
+            }
+          ];
+          center = [
+            {
+              hideUnoccupied = false;
+              id = "Workspace";
+              labelMode = "none";
+            }
+          ];
+          right = [
+            {
+              alwaysShowPercentage = false;
+              id = "Battery";
+              warningThreshold = 30;
+            }
+            {
+              formatHorizontal = "HH:mm";
+              formatVertical = "HH mm";
+              id = "Clock";
+              useMonospacedFont = true;
+              usePrimaryColor = true;
+            }
+          ];
+        };
+      };
+      colorSchemes.predefinedScheme = "Monochrome";
+      general = {
+        avatarImage = "/home/drfoobar/.face";
+        radiusRatio = 0.2;
+      };
+      location = {
+        monthBeforeDay = true;
+        name = "Marseille, France";
+      };
+    };
+  };
+}
