@@ -142,7 +142,9 @@
               mutableTaps = false;
               autoMigrate = true;
             };
-          }
+          }({config, ...}: {
+            homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+          })
           ./hosts/${hostname}
         ];
       };
