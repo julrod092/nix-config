@@ -19,6 +19,7 @@
     ../programs/nvim  
     ../programs/zen
     ../programs/gpg
+    ../programs/lan-mouse
     ../programs/spicetify
     ../scripts
 
