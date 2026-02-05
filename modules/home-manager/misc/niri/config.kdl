@@ -277,7 +277,7 @@ binds {
     Mod+B hotkey-overlay-title="Open a Browser " { spawn "zen"; }
     // Mod+O hotkey-overlay-title="Open a Obsidian " { spawn "obsidian"; }
     Mod+E hotkey-overlay-title="Open a FileManager " { spawn "nautilus"; }
-    Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "noctalia-shell ipc call launcher toggle"; } 
+    Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "noctalia-shell ipc call launcher toggle"; } 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
 
     // Example volume keys mappings for PipeWire & WirePlumber.
