@@ -5,6 +5,7 @@
     "${nhModules}/misc/xdg"
     "${nhModules}/misc/qt"
     "${nhModules}/misc/niri"
+    "${nhModules}/programs/lan-mouse"
     # "${nhModules}/secrets/sops"
   ];
 
