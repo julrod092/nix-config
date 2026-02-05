@@ -10,7 +10,7 @@
 
     ./hardware-configuration.nix
     "${nixosModules}/common"
-    # "${nixosModules}/desktop/gnome"
+    "${nixosModules}/desktop/gnome"
     "${nixosModules}/desktop/niri"
     "${nixosModules}/services/nvidia"
     "${nixosModules}/services/podman"

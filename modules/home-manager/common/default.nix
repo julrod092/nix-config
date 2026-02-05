@@ -20,6 +20,7 @@
     ../programs/zen
     ../programs/gpg
     ../programs/spicetify
+    ../programs/lan-mouse
     ../scripts
 
     # Services

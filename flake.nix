@@ -74,6 +74,8 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lan-mouse.url = "github:feschber/lan-mouse";
   };
 
   outputs = {
