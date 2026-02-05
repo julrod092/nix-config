@@ -31,7 +31,6 @@ in
       age
       vscode
       fzf
-      unstable.lan-mouse
       
       # Nix servers
       nixd
@@ -63,7 +62,6 @@ in
       synergy.synergy_1_20
       obsidian
       libheif
-      wofi
     ];
   };
 }

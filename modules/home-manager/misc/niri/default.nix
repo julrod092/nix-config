@@ -2,7 +2,7 @@
 
 {
 
-  imports = [
+  imports = [#
     inputs.noctalia.homeModules.default
   ];
 
@@ -10,59 +10,102 @@
   xdg.configFile."swaylock/config".source = ./swaylock.conf;
   home.file.".local/bin/nws.sh".source = ./nws.sh;
 
-  programs.noctalia-shell = {
-    enable = true;
-    systemd.enable = true;
-    settings = {
-      # configure noctalia here
-      bar = {
-        density = "compact";
-        position = "right";
-        showCapsule = false;
-        widgets = {
-          left = [
+  programs = {
+    noctalia-shell = {
+      enable = true;
+      systemd.enable = true;
+      settings = {
+        # configure noctalia here
+        bar = {
+          density = "compact";
+          position = "top";
+          barType = "floating";
+          showCapsule = false;
+          backgroundOpacity = 0.8;
+          useSeparateOpacity = true;
+          floating = true;
+          marginVertical = 10;
+          marginHorizontal = 15;
+          widgets = {
+            left = [
+              {
+                id = "ControlCenter";
+                useDistroLogo = true;
+              }
+              {
+                id = "Launcher";
+              }
+            ];
+            center = [
+              {
+                formatHorizontal = "dd-MM-yyyy HH:mm";
+                formatVertical = "HH mm";
+                id = "Clock";
+                useMonospacedFont = true;
+                usePrimaryColor = true;
+              }
+              {
+                hideUnoccupied = false;
+                id = "Workspace";
+                labelMode = "none";
+              }
+            ];
+            right = [
+              {
+                id = "Network";
+              }
+              {
+                id = "Bluetooth";
+              }
+            ];
+          };
+        };
+        colorSchemes.predefinedScheme = "Monochrome";
+        general = {
+          avatarImage = "/home/drfoobar/.face";
+          radiusRatio = 0.2;
+        };
+        location = {
+          name = "El Carmen de Viboral, Colombia";
+        };
+        dock = {
+          enabled = false;
+        };
+        sessionMenu = {
+          enableCountdown = true;
+          countdownDuration = 10000;
+          position = "right";
+          showHeader = true;
+          largeButtonsStyle = true;
+          largeButtonsLayout = "single-row";
+          showNumberLabels = true;
+          powerOptions = [
             {
-              id = "ControlCenter";
-              useDistroLogo = true;
+              action = "lock";
+              enabled = true;
             }
             {
-              id = "Network";
+              action = "suspend";
+              enabled = true;
             }
             {
-              id = "Bluetooth";
-            }
-          ];
-          center = [
-            {
-              hideUnoccupied = false;
-              id = "Workspace";
-              labelMode = "none";
-            }
-          ];
-          right = [
-            {
-              alwaysShowPercentage = false;
-              id = "Battery";
-              warningThreshold = 30;
+              action = "hibernate";
+              enabled = true;
             }
             {
-              formatHorizontal = "HH:mm";
-              formatVertical = "HH mm";
-              id = "Clock";
-              useMonospacedFont = true;
-              usePrimaryColor = true;
+              action = "reboot";
+              enabled = true;
+            }
+            {
+              action = "logout";
+              enabled = true;
+            }
+            {
+              action = "shutdown";
+              enabled = true;
             }
           ];
         };
-      };
-      colorSchemes.predefinedScheme = "Monochrome";
-      general = {
-        avatarImage = "/home/drfoobar/.face";
-        radiusRatio = 0.2;
-      };
-      location = {
-        monthBeforeDay = true;
-        name = "Marseille, France";
       };
     };
   };

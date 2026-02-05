@@ -82,6 +82,8 @@
     LC_TIME = "es_CO.UTF-8";
   };
 
+  services.displayManager.ly.enable = true;
+
   # Input settings
   services.libinput.enable = true;
   services = {
@@ -109,6 +111,8 @@
       xdg-desktop-portal-gtk
     ];
   };
+
+  hardware.bluetooth.enable = true;
 
   services = {
     # Disable CUPS printing
@@ -140,6 +144,10 @@
 
     # OpenSSH daemon
     openssh.enable = true;
+
+    # Noctua power optimization
+    power-profiles-daemon.enable = true;
+    upower.enable = true;
   };
 
   # User configuration
