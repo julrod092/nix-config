@@ -1,5 +1,5 @@
 {
-  description = "NixOS and nix-darwin configs for my machines";
+  description = "Nix configuratios for all work and personal machines";
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -85,9 +85,6 @@
     home-manager,
     nixpkgs,
     nix-homebrew,
-    homebrew-bundle,
-    homebrew-core,
-    homebrew-cask,
     sops-nix,
     nixvim,
     ...
@@ -138,9 +135,9 @@
               enableRosetta = true;
               user = "${username}";
               taps = {
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
+                "homebrew/homebrew-core" = inputs.homebrew-core;
+                "homebrew/homebrew-cask" = inputs.homebrew-cask;
+                "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
               };
               mutableTaps = false;
               autoMigrate = true;
