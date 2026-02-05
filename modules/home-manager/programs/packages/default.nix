@@ -28,7 +28,6 @@ in
       openssl
       unstable.jetbrains.idea
       sops
-      age
       vscode
       fzf
       
