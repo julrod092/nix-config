@@ -23,8 +23,4 @@
         system = "${_system}"; 
       };
   };
-
-  synergy-package = final: _prev: {
-    synergy = inputs.synergy.overlays.default final _prev;
-  };
 }

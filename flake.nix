@@ -64,18 +64,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Synergy 1.20.0 with Wayland support
-    synergy = {
-      url = "git+ssh://git@github.com/julrod092/synergy-flake.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    lan-mouse.url = "github:feschber/lan-mouse";
   };
 
   outputs = {
