@@ -229,25 +229,6 @@
         "type": "github"
       }
     },
-    "lan-mouse": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2",
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1764846550,
-        "narHash": "sha256-/2V2CC1rs1PPVwVBOwh15C6S7g+PMMreeWZTfEyTUAc=",
-        "owner": "feschber",
-        "repo": "lan-mouse",
-        "rev": "3922b45bd92f07f62e8af84bb9471abf8b0873a3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "feschber",
-        "repo": "lan-mouse",
-        "type": "github"
-      }
-    },
     "nix-homebrew": {
       "inputs": {
         "brew-src": "brew-src"
@@ -299,22 +280,6 @@
       }
     },
     "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1752687322,
-        "narHash": "sha256-RKwfXA4OZROjBTQAl9WOZQFm7L8Bo93FQwSJpAiSRvo=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "6e987485eb2c77e5dcc5af4e3c70843711ef9251",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1770136044,
         "narHash": "sha256-tlFqNG/uzz2++aAmn4v8J0vAkV3z7XngeIIB3rM3650=",
@@ -406,37 +371,14 @@
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
-        "lan-mouse": "lan-mouse",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "noctalia": "noctalia",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
-        "synergy": "synergy",
         "zen-browser": "zen-browser"
-      }
-    },
-    "rust-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "lan-mouse",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1752806774,
-        "narHash": "sha256-4cHeoR2roN7d/3J6gT+l6o7J2hTrBIUiCwVdDNMeXzE=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "3c90219b3ba1c9790c45a078eae121de48a39c55",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
       }
     },
     "sops-nix": {
@@ -478,26 +420,6 @@
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
         "type": "github"
-      }
-    },
-    "synergy": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1767125813,
-        "narHash": "sha256-l82rnHEdluNC+Q6rlD2EaZcmzT01sc6SpbrHCYrhNO8=",
-        "ref": "refs/heads/master",
-        "rev": "36f810fa578afd92e4b053b17288e7e4bf4aa793",
-        "revCount": 7,
-        "type": "git",
-        "url": "ssh://git@github.com/julrod092/synergy-flake.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/julrod092/synergy-flake.git"
       }
     },
     "systems": {

@@ -19,12 +19,11 @@
     ../programs/nvim  
     ../programs/zen
     ../programs/gpg
-    ../programs/lan-mouse
     ../programs/spicetify
     ../scripts
 
     # Services
-    ../services/ulauncher
+    # ../services/ulauncher
     ../services/ssh
   ];
 
@@ -33,7 +32,6 @@
     overlays = [
       outputs.overlays.unstable-packages
       outputs.overlays.expected-package-revision
-      outputs.overlays.synergy-package
     ];
 
     config = {

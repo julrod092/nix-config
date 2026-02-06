@@ -58,9 +58,9 @@ in
       code-cursor
       unstable.discord
       nautilus
-      synergy.synergy_1_20
       obsidian
       libheif
+      unstable.deskflow
     ];
   };
 }
