@@ -1,8 +1,11 @@
-{ config, pkgs, inputs, ... }:
-
 {
-
-  imports = [#
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    #
     inputs.noctalia.homeModules.default
   ];
 

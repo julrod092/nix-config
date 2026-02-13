@@ -101,7 +101,7 @@
     localBinInPath = true;
     variables.EDITOR = "nvim";
   };
-  
+
   security.rtkit.enable = true;
 
   # Enable XDG Desktop Portal for Wayland applications (needed for Synergy GUI)
@@ -117,10 +117,10 @@
   services = {
     # Disable CUPS printing
     printing.enable = false;
-    
+
     # Enable devmon for device management
     devmon.enable = true;
-    
+
     # Enable geoclue for location services (needed for gammastep/night light)
     geoclue2.enable = true;
 
@@ -160,6 +160,7 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
+    inputs.alejandra.defaultPackage.${system}
     gcc
     glib
     gnumake

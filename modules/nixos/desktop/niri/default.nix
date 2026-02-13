@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
-
-{  
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.niri.enable = true;
 }

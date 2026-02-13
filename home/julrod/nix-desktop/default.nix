@@ -1,4 +1,4 @@
-{nhModules,...}: {
+{nhModules, ...}: {
   imports = [
     "${nhModules}/common"
     "${nhModules}/misc/gtk"

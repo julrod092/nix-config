@@ -1,6 +1,4 @@
-_:
-
-[
+_: [
   # Misc
   "appcleaner"
   "zoom"

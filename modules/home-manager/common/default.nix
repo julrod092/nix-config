@@ -16,7 +16,7 @@
     ../programs/tmux
     ../programs/zsh
     ../programs/packages
-    ../programs/nvim  
+    ../programs/nvim
     ../programs/zen
     ../programs/gpg
     ../programs/spicetify

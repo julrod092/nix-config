@@ -4,7 +4,7 @@
     # "${nhModules}/desktop/hyprland"
     # "${nhModules}/secrets/sops"
   ];
-  
+
   # Enable home-manager
   programs.home-manager.enable = true;
 

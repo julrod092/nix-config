@@ -4,7 +4,6 @@
   userConfig,
   ...
 }: {
-
   imports = [
     ./dock
   ];
@@ -23,13 +22,11 @@
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
-      trusted-users = [ "root" "julrod" ];
+      trusted-users = ["root" "julrod"];
     };
     optimise.automatic = true;
-    # Skip tests to avoid build failures on macOS
-    # The nix-shell test failure is a known issue on macOS
     package = pkgs.nix;
-    nixPath = [ "nixpkgs=flake:nixpkgs" ];
+    nixPath = ["nixpkgs=flake:nixpkgs"];
   };
 
   # User configuration
@@ -134,9 +131,9 @@
     dock.enable = true;
     dock.username = userConfig.name;
     dock.entries = [
-      { path = "/Applications/Zen.app/"; }
-      { path = "/Applications/Microsoft\ Teams.app/"; }
-      { path = "/Applications/AppCleaner.app/"; }
+      {path = "/Applications/Zen.app/";}
+      {path = "/Applications/Microsoft\ Teams.app/";}
+      {path = "/Applications/AppCleaner.app/";}
       {
         path = "/Users/${userConfig.name}/Downloads";
         section = "others";
