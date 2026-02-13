@@ -1,6 +1,4 @@
-{inputs, ...}: 
-
-{
+{inputs, ...}: {
   # When applied, the stable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
   unstable-packages = final: _prev: {
@@ -20,7 +18,7 @@
         repo = "nixpkgs";
         rev = "${rev}";
       }) {
-        system = "${_system}"; 
+        system = "${_system}";
       };
   };
 }

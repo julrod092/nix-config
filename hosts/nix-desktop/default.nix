@@ -17,7 +17,6 @@
     "${nixosModules}/services/network"
     "${nixosModules}/programs/nh"
     "${nixosModules}/programs/steam"
-
   ];
 
   # Set hostname
@@ -25,7 +24,6 @@
 
   # Enable Razer Nari Ultimate headset profiles
   # hardware.razer-nari.enable = true;
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

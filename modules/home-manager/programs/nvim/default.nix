@@ -1,11 +1,10 @@
-{ pkgs, ... }: {
-
+{pkgs, ...}: {
   programs.nixvim = {
     enable = true;
 
     colorschemes.kanagawa.enable = true;
-    
-    plugins = { 
+
+    plugins = {
       lualine.enable = true;
       treesitter = {
         enable = true;
@@ -33,19 +32,19 @@
         ];
       };
 
-      treesitter-context = { 
+      treesitter-context = {
         enable = true;
       };
 
       neo-tree.enable = true;
       neorg.enable = true;
-            
+
       telescope = {
         enable = true;
-      }; 
+      };
 
-      neogit = { 
-        enable = true; 
+      neogit = {
+        enable = true;
       };
 
       multicursors = {
@@ -55,7 +54,7 @@
       mini = {
         enable = true;
         mockDevIcons = true;
-        modules.icons = { };  # Empty attrset to enable the module
+        modules.icons = {}; # Empty attrset to enable the module
       };
 
       # Explicitly disable web-devicons since mini.icons is handling it

@@ -1,10 +1,14 @@
-{ config, pkgs, userConfig, ... }:
-let 
-  osHomePath = if (pkgs.stdenv.isDarwin) 
-  then "/Users/${userConfig.name}"
-  else "/home/${userConfig.name}";
-in
 {
+  config,
+  pkgs,
+  userConfig,
+  ...
+}: let
+  osHomePath =
+    if (pkgs.stdenv.isDarwin)
+    then "/Users/${userConfig.name}"
+    else "/home/${userConfig.name}";
+in {
   programs.nh = {
     enable = true;
     clean.enable = true;

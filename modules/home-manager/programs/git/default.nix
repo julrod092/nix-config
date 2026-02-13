@@ -1,4 +1,9 @@
-{userConfig, lib, pkgs, ...}: {
+{
+  userConfig,
+  lib,
+  pkgs,
+  ...
+}: {
   # Install git via home-manager module
 
   programs = {
@@ -7,7 +12,7 @@
       settings = {
         user = {
           namne = userConfig.fullName;
-          email =  userConfig.email;
+          email = userConfig.email;
         };
         pull.rebase = "true";
       };

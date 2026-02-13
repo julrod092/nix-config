@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{pkgs, ...}: {
   # Steam gaming platform configuration
 
   programs.steam.enable = true;
@@ -8,8 +8,8 @@
     mangohud
     protonup-qt
     protonup-ng
-    lutris 
-    bottles 
+    lutris
+    bottles
     heroic
   ];
 

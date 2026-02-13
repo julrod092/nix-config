@@ -5,23 +5,25 @@
 }: {
   # Install gpg via home-manager module
 
-  home.packages = with pkgs; [
-    # Yubikey
-    yubikey-manager
-    # yubikey-manager-qt
-    # yubikey-personalization
-    # yubikey-personalization-gui
-    yubico-piv-tool
-    # yubikeyGuide
+  home.packages = with pkgs;
+    [
+      # Yubikey
+      yubikey-manager
+      # yubikey-manager-qt
+      # yubikey-personalization
+      # yubikey-personalization-gui
+      yubico-piv-tool
+      # yubikeyGuide
 
-    # Other tools
-    cfssl
-    pcsc-tools
-  ] ++ lib.lists.optionals (!stdenv.isDarwin) [
-    yubioath-flutter
-    # Password generation tools
-    rng-tools
-  ];
+      # Other tools
+      cfssl
+      pcsc-tools
+    ]
+    ++ lib.lists.optionals (!stdenv.isDarwin) [
+      yubioath-flutter
+      # Password generation tools
+      rng-tools
+    ];
 
   programs = {
     gpg = {

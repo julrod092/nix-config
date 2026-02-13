@@ -58,14 +58,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NVIM nix community scratch 
+    # NVIM nix community scratch
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Desktop enviroment
+    niri.url = "github:sodiboo/niri-flake";
+
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Nix addons
+
+    alejandra = {
+      url = "github:kamadorueda/alejandra/4.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -134,7 +144,8 @@
               mutableTaps = false;
               autoMigrate = true;
             };
-          }({config, ...}: {
+          }
+          ({config, ...}: {
             homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
           })
           ./hosts/${hostname}
@@ -174,6 +185,6 @@
       "julrod@nix-laptop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-laptop";
     };
 
-    overlays = import ./overlays { inherit inputs; };
+    overlays = import ./overlays {inherit inputs;};
   };
 }

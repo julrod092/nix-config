@@ -1,7 +1,10 @@
 #
-{pkgs, lib, inputs, ...}:
 {
-
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.zen-browser.homeModules.twilight
   ];
@@ -20,17 +23,15 @@
         DontCheckDefaultBrowser = true;
         NoDefaultBookmarks = true;
         OfferToSaveLogins = false;
-        ExtensionSettings =
-          with builtins;
-          let
-            extension = shortId: uuid: {
-              name = uuid;
-              value = {
-                install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
-                installation_mode = "normal_installed";
-              };
+        ExtensionSettings = with builtins; let
+          extension = shortId: uuid: {
+            name = uuid;
+            value = {
+              install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
+              installation_mode = "normal_installed";
             };
-          in
+          };
+        in
           listToAttrs [
             (extension "ublock-origin" "uBlock0@raymondhill.net")
             (extension "proton-pass" "78272b6fa58f4a1abaac99321d503a20@proton.me")

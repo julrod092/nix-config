@@ -1,10 +1,18 @@
-{ config, pkgs, hostname, userConfig, lib, ... }:
-let
-  homeDirectory = if pkgs.stdenv.isDarwin
+{
+  config,
+  pkgs,
+  hostname,
+  userConfig,
+  lib,
+  ...
+}: let
+  homeDirectory =
+    if pkgs.stdenv.isDarwin
     then "/Users/${userConfig.name}"
     else "/home/${userConfig.name}";
 
-  secretsPath = if pkgs.stdenv.isDarwin
+  secretsPath =
+    if pkgs.stdenv.isDarwin
     then "${homeDirectory}/.config/sops/secrets"
     else "/run/user/1000/secrets";
 
@@ -31,19 +39,20 @@ let
     secrets = {};
     templates = {};
   };
-in
-{
+in {
   sops = {
     defaultSymlinkPath = secretsPath;
     defaultSopsFile = ./../../../home/${userConfig.name}/${hostname}/secrets/secrets.yaml;
     gnupg.home = "${homeDirectory}/.gnupg";
 
-    secrets = sharedSecrets.secrets 
+    secrets =
+      sharedSecrets.secrets
       // (lib.optionalAttrs pkgs.stdenv.isDarwin macos.secrets)
       // (lib.optionalAttrs (hostname == "nix-desktop") desktop.secrets)
       // (lib.optionalAttrs (hostname == "nix-laptop") laptop.secrets);
 
-      templates = sharedSecrets.templates 
+    templates =
+      sharedSecrets.templates
       // (lib.optionalAttrs pkgs.stdenv.isDarwin macos.templates)
       // (lib.optionalAttrs (hostname == "nix-desktop") desktop.templates)
       // (lib.optionalAttrs (hostname == "nix-laptop") laptop.templates);
