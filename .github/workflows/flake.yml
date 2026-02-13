@@ -23,7 +23,7 @@ jobs:
           commit_user_name: Flake Bot
           commit_options: --no-verify --signoff
           commit_author: Flake Bot <actions@github.com>
-          branch: main
+          branch: master
           file_pattern: flake.lock
           skip_dirty_check: false
           skip_fetch: true
