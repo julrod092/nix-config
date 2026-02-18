@@ -28,6 +28,14 @@ input {
 
 // Monitor settings
 output "DP-1" {
+  off
+}
+
+output "DP-2" {
+  off
+}
+
+output "DP-3" {
     variable-refresh-rate on-demand=true
 }
 
@@ -206,9 +214,6 @@ binds {
 
     // Pick color from screen and copy to clipboard
     Mod+Shift+C hotkey-overlay-title="Color Picker" { spawn-sh "niri msg pick-color | grep -o '#.*' | wl-copy"; }
-
-    // OCR
-    Alt+Shift+2 hotkey-overlay-title="OCR Screenshot" { spawn-sh "$HOME/.local/bin/ocr"; }
 
     // Screenshot area
     Mod+Shift+S hotkey-overlay-title="Screenshot Area" { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
