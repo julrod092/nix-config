@@ -42,7 +42,7 @@
 
   # Boot settings
   boot = {
-    kernelParams = ["quiet" "splash"];
+    kernelParams = ["quiet" "splash" "rd.udev.log_level=3"];
     initrd.verbose = false;
     loader = {
       timeout = 10;
@@ -86,33 +86,27 @@
 
   # Input settings
   services.libinput.enable = true;
-  services = {
-    xserver = {
-      enable = true;
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-    };
-  };
+  services.xserver.excludePackages = with pkgs; [xterm];
 
   # PATH configuration
   environment = {
     localBinInPath = true;
-    variables.EDITOR = "nvim";
+    variables = {
+      EDITOR = "nvim";
+    };
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      XCURSOR_SIZE = "24";
+    };
   };
 
   security.rtkit.enable = true;
 
-  # Enable XDG Desktop Portal for Wayland applications (needed for Synergy GUI)
-  xdg.portal = {
+  # Enables support for Bluetooth
+  hardware.bluetooth = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
+    powerOnBoot = false;
   };
-
-  hardware.bluetooth.enable = true;
 
   services = {
     # Disable CUPS printing
@@ -120,9 +114,6 @@
 
     # Enable devmon for device management
     devmon.enable = true;
-
-    # Enable geoclue for location services (needed for gammastep/night light)
-    geoclue2.enable = true;
 
     # Enable PipeWire for sound
     pulseaudio.enable = false;
@@ -139,15 +130,8 @@
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
 
-    # Additional services
-    locate.enable = true;
-
     # OpenSSH daemon
     openssh.enable = true;
-
-    # Noctua power optimization
-    power-profiles-daemon.enable = true;
-    upower.enable = true;
   };
 
   # User configuration
@@ -158,14 +142,36 @@
     shell = pkgs.zsh;
   };
 
+  # Set User's avatar
+  system.activationScripts.setUserAvatar.text = ''
+    mkdir -p /var/lib/AccountsService/{icons,users}
+    cp ${userConfig.avatar} /var/lib/AccountsService/icons/${userConfig.name}
+
+    touch /var/lib/AccountsService/users/${userConfig.name}
+
+    if ! grep -q "^Icon=" /var/lib/AccountsService/users/${userConfig.name}; then
+      if ! grep -q "^\[User\]" /var/lib/AccountsService/users/${userConfig.name}; then
+        echo "[User]" >> /var/lib/AccountsService/users/${userConfig.name}
+      fi
+      echo "Icon=/var/lib/AccountsService/icons/${userConfig.name}" >> /var/lib/AccountsService/users/${userConfig.name}
+    fi
+  '';
+
+  # Common container config
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
   # System packages
   environment.systemPackages = with pkgs; [
     inputs.alejandra.defaultPackage.${system}
     gcc
-    glib
     gnumake
     killall
-    mesa
     # Libraries needed for Synergy Wayland support
     libei
     libportal

@@ -1,11 +1,7 @@
 {nhModules, ...}: {
   imports = [
     "${nhModules}/common"
-    "${nhModules}/misc/gtk"
-    "${nhModules}/misc/xdg"
-    "${nhModules}/misc/qt"
-    "${nhModules}/misc/niri"
-    # "${nhModules}/secrets/sops"
+    "${nhModules}/desktop/niri"
   ];
 
   # Enable home-manager
