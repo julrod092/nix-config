@@ -16,7 +16,7 @@ input {
     mouse {
         accel-profile "flat"
         // DPI 1600
-        accel-speed -0.5
+        accel-speed 0.5
     }
 
     trackpoint {
@@ -95,7 +95,8 @@ animations {
 }
 
 // Workspaces
-workspace "main"
+workspace "browser"
+workspace "code"
 workspace "terminal"
 workspace "steam"
 workspace "games"
@@ -116,7 +117,19 @@ window-rule {
 window-rule {
     match app-id=r#"^zen-twilight$"#
     default-column-width { proportion 1.0; }
-    open-on-workspace "main"
+    open-on-workspace "browser"
+}
+
+window-rule {
+    match app-id=r#"^idea$"#
+    default-column-width { proportion 1.0; }
+    open-on-workspace "code"
+}
+
+window-rule {
+    match app-id=r#"^code$"#
+    default-column-width { proportion 1.0; }
+    open-on-workspace "code"
 }
 
 window-rule {
@@ -203,10 +216,10 @@ binds {
     Mod+Shift+Return hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
     Mod+Shift+B hotkey-overlay-title="Open Zen Browser" { spawn "zen-twilight"; }
     Mod+Shift+F hotkey-overlay-title="Open Nautilus" { spawn "nautilus"; }
-    Ctrl+Alt+P hotkey-overlay-title="Toggle Pomodoro" { spawn-sh "gnome-pomodoro --start-stop"; }
 
     // Application launcher
-    Mod+A hotkey-overlay-title="Open Albert Apps" { spawn "albert" "show" "apps "; }
+    Mod+A hotkey-overlay-title="Open Noctalia Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    // Mod+A hotkey-overlay-title="Open Albert Apps" { spawn "albert" "show" "apps "; }
     Ctrl+Space hotkey-overlay-title="Toggle Albert" { spawn "albert" "toggle"; }
 
     // Clipboard history

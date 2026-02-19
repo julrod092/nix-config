@@ -4,8 +4,7 @@
   pkgs,
   userConfig,
   ...
-}:
-let
+}: let
   paletteFile = "${
     inputs.catppuccin.packages.${pkgs.stdenv.hostPlatform.system}.palette
   }/palette.json";
@@ -13,8 +12,7 @@ let
   flavorPalette = palette.${config.catppuccin.flavor}.colors;
   color = name: flavorPalette.${name}.hex;
   accentColor = color config.catppuccin.accent;
-in
-{
+in {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -103,7 +101,7 @@ in
         iconMode = "tabler";
         ignoreMouseInput = false;
         overviewLayer = false;
-        pinnedApps = [ ];
+        pinnedApps = [];
         position = "center";
         screenshotAnnotationTool = "";
         showCategories = false;
@@ -115,7 +113,7 @@ in
       };
       audio = {
         cavaFrameRate = 30;
-        mprisBlacklist = [ ];
+        mprisBlacklist = [];
         preferredPlayer = "";
         visualizerType = "linear";
         volumeFeedback = false;
@@ -126,7 +124,7 @@ in
         autoHideDelay = 500;
         autoShowDelay = 150;
         backgroundOpacity = 0.93;
-        barType = "simple";
+        barType = "floating";
         capsuleColorKey = "none";
         capsuleOpacity = 1;
         density = "default";
@@ -137,10 +135,10 @@ in
         hideOnOverview = true;
         marginHorizontal = 4;
         marginVertical = 4;
-        monitors = [ ];
+        monitors = [];
         outerCorners = false;
         position = "top";
-        screenOverrides = [ ];
+        screenOverrides = [];
         showCapsule = false;
         showOutline = false;
         useSeparateOpacity = false;
@@ -188,13 +186,13 @@ in
           ];
           right = [
             {
-              blacklist = [ ];
+              blacklist = [];
               chevronColor = "none";
               colorizeIcons = false;
               drawerEnabled = true;
               hidePassive = false;
               id = "Tray";
-              pinned = [ ];
+              pinned = [];
             }
             {
               displayMode = "forceOpen";
@@ -342,7 +340,7 @@ in
       desktopWidgets = {
         enabled = false;
         gridSnap = false;
-        monitorWidgets = [ ];
+        monitorWidgets = [];
       };
       dock = {
         animationSpeed = 1;
@@ -353,9 +351,9 @@ in
         enabled = false;
         floatingRatio = 1;
         inactiveIndicators = false;
-        monitors = [ ];
+        monitors = [];
         onlySameOutput = true;
-        pinnedApps = [ ];
+        pinnedApps = [];
         pinnedStatic = false;
         position = "bottom";
         size = 1;
@@ -377,19 +375,19 @@ in
         forceBlackScreenCorners = false;
         iRadiusRatio = 1;
         keybinds = {
-          keyDown = [ "Ctrl+J" ];
-          keyEnter = [ "Return" ];
-          keyEscape = [ "Esc" ];
-          keyLeft = [ "Ctrl+H" ];
-          keyRight = [ "Ctrl+L" ];
-          keyUp = [ "Ctrl+K" ];
+          keyDown = ["Ctrl+J"];
+          keyEnter = ["Return"];
+          keyEscape = ["Esc"];
+          keyLeft = ["Ctrl+H"];
+          keyRight = ["Ctrl+L"];
+          keyUp = ["Ctrl+K"];
         };
         language = "";
         lockOnSuspend = true;
         lockScreenAnimations = false;
         lockScreenBlur = 0;
         lockScreenCountdownDuration = 10000;
-        lockScreenMonitors = [ ];
+        lockScreenMonitors = [];
         lockScreenTint = 0;
         radiusRatio = 1;
         scaleRatio = 1;
@@ -437,9 +435,9 @@ in
         wifiEnabled = false;
       };
       nightLight = {
-        autoSchedule = true;
+        autoSchedule = false;
         dayTemp = "6500";
-        enabled = true;
+        enabled = false;
         forced = false;
         manualSunrise = "06:30";
         manualSunset = "18:30";
@@ -455,7 +453,7 @@ in
         enabled = true;
         location = "top_right";
         lowUrgencyDuration = 3;
-        monitors = [ ];
+        monitors = [];
         normalUrgencyDuration = 7;
         overlayLayer = true;
         respectExpireTimeout = false;
@@ -484,7 +482,7 @@ in
           2
         ];
         location = "top_right";
-        monitors = [ ];
+        monitors = [];
         overlayLayer = true;
       };
       plugins = {
@@ -561,7 +559,7 @@ in
         warningColor = "";
       };
       templates = {
-        activeTemplates = [ ];
+        activeTemplates = [];
         enableUserTheming = false;
       };
       ui = {
@@ -584,11 +582,11 @@ in
         directory = "";
         enableMultiMonitorDirectories = false;
         enabled = true;
-        favorites = [ ];
+        favorites = [];
         fillColor = "#000000";
         fillMode = "crop";
         hideWallpaperFilenames = false;
-        monitorDirectories = [ ];
+        monitorDirectories = [];
         overviewBlur = 0.4;
         overviewEnabled = true;
         overviewTint = 0.6;

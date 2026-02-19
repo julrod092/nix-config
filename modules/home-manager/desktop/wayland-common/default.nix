@@ -3,8 +3,7 @@
   lib,
   nhModules,
   ...
-}:
-{
+}: {
   imports = [
     "${nhModules}/misc/gtk"
     "${nhModules}/misc/qt"
