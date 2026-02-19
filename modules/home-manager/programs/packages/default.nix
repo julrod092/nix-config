@@ -46,7 +46,7 @@ in {
         raycast
         (expected-rev "e518d4ad2bcad74f98fec028cf21ce5b1e5020dd" "${pkgs.stdenv.hostPlatform.system}").nodejs_20
         (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.stdenv.hostPlatform.system}").haproxy
-        (expected-rev "a1bab9e494f5f4939442a57a58d0449a109593fe" "${pkgs.stdenv.hostPlatform.system}").charles
+        charles4
         unstable.synergy
         google-chrome
         slack
