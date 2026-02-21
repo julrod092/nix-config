@@ -133,6 +133,12 @@ window-rule {
 }
 
 window-rule {
+    match app-id=r#"^code$"#
+    default-column-width { proportion 1.0; }
+    open-on-workspace "code"
+}
+
+window-rule {
     match app-id=r#"^Alacritty$"#
     default-column-width { proportion 1.0; }
     open-on-workspace "terminal"
