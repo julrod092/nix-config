@@ -68,6 +68,7 @@ in {
         obsidian
         libheif
         unstable.deskflow
+        unstable.prismlauncher
       ];
   };
 }

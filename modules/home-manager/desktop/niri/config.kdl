@@ -218,7 +218,7 @@ binds {
     Mod+Shift+F hotkey-overlay-title="Open Nautilus" { spawn "nautilus"; }
 
     // Application launcher
-    Mod+A hotkey-overlay-title="Open Noctalia Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+D hotkey-overlay-title="Open Noctalia Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     // Mod+A hotkey-overlay-title="Open Albert Apps" { spawn "albert" "show" "apps "; }
     Ctrl+Space hotkey-overlay-title="Toggle Albert" { spawn "albert" "toggle"; }
 
