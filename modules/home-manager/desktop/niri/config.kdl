@@ -121,13 +121,13 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^idea$"#
+    match app-id=r#"^jetbrains-idea"$"#
     default-column-width { proportion 1.0; }
     open-on-workspace "code"
 }
 
 window-rule {
-    match app-id=r#"^code$"#
+    match app-id=r#"^Code$"#
     default-column-width { proportion 1.0; }
     open-on-workspace "code"
 }
