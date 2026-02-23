@@ -28,7 +28,7 @@ input {
 
 // Monitor settings
 output "DP-1" {
-  off
+  variable-refresh-rate on-demand=true
 }
 
 output "DP-2" {

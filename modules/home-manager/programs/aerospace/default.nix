@@ -47,8 +47,7 @@
       [mode.main.binding]
       # Launch applications
       alt-shift-enter = 'exec-and-forget open -na alacritty'
-      alt-shift-b = 'exec-and-forget open -a "Brave Browser"'
-      alt-shift-t = 'exec-and-forget open -a "Telegram"'
+      alt-shift-b = 'exec-and-forget open -a "Zen"'
       alt-shift-f = 'exec-and-forget open -a Finder'
 
       # Window management

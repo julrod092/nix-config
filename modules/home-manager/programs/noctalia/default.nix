@@ -1,18 +1,8 @@
 {
-  config,
   inputs,
-  pkgs,
   userConfig,
   ...
-}: let
-  paletteFile = "${
-    inputs.catppuccin.packages.${pkgs.stdenv.hostPlatform.system}.palette
-  }/palette.json";
-  palette = builtins.fromJSON (builtins.readFile paletteFile);
-  flavorPalette = palette.${config.catppuccin.flavor}.colors;
-  color = name: flavorPalette.${name}.hex;
-  accentColor = color config.catppuccin.accent;
-in {
+}: {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -25,24 +15,6 @@ in {
 
   programs.noctalia-shell = {
     enable = true;
-    colors = {
-      mPrimary = accentColor;
-      mOnPrimary = color "crust";
-      mSecondary = color "pink";
-      mOnSecondary = color "crust";
-      mTertiary = color "mauve";
-      mOnTertiary = color "crust";
-      mError = color "red";
-      mOnError = color "crust";
-      mSurface = color "base";
-      mOnSurface = color "text";
-      mSurfaceVariant = color "surface0";
-      mOnSurfaceVariant = color "subtext0";
-      mOutline = color "overlay0";
-      mShadow = color "crust";
-      mHover = accentColor;
-      mOnHover = color "crust";
-    };
     plugins = {
       sources = [
         {
@@ -123,7 +95,7 @@ in {
       bar = {
         autoHideDelay = 500;
         autoShowDelay = 150;
-        backgroundOpacity = 0.93;
+        backgroundOpacity = 0;
         barType = "floating";
         capsuleColorKey = "none";
         capsuleOpacity = 1;
@@ -133,15 +105,15 @@ in {
         frameRadius = 12;
         frameThickness = 8;
         hideOnOverview = true;
-        marginHorizontal = 4;
-        marginVertical = 4;
-        monitors = [];
+        marginHorizontal = 6;
+        marginVertical = 6;
+        monitors = ["DP-3" "DP-1"];
         outerCorners = false;
         position = "top";
         screenOverrides = [];
-        showCapsule = false;
+        showCapsule = true;
         showOutline = false;
-        useSeparateOpacity = false;
+        useSeparateOpacity = true;
         widgets = {
           center = [
             {
@@ -152,14 +124,6 @@ in {
               id = "Clock";
               tooltipFormat = "HH:mm ddd, MMM dd";
               useCustomFont = false;
-            }
-            {
-              hideWhenZero = false;
-              hideWhenZeroUnread = false;
-              iconColor = "none";
-              id = "NotificationHistory";
-              showUnreadBadge = true;
-              unreadBadgeColor = "primary";
             }
           ];
           left = [
@@ -213,6 +177,14 @@ in {
               id = "Volume";
               middleClickCommand = "";
               textColor = "none";
+            }
+            {
+              hideWhenZero = false;
+              hideWhenZeroUnread = false;
+              iconColor = "none";
+              id = "NotificationHistory";
+              showUnreadBadge = true;
+              unreadBadgeColor = "primary";
             }
             {
               deviceNativePath = "";
@@ -415,15 +387,15 @@ in {
       location = {
         analogClockInCalendar = false;
         firstDayOfWeek = -1;
-        hideWeatherCityName = false;
+        hideWeatherCityName = true;
         hideWeatherTimezone = false;
-        name = "Warsaw";
+        name = "El Carmen de Viboral";
         showCalendarEvents = false;
         showCalendarWeather = false;
         showWeekNumberInCalendar = true;
         use12hourFormat = false;
         useFahrenheit = false;
-        weatherEnabled = false;
+        weatherEnabled = true;
         weatherShowEffects = false;
       };
       network = {
@@ -579,7 +551,7 @@ in {
       };
       wallpaper = {
         automationEnabled = false;
-        directory = "";
+        directory = "/home/julrod/Pictures/Wallpapers";
         enableMultiMonitorDirectories = false;
         enabled = true;
         favorites = [];
@@ -592,7 +564,7 @@ in {
         overviewTint = 0.6;
         panelPosition = "follow_bar";
         randomIntervalSec = 300;
-        setWallpaperOnAllMonitors = true;
+        setWallpaperOnAllMonitors = false;
         showHiddenFiles = false;
         skipStartupTransition = true;
         solidColor = "#1a1a2e";
