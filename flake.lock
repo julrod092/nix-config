@@ -199,6 +199,117 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+    "homebrew-bundle": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745335228,
+        "narHash": "sha256-TIKR2UgtyUmHLNZp255/vLs+1I10hXe+sciMEbAGFwE=",
+        "owner": "homebrew",
+        "repo": "homebrew-bundle",
+        "rev": "a3265c84b232e13048ecbf6fc18a2eedfadbeb08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "homebrew",
+        "repo": "homebrew-bundle",
+        "type": "github"
+      }
+    },
+    "homebrew-cask": {
+      "flake": false,
+      "locked": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "lastModified": 1771835133,
+        "narHash": "sha256-XhLfb1tF7PHdRjURZDqH+0t0okBurAMrUh4VwXMfqog=",
+        "owner": "homebrew",
+        "repo": "homebrew-cask",
+        "rev": "540bcea05abb0814df035f803cf258ea9aa3b973",
+=======
+        "lastModified": 1771497446,
+        "narHash": "sha256-3eiQdnXWX97GUXYVO7JzU29Dz+Op2cZV0ZVtCCKaayQ=",
+        "owner": "homebrew",
+        "repo": "homebrew-cask",
+        "rev": "99b55813659d25561165054039f9878f07940115",
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+=======
+        "lastModified": 1771583642,
+        "narHash": "sha256-mKVhOB/bChKUdaDu/RJCqaWXORrCiCeYPvmvQxhPSIE=",
+        "owner": "homebrew",
+        "repo": "homebrew-cask",
+        "rev": "52991d23ad7ae88ec4eb6ece5c90fadc3d660335",
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+        "type": "github"
+      },
+      "original": {
+        "owner": "homebrew",
+        "repo": "homebrew-cask",
+        "type": "github"
+      }
+    },
+    "homebrew-core": {
+      "flake": false,
+      "locked": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "lastModified": 1771842417,
+        "narHash": "sha256-TG/BdReNrkxuDCKWD+sIQnLGU+sG8A+9W+rPA8fKKNI=",
+        "owner": "homebrew",
+        "repo": "homebrew-core",
+        "rev": "11317680c5a8581fd996ab28cf48bfe984fe3760",
+=======
+        "lastModified": 1771496503,
+        "narHash": "sha256-Rj5Wh2CnLs5dj4UTCqjcDFxSY2aSqN3TW+Ij7REw8U0=",
+        "owner": "homebrew",
+        "repo": "homebrew-core",
+        "rev": "3149e79ed1475c3f1179a4eabbfcc6c00afe40a8",
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+=======
+        "lastModified": 1771577856,
+        "narHash": "sha256-B+tR08bn8+FJ/hk8BmGqV3tQvqftsm9MlhNRNgGFzfs=",
+        "owner": "homebrew",
+        "repo": "homebrew-core",
+        "rev": "3c90b72f62f5930e7adadbd98c7873159dd09129",
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+        "type": "github"
+      },
+      "original": {
+        "owner": "homebrew",
+        "repo": "homebrew-core",
+        "type": "github"
+      }
+    },
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 8d4d3ba (chore(deps): bump flake.lock)
+=======
+=======
+>>>>>>> 7a651b9 (Update packages after refactor)
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+=======
+>>>>>>> 7a651b9 (Update packages after refactor)
+=======
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+<<<<<<< HEAD
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+=======
+=======
+>>>>>>> e9d9473 (Update packages after refactor)
+>>>>>>> abc7c7d (Update packages after refactor)
+>>>>>>> 0332a40 (Update packages after refactor)
     "ixx": {
       "inputs": {
         "flake-utils": [
@@ -227,6 +338,114 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+    "niri": {
+      "inputs": {
+        "niri-stable": "niri-stable",
+        "niri-unstable": "niri-unstable",
+        "nixpkgs": "nixpkgs_2",
+        "nixpkgs-stable": "nixpkgs-stable",
+        "xwayland-satellite-stable": "xwayland-satellite-stable",
+        "xwayland-satellite-unstable": "xwayland-satellite-unstable"
+      },
+      "locked": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "lastModified": 1771832014,
+        "narHash": "sha256-Vi26U3yzhGkg6+dv3w3kOTAi+KIdDyOf+Rd8s/z+2tU=",
+        "owner": "sodiboo",
+        "repo": "niri-flake",
+        "rev": "784d17c580cb966a37e2290e70bf25dd9273b2f1",
+=======
+        "lastModified": 1771443511,
+        "narHash": "sha256-0vp2Se/SEnQ2EOIyeHkbfDwrcBBRwSQ779KHJY05CmE=",
+        "owner": "sodiboo",
+        "repo": "niri-flake",
+        "rev": "480118b7c3c01ae99be390bafd0050d9d0726b9f",
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+=======
+        "lastModified": 1771514840,
+        "narHash": "sha256-t3WbZvwoDj/75YDX/nwkZuxanZLZaWr9meSfKswaN6g=",
+        "owner": "sodiboo",
+        "repo": "niri-flake",
+        "rev": "4f69ab280e9bb34e2c0b67fdfa6f0978a170ef56",
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+        "type": "github"
+      },
+      "original": {
+        "owner": "sodiboo",
+        "repo": "niri-flake",
+        "type": "github"
+      }
+    },
+    "niri-stable": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756556321,
+        "narHash": "sha256-RLD89dfjN0RVO86C/Mot0T7aduCygPGaYbog566F0Qo=",
+        "owner": "YaLTeR",
+        "repo": "niri",
+        "rev": "01be0e65f4eb91a9cd624ac0b76aaeab765c7294",
+        "type": "github"
+      },
+      "original": {
+        "owner": "YaLTeR",
+        "ref": "v25.08",
+        "repo": "niri",
+        "type": "github"
+      }
+    },
+    "niri-unstable": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771305475,
+        "narHash": "sha256-lqweVTwHhYc+9T33cysp38gVwxaibGJHriOPZXWyhCY=",
+        "owner": "YaLTeR",
+        "repo": "niri",
+        "rev": "a2a52911757cb3b497db9407592f9b4c439571ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "YaLTeR",
+        "repo": "niri",
+        "type": "github"
+      }
+    },
+    "nix-homebrew": {
+      "inputs": {
+        "brew-src": "brew-src"
+      },
+      "locked": {
+        "lastModified": 1769437432,
+        "narHash": "sha256-8d7KnCpT2LweRvSzZYEGd9IM3eFX+A78opcnDM0+ndk=",
+        "owner": "zhaofengli-wip",
+        "repo": "nix-homebrew",
+        "rev": "a5409abd0d5013d79775d3419bcac10eacb9d8c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zhaofengli-wip",
+        "repo": "nix-homebrew",
+        "type": "github"
+      }
+    },
+<<<<<<< HEAD
+>>>>>>> 9ce2a09 (chore(deps): bump flake.lock)
+=======
+<<<<<<< HEAD
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+>>>>>>> 0332a40 (Update packages after refactor)
     "nixpkgs": {
       "locked": {
         "lastModified": 1771714954,
@@ -234,6 +453,22 @@
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "afbbf774e2087c3d734266c22f96fca2e78d3620",
+<<<<<<< HEAD
+=======
+=======
+        "lastModified": 1764521362,
+        "narHash": "sha256-M101xMtWdF1eSD0xhiR8nG8CXRlHmv6V+VoY65Smwf4=",
+        "owner": "NixOS",
+=======
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1771208521,
+        "narHash": "sha256-X01Q3DgSpjeBpapoGA4rzKOn25qdKxbPnxHeMLNoHTU=",
+        "owner": "nixos",
+>>>>>>> e9d9473 (Update packages after refactor)
+        "repo": "nixpkgs",
+        "rev": "871b9fd269ff6246794583ce4ee1031e1da71895",
+>>>>>>> 0332a40 (Update packages after refactor)
         "type": "github"
       },
       "original": {
@@ -259,6 +494,85 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1771369470,
+        "narHash": "sha256-0NBlEBKkN3lufyvFegY4TYv5mCNHbi5OmBDrzihbBMQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0182a361324364ae3f436a63005877674cf45efb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "lastModified": 1771714954,
+        "narHash": "sha256-nhZJPnBavtu40/L2aqpljrfUNb2rxmWTmSjK2c9UKds=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "afbbf774e2087c3d734266c22f96fca2e78d3620",
+=======
+        "lastModified": 1771208521,
+        "narHash": "sha256-X01Q3DgSpjeBpapoGA4rzKOn25qdKxbPnxHeMLNoHTU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fa56d7d6de78f5a7f997b0ea2bc6efd5868ad9e8",
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+=======
+        "lastModified": 1771419570,
+        "narHash": "sha256-bxAlQgre3pcQcaRUm/8A0v/X8d2nhfraWSFqVmMcBcU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "6d41bc27aaf7b6a3ba6b169db3bd5d6159cfaa47",
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 9ce2a09 (chore(deps): bump flake.lock)
+=======
+=======
+>>>>>>> 7a651b9 (Update packages after refactor)
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+=======
+>>>>>>> 7a651b9 (Update packages after refactor)
+=======
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+<<<<<<< HEAD
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+=======
+=======
+>>>>>>> e9d9473 (Update packages after refactor)
+>>>>>>> abc7c7d (Update packages after refactor)
+>>>>>>> 0332a40 (Update packages after refactor)
     "nixvim": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -290,11 +604,87 @@
         ]
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1771852251,
         "narHash": "sha256-9VqcmeS1FzQ1kaJR8IF5MTO78239nZZw2871Robg+4Q=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
         "rev": "17760955ac5652052cbbdf21b0078278bc34e82a",
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "lastModified": 1771444048,
+        "narHash": "sha256-li7Pd9wOtiYuFq+u+lMbbaoNySBz7fVTeYTxOSLcBTI=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "cb77a08243a5956ebed2d0960f161d0644295f83",
+=======
+        "lastModified": 1771732280,
+        "narHash": "sha256-pwfFptl7m1Xu+I7eSjapRfIBtVH9rsLpzuaCouraz9U=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "341c5ee138d688ac1a7ffb1543ce2a3c9801aa34",
+>>>>>>> 8d4d3ba (chore(deps): bump flake.lock)
+=======
+=======
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+=======
+>>>>>>> b7c32fa (chore(deps): bump flake.lock)
+=======
+>>>>>>> abc7c7d (Update packages after refactor)
+        "lastModified": 1771837636,
+        "narHash": "sha256-m4yqAkwKdfPspHjkrEsVo24OAbT2ejswLUmBDby8CzQ=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "716c3574a6d3bb0d9d1031b1292ec9aa9df31c2a",
+<<<<<<< HEAD
+>>>>>>> 9ce2a09 (chore(deps): bump flake.lock)
+=======
+=======
+        "lastModified": 1771444048,
+        "narHash": "sha256-li7Pd9wOtiYuFq+u+lMbbaoNySBz7fVTeYTxOSLcBTI=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "cb77a08243a5956ebed2d0960f161d0644295f83",
+>>>>>>> 7a651b9 (Update packages after refactor)
+<<<<<<< HEAD
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+=======
+        "lastModified": 1771486822,
+        "narHash": "sha256-DB6CCfGg+UAro5tZEP/VMgWL5ZdBCUfPOBf3Ox0Vu24=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "3c3a8a2823496d42730095970c9ebccdde2899da",
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+<<<<<<< HEAD
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+=======
+=======
+        "lastModified": 1771554771,
+        "narHash": "sha256-atFYM8h8fgnXW/i/zM3yZnhsbVxlsIQ6eq/FcC6uZ6k=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "8eef8ef71d64a7ad0144eb79221cdfcc568848cf",
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+<<<<<<< HEAD
+>>>>>>> b7c32fa (chore(deps): bump flake.lock)
+=======
+=======
+        "lastModified": 1771444048,
+        "narHash": "sha256-li7Pd9wOtiYuFq+u+lMbbaoNySBz7fVTeYTxOSLcBTI=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "cb77a08243a5956ebed2d0960f161d0644295f83",
+>>>>>>> e9d9473 (Update packages after refactor)
+>>>>>>> abc7c7d (Update packages after refactor)
+>>>>>>> 0332a40 (Update packages after refactor)
         "type": "github"
       },
       "original": {
@@ -357,6 +747,94 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+>>>>>>> b7c32fa (chore(deps): bump flake.lock)
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+<<<<<<< HEAD
+        "lastModified": 1771735105,
+        "narHash": "sha256-MJuVJeszZEziquykEHh/hmgIHYxUcuoG/1aowpLiSeU=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "d7755d820f5fa8acf7f223309c33e25d4f92e74f",
+=======
+        "lastModified": 1771524872,
+        "narHash": "sha256-eksVUcUsfS9mQx4D9DrYu88u9w70bAf+n6KmTDuIGEE=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "e85540ffe97322dc1fea14dd11cdc2f59d540ac7",
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "spicetify-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": "systems_3"
+      },
+      "locked": {
+<<<<<<< HEAD
+        "lastModified": 1771737804,
+        "narHash": "sha256-7wn9qbzIQQgH8tnq4VwzuWEqEWpekuymlLyhY3vM/j8=",
+        "owner": "Gerg-L",
+        "repo": "spicetify-nix",
+        "rev": "6dd43010ac2458cc56a6ac5250349b9217a7a2ae",
+=======
+        "lastModified": 1771268051,
+        "narHash": "sha256-nGqPcngnezoT+/xAvw3UDjwdKP2MC4fO315A/Otb9eE=",
+        "owner": "Gerg-L",
+        "repo": "spicetify-nix",
+        "rev": "b930de84c561f62a0c39a6a57c2ab553a97e8495",
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+        "type": "github"
+      },
+      "original": {
+        "owner": "Gerg-L",
+        "repo": "spicetify-nix",
+        "type": "github"
+      }
+    },
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 8d4d3ba (chore(deps): bump flake.lock)
+=======
+=======
+>>>>>>> 7a651b9 (Update packages after refactor)
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+=======
+>>>>>>> 7a651b9 (Update packages after refactor)
+=======
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+<<<<<<< HEAD
+>>>>>>> b7c32fa (chore(deps): bump flake.lock)
+=======
+=======
+>>>>>>> e9d9473 (Update packages after refactor)
+>>>>>>> abc7c7d (Update packages after refactor)
+>>>>>>> 0332a40 (Update packages after refactor)
     "systems": {
       "locked": {
         "lastModified": 1681028828,
@@ -395,11 +873,85 @@
         ]
       },
       "locked": {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "lastModified": 1771437627,
+        "narHash": "sha256-mGav6dRJOzHXQzrVAanJXQeGIG7LZr9fB2s024BBggU=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "b04b9a92e4ca216bf39de96ad1cdc6af343ce472",
+=======
+        "lastModified": 1771719171,
+        "narHash": "sha256-ZDE3//9Hg+9X5xXcDJ4k/d6qcOVQ4MrTmvf1zv/omZY=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "2a71f2e720db962f2522b38704e23e11163e91ae",
+>>>>>>> 8d4d3ba (chore(deps): bump flake.lock)
+=======
+=======
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+=======
+>>>>>>> b7c32fa (chore(deps): bump flake.lock)
+=======
+>>>>>>> abc7c7d (Update packages after refactor)
+>>>>>>> 0332a40 (Update packages after refactor)
         "lastModified": 1771840410,
         "narHash": "sha256-fxtvkgQLVhHAjWXPhqahYrVky6KjmS3hwhsb1UX/c/8=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
         "rev": "24e003a8ad4ab99cabbba6821bd985bb81dbe656",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9ce2a09 (chore(deps): bump flake.lock)
+=======
+=======
+        "lastModified": 1771437627,
+        "narHash": "sha256-mGav6dRJOzHXQzrVAanJXQeGIG7LZr9fB2s024BBggU=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "b04b9a92e4ca216bf39de96ad1cdc6af343ce472",
+>>>>>>> 7a651b9 (Update packages after refactor)
+<<<<<<< HEAD
+>>>>>>> b2b0543 (Update packages after refactor)
+=======
+=======
+        "lastModified": 1771480775,
+        "narHash": "sha256-7umHh1q3vZkOHvVKppfLSwF54v623SIvdB2bGaj68hA=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "ae59e082da5c6ef5bca9219d7b5922aadd551b95",
+>>>>>>> 4c2b0fd (chore(deps): bump flake.lock)
+<<<<<<< HEAD
+>>>>>>> 03a9f2b (chore(deps): bump flake.lock)
+=======
+=======
+        "lastModified": 1771562861,
+        "narHash": "sha256-6oT3rF68W8HERLXvFfEkpz8xpAVLKZsY1ZuR/BbDTO8=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "7783a3adf3d5a9599a82c75a44c7482e70398ac2",
+>>>>>>> 758ca88 (chore(deps): bump flake.lock)
+<<<<<<< HEAD
+>>>>>>> b7c32fa (chore(deps): bump flake.lock)
+=======
+=======
+        "lastModified": 1771437627,
+        "narHash": "sha256-mGav6dRJOzHXQzrVAanJXQeGIG7LZr9fB2s024BBggU=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "b04b9a92e4ca216bf39de96ad1cdc6af343ce472",
+>>>>>>> e9d9473 (Update packages after refactor)
+>>>>>>> abc7c7d (Update packages after refactor)
+>>>>>>> 0332a40 (Update packages after refactor)
         "type": "github"
       },
       "original": {
