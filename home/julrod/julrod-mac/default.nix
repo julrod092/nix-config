@@ -1,7 +1,6 @@
 {nhModules, ...}: {
   imports = [
     "${nhModules}/common"
-    # "${nhModules}/secrets"
   ];
 
   # Enable home-manager
