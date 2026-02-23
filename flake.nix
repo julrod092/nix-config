@@ -57,7 +57,6 @@
     darwin,
     home-manager,
     nixpkgs,
-    sops-nix,
     nixvim,
     ...
   } @ inputs: let
@@ -127,13 +126,14 @@
           config = nixpkgsConfig;
         };
         extraSpecialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs hostname;
           userConfig = users.${username};
           nhModules = "${self}/modules/home-manager";
         };
         modules = [
           ./home/${username}/${hostname}
           catppuccin.homeModules.catppuccin
+          nixvim.homeModules.nixvim
         ];
       };
   in {

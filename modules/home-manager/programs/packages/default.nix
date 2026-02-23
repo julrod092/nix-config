@@ -48,6 +48,10 @@ in {
         (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.stdenv.hostPlatform.system}").haproxy
         (expected-rev "e6f23dc08d3624daab7094b701aa3954923c6bbb" "${pkgs.stdenv.hostPlatform.system}").charles
         unstable.synergy
+        google-chrome
+        slack
+        appcleaner
+        unstable.zoom-us
       ]
       ++ lib.lists.optionals (!stdenv.isDarwin) [
         pavucontrol

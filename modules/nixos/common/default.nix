@@ -82,8 +82,6 @@
     LC_TIME = "es_CO.UTF-8";
   };
 
-  services.displayManager.ly.enable = true;
-
   # Input settings
   services.libinput.enable = true;
   services.xserver.excludePackages = with pkgs; [xterm];

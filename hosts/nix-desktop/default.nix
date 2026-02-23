@@ -13,7 +13,6 @@
     "${nixosModules}/desktop/gnome"
     "${nixosModules}/desktop/niri"
     "${nixosModules}/services/nvidia"
-    "${nixosModules}/services/podman"
     "${nixosModules}/services/network"
     "${nixosModules}/programs/nh"
     "${nixosModules}/programs/steam"
