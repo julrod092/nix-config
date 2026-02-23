@@ -1,19 +1,29 @@
 {
-  userConfig,
+  config,
   pkgs,
   ...
 }: {
   # GTK theme configuration
   gtk = {
     enable = true;
+    colorScheme = "dark";
+    gtk4.theme = config.gtk.theme;
+    theme = {
+      name = "catppuccin-${config.catppuccin.flavor}-${config.catppuccin.accent}-compact";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [config.catppuccin.accent];
+        variant = config.catppuccin.flavor;
+        size = "compact";
+      };
+    };
     iconTheme = {
       name = "Tela-circle-dark";
       package = pkgs.tela-circle-icon-theme;
     };
     cursorTheme = {
-      name = "Yaru"; # Using Yaru as sweet-cursors is not in nixpkgs
+      name = "Yaru";
       package = pkgs.yaru-theme;
-      size = 18;
+      size = 24;
     };
     font = {
       name = "Roboto";
@@ -21,11 +31,12 @@
     };
     gtk3 = {
       bookmarks = [
-        "file:///home/${userConfig.name}/Documents"
-        "file:///home/${userConfig.name}/Downloads"
-        "file:///home/${userConfig.name}/Pictures"
-        "file:///home/${userConfig.name}/Videos"
-        "file:///home/${userConfig.name}/workspace/repositories"
+        "file://${config.home.homeDirectory}/Documents"
+        "file://${config.home.homeDirectory}/Downloads"
+        "file://${config.home.homeDirectory}/Pictures"
+        "file://${config.home.homeDirectory}/Videos"
+        "file://${config.home.homeDirectory}/Downloads/temp"
+        "file://${config.home.homeDirectory}/Documents/repositories"
       ];
     };
   };

@@ -1,4 +1,5 @@
 {
+  lib,
   outputs,
   userConfig,
   pkgs,
@@ -19,11 +20,9 @@
     ../programs/nvim
     ../programs/zen
     ../programs/gpg
-    ../programs/spicetify
+    ../programs/fzf
+    ../programs/albert
     ../scripts
-
-    # Services
-    # ../services/ulauncher
     ../services/ssh
   ];
 
@@ -40,7 +39,7 @@
   };
 
   # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
+  systemd.user.startServices = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "sd-switch";
 
   # Home-Manager configuration for the user's home environment
   home = {
@@ -57,5 +56,6 @@
   # Catpuccin flavor and accent
   catppuccin = {
     flavor = "macchiato";
+    accent = "lavender";
   };
 }

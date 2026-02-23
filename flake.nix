@@ -11,50 +11,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixOS profiles to optimize settings for different hardware
-    hardware.url = "github:nixos/nixos-hardware";
-
-    # Global catppuccin theme
-    catppuccin.url = "github:catppuccin/nix/release-25.11";
-
-    # NixOS Spicetify
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Nix Darwin (for MacOS machines)
     darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Homebrew
-    nix-homebrew = {
-      url = "github:zhaofengli-wip/nix-homebrew";
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
+    # NixOS profiles to optimize settings for different hardware
+    hardware.url = "github:nixos/nixos-hardware";
+
+    # Global catppuccin theme
+    catppuccin = {
+      url = "github:catppuccin/nix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Temporal Zen browser flake
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Secrets managements
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -65,15 +39,12 @@
     };
 
     # Desktop enviroment
-    niri.url = "github:sodiboo/niri-flake";
-
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Nix addons
-
     alejandra = {
       url = "github:kamadorueda/alejandra/4.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -86,20 +57,34 @@
     darwin,
     home-manager,
     nixpkgs,
-    nix-homebrew,
-    sops-nix,
     nixvim,
     ...
   } @ inputs: let
     inherit (self) outputs;
 
+    # Nixpkgs configuration
+    nixpkgsConfig = {
+      allowUnfree = true;
+    };
+
     # Define user configurations
     users = {
+      "julian.rodriguez" = {
+        inherit
+          (users.julrod)
+          avatar
+          email
+          fullName
+          gitKey
+          ;
+        name = "julian.rodriguez";
+      };
       julrod = {
-        avatar = ./files/avatar/face;
+        avatar = ./files/avatar;
+        wallpaper = ./files/wallpaper.jpg;
         email = "jrodriguezrpo@pm.me";
         fullName = "Julian Rodriguez";
-        gitKey = "CC597166004906B8";
+        gitKey = "CC597166";
         name = "julrod";
       };
     };
@@ -113,7 +98,7 @@
           nixosModules = "${self}/modules/nixos";
         };
         modules = [
-          sops-nix.nixosModules.sops
+          {nixpkgs.config = nixpkgsConfig;}
           ./hosts/${hostname}
         ];
       };
@@ -125,29 +110,10 @@
         specialArgs = {
           inherit inputs outputs hostname;
           userConfig = users.${username};
-          nixosModules = "${self}/modules/nixos";
+          darwinModules = "${self}/modules/darwin";
         };
         modules = [
-          sops-nix.darwinModules.sops
-          home-manager.darwinModules.home-manager
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              enable = true;
-              enableRosetta = true;
-              user = "${username}";
-              taps = {
-                "homebrew/homebrew-core" = inputs.homebrew-core;
-                "homebrew/homebrew-cask" = inputs.homebrew-cask;
-                "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
-              };
-              mutableTaps = false;
-              autoMigrate = true;
-            };
-          }
-          ({config, ...}: {
-            homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
-          })
+          {nixpkgs.config = nixpkgsConfig;}
           ./hosts/${hostname}
         ];
       };
@@ -155,18 +121,19 @@
     # Function for Home Manager configuration
     mkHomeConfiguration = system: username: hostname:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs {
+          inherit system;
+          config = nixpkgsConfig;
+        };
         extraSpecialArgs = {
-          inherit inputs outputs system hostname;
+          inherit inputs outputs hostname;
           userConfig = users.${username};
           nhModules = "${self}/modules/home-manager";
         };
-
         modules = [
-          sops-nix.homeManagerModules.sops
+          ./home/${username}/${hostname}
           catppuccin.homeModules.catppuccin
           nixvim.homeModules.nixvim
-          ./home/${username}/${hostname}
         ];
       };
   in {

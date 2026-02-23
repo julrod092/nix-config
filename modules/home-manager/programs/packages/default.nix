@@ -46,7 +46,12 @@ in {
         raycast
         (expected-rev "e518d4ad2bcad74f98fec028cf21ce5b1e5020dd" "${pkgs.stdenv.hostPlatform.system}").nodejs_20
         (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.stdenv.hostPlatform.system}").haproxy
+        charles4
         unstable.synergy
+        google-chrome
+        slack
+        appcleaner
+        unstable.zoom-us
       ]
       ++ lib.lists.optionals (!stdenv.isDarwin) [
         pavucontrol
@@ -63,6 +68,7 @@ in {
         obsidian
         libheif
         unstable.deskflow
+        unstable.prismlauncher
       ];
   };
 }
