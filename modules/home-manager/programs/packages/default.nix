@@ -6,7 +6,7 @@
   mainJdk = pkgs.zulu21;
 in {
   home = {
-    file = {
+    file = lib.mkIf (pkgs.stdenv.hostPlatform.isDarwin) {
       "jdks/zulu8".source = pkgs.zulu8;
       "jdks/zulu11".source = pkgs.zulu11;
       "jdks/zulu21".source = mainJdk;
@@ -32,6 +32,7 @@ in {
         sops
         vscode
         fzf
+        unstable.google-chrome
 
         # Nix servers
         nixd
@@ -48,7 +49,6 @@ in {
         (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.stdenv.hostPlatform.system}").haproxy
         charles4
         unstable.synergy
-        google-chrome
         slack
         appcleaner
         unstable.zoom-us
@@ -64,7 +64,6 @@ in {
         codecrafters-cli
         code-cursor
         unstable.discord
-        nautilus
         obsidian
         libheif
         unstable.deskflow
