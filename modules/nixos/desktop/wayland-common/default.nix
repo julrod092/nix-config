@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   # Enable GDM display manager
-  services.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.enable = true;
+  services.displayManager.ly.enable = true;
 
   # Enable Power management support
   services.power-profiles-daemon.enable = true;
@@ -18,7 +19,6 @@
     # GNOME apps
     file-roller # archive manager
     gnome-calculator
-    gnome-pomodoro
     gnome-text-editor
     loupe # image viewer
     nautilus # file manager
