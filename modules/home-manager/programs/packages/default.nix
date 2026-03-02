@@ -45,13 +45,14 @@ in {
         hidden-bar
         docker-compose
         raycast
-        (expected-rev "e518d4ad2bcad74f98fec028cf21ce5b1e5020dd" "${pkgs.stdenv.hostPlatform.system}").nodejs_20
         (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.stdenv.hostPlatform.system}").haproxy
+        (expected-rev "5d5288fa1b2665243a1fd5dd99703077d25d4218" "${pkgs.stdenv.hostPlatform.system}").nodejs_24
         charles4
         unstable.synergy
         slack
         appcleaner
         unstable.zoom-us
+        unstable.claude-code
       ]
       ++ lib.lists.optionals (!stdenv.isDarwin) [
         pavucontrol
