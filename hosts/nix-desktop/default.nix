@@ -14,6 +14,7 @@
     "${nixosModules}/desktop/niri"
     "${nixosModules}/services/nvidia"
     "${nixosModules}/services/network"
+    "${nixosModules}/services/podman"
     "${nixosModules}/programs/nh"
     "${nixosModules}/programs/steam"
   ];

@@ -155,15 +155,6 @@
     fi
   '';
 
-  # Common container config
-  virtualisation = {
-    containers.enable = true;
-    podman = {
-      enable = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
-
   # System packages
   environment.systemPackages = with pkgs; [
     inputs.alejandra.defaultPackage.${system}
