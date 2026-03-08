@@ -164,6 +164,8 @@
     # Libraries needed for Synergy Wayland support
     libei
     libportal
+    # Libraries for stremio web
+    ffmpeg_7
   ];
 
   # Zsh configuration

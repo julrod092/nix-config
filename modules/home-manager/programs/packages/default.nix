@@ -32,7 +32,6 @@ in {
         sops
         vscode
         fzf
-        unstable.google-chrome
 
         # Nix servers
         nixd
@@ -53,13 +52,14 @@ in {
         appcleaner
         unstable.zoom-us
         unstable.claude-code
+        unstable.google-chrome
       ]
       ++ lib.lists.optionals (!stdenv.isDarwin) [
         pavucontrol
         pulseaudio
         tesseract
         unzip
-        wl-clipboard
+        # wl-clipboard
         baobab
         # stremio
         codecrafters-cli
@@ -69,6 +69,7 @@ in {
         libheif
         unstable.deskflow
         unstable.prismlauncher
+        unstable.deluge
       ];
   };
 }
