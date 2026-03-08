@@ -49,6 +49,11 @@
       url = "github:kamadorueda/alejandra/4.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixflix = {
+      url = "github:kiriwalawren/nixflix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -99,6 +104,7 @@
         };
         modules = [
           {nixpkgs.config = nixpkgsConfig;}
+          inputs.nixflix.nixosModules.default
           ./hosts/${hostname}
         ];
       };

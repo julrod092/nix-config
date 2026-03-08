@@ -17,6 +17,7 @@
     "${nixosModules}/services/podman"
     "${nixosModules}/programs/nh"
     "${nixosModules}/programs/steam"
+    # "${nixosModules}/services/nixflix"
   ];
 
   # Set hostname
