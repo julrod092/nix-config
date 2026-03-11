@@ -252,11 +252,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1772488460,
-        "narHash": "sha256-TZuI5NyeWK0DAJdBfK92X3XbasqkIoGPId9B/Q7euQA=",
+        "lastModified": 1773157225,
+        "narHash": "sha256-qKVsW0UtjpNzQrOr3sVYZ8bnGrb+BuIpQYd6POdz+qg=",
         "owner": "kiriwalawren",
         "repo": "nixflix",
-        "rev": "1745d0c78c0463e9108db04659848a2df5b44d12",
+        "rev": "558411bd6584249e6a0945e7caf8a08ba75a7add",
         "type": "github"
       },
       "original": {
@@ -329,11 +329,11 @@
         "noctalia-qs": "noctalia-qs"
       },
       "locked": {
-        "lastModified": 1773196620,
-        "narHash": "sha256-2+oZquEDg+5YLxXmEF3R0Kz40gJNLast6JLRgXFGzjs=",
+        "lastModified": 1773252517,
+        "narHash": "sha256-t4K/LBLj2UTVpUhdNbpdzexP/sJeCJB1R6nii8QDt28=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
-        "rev": "13f0b8fce4588bd17c99b53d9cba6d73defed0c2",
+        "rev": "dbb2e156838e740629e60b1d9f7969aff5868fde",
         "type": "github"
       },
       "original": {
@@ -449,7 +449,6 @@
         "type": "github"
       }
     },
-<<<<<<< HEAD
     "systems_3": {
       "locked": {
         "lastModified": 1689347949,
@@ -462,7 +461,9 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
-=======
+        "type": "github"
+      }
+    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -471,17 +472,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1770228511,
-        "narHash": "sha256-wQ6NJSuFqAEmIg2VMnLdCnUc0b7vslUohqqGGD+Fyxk=",
+        "lastModified": 1772660329,
+        "narHash": "sha256-IjU1FxYqm+VDe5qIOxoW+pISBlGvVApRjiw/Y/ttJzY=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "337a4fe074be1042a35086f15481d763b8ddc0e7",
+        "rev": "3710e0e1218041bbad640352a0440114b1e10428",
         "type": "github"
       },
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
->>>>>>> 6ce75c2 (Testing nixflix)
         "type": "github"
       }
     },
