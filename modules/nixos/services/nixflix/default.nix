@@ -78,10 +78,10 @@
       enable = true;
       deluge = {
         enable = true;
-        username = "localclient";  # Default Deluge username
+        username = "localclient"; # Default Deluge username
         password = "deluge";
-        host = "127.0.0.1";  # Use IP instead of localhost
-        port = 8112;  # Deluge web UI port (used by *arr services)
+        host = "127.0.0.1"; # Use IP instead of localhost
+        port = 8112; # Deluge web UI port (used by *arr services)
       };
     };
   };
