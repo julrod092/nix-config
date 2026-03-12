@@ -76,7 +76,7 @@
     users = {
       "julian.rodriguez" = {
         inherit
-          (users.julrod)
+          (users.julrod users.julian)
           avatar
           email
           fullName
@@ -91,6 +91,14 @@
         fullName = "Julian Rodriguez";
         gitKey = "CC597166";
         name = "julrod";
+      };
+      julian = {
+        avatar = ./files/avatar;
+        wallpaper = ./files/wallpaper.jpg;
+        email = "jrodriguezrpo@pm.me";
+        fullName = "Julian Rodriguez";
+        gitKey = "CC597166";
+        name = "julian";
       };
     };
 
@@ -149,11 +157,11 @@
     };
 
     darwinConfigurations = {
-      "julrod-mac" = mkDarwinConfiguration "julrod-mac" "julrod";
+      "nix-mac" = mkDarwinConfiguration "nix-mac" "julian";
     };
 
     homeConfigurations = {
-      "julrod@julrod-mac" = mkHomeConfiguration "aarch64-darwin" "julrod" "julrod-mac";
+      "julian@nix-mac" = mkHomeConfiguration "aarch64-darwin" "julian" "nix-mac";
       "julrod@nix-desktop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-desktop";
       "julrod@nix-laptop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-laptop";
     };
