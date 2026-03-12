@@ -39,7 +39,7 @@ in {
       ]
       ++ lib.lists.optionals stdenv.isDarwin [
         dockutil
-        colima
+        unstable.colima
         docker
         hidden-bar
         docker-compose
