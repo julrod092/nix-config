@@ -41,7 +41,7 @@ in {
         dockutil
         unstable.colima
         docker
-        hidden-bar
+        unstable.hidden-bar
         docker-compose
         raycast
         (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.stdenv.hostPlatform.system}").haproxy
