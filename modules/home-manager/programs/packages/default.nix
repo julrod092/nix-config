@@ -59,7 +59,7 @@ in {
         pulseaudio
         tesseract
         unzip
-        # wl-clipboard
+        unstanble.wl-clipboard
         baobab
         # stremio
         codecrafters-cli
