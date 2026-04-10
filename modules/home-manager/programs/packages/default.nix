@@ -54,6 +54,7 @@ in {
         appcleaner
         unstable.zoom-us
         unstable.claude-code
+        unstable.codex
         unstable.google-chrome
       ]
       ++ lib.lists.optionals (!isDarwin) [
