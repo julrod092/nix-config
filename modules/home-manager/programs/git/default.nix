@@ -6,7 +6,7 @@
       enable = true;
       settings = {
         user = {
-          namne = userConfig.fullName;
+          name = userConfig.fullName;
           email = userConfig.email;
         };
         pull.rebase = "true";

@@ -2,8 +2,7 @@
   pkgs,
   userConfig,
   ...
-}:
-{
+}: {
   # Nix settings
   nix = {
     settings = {
@@ -20,9 +19,6 @@
 
   # Add ability to use TouchID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
-
-  # Passwordless sudo
-  security.sudo.extraConfig = "${userConfig.name}    ALL = (ALL) NOPASSWD: ALL";
 
   # System settings
   system = {
@@ -178,7 +174,7 @@
         expose-animation-duration = 0.15;
         show-recents = false;
         showhidden = true;
-        persistent-apps = [ ];
+        persistent-apps = [];
         tilesize = 30;
         wvous-bl-corner = 1;
         wvous-br-corner = 1;

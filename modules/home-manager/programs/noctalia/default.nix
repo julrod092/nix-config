@@ -2,7 +2,9 @@
   inputs,
   userConfig,
   ...
-}: {
+}: let
+  homeDir = "/home/${userConfig.name}";
+in {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -551,7 +553,7 @@
       };
       wallpaper = {
         automationEnabled = false;
-        directory = "/home/julrod/Pictures/Wallpapers";
+        directory = "${homeDir}/Pictures/Wallpapers";
         enableMultiMonitorDirectories = false;
         enabled = true;
         favorites = [];

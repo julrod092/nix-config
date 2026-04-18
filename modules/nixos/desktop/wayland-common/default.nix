@@ -1,6 +1,5 @@
 {pkgs, ...}: {
-  # Enable GDM display manager
-  # services.displayManager.gdm.enable = true;
+  # Enable Ly display manager for Wayland sessions.
   services.displayManager.ly.enable = true;
 
   # Enable Power management support
@@ -11,7 +10,7 @@
   services.gnome.gnome-keyring.enable = true;
   security.polkit.enable = true;
   security.pam.services = {
-    gdm.enableGnomeKeyring = true;
+    ly.enableGnomeKeyring = true;
   };
 
   # Common packages for Wayland compositors

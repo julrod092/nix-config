@@ -2,7 +2,9 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+in {
   # Install gpg via home-manager module
 
   home.packages = with pkgs;
@@ -19,7 +21,7 @@
       cfssl
       pcsc-tools
     ]
-    ++ lib.lists.optionals (!stdenv.isDarwin) [
+    ++ lib.lists.optionals (!isDarwin) [
       yubioath-flutter
       # Password generation tools
       rng-tools

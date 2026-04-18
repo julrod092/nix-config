@@ -2,8 +2,11 @@
   inputs,
   hostname,
   nixosModules,
+  userConfig,
   ...
-}: {
+}: let
+  homeDir = "/home/${userConfig.name}";
+in {
   imports = [
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
@@ -23,14 +26,14 @@
   # Set hostname
   networking.hostName = hostname;
 
-  fileSystems."/home/julrod/m2" = {
+  fileSystems."${homeDir}/m2" = {
     device = "/dev/disk/by-uuid/f943f8f5-5917-41bf-9a39-382a04fb1986";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
+    options = ["defaults" "nofail"];
   };
 
   systemd.tmpfiles.rules = [
-    "d /home/julrod/m2 0775 julrod users - -"
+    "d ${homeDir}/m2 0775 ${userConfig.name} users - -"
   ];
 
   # Enable Razer Nari Ultimate headset profiles

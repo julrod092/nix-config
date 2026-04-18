@@ -15,18 +15,11 @@
     oci-containers.backend = "podman";
   };
 
-  environment = {
-    # Useful other development tools
-    systemPackages = with pkgs; [
-      qemu # Essential to run fedora based image
-      dive # look into docker image layers
-      podman-tui # status of containers in the terminal
-      docker-compose # start group of containers for dev
-      podman-compose # start group of containers for dev
-    ];
-
-    variables = {
-      DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock"; # needs to run docker container based images
-    };
-  };
+  environment.systemPackages = with pkgs; [
+    qemu # Essential to run fedora based image
+    dive # look into docker image layers
+    podman-tui # status of containers in the terminal
+    docker-compose # start group of containers for dev
+    podman-compose # start group of containers for dev
+  ];
 }
