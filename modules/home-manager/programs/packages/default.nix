@@ -32,6 +32,7 @@ in {
         sops
         vscode
         fzf
+        unstable.opencode
 
         # Nix servers
         nixd
@@ -62,7 +63,6 @@ in {
         baobab
         # stremio
         codecrafters-cli
-        code-cursor
         unstable.discord
         obsidian
         libheif
