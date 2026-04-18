@@ -4,6 +4,7 @@
   ...
 }: let
   mainJdk = pkgs.zulu21;
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 in {
   home = {
     file = lib.mkIf (pkgs.stdenv.hostPlatform.isDarwin) {
@@ -38,7 +39,7 @@ in {
         nixd
         nil
       ]
-      ++ lib.lists.optionals stdenv.isDarwin [
+      ++ lib.lists.optionals isDarwin [
         dockutil
         unstable.colima
         docker
@@ -55,7 +56,7 @@ in {
         unstable.claude-code
         unstable.google-chrome
       ]
-      ++ lib.lists.optionals (!stdenv.isDarwin) [
+      ++ lib.lists.optionals (!isDarwin) [
         pavucontrol
         pulseaudio
         tesseract

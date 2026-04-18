@@ -157,7 +157,7 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
-    inputs.alejandra.defaultPackage.${system}
+    alejandra
     gcc
     gnumake
     killall
@@ -165,7 +165,7 @@
     libei
     libportal
     # Libraries for stremio web
-    ffmpeg_7
+    ffmpeg
   ];
 
   # Zsh configuration
