@@ -57,7 +57,6 @@ in {
         videoSource = "portal";
       };
     };
-    systemd.enable = true;
     settings = {
       appLauncher = {
         autoPasteClipboard = false;

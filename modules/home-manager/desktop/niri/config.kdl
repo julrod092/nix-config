@@ -40,6 +40,8 @@ output "DP-3" {
 }
 
 // General settings
+spawn-at-startup "noctalia-shell"
+
 prefer-no-csd
 
 hotkey-overlay {
