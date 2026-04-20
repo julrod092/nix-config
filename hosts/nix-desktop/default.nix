@@ -10,7 +10,9 @@ in {
   imports = [
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
+    inputs.disko.nixosModules.disko
 
+    ./disko.nix
     ./hardware-configuration.nix
     "${nixosModules}/common"
     "${nixosModules}/desktop/gnome"
@@ -20,17 +22,10 @@ in {
     "${nixosModules}/services/podman"
     "${nixosModules}/programs/nh"
     "${nixosModules}/programs/steam"
-    # "${nixosModules}/services/nixflix"
   ];
 
   # Set hostname
   networking.hostName = hostname;
-
-  fileSystems."${homeDir}/m2" = {
-    device = "/dev/disk/by-uuid/f943f8f5-5917-41bf-9a39-382a04fb1986";
-    fsType = "ext4";
-    options = ["defaults" "nofail"];
-  };
 
   systemd.tmpfiles.rules = [
     "d ${homeDir}/m2 0775 ${userConfig.name} users - -"
