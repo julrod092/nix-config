@@ -7,7 +7,7 @@
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 in {
   home = {
-    file = lib.mkIf (pkgs.stdenv.hostPlatform.isDarwin) {
+    file = lib.mkIf isDarwin {
       "jdks/zulu8".source = pkgs.zulu8;
       "jdks/zulu11".source = pkgs.zulu11;
       "jdks/zulu21".source = mainJdk;
