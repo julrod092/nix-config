@@ -1,38 +1,32 @@
 {
-  description = "Nix configuratios for all work and personal machines";
+  description = "Nix configurations for work and personal machines";
+
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix Darwin (for MacOS machines)
     darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixOS profiles to optimize settings for different hardware
     hardware.url = "github:nixos/nixos-hardware";
 
-    # Global catppuccin theme
     catppuccin = {
       url = "github:catppuccin/nix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Temporal Zen browser flake
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NVIM nix community scratch
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,13 +37,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Desktop enviroment
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix addons
     alejandra = {
       url = "github:kamadorueda/alejandra/4.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,114 +53,77 @@
     };
   };
 
-  outputs = {
-    self,
-    catppuccin,
+  outputs = inputs@{
     darwin,
     home-manager,
     nixpkgs,
-    nixvim,
+    self,
     ...
-  } @ inputs: let
-    inherit (self) outputs;
+  }: let
+    lib = nixpkgs.lib;
 
-    # Nixpkgs configuration
-    nixpkgsConfig = {
-      allowUnfree = true;
+    collectModules = dir:
+      let
+        entries = builtins.readDir dir;
+        names = builtins.sort builtins.lessThan (builtins.attrNames entries);
+      in
+        lib.flatten (map (
+          name:
+            let
+              path = dir + "/${name}";
+              kind = entries.${name};
+            in
+              if kind == "directory"
+              then collectModules path
+              else if lib.hasSuffix ".nix" name
+              then [path]
+              else []
+        ) names);
+
+    top = lib.evalModules {
+      specialArgs = {inherit inputs self;};
+      modules = collectModules ./modules;
     };
 
-    # Define user configurations
-    users = {
-      "julian.rodriguez" = {
-        inherit
-          (users.julrod users.julian)
-          avatar
-          email
-          fullName
-          gitKey
-          ;
-        name = "julian.rodriguez";
-      };
-      julrod = {
-        avatar = ./files/avatar;
-        wallpaper = ./files/wallpaper.jpg;
-        email = "jrodriguezrpo@pm.me";
-        fullName = "Julian Rodriguez";
-        gitKey = "CC597166";
-        name = "julrod";
-      };
-      julian = {
-        avatar = ./files/avatar;
-        wallpaper = ./files/wallpaper.jpg;
-        email = "jrodriguezrpo@pm.me";
-        fullName = "Julian Rodriguez";
-        gitKey = "CC597166";
-        name = "julian";
+    repo = top.config.dendritic;
+
+    mkIdentityArgs = hostName: userName: {
+      _module.args.identity = {
+        inherit hostName userName;
+        user = repo.users.${userName};
       };
     };
 
-    # Function for NixOS system configuration
-    mkNixosConfiguration = hostname: username:
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs hostname;
-          userConfig = users.${username};
-          nixosModules = "${self}/modules/nixos";
-        };
+    mkNixosConfiguration = hostName: definition:
+      lib.nixosSystem {
+        system = definition.system;
         modules = [
-          {nixpkgs.config = nixpkgsConfig;}
-          inputs.nixflix.nixosModules.default
-          ./hosts/${hostname}
-        ];
+          (mkIdentityArgs hostName definition.user)
+        ] ++ definition.modules;
       };
 
-    # Function for nix-darwin system configuration
-    mkDarwinConfiguration = hostname: username:
+    mkDarwinConfiguration = hostName: definition:
       darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {
-          inherit inputs outputs hostname;
-          userConfig = users.${username};
-          darwinModules = "${self}/modules/darwin";
-        };
+        system = definition.system;
         modules = [
-          {nixpkgs.config = nixpkgsConfig;}
-          ./hosts/${hostname}
-        ];
+          (mkIdentityArgs hostName definition.user)
+        ] ++ definition.modules;
       };
 
-    # Function for Home Manager configuration
-    mkHomeConfiguration = system: username: hostname:
+    mkHomeConfiguration = _profileName: definition:
       home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-          inherit system;
-          config = nixpkgsConfig;
-        };
-        extraSpecialArgs = {
-          inherit inputs outputs hostname;
-          userConfig = users.${username};
-          nhModules = "${self}/modules/home-manager";
+          system = definition.system;
+          config = repo.nixpkgsConfig;
         };
         modules = [
-          ./home/${username}/${hostname}
-          catppuccin.homeModules.catppuccin
-          nixvim.homeModules.nixvim
-        ];
+          (mkIdentityArgs definition.host definition.user)
+        ] ++ definition.modules;
       };
   in {
-    nixosConfigurations = {
-      "nix-desktop" = mkNixosConfiguration "nix-desktop" "julrod";
-    };
-
-    darwinConfigurations = {
-      "nix-mac" = mkDarwinConfiguration "nix-mac" "julian";
-    };
-
-    homeConfigurations = {
-      "julian@nix-mac" = mkHomeConfiguration "aarch64-darwin" "julian" "nix-mac";
-      "julrod@nix-desktop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-desktop";
-    };
-
-    overlays = import ./overlays {inherit inputs;};
+    nixosConfigurations = lib.mapAttrs mkNixosConfiguration repo.nixosConfigurations;
+    darwinConfigurations = lib.mapAttrs mkDarwinConfiguration repo.darwinConfigurations;
+    homeConfigurations = lib.mapAttrs mkHomeConfiguration repo.homeConfigurations;
+    overlays = repo.overlays;
   };
 }
