@@ -55,8 +55,6 @@ in {
         slack
         appcleaner
         unstable.zoom-us
-        unstable.claude-code
-        unstable.codex
         unstable.google-chrome
       ]
       ++ lib.lists.optionals (!isDarwin) [
@@ -65,7 +63,6 @@ in {
         tesseract
         unzip
         baobab
-        # stremio
         codecrafters-cli
         unstable.discord
         obsidian
