@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    ../programs/aerospace
     ../programs/alacritty
     ../programs/bat
     ../programs/btop
