@@ -3,14 +3,14 @@
   lib,
   ...
 }: let
-  mainJdk = pkgs.zulu21;
+  mainJdk = pkgs.zulu11;
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 in {
   home = {
     file = lib.mkIf isDarwin {
       "jdks/zulu8".source = pkgs.zulu8;
-      "jdks/zulu11".source = pkgs.zulu11;
-      "jdks/zulu21".source = mainJdk;
+      "jdks/zulu11".source = mainJdk;
+      "jdks/zulu21".source = pkgs.zulu21;
     };
     packages = with pkgs;
       [
