@@ -38,6 +38,8 @@ in {
         # Nix servers
         nixd
         nil
+        sops
+        age
       ]
       ++ lib.lists.optionals isDarwin [
         dockutil

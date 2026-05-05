@@ -55,8 +55,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixflix = {
-      url = "github:kiriwalawren/nixflix";
+    # Secrets managements
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -117,7 +118,7 @@
         };
         modules = [
           {nixpkgs.config = nixpkgsConfig;}
-          inputs.nixflix.nixosModules.default
+          inputs.sops-nix.nixosModules.sops
           ./hosts/${hostname}
         ];
       };
@@ -153,6 +154,7 @@
           ./home/${username}/${hostname}
           catppuccin.homeModules.catppuccin
           nixvim.homeModules.nixvim
+          inputs.sops-nix.homeManagerModules.sops
         ];
       };
   in {

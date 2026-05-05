@@ -9,13 +9,8 @@ in {
 
   home.packages = with pkgs;
     [
-      # Yubikey
       yubikey-manager
-      # yubikey-manager-qt
-      # yubikey-personalization
-      # yubikey-personalization-gui
       yubico-piv-tool
-      # yubikeyGuide
 
       # Other tools
       cfssl
