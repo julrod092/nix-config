@@ -164,11 +164,11 @@
     },
     "hardware": {
       "locked": {
-        "lastModified": 1777796046,
-        "narHash": "sha256-bEJp/zaQApzynGRaAO62BZSz9tFikKtIHCn2yIA/s7Q=",
+        "lastModified": 1777917524,
+        "narHash": "sha256-k+LVe9YaO2BEPB9AaCtTtOMCeGi4dxDo6gt4Un3qoPY=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "eeb02f6e29fc8139c0b15af5ff0fdfdc6d0d3d90",
+        "rev": "df7783100babf59001340a7a874ba3824e441ecb",
         "type": "github"
       },
       "original": {
@@ -273,11 +273,11 @@
         "vpn-confinement": "vpn-confinement"
       },
       "locked": {
-        "lastModified": 1777848932,
-        "narHash": "sha256-ACLygVQGAGvAatOwkbe+iJVJNT5xVgfL18PIC9TCNEM=",
+        "lastModified": 1777920328,
+        "narHash": "sha256-cVPdyPjGaW7TkTxDuVvuS0bSCZ3NpRWaIAtdKBabVpk=",
         "owner": "kiriwalawren",
         "repo": "nixflix",
-        "rev": "269533863ef0bfa2a4769a9d3b100aaf67db9f66",
+        "rev": "10376ea2f24f00ee2fea524a14debdc2b4a61182",
         "type": "github"
       },
       "original": {
@@ -553,11 +553,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777564084,
-        "narHash": "sha256-O9VRkxg+2j+sh+c73wi4VeIBECoqW2PlnCR9Qe1nQKA=",
+        "lastModified": 1777959875,
+        "narHash": "sha256-kL2gxkGbIawygfc+DJhWBXAcRplFQlLyDBb4JHCxTzw=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "d93443c0f6fdb3b179bed68856f322dba4842612",
+        "rev": "604c3c8814c87eac54d804253ab520cb8fac7b21",
         "type": "github"
       },
       "original": {
