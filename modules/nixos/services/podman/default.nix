@@ -15,6 +15,8 @@
     oci-containers.backend = "podman";
   };
 
+  boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 53;
+
   environment.systemPackages = with pkgs; [
     qemu # Essential to run fedora based image
     dive # look into docker image layers

@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
   # Manage kanshi services via Home-manager
   services.kanshi = {
     enable = true;
@@ -30,4 +30,9 @@
       }
     ];
   };
+
+  systemd.user.services.kanshi.Unit.ConditionEnvironment = lib.mkForce [
+    "WAYLAND_DISPLAY"
+    "XDG_CURRENT_DESKTOP=niri"
+  ];
 }
