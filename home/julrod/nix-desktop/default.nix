@@ -2,6 +2,8 @@
   imports = [
     "${nhModules}/common"
     "${nhModules}/desktop/niri"
+    "${nhModules}/secrets/sops"
+    "${nhModules}/services/stacks"
   ];
 
   # Enable home-manager

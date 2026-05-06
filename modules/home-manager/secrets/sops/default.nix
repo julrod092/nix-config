@@ -14,14 +14,30 @@
   macos = {};
 
   desktop = {
-    secrets = {};
+    secrets = lib.genAttrs [
+      "authelia/jwt_secret"
+      "authelia/session_secret"
+      "authelia/encryption_key"
+      "authelia/oidc_hmac_secret"
+      "authelia/oidc_rsa_pk"
+      "aiostreams/secret_key"
+      "lldap/key_seed"
+      "lldap/jwt_secret"
+      "lldap/admin_password"
+      "lldap/julian_password"
+      "paperless/admin_password"
+      "paperless/secret_key"
+      "paperless/authelia_client_secret"
+      "paperless/db_password"
+      "traefik/cf_api_token"
+    ] (s: {});
     templates = {};
   };
 in {
   sops = {
     defaultSymlinkPath = secretsPath;
-    defaultSopsFile = ./../../../home/${userConfig.name}/${hostname}/secrets/secrets.yaml;
-    gnupg.home = "${config.users.users.${userConfig.name}.home}/.gnupg";
+    defaultSopsFile = ./../../../../home/${userConfig.name}/${hostname}/secrets.yaml;
+    gnupg.home = "${config.home.homeDirectory}/.gnupg";
 
     secrets =
       lib.optionalAttrs pkgs.stdenv.isDarwin macos.secrets

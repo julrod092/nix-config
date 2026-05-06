@@ -55,6 +55,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # nix stacks
+    nix-podman-stacks = {
+      url = "github:Tarow/nix-podman-stacks/v0.6.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Secrets managements
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -155,6 +161,7 @@
           catppuccin.homeModules.catppuccin
           nixvim.homeModules.nixvim
           inputs.sops-nix.homeManagerModules.sops
+          inputs.nix-podman-stacks.homeModules.nps
         ];
       };
   in {
