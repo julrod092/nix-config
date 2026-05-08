@@ -58,7 +58,6 @@
               password_file = config.sops.secrets."lldap/julian_password".path;
               groups = with config.nps.stacks; [
                 paperless.oidc.userGroup
-                komga.oidc.userGroup
               ];
             };
           };
