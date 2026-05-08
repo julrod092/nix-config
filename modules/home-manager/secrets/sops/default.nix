@@ -30,6 +30,7 @@
       "paperless/authelia_client_secret"
       "paperless/db_password"
       "traefik/cf_api_token"
+      "komga/authelia_client_secret"
     ] (s: {});
     templates = {};
   };

@@ -1,12 +1,12 @@
 {config, ...}: {
   services.podman.containers = {
     # These containers mount sops-nix secrets at startup.
-    aiostreams.dependsOn = ["sops-nix.service"];
-    authelia.dependsOn = ["sops-nix.service"];
-    lldap.dependsOn = ["sops-nix.service"];
-    paperless.dependsOn = ["sops-nix.service"];
-    paperless-db.dependsOn = ["sops-nix.service"];
-    traefik.dependsOn = ["sops-nix.service"];
+    aiostreams.dependsOn = ["NetworkManager" "sops-nix.service"];
+    authelia.dependsOn = ["NetworkManager" "sops-nix.service"];
+    lldap.dependsOn = ["NetworkManager" "sops-nix.service"];
+    paperless.dependsOn = ["NetworkManager" "sops-nix.service"];
+    paperless-db.dependsOn = ["NetworkManager" "sops-nix.service"];
+    traefik.dependsOn = ["NetworkManager" "sops-nix.service"];
   };
 
   nps = {
@@ -20,11 +20,6 @@
       docker-socket-proxy.enable = true;
       monitoring.enable = true;
       bentopdf.enable = true;
-
-      aiostreams = {
-        enable = true;
-        secretKeyFile = config.sops.secrets."aiostreams/secret_key".path;
-      };
 
       authelia = {
         enable = true;
@@ -63,6 +58,7 @@
               password_file = config.sops.secrets."lldap/julian_password".path;
               groups = with config.nps.stacks; [
                 paperless.oidc.userGroup
+                komga.oidc.userGroup
               ];
             };
           };
@@ -81,11 +77,18 @@
         enableGrafanaAccessLogDashboard = true;
       };
 
+      # Media
+
+      aiostreams = {
+        enable = true;
+        secretKeyFile = config.sops.secrets."aiostreams/secret_key".path;
+      };
+
       paperless = {
         enable = true;
         adminProvisioning = {
-          username = "julrod";
-          email = "julianrodriguez@estudioochosiete.xyz";
+          username = "admin";
+          email = "admin@estudioochosiete.xyz";
           passwordFile = config.sops.secrets."paperless/admin_password".path;
         };
         oidc = {
@@ -93,9 +96,7 @@
           clientSecretFile = config.sops.secrets."paperless/authelia_client_secret".path;
         };
         secretKeyFile = config.sops.secrets."paperless/secret_key".path;
-        db = {
-          passwordFile = config.sops.secrets."paperless/db_password".path;
-        };
+        db.passwordFile = config.sops.secrets."paperless/db_password".path;
       };
     };
   };
