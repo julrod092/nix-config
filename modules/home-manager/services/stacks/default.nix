@@ -20,6 +20,8 @@
       docker-socket-proxy.enable = true;
       monitoring.enable = true;
       bentopdf.enable = true;
+      adguard.enable = true;
+      homeassistant.enable = true;
 
       authelia = {
         enable = true;
@@ -30,16 +32,6 @@
           enable = true;
           hmacSecretFile = config.sops.secrets."authelia/oidc_hmac_secret".path;
           jwksRsaKeyFile = config.sops.secrets."authelia/oidc_rsa_pk".path;
-        };
-      };
-
-      blocky = {
-        enable = true;
-        enableGrafanaDashboard = true;
-        enablePrometheusExport = true;
-        containers.blocky = {
-          # When clicking the Blocky icon in the homepage, it will redirect to the Grafana dashboard.
-          homepage.settings.href = "${config.nps.containers.grafana.traefik.serviceUrl}/d/blocky";
         };
       };
 
