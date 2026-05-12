@@ -7,6 +7,9 @@
     paperless.dependsOn = ["NetworkManager" "sops-nix.service"];
     paperless-db.dependsOn = ["NetworkManager" "sops-nix.service"];
     traefik.dependsOn = ["NetworkManager" "sops-nix.service"];
+    stirling-pdf.dependsOn = ["NetworkManager" "sops-nix.service"];
+    reactive-resume.dependsOn = ["NetworkManager" "sops-nix.service"];
+    job-ops.dependsOn = ["NetworkManager" "sops-nix.service"];
   };
 
   nps = {
@@ -22,6 +25,9 @@
       bentopdf.enable = true;
       adguard.enable = true;
       homeassistant.enable = true;
+      networking-toolbox.enable = true;
+      n8n.enable = true;
+      it-tools.enable = true;
 
       authelia = {
         enable = true;
@@ -50,6 +56,7 @@
               password_file = config.sops.secrets."lldap/julian_password".path;
               groups = with config.nps.stacks; [
                 paperless.oidc.userGroup
+                reactive-resume.oidc.userGroup
               ];
             };
           };
@@ -88,6 +95,26 @@
         };
         secretKeyFile = config.sops.secrets."paperless/secret_key".path;
         db.passwordFile = config.sops.secrets."paperless/db_password".path;
+      };
+
+      stirling-pdf = {
+        enable = true;
+      };
+
+      reactive-resume = {
+        enable = true;
+        authSecretFile = config.sops.secrets."rx_resume/auth_secret".path;
+        db.passwordFile = config.sops.secrets."rx_resume/db_password".path;
+        oidc = {
+          enable = true;
+          clientSecretFile = config.sops.secrets."rx_resume/authelia_client_secret".path;
+          clientSecretHash = "$pbkdf2-sha512$310000$H9WV2/FSER7SUdTJltfkpQ$F7mBoFWFi7WI6S85ri1ror/M1wkT4/H/c6g5QFQiDGhk7At0friRXgK8py4iRqED5wadtCTq5.5cVPagsPzFHQ";
+        };
+      };
+
+      job-ops = {
+        enable = true;
+        rxResumeApiKeyFile = config.sops.secrets."job-ops/rx_resume_api_key".path;
       };
     };
   };
