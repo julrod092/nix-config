@@ -73,6 +73,7 @@ in {
         unstable.deskflow
         unstable.prismlauncher
         unstable.deluge
+        unstable.xclip
       ];
   };
 }

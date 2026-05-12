@@ -30,6 +30,10 @@
       "paperless/authelia_client_secret"
       "paperless/db_password"
       "traefik/cf_api_token"
+      "rx_resume/auth_secret"
+      "rx_resume/db_password"
+      "rx_resume/authelia_client_secret"
+      "job-ops/rx_resume_api_key"
     ] (s: {});
     templates = {};
   };

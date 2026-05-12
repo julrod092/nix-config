@@ -57,7 +57,7 @@
 
     # nix stacks
     nix-podman-stacks = {
-      url = "github:Tarow/nix-podman-stacks/v0.6.0";
+      url = "github:julrod092/nix-podman-stacks";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
