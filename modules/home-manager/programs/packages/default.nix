@@ -74,6 +74,7 @@ in {
         unstable.prismlauncher
         unstable.deluge
         unstable.xclip
+        python314
       ];
   };
 }
