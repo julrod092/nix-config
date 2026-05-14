@@ -10,6 +10,11 @@
     stirling-pdf.dependsOn = ["NetworkManager" "sops-nix.service"];
     reactive-resume.dependsOn = ["NetworkManager" "sops-nix.service"];
     job-ops.dependsOn = ["NetworkManager" "sops-nix.service"];
+    tandoor.dependsOn = ["NetworkManager" "sops-nix.service"];
+    tandoor-db.dependsOn = ["NetworkManager" "sops-nix.service"];
+    homebox.dependsOn = ["NetworkManager" "sops-nix.service"];
+    wallos.dependsOn = ["NetworkManager" "sops-nix.service"];
+    freshrss.dependsOn = ["NetworkManager" "sops-nix.service"];
   };
 
   nps = {
@@ -22,7 +27,6 @@
       homepage.enable = true;
       docker-socket-proxy.enable = true;
       monitoring.enable = true;
-      bentopdf.enable = true;
       adguard.enable = true;
       homeassistant.enable = true;
       networking-toolbox.enable = true;
@@ -57,6 +61,10 @@
               groups = with config.nps.stacks; [
                 paperless.oidc.userGroup
                 reactive-resume.oidc.userGroup
+                freshrss.oidc.userGroup
+                homebox.oidc.userGroup
+                tandoor.oidc.userGroup
+                wallos.oidc.userGroup
               ];
             };
           };
@@ -115,6 +123,52 @@
       job-ops = {
         enable = true;
         rxResumeApiKeyFile = config.sops.secrets."job-ops/rx_resume_api_key".path;
+      };
+
+      freshrss = {
+        enable = true;
+        oidc = {
+          enable = true;
+          clientSecretHash = "$pbkdf2-sha512$310000$eKZ0sl3s01gm7gJPXpaqpA$J5rQMe2Km8/1BSiilSteLS8QqJg2EqPQnCq450JZLobZIUWF0F.L4nek0nMlTTcLf/LrPDk1/AUJ.Th3dKecEg";
+          clientSecretFile = config.sops.secrets."freshrss/authelia_client_secret".path;
+          cryptoKeyFile = config.sops.secrets."freshrss/authelia_crypto_key".path;
+        };
+      };
+
+      homebox = {
+        enable = true;
+        oidc = {
+          enable = true;
+          clientSecretHash = "$pbkdf2-sha512$310000$lTxz4Jpmgm/LR9n8/0Y3Zg$8Po3esfp/T18axaEaC6fSXFcMMpDCte0LYIJkNhC0tO9dKm2xynVWQq1GDoafcbBquofWB5z42pKx5lCYsjNlQ";
+          clientSecretFile = config.sops.secrets."homebox/authelia_client_secret".path;
+        };
+      };
+
+      tandoor = {
+        enable = true;
+
+        secretKeyFile = config.sops.secrets."tandoor/secret_key".path;
+        db.passwordFile = config.sops.secrets."tandoor/db_password".path;
+
+        oidc = {
+          enable = true;
+          clientSecretFile = config.sops.secrets."tandoor/authelia_client_secret".path;
+          clientSecretHash = "$pbkdf2-sha512$310000$Jn3mVBKwxGdVO0SwnnB7tQ$xw0Irb7RnbCE1PcC28TUAnl.2lLuLSCjemGZJeRbCBViz3qwtbwoBDn3a1QtQPKgnxb50QFY8yZodvDnsp4nrw";
+        };
+
+        containers.tandoor.extraEnv = {
+          # https://docs.tandoor.dev/system/configuration/#default-permissions
+          SOCIAL_DEFAULT_ACCESS = 1;
+          SOCIAL_DEFAULT_GROUP = "user";
+        };
+      };
+
+      wallos = {
+        enable = true;
+        oidc = {
+          registerClient = true;
+          clientSecretHash = "$pbkdf2-sha512$310000$HbyoXa5PfRRiOMXny2Q03A$2PNmEypjh0KcPVewrFTSKkoHsyuK0rkLWSWrTeNkQRxU9tD2GeXjOlIjes9UbxOx85SaP9dzyivMC4u.BlBCfQ";
+        };
       };
     };
   };
