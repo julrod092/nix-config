@@ -1,20 +1,20 @@
 {config, ...}: {
   services.podman.containers = {
     # These containers mount sops-nix secrets at startup.
-    aiostreams.dependsOn = ["NetworkManager" "sops-nix.service"];
-    authelia.dependsOn = ["NetworkManager" "sops-nix.service"];
-    lldap.dependsOn = ["NetworkManager" "sops-nix.service"];
-    paperless.dependsOn = ["NetworkManager" "sops-nix.service"];
-    paperless-db.dependsOn = ["NetworkManager" "sops-nix.service"];
-    traefik.dependsOn = ["NetworkManager" "sops-nix.service"];
-    stirling-pdf.dependsOn = ["NetworkManager" "sops-nix.service"];
-    reactive-resume.dependsOn = ["NetworkManager" "sops-nix.service"];
-    job-ops.dependsOn = ["NetworkManager" "sops-nix.service"];
-    tandoor.dependsOn = ["NetworkManager" "sops-nix.service"];
-    tandoor-db.dependsOn = ["NetworkManager" "sops-nix.service"];
-    homebox.dependsOn = ["NetworkManager" "sops-nix.service"];
-    wallos.dependsOn = ["NetworkManager" "sops-nix.service"];
-    freshrss.dependsOn = ["NetworkManager" "sops-nix.service"];
+    aiostreams.dependsOn = ["sops-nix.service"];
+    authelia.dependsOn = ["sops-nix.service"];
+    lldap.dependsOn = ["sops-nix.service"];
+    paperless.dependsOn = ["sops-nix.service"];
+    paperless-db.dependsOn = ["sops-nix.service"];
+    traefik.dependsOn = ["sops-nix.service"];
+    stirling-pdf.dependsOn = ["sops-nix.service"];
+    reactive-resume.dependsOn = ["sops-nix.service"];
+    job-ops.dependsOn = ["sops-nix.service"];
+    tandoor.dependsOn = ["sops-nix.service"];
+    tandoor-db.dependsOn = ["sops-nix.service"];
+    homebox.dependsOn = ["sops-nix.service"];
+    wallos.dependsOn = ["sops-nix.service"];
+    freshrss.dependsOn = ["sops-nix.service"];
   };
 
   nps = {
