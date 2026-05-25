@@ -107,9 +107,9 @@
       julian = {
         avatar = ./files/avatar;
         wallpaper = ./files/wallpaper.jpg;
-        email = "jrodriguezrpo@pm.me";
+        email = "jandresrodriguez@nclcorp.com";
         fullName = "Julian Rodriguez";
-        gitKey = "CC597166";
+        gitKey = "1A72119A";
         name = "julian";
       };
     };

@@ -11,7 +11,10 @@
     then "${config.users.users.${userConfig.name}.home}/.config/sops/secrets"
     else "/run/user/1000/secrets";
 
-  macos = {};
+  macos = {
+    secrets = {};
+    templates = {};
+  };
 
   desktop = {
     secrets = lib.genAttrs [
@@ -46,7 +49,7 @@
 in {
   sops = {
     defaultSymlinkPath = secretsPath;
-    defaultSopsFile = ./../../../../home/${userConfig.name}/${hostname}/secrets.yaml;
+    defaultSopsFile = ./../../../../home/${userConfig.name}/secrets.yaml;
     gnupg.home = "${config.home.homeDirectory}/.gnupg";
 
     secrets =
