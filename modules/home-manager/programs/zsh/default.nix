@@ -1,4 +1,6 @@
 {
+  config,
+  lib,
   pkgs,
   hostname,
   userConfig,
@@ -27,6 +29,12 @@ in {
       plugins = ["git"];
       theme = "agnoster";
     };
+
+    profileExtra = lib.optionalString pkgs.stdenv.isDarwin ''
+      if [[ -f "${config.sops.templates."opencode-env.zsh".path}" ]]; then
+        . "${config.sops.templates."opencode-env.zsh".path}"
+      fi
+    '';
 
     initContent = ''
       # extra lines for zsh config file
