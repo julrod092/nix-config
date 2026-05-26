@@ -92,8 +92,7 @@
           avatar
           email
           fullName
-          gitKey
-          ;
+          gitKey;
         name = "julian.rodriguez";
       };
       julrod = {
