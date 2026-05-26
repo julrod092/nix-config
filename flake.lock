@@ -325,11 +325,11 @@
         "sops-nix": "sops-nix"
       },
       "locked": {
-        "lastModified": 1778771922,
-        "narHash": "sha256-LyJq+b0JwTdoyeOIAj/ejizMx0ZKVG66zBCaivK85b0=",
+        "lastModified": 1779801732,
+        "narHash": "sha256-EGQblFWPFlwbPpqRWkUr54zBEWm2GNo11A27/ZIB1oI=",
         "owner": "julrod092",
         "repo": "nix-podman-stacks",
-        "rev": "ed598e21354745b2ff4ecad96ea82759e14367c0",
+        "rev": "f384f6d9efed7fd2b30d4a5d880d900c102f6b41",
         "type": "github"
       },
       "original": {
@@ -356,11 +356,19 @@
     },
     "nixpkgs-unstable": {
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1779508470,
         "narHash": "sha256-Ap9KJX+5xHIn3bPIpfNgT6MEXdAECECwo4/rmlQD74M=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "29916453413845e54a65b8a1cf996842300cd299",
+=======
+        "lastModified": 1779560665,
+        "narHash": "sha256-tpyBcxPpcQb8ukyNF7DoCwfSY3VPsxHoYwj00Cayv5o=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+>>>>>>> ebea2b6 (Update lock manually)
         "type": "github"
       },
       "original": {
@@ -402,11 +410,19 @@
         "noctalia-qs": "noctalia-qs"
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1779591140,
         "narHash": "sha256-G54zkslNueiiYDtg8QbAkPTv0/vfLzdjDsaUljlRQAE=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
         "rev": "052f533186e6ad8e60541760cfe3123f14108c1e",
+=======
+        "lastModified": 1779763713,
+        "narHash": "sha256-as2Vo4PitnWfXezfkQB2H3Rsr/DXJPp4Oe+dE+dZ0Xo=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "272cd91408b5ff6e329e6397eed042fe422069e7",
+>>>>>>> ebea2b6 (Update lock manually)
         "type": "github"
       },
       "original": {
@@ -649,11 +665,19 @@
         ]
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1779649538,
         "narHash": "sha256-k256zgHyqJ/0siFdq5y4GSwJyYKhQnW83N9K8S7OMKo=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
         "rev": "e8fbde26a92a8c078fb1355c9f7c8dba5f7eb9d6",
+=======
+        "lastModified": 1779781734,
+        "narHash": "sha256-c2FZ7S/rhnCHcwPkc82GOxlCw88HKYBaJkLtMgi72p8=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "ef7c137fea3d0d0624864db7aa1f068eed79b0fb",
+>>>>>>> ebea2b6 (Update lock manually)
         "type": "github"
       },
       "original": {
