@@ -6,12 +6,6 @@
   lib,
   ...
 }: let
-  exportSecret = name: ''
-    export ${name}="$(cat <<'EOF'
-    ${builtins.getAttr name config.sops.placeholder}
-    EOF
-    )"
-  '';
 
   secretsPath =
     if pkgs.stdenv.isDarwin
@@ -20,19 +14,10 @@
 
   macos = {
     secrets = lib.genAttrs [
-      "AWS_ACCESS_KEY_ID"
-      "AWS_SECRET_ACCESS_KEY"
       "GITHUB_NPM_KEY"
       "GITHUB_REPO_ACCESS"
     ] (s: {});
-    templates = {
-      "opencode-env.zsh".content = lib.concatMapStringsSep "\n" exportSecret [
-        "AWS_ACCESS_KEY_ID"
-        "AWS_SECRET_ACCESS_KEY"
-        "GITHUB_NPM_KEY"
-        "GITHUB_REPO_ACCESS"
-      ];
-    };
+    templates = {};
   };
 
   desktop = {

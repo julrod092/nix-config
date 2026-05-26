@@ -55,6 +55,7 @@ in {
         appcleaner
         unstable.zoom-us
         unstable.google-chrome
+        unstable.awscli2
       ]
       ++ lib.lists.optionals (!isDarwin) [
         pavucontrol
