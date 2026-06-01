@@ -72,5 +72,9 @@ in {
     maxCacheTtlSsh = 120;
     enableScDaemon = true;
     pinentry.package = pinentryPackage;
+    # pinentry-mac does not honor the `grab` directive; emitting it on
+    # Darwin is at best a no-op and at worst a source of confusion when
+    # debugging missing pinentry prompts.
+    grabKeyboardAndMouse = lib.mkIf isDarwin false;
   };
 }
