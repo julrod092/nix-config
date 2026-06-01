@@ -30,7 +30,6 @@
       adguard.enable = true;
       homeassistant.enable = true;
       networking-toolbox.enable = true;
-      n8n.enable = true;
       it-tools.enable = true;
 
       authelia = {

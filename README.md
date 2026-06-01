@@ -19,9 +19,9 @@
 
 ### Key Inputs
 
-- **nixpkgs**: Points to the `nixos-25.11` channel, providing stable NixOS packages
+- **nixpkgs**: Points to the `nixos-26.05` channel, providing stable NixOS packages
 - **nixpkgs-stable**: Points to the `nixos-unstable` channel for access to the latest packages
-- **home-manager**: Manages user-specific configurations, following the `nixpkgs` input (release-25.11)
+- **home-manager**: Manages user-specific configurations, following the `nixpkgs` input (release-26.05)
 - **hardware**: Optimizes settings for different hardware configurations
 - **catppuccin**: Provides global Catppuccin theme integration
 - **darwin**: Enables nix-darwin for macOS system configuration
