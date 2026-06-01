@@ -1,9 +1,4 @@
-{
-  userConfig,
-  lib,
-  pkgs,
-  ...
-}: {
+{userConfig, ...}: {
   # Install git via home-manager module
 
   programs = {
@@ -16,7 +11,7 @@
         };
         pull.rebase = "true";
       };
-      signing = lib.mkIf (!pkgs.stdenv.isDarwin) {
+      signing = {
         key = userConfig.gitKey;
         signByDefault = true;
       };
