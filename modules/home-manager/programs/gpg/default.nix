@@ -4,6 +4,11 @@
   ...
 }: let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+
+  pinentryPackage =
+    if isDarwin
+    then pkgs.pinentry_mac
+    else pkgs.pinentry-gnome3;
 in {
   # Install gpg via home-manager module
 
@@ -20,6 +25,10 @@ in {
       yubioath-flutter
       # Password generation tools
       rng-tools
+      pinentry-gnome3
+    ]
+    ++ lib.lists.optionals isDarwin [
+      pinentry_mac
     ];
 
   programs = {
@@ -54,19 +63,14 @@ in {
         throw-keyids = true;
       };
     };
-    zsh = {
-      localVariables = lib.mkIf (!pkgs.stdenv.isDarwin) {
-        SSH_AUTH_SOCK = "$(gpgconf --list-dirs agent-ssh-socket)";
-      };
-    };
   };
 
-  services.gpg-agent = lib.mkIf (!pkgs.stdenv.isDarwin) {
+  services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 60;
     enableSshSupport = true;
     maxCacheTtlSsh = 120;
-    pinentry.package = pkgs.pinentry-gnome3;
     enableScDaemon = true;
+    pinentry.package = pinentryPackage;
   };
 }
