@@ -6,7 +6,6 @@
   lib,
   ...
 }: let
-
   secretsPath =
     if pkgs.stdenv.isDarwin
     then "${config.home.homeDirectory}/.config/sops/secrets"
@@ -32,6 +31,7 @@
       "lldap/jwt_secret"
       "lldap/admin_password"
       "lldap/julian_password"
+      "lldap/cpuerta_password"
       "paperless/admin_password"
       "paperless/secret_key"
       "paperless/authelia_client_secret"
