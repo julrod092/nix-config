@@ -33,10 +33,7 @@
     };
 
     # NVIM nix community scratch
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixvim.url = "github:nix-community/nixvim/nixos-26.05";
 
     disko = {
       url = "github:nix-community/disko";
