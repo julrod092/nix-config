@@ -72,6 +72,7 @@ in {
         unstable.deluge
         unstable.xclip
         python314
+        ollama
       ];
   };
 }
