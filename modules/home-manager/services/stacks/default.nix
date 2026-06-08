@@ -1,4 +1,17 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
+  xdg.configFile."containers/storage.conf" = lib.mkForce {
+    text = ''
+      [storage]
+      driver = "overlay"
+      graphroot = "${config.home.homeDirectory}/m2/Podman"
+      runroot = "/run/user/1000/containers"
+    '';
+  };
+
   services.podman.containers = {
     # These containers mount sops-nix secrets at startup.
     aiostreams.dependsOn = ["sops-nix.service"];

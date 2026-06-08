@@ -1,7 +1,21 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  userConfig,
+  ...
+}: {
   # Enable common container config files in /etc/containers
   virtualisation = {
-    containers.enable = true;
+    containers = {
+      enable = true;
+      storage.settings = {
+        storage = {
+          driver = "overlay";
+          graphroot = "/home/${userConfig.name}/m2/Podman-root";
+          runroot = "/run/containers/storage";
+          rootless_storage_path = "/home/${userConfig.name}/m2/Podman";
+        };
+      };
+    };
     podman = {
       enable = true;
 
