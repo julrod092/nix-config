@@ -11,6 +11,8 @@
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
+        cudaPackages.cuda_nvcc
+        cudaPackages.cuda_cudart
         nvidia-vaapi-driver
         libva-vdpau-driver
         libvdpau-va-gl
@@ -28,6 +30,12 @@
 
   # Set necessary environment variables
   environment.sessionVariables = {
+    CUDA_PATH = "${pkgs.cudaPackages.cuda_cudart}";
+    LD_LIBRARY_PATH = lib.mkAfter [
+      "${pkgs.cudaPackages.cuda_cudart}/lib"
+      "${pkgs.cudaPackages.cuda_nvcc}/lib"
+      "/run/opengl-driver/lib"
+    ];
     # Add variables to help with EGL/OpenGL issues
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
