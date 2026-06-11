@@ -21,6 +21,7 @@
     ../programs/gpg
     ../programs/fzf
     ../programs/albert
+    ../programs/opencode
     ../scripts
     ../services/ssh
   ];

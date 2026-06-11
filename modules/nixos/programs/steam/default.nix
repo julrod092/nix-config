@@ -10,6 +10,7 @@
     protonup-ng
     lutris
     heroic
+    unstable.bottles
   ];
 
   programs.gamemode.enable = true;

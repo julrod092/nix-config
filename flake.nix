@@ -63,6 +63,12 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    arctis-sound-manager = {
+      # Local checkout. Or: "github:loteran/Arctis-Sound-Manager?dir=nix"
+      url = "github:loteran/Arctis-Sound-Manager?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs"; # share one nixpkgs
+    };
   };
 
   outputs = {
@@ -122,6 +128,7 @@
         modules = [
           {nixpkgs.config = nixpkgsConfig;}
           inputs.sops-nix.nixosModules.sops
+          inputs.arctis-sound-manager.nixosModules.default
           ./hosts/${hostname}
         ];
       };
