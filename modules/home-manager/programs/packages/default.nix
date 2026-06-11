@@ -32,7 +32,6 @@ in {
         sops
         vscode
         fzf
-        unstable.opencode
 
         # Nix servers
         nixd

@@ -168,6 +168,9 @@
     ffmpeg
   ];
 
+  # Steel series sound manager
+  services.arctis-sound-manager.enable = true;
+
   # Zsh configuration
   programs.zsh.enable = true;
 
