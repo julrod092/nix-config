@@ -114,9 +114,7 @@ in {
 
     package = pkgs.unstable.opencode;
 
-    skills = {
-      sdd-ddd-architecture = ./skills/sdd-ddd-architecture;
-    };
+    skills = {};
 
     tui = {
       theme = "tokyonight";
