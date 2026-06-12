@@ -1,9 +1,24 @@
 {
   description = "Nix configuratios for all work and personal machines";
+
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://lan-mouse.cachix.org/"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "lan-mouse.cachix.org-1:KlE2AEZUgkzNKM7BIzMQo8w9yJYqUpor1CAUNRY6OyM="
+    ];
+  };
+
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    lan-mouse.url = "github:feschber/lan-mouse";
+    hardware.url = "github:nixos/nixos-hardware";
+    nixvim.url = "github:nix-community/nixvim/nixos-26.05";
 
     # Home manager
     home-manager = {
@@ -17,23 +32,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixOS profiles to optimize settings for different hardware
-    hardware.url = "github:nixos/nixos-hardware";
-
-    # Global catppuccin theme
     catppuccin = {
       url = "github:catppuccin/nix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Temporal Zen browser flake
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # NVIM nix community scratch
-    nixvim.url = "github:nix-community/nixvim/nixos-26.05";
 
     disko = {
       url = "github:nix-community/disko";
@@ -166,6 +173,7 @@
           nixvim.homeModules.nixvim
           inputs.sops-nix.homeManagerModules.sops
           inputs.nix-podman-stacks.homeModules.nps
+          inputs.lan-mouse.homeManagerModules.default
         ];
       };
   in {
