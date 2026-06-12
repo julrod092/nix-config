@@ -94,11 +94,6 @@
     then [(mkSkillCommand installWithoutSkill)]
     else map (skill: mkSkillCommand (installWithoutSkill // {inherit skill;})) skills;
 in {
-  home.packages = with pkgs; [
-    nodejs_26
-    git
-  ];
-
   home.activation.initOpenCode = lib.hm.dag.entryAfter ["writeBoundary"] ''
     rm -f "''${XDG_CONFIG_HOME:-$HOME/.config}/opencode/opencode.jsonc"
 
