@@ -362,14 +362,28 @@ in {
     ${opencodeSyncSkills}/bin/opencode-sync-skills
   '';
 
-  xdg.configFile."opencode/opencode.json".text = ''
-    {"$schema":"https://opencode.ai/config.json"}
-  '';
+  programs.mcp = {
+    enable = true;
+
+    servers = {
+      jira = {
+        url = "https://mcp.atlassian.com/v1/mcp/authv2";
+      };
+
+      chrome-devtools = {
+        command = "npx";
+        args = ["-y" "chrome-devtools-mcp@latest"];
+      };
+    };
+  };
 
   programs.opencode = {
     enable = true;
 
     package = pkgs.unstable.opencode;
+    enableMcpIntegration = true;
+
+    extraPackages = [pkgs.nodejs_26];
 
     skills = {};
 
