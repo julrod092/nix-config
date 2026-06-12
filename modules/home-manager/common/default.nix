@@ -22,6 +22,7 @@
     ../programs/fzf
     ../programs/albert
     ../programs/opencode
+    ../programs/lan-mouse
     ../scripts
     ../services/ssh
   ];
