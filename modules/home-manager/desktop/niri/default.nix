@@ -271,7 +271,7 @@ in {
 
         "Mod+D" = {
           hotkey-overlay.title = "Open Noctalia Launcher";
-          action.spawn = ["noctalia-shell" "msg" "panel-toggle" "launcher"];
+          action.spawn = ["noctalia-shell" "ipc" "call" "launcher" "toggle"];
         };
         "Ctrl+Space" = {
           hotkey-overlay.title = "Toggle Albert";
@@ -280,7 +280,7 @@ in {
 
         "Alt+Shift+V" = {
           hotkey-overlay.title = "Clipboard History";
-          action.spawn-sh = "noctalia-shell msg panel-toggle clipboard";
+          action.spawn = ["noctalia-shell" "ipc" "call" "launcher" "clipboard"];
         };
         "Mod+Shift+C" = {
           hotkey-overlay.title = "Color Picker";
@@ -296,56 +296,56 @@ in {
         };
         "Mod+Shift+R" = {
           hotkey-overlay.title = "Toggle Screen Recording";
-          action.spawn-sh = "noctalia-shell msg scripted-widget screen_recorder focused toggle";
+          action.spawn = ["noctalia-shell" "ipc" "call" "plugin" "togglePanel" "screen-recorder"];
         };
         "Ctrl+Alt+L" = {
           hotkey-overlay.title = "Lock Screen";
-          action.spawn-sh = "noctalia-shell msg session lock";
+          action.spawn = ["noctalia-shell" "ipc" "call" "lockScreen" "lock"];
         };
         "Mod+C" = {
           hotkey-overlay.title = "Toggle Control Center";
-          action.spawn-sh = "noctalia-shell msg panel-toggle control-center";
+          action.spawn = ["noctalia-shell" "ipc" "call" "controlCenter" "toggle"];
         };
         "Mod+N" = {
           hotkey-overlay.title = "Toggle Notifications";
-          action.spawn-sh = "noctalia-shell msg panel-toggle control-center notifications";
+          action.spawn = ["noctalia-shell" "ipc" "call" "notifications" "toggleHistory"];
         };
         "Mod+Shift+Backspace" = {
           hotkey-overlay.title = "Clear Notifications";
-          action.spawn-sh = "noctalia-shell msg notification-clear-history";
+          action.spawn = ["noctalia-shell" "ipc" "call" "notifications" "clear"];
         };
 
         "XF86MonBrightnessUp" = {
           allow-when-locked = true;
-          action.spawn-sh = "noctalia-shell msg brightness-up";
+          action.spawn = ["noctalia-shell" "ipc" "call" "brightness" "increase"];
         };
         "XF86MonBrightnessDown" = {
           allow-when-locked = true;
-          action.spawn-sh = "noctalia-shell msg brightness-down";
+          action.spawn = ["noctalia-shell" "ipc" "call" "brightness" "decrease"];
         };
         "XF86AudioRaiseVolume" = {
           allow-when-locked = true;
-          action.spawn-sh = "noctalia-shell msg volume-up";
+          action.spawn = ["noctalia-shell" "ipc" "call" "volume" "increase"];
         };
         "XF86AudioLowerVolume" = {
           allow-when-locked = true;
-          action.spawn-sh = "noctalia-shell msg volume-down";
+          action.spawn = ["noctalia-shell" "ipc" "call" "volume" "decrease"];
         };
         "XF86AudioMute" = {
           allow-when-locked = true;
-          action.spawn-sh = "noctalia-shell msg volume-mute";
+          action.spawn = ["noctalia-shell" "ipc" "call" "volume" "muteOutput"];
         };
         "Shift+XF86AudioRaiseVolume" = {
           allow-when-locked = true;
-          action.spawn-sh = "noctalia-shell msg mic-volume-up";
+          action.spawn = ["noctalia-shell" "ipc" "call" "volume" "increaseInput"];
         };
         "Shift+XF86AudioLowerVolume" = {
           allow-when-locked = true;
-          action.spawn-sh = "noctalia-shell msg mic-volume-down";
+          action.spawn = ["noctalia-shell" "ipc" "call" "volume" "decreaseInput"];
         };
         "XF86AudioMicMute" = {
           allow-when-locked = true;
-          action.spawn-sh = "noctalia-shell msg mic-mute";
+          action.spawn = ["noctalia-shell" "ipc" "call" "volume" "muteInput"];
         };
 
         "Mod+Q" = {
