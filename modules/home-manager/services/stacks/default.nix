@@ -29,6 +29,7 @@
     wallos.dependsOn = ["sops-nix.service"];
     freshrss.dependsOn = ["sops-nix.service"];
     # n8n.dependsOn = ["sops-nix.service"];
+    trek.dependsOn = ["sops-nix.service"];
   };
 
   nps = {
@@ -79,6 +80,7 @@
                 homebox.oidc.userGroup
                 tandoor.oidc.userGroup
                 wallos.oidc.userGroup
+                trek.oidc.userGroup
               ];
             };
             cpuerta = {
@@ -86,10 +88,10 @@
               displayName = "Cristina Puerta";
               password_file = config.sops.secrets."lldap/cpuerta_password".path;
               groups = with config.nps.stacks; [
-                paperless.oidc.userGroup
                 homebox.oidc.userGroup
                 tandoor.oidc.userGroup
                 wallos.oidc.userGroup
+                trek.oidc.userGroup
               ];
             };
           };
@@ -198,6 +200,15 @@
         oidc = {
           registerClient = true;
           clientSecretHash = "$pbkdf2-sha512$310000$HbyoXa5PfRRiOMXny2Q03A$2PNmEypjh0KcPVewrFTSKkoHsyuK0rkLWSWrTeNkQRxU9tD2GeXjOlIjes9UbxOx85SaP9dzyivMC4u.BlBCfQ";
+        };
+      };
+
+      trek = {
+        enable = true;
+        oidc = {
+          enable = true;
+          clientSecretHash = "$pbkdf2-sha512$310000$Y1/SmpPFGRxuxsuw5jZAjw$BRty46BFUPnnC/eSd/fBW6YKTe3m5x0Uv8tI3TfNlJok19Nev1WINfYwdPrMa40uQerDw8pYSborlkoIpaWzGw";
+          clientSecretFile = config.sops.secrets."authelia/services/trek".path;
         };
       };
     };
