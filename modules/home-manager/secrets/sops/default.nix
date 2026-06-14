@@ -26,6 +26,7 @@
       "authelia/encryption_key"
       "authelia/oidc_hmac_secret"
       "authelia/oidc_rsa_pk"
+      "authelia/services/trek"
       "aiostreams/secret_key"
       "lldap/key_seed"
       "lldap/jwt_secret"

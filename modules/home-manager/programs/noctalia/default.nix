@@ -204,7 +204,7 @@ in {
           show_label = false;
         };
         workspaces = {
-          display = "id";
+          display = "name";
           empty_color = "secondary";
           focused_color = "primary";
           hide_when_empty = true;
