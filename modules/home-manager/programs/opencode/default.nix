@@ -34,7 +34,6 @@
         "writing-plans"
         "executing-plans"
         "systematic-debugging"
-        "receiving-code-review"
         "verification-before-completion"
         "dispatching-parallel-agents"
       ];
@@ -45,7 +44,6 @@
         "improve-codebase-architecture"
         "grill-me"
         "grill-with-docs"
-        "diagnose"
         "triage"
       ];
     }
