@@ -46,6 +46,7 @@
       networking-toolbox.enable = true;
       it-tools.enable = true;
       n8n.enable = true;
+      mazanoke.enable = true;
 
       authelia = {
         enable = true;
@@ -79,6 +80,7 @@
                 tandoor.oidc.userGroup
                 wallos.oidc.userGroup
                 trek.oidc.userGroup
+                jotty.oidc.userGroup
               ];
             };
             cpuerta = {
@@ -90,6 +92,7 @@
                 tandoor.oidc.userGroup
                 wallos.oidc.userGroup
                 trek.oidc.userGroup
+                jotty.oidc.userGroup
               ];
             };
           };
@@ -124,7 +127,7 @@
         };
         oidc = {
           enable = true;
-          clientSecretFile = config.sops.secrets."paperless/authelia_client_secret".path;
+          clientSecretFile = config.sops.secrets."authelia/services/paperless".path;
         };
         secretKeyFile = config.sops.secrets."paperless/secret_key".path;
         db.passwordFile = config.sops.secrets."paperless/db_password".path;
@@ -140,7 +143,7 @@
         db.passwordFile = config.sops.secrets."rx_resume/db_password".path;
         oidc = {
           enable = true;
-          clientSecretFile = config.sops.secrets."rx_resume/authelia_client_secret".path;
+          clientSecretFile = config.sops.secrets."authelia/services/rx_resume".path;
           clientSecretHash = "$pbkdf2-sha512$310000$H9WV2/FSER7SUdTJltfkpQ$F7mBoFWFi7WI6S85ri1ror/M1wkT4/H/c6g5QFQiDGhk7At0friRXgK8py4iRqED5wadtCTq5.5cVPagsPzFHQ";
         };
       };
@@ -160,7 +163,7 @@
         oidc = {
           enable = true;
           clientSecretHash = "$pbkdf2-sha512$310000$eKZ0sl3s01gm7gJPXpaqpA$J5rQMe2Km8/1BSiilSteLS8QqJg2EqPQnCq450JZLobZIUWF0F.L4nek0nMlTTcLf/LrPDk1/AUJ.Th3dKecEg";
-          clientSecretFile = config.sops.secrets."freshrss/authelia_client_secret".path;
+          clientSecretFile = config.sops.secrets."authelia/services/freshrss".path;
           cryptoKeyFile = config.sops.secrets."freshrss/authelia_crypto_key".path;
         };
       };
@@ -173,7 +176,7 @@
 
         oidc = {
           enable = true;
-          clientSecretFile = config.sops.secrets."tandoor/authelia_client_secret".path;
+          clientSecretFile = config.sops.secrets."authelia/services/tandoor".path;
           clientSecretHash = "$pbkdf2-sha512$310000$Jn3mVBKwxGdVO0SwnnB7tQ$xw0Irb7RnbCE1PcC28TUAnl.2lLuLSCjemGZJeRbCBViz3qwtbwoBDn3a1QtQPKgnxb50QFY8yZodvDnsp4nrw";
         };
 
@@ -198,6 +201,15 @@
           enable = true;
           clientSecretHash = "$pbkdf2-sha512$310000$Y1/SmpPFGRxuxsuw5jZAjw$BRty46BFUPnnC/eSd/fBW6YKTe3m5x0Uv8tI3TfNlJok19Nev1WINfYwdPrMa40uQerDw8pYSborlkoIpaWzGw";
           clientSecretFile = config.sops.secrets."authelia/services/trek".path;
+        };
+      };
+
+      jotty = {
+        enable = true;
+        oidc = {
+          enable = true;
+          clientSecretFile = config.sops.secrets."authelia/services/jotty".path;
+          clientSecretHash = "$pbkdf2-sha512$310000$LLzzqfk2YcLNvTtTbCYq7g$JHSQ0Dm5KAutsAHI8BhjM1BLmtrOMnL39Z8NF0DHDvXK8tdhzOdDBuF35hMWWZktEs0AGW9y.o2iQQhX.tBv/A";
         };
       };
     };

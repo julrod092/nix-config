@@ -8,6 +8,6 @@
       OLLAMA_KEEP_ALIVE = "30m";
       OLLAMA_LOAD_TIMEOUT = "10m";
     };
-    loadModels = ["qwen3-coder:30b"];
+    loadModels = ["gpt-oss:20b"];
   };
 }
