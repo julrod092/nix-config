@@ -57,22 +57,13 @@ in {
 
       # Outputs
       outputs = {
-        "DP-1" = {
-          mode = {
-            width = 1920;
-            height = 1080;
-            refresh = 144.001;
-          };
-          focus-at-startup = true;
-          variable-refresh-rate = true;
-        };
-
         "DP-2" = {
           mode = {
             width = 1920;
             height = 1080;
             refresh = 144.001;
           };
+          focus-at-startup = true;
           variable-refresh-rate = true;
         };
       };
@@ -266,7 +257,7 @@ in {
         };
         "Mod+Shift+B" = {
           hotkey-overlay.title = "Open Zen Browser";
-          action.spawn = "zen-twilight";
+          action.spawn = "zen-beta";
         };
 
         "Mod+D" = {
@@ -352,7 +343,7 @@ in {
           repeat = false;
           action.close-window = [];
         };
-        "Mod+F".action.toggle-window-floating = [];
+        "Mod+Shift+F".action.toggle-window-floating = [];
         "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = [];
         "Mod+M".action.maximize-column = [];
         "Mod+Shift+M".action.fullscreen-window = [];
@@ -473,7 +464,7 @@ in {
 
         "Mod+R".action.switch-preset-column-width = [];
         "Mod+Ctrl+R".action.reset-window-height = [];
-        "Mod+Ctrl+F".action.expand-column-to-available-width = [];
+        "Mod+F".action.expand-column-to-available-width = [];
         "Mod+Ctrl+C".action.center-visible-columns = [];
         "Ctrl+Alt+C".action.center-column = [];
         "Mod+Minus".action.set-column-width = "-10%";
