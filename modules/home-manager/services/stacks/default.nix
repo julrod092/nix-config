@@ -28,7 +28,7 @@
     homebox.dependsOn = ["sops-nix.service"];
     wallos.dependsOn = ["sops-nix.service"];
     freshrss.dependsOn = ["sops-nix.service"];
-    # n8n.dependsOn = ["sops-nix.service"];
+    n8n.dependsOn = ["sops-nix.service"];
     trek.dependsOn = ["sops-nix.service"];
   };
 
@@ -46,7 +46,7 @@
       homeassistant.enable = true;
       networking-toolbox.enable = true;
       it-tools.enable = true;
-      # n8n.enable = true;
+      n8n.enable = true;
 
       authelia = {
         enable = true;
