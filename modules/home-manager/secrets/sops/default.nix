@@ -44,7 +44,6 @@
       "job-ops/rx_resume_api_key"
       "freshrss/authelia_client_secret"
       "freshrss/authelia_crypto_key"
-      "homebox/authelia_client_secret"
       "tandoor/secret_key"
       "tandoor/db_password"
       "tandoor/authelia_client_secret"

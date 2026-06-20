@@ -31,11 +31,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1781936403,
-        "narHash": "sha256-VVNEoit3RF4VwKy6jX44/I7fFgsgV9T4bf0p6AslICQ=",
+        "lastModified": 1781958276,
+        "narHash": "sha256-bMOb5OHvxbz2v1zmTEpNal6WNdCO2tUoopeM+x6EvPY=",
         "owner": "loteran",
         "repo": "Arctis-Sound-Manager",
-        "rev": "48988c098b9adf66bf5d479efa42b4779fb02656",
+        "rev": "b14c858185fb25b5b19d3b95d2417110def5857c",
         "type": "github"
       },
       "original": {
@@ -381,15 +381,16 @@
         "sops-nix": "sops-nix"
       },
       "locked": {
-        "lastModified": 1781876026,
-        "narHash": "sha256-LgiZaM+DnjdfIB5GLk349bkdEQSgo6TTJ1rxF4E3its=",
+        "lastModified": 1781974693,
+        "narHash": "sha256-mD3hYyJEfJh3h/FXD7tWfuNgRJZXG4Js20EdxOojjK4=",
         "owner": "julrod092",
         "repo": "nix-podman-stacks",
-        "rev": "99ec87dcb5efaccbe4343901eb77b594e77a9276",
+        "rev": "7752a149fb4ce369fb09898f4de20a296f12325c",
         "type": "github"
       },
       "original": {
         "owner": "julrod092",
+        "ref": "release/personal",
         "repo": "nix-podman-stacks",
         "type": "github"
       }
@@ -494,11 +495,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1781915791,
-        "narHash": "sha256-LT1typkmETNVtWQncEByIR64ycmzZqxqtzZ5I9QkyTY=",
+        "lastModified": 1781971008,
+        "narHash": "sha256-T2u2RQZWKvD1J+TgcxjiJr8IymBr/PrUNeAGhMZFZU4=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "62019d53fd44f9fe20e3e20c891fbca567f3d331",
+        "rev": "7afca458f064f166d3a9c98db3b41a984fe46492",
         "type": "github"
       },
       "original": {

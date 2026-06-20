@@ -25,7 +25,6 @@
     job-ops.dependsOn = ["sops-nix.service"];
     tandoor.dependsOn = ["sops-nix.service"];
     tandoor-db.dependsOn = ["sops-nix.service"];
-    homebox.dependsOn = ["sops-nix.service"];
     wallos.dependsOn = ["sops-nix.service"];
     freshrss.dependsOn = ["sops-nix.service"];
     n8n.dependsOn = ["sops-nix.service"];
@@ -77,7 +76,6 @@
                 paperless.oidc.userGroup
                 reactive-resume.oidc.userGroup
                 freshrss.oidc.userGroup
-                homebox.oidc.userGroup
                 tandoor.oidc.userGroup
                 wallos.oidc.userGroup
                 trek.oidc.userGroup
@@ -164,15 +162,6 @@
           clientSecretHash = "$pbkdf2-sha512$310000$eKZ0sl3s01gm7gJPXpaqpA$J5rQMe2Km8/1BSiilSteLS8QqJg2EqPQnCq450JZLobZIUWF0F.L4nek0nMlTTcLf/LrPDk1/AUJ.Th3dKecEg";
           clientSecretFile = config.sops.secrets."freshrss/authelia_client_secret".path;
           cryptoKeyFile = config.sops.secrets."freshrss/authelia_crypto_key".path;
-        };
-      };
-
-      homebox = {
-        enable = true;
-        oidc = {
-          enable = true;
-          clientSecretHash = "$pbkdf2-sha512$310000$lTxz4Jpmgm/LR9n8/0Y3Zg$8Po3esfp/T18axaEaC6fSXFcMMpDCte0LYIJkNhC0tO9dKm2xynVWQq1GDoafcbBquofWB5z42pKx5lCYsjNlQ";
-          clientSecretFile = config.sops.secrets."homebox/authelia_client_secret".path;
         };
       };
 
