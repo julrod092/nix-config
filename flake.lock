@@ -31,11 +31,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1781958276,
-        "narHash": "sha256-bMOb5OHvxbz2v1zmTEpNal6WNdCO2tUoopeM+x6EvPY=",
+        "lastModified": 1782024614,
+        "narHash": "sha256-kIdiRcorDBP2IN1Pues3RVnG0YaDxLyAy5eKjGzBJzk=",
         "owner": "loteran",
         "repo": "Arctis-Sound-Manager",
-        "rev": "b14c858185fb25b5b19d3b95d2417110def5857c",
+        "rev": "2ba3c09b5fb655467e647dcf0ab193348d060c55",
         "type": "github"
       },
       "original": {
@@ -209,11 +209,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781319724,
-        "narHash": "sha256-ZGuxexEMo4Xv28KJ0dX/m/PHN4oZIOnxHZpNTyrvx4M=",
+        "lastModified": 1781981105,
+        "narHash": "sha256-/1nNBbA7PrSQpTc9Qazkhl4kIPg+TNl0CjxS3UQJKlw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8355f0a16b2dbb06a97959a918af5b239bbe05ae",
+        "rev": "7bfff44b465909f69a442701293bc0badcf476dc",
         "type": "github"
       },
       "original": {
@@ -784,11 +784,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781932488,
-        "narHash": "sha256-v7xGsRuuTPyKT1BzZYXfhciGKBRxQiBPn/wyvHDriqM=",
+        "lastModified": 1782012261,
+        "narHash": "sha256-3uA/FtAVbmBIL3kUs6ZDUtf/ZKjLmHljDQZWSKuJwx0=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "bed09c284f289ad29cd7936e6297c7c16841903a",
+        "rev": "6593c895a25b4bf166f596987f2cfabc63a86c0d",
         "type": "github"
       },
       "original": {
