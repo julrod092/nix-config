@@ -166,6 +166,9 @@
     libportal
     # Libraries for stremio web
     ffmpeg
+    #LLM
+    lmstudio
+    nodejs_latest
   ];
 
   # Steel series sound manager
