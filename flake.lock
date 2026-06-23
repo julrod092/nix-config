@@ -150,6 +150,27 @@
         "type": "github"
       }
     },
+    "flake-parts_2": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "steam-config-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765835352,
+        "narHash": "sha256-XswHlK/Qtjasvhd1nOa1e8MgZ8GS//jBoTqWtrS1Giw=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "a34fae9c08a15ad73f295041fec82323541400a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -381,11 +402,11 @@
         "sops-nix": "sops-nix"
       },
       "locked": {
-        "lastModified": 1781974693,
-        "narHash": "sha256-mD3hYyJEfJh3h/FXD7tWfuNgRJZXG4Js20EdxOojjK4=",
+        "lastModified": 1782224594,
+        "narHash": "sha256-RWX+hjwb0FXrsHaW/ISFeOBsrdAxWEFp/39xyyl2tGg=",
         "owner": "julrod092",
         "repo": "nix-podman-stacks",
-        "rev": "7752a149fb4ce369fb09898f4de20a296f12325c",
+        "rev": "19a19217ecd32d8e13f2e484eccf2972ece58f8c",
         "type": "github"
       },
       "original": {
@@ -571,6 +592,7 @@
         "nixvim": "nixvim",
         "noctalia": "noctalia",
         "sops-nix": "sops-nix_2",
+        "steam-config-nix": "steam-config-nix",
         "zen-browser": "zen-browser"
       }
     },
@@ -676,6 +698,28 @@
         "type": "github"
       }
     },
+    "steam-config-nix": {
+      "inputs": {
+        "flake-parts": "flake-parts_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": "systems_4"
+      },
+      "locked": {
+        "lastModified": 1781834224,
+        "narHash": "sha256-l9pVFs8+CmCvC+feR/PL5vstu3CVmKx/xCW8fGmux0c=",
+        "owner": "different-name",
+        "repo": "steam-config-nix",
+        "rev": "22c06e684b0785f9031872e0af7d9a96d27ad87c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "different-name",
+        "repo": "steam-config-nix",
+        "type": "github"
+      }
+    },
     "systems": {
       "locked": {
         "lastModified": 1681028828,
@@ -718,6 +762,21 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_4": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     },
