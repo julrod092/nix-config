@@ -150,11 +150,6 @@
 
       job-ops = {
         enable = true;
-        extraEnv = {
-          LLM_BASE_URL = "http://host.containers.internal:11434";
-          LLM_PROVIDER = "ollama";
-          MODEL = "qwen3-coder:30b";
-        };
         rxResumeApiKeyFile = config.sops.secrets."job-ops/rx_resume_api_key".path;
       };
 
