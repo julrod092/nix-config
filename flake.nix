@@ -70,6 +70,11 @@
       url = "github:loteran/Arctis-Sound-Manager?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs"; # share one nixpkgs
     };
+
+    steam-config-nix = {
+      url = "github:different-name/steam-config-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
