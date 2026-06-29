@@ -29,6 +29,7 @@ in {
         scala-cli
         openssl
         unstable.jetbrains.idea
+        unstable.jetbrains.rust-rover
         sops
         vscode
         fzf

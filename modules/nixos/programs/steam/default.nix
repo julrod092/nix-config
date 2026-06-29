@@ -13,6 +13,9 @@
     mangohud
     protonup-qt
     protonup-ng
+    unstable.lutris
+    unstable.bottles
+    unstable.heroic
   ];
 
   programs.gamemode.enable = true;
@@ -22,7 +25,7 @@
     config = {
       enable = true;
       closeSteam = true;
-      defaultCompatTool = "GE-Proton";
+      defaultCompatTool = "GE-Proton11-1";
 
       apps = {
         uncharted = {
@@ -34,23 +37,6 @@
             };
 
             args = [
-              "--gamemoderun"
-            ];
-          };
-        };
-
-        gta-v = {
-          id = 3240220;
-          launchOptions = {
-            env = {
-              PROTON_BATTLEYE_RUNTIME = "~/.local/share/Steam/steamapps/common/Proton\ BattlEye\ Runtime/";
-              PROTON_DLSS_UPGRADE = "1";
-              PROTON_ENABLE_WAYLAND = "1";
-            };
-
-            args = [
-              "--fullscreen"
-              "--force-grab-cursor"
               "--gamemoderun"
             ];
           };
