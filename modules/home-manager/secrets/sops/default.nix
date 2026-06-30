@@ -20,7 +20,7 @@
   };
 
   desktop = {
-    secrets = lib.genAttrs [
+    secrets = { "gpg-ssh-key" = { path = "${config.home.homeDirectory}/.ssh/id_rsa.pub"; }; } // lib.genAttrs [
       "authelia/jwt_secret"
       "authelia/session_secret"
       "authelia/encryption_key"
