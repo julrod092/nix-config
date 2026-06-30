@@ -112,15 +112,15 @@
 
     # Define user configurations
     users = {
-      "julian.rodriguez" = {
+      "julian" = {
         inherit
-          (users.julrod users.julian)
+          (users.julrod)
           avatar
-          email
           fullName
-          gitKey
           ;
-        name = "julian.rodriguez";
+        email = "jandresrodriguez@nclcorp.com";
+        gitKey = "86D656A8DE022933";
+        name = "julian";
       };
       julrod = {
         avatar = ./files/avatar;
@@ -129,14 +129,6 @@
         fullName = "Julian Rodriguez";
         gitKey = "BB07BC58D5058FD9";
         name = "julrod";
-      };
-      julian = {
-        avatar = ./files/avatar;
-        wallpaper = ./files/wallpaper.jpg;
-        email = "jandresrodriguez@nclcorp.com";
-        fullName = "Julian Rodriguez";
-        gitKey = "86D656A8DE022933";
-        name = "julian";
       };
     };
 
