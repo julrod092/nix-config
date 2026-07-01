@@ -12,7 +12,6 @@ in {
   programs.nh = {
     enable = true;
     flake = flake;
-    homeFlake = "${flake}#${userConfig.name}@${hostname}";
     osFlake = lib.mkIf (!isDarwin) "${flake}#${hostname}";
     darwinFlake = lib.mkIf isDarwin "${flake}#${hostname}";
 
