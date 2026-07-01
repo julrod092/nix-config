@@ -20,7 +20,6 @@ in {
     "${nixosModules}/services/nvidia"
     "${nixosModules}/services/network"
     "${nixosModules}/services/podman"
-    "${nixosModules}/programs/nh"
     "${nixosModules}/programs/steam"
   ];
 
