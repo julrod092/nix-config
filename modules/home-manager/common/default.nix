@@ -22,7 +22,7 @@
     ../programs/fzf
     ../programs/albert
     ../programs/opencode
-    ../programs/lan-mouse
+    # ../programs/lan-mouse
     ../programs/rust
     ../scripts
     ../services/ssh
