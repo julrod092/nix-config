@@ -22,8 +22,6 @@
     ../programs/fzf
     ../programs/albert
     ../programs/opencode
-    ../programs/nh
-    # ../programs/lan-mouse
     ../programs/rust
     ../scripts
     ../services/ssh
