@@ -402,11 +402,11 @@
         "sops-nix": "sops-nix"
       },
       "locked": {
-        "lastModified": 1782224594,
-        "narHash": "sha256-RWX+hjwb0FXrsHaW/ISFeOBsrdAxWEFp/39xyyl2tGg=",
+        "lastModified": 1782998914,
+        "narHash": "sha256-d0nWFx74hLx2Ru2vcfSn1UV2DmvQPeVNjjBjRRBsQvU=",
         "owner": "julrod092",
         "repo": "nix-podman-stacks",
-        "rev": "19a19217ecd32d8e13f2e484eccf2972ece58f8c",
+        "rev": "5b1dd70c3459d493174fb7bfc03e8bce74654f7f",
         "type": "github"
       },
       "original": {
