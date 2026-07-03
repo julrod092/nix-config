@@ -66,15 +66,15 @@
     };
 
     arctis-sound-manager = {
-      # Local checkout. Or: "github:loteran/Arctis-Sound-Manager?dir=nix"
       url = "github:loteran/Arctis-Sound-Manager?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs"; # share one nixpkgs
+      inputs.nixpkgs.follows = "nixpkgs"; 
     };
 
-    steam-config-nix = {
-      url = "github:different-name/steam-config-nix";
+    # Experiments
+    herdr = {
+      url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
+    }; 
   };
 
   outputs = {

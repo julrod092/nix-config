@@ -30,6 +30,7 @@ in {
         openssl
         unstable.jetbrains.idea
         unstable.jetbrains.rust-rover
+        herdr
         sops
         vscode
         fzf
