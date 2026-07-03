@@ -31,11 +31,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1782971886,
-        "narHash": "sha256-ZTRIRD0qXyCzfWqfK1DonMWuJ3FTatE9kVZ5rmNJwxc=",
+        "lastModified": 1783057944,
+        "narHash": "sha256-Umm669Ct79G4usLV/Ka/HY2+8H696NSZdi7gjAdckQM=",
         "owner": "loteran",
         "repo": "Arctis-Sound-Manager",
-        "rev": "66f80209cb009a0a8c4766f54e7087d6e180c5f7",
+        "rev": "4cb8d59c2f4c1f6938896380b5b83c34b0114362",
         "type": "github"
       },
       "original": {
@@ -538,11 +538,11 @@
         "noctalia-qs": "noctalia-qs"
       },
       "locked": {
-        "lastModified": 1782914985,
-        "narHash": "sha256-Zsr2tXbfpsl52wpxAAAff4TxVYccPm1ESubJXR9yhTA=",
+        "lastModified": 1783017890,
+        "narHash": "sha256-bAzrtN0GDMH0dOZkgeI3zSxfFs2rdD3pMuzOxvTF0bs=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
-        "rev": "bf03835d919833e668661c0e1ca9411ac3302169",
+        "rev": "a48885b9fec485c903c955749a7da6e30147cd38",
         "type": "github"
       },
       "original": {
@@ -843,11 +843,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782977605,
-        "narHash": "sha256-JbA53uu/VXhk1mDQFDvLcHQJUbGJZtucDZ0agW1VKKQ=",
+        "lastModified": 1783063269,
+        "narHash": "sha256-XVOopPVgoWPlhuJajUYNTK/M9j/L/llD6vdH5JE9EKs=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "6ec2929c287c104eb81bd4dc57347dc339aba229",
+        "rev": "b86380c97016a1c79f535f286a34c0f5b4270a1b",
         "type": "github"
       },
       "original": {
