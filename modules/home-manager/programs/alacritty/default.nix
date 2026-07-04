@@ -12,7 +12,7 @@
         shell.args = [
           "-l"
           "-c"
-          "tmux attach || tmux "
+          "herdr"
         ];
       };
 

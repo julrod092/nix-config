@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: let
   mainJdk = pkgs.zulu21;
@@ -30,14 +31,16 @@ in {
         openssl
         unstable.jetbrains.idea
         unstable.jetbrains.rust-rover
-        herdr
         sops
         vscode
         fzf
+        inputs.herdr.packages.${pkgs.system}.default
 
         # Nix servers
         nixd
         nil
+
+        # Security
         sops
         age
       ]
