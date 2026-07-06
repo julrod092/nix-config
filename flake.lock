@@ -361,11 +361,19 @@
         "sops-nix": "sops-nix"
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1783347597,
         "narHash": "sha256-MPevFUj2WE0E0kIJFSoDrgXFU2dVq8y+RrFzt6PK+sw=",
         "owner": "julrod092",
         "repo": "nix-podman-stacks",
         "rev": "3145f7646c3ea9782aac7d3d9486b8fa247bac2c",
+=======
+        "lastModified": 1783347021,
+        "narHash": "sha256-qP5RGGQViMweonGnW2RQIVPZ6c7CoiO8QB+3BccwoT4=",
+        "owner": "julrod092",
+        "repo": "nix-podman-stacks",
+        "rev": "b317c2ef67f0d6868a5c8c115dc4fa47e408d57e",
+>>>>>>> ddb5927 (Update personal nix-podman-stack)
         "type": "github"
       },
       "original": {
