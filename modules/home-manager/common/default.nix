@@ -16,7 +16,6 @@
     ../programs/tmux
     ../programs/zsh
     ../programs/packages
-    ../programs/nvim
     ../programs/zen
     ../programs/gpg
     ../programs/fzf
