@@ -60,6 +60,7 @@ in {
         unstable.zoom-us
         unstable.google-chrome
         unstable.awscli2
+        unstable.go
       ]
       ++ lib.lists.optionals (!isDarwin) [
         pavucontrol

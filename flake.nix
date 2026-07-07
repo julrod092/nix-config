@@ -7,7 +7,6 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     lan-mouse.url = "github:feschber/lan-mouse";
     hardware.url = "github:nixos/nixos-hardware";
-    nixvim.url = "github:nix-community/nixvim/nixos-26.05";
 
     # Home manager
     home-manager = {
