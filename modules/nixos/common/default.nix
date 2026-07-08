@@ -157,6 +157,7 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
+    nvim
     alejandra
     gcc
     gnumake
