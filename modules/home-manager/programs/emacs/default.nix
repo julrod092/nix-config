@@ -102,6 +102,8 @@ in {
       emacsEditor
       metalsEmacs
       pkgs.metals
+      pkgs.cmake
+      pkgs.libtool
     ]
     ++ nixTools
     ++ scalaTools
