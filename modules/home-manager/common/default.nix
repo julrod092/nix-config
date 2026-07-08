@@ -21,6 +21,7 @@
     ../programs/fzf
     ../programs/albert
     ../programs/opencode
+    ../programs/emacs
     ../programs/rust
     ../scripts
     ../services/ssh
