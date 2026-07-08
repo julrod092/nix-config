@@ -1,4 +1,3 @@
-[33mWarning: Bare invocation of nixfmt is deprecated. Use 'nixfmt -' for anonymous stdin.[39m
 {
   description = "Nix configuratios for all work and personal machines";
 
@@ -166,7 +165,7 @@
       # Function for Home Manager configuration
       mkHomeConfiguration =
         system: username: hostname:
-        home-manager.libhomeManagerConfiguration {
+        home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
             config = nixpkgsConfig;

@@ -141,7 +141,6 @@ in {
        dotspacemacs-configuration-layer-path '()
        dotspacemacs-configuration-layers
        '(
-         auto-completion
          better-defaults
          syntax-checking
          (lsp :variables
@@ -153,9 +152,26 @@ in {
          helm
          prettier
          treemacs
+         tree-sitter
+         themes-megapack
+         tabs
          version-control
          markdown
-         org
+         toml
+         llm-client
+         markdown
+         mermaid
+         multiple-cursors
+         python
+         shell-scripts
+         spacemacs-org
+         (unicode-fonts :variables unicode-fonts-enable-ligatures t)
+         (auto-completion :variables
+                      auto-completion-enable-help-tooltip 'manual)
+         (org :variables
+          org-enable-verb-support t
+          org-enable-roam-support t
+          org-enable-roam-ui t)
          (shell-scripts :variables
                         shell-scripts-backend 'lsp
                         shell-scripts-format-on-save t)
@@ -165,7 +181,6 @@ in {
                json-backend 'lsp
                json-fmt-tool 'prettier
                json-fmt-on-save t)
-         toml
          (nixos :variables
                 nix-backend 'lsp
                 nixos-format-on-save t)
@@ -183,9 +198,15 @@ in {
              gofmt-command "goimports"
              go-use-golangci-lint t
              go-dap-mode 'dap-dlv-go)
+          (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom
+            shell-default-term-shell "/usr/bin/zsh"
+            shell-default-shell 'vterm
+            close-window-with-terminal t)
          (haskell :variables
                   haskell-completion-backend 'lsp))
-       dotspacemacs-additional-packages '()
+       dotspacemacs-additional-packages '(beacon tmr logview smithy-mode exec-path-from-shell)
        dotspacemacs-frozen-packages '()
        dotspacemacs-excluded-packages '()
        dotspacemacs-install-packages 'used-only))
@@ -207,10 +228,18 @@ in {
        dotspacemacs-startup-buffer-responsive t
        dotspacemacs-new-empty-buffer-major-mode 'text-mode
        dotspacemacs-scratch-mode 'text-mode
-       dotspacemacs-themes '(spacemacs-dark spacemacs-light)
-       dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+       dotspacemacs-themes '(doom-one
+                         spacemacs-dark
+                         spacemacs-light
+                         doom-one-light
+                         madhat2r
+                         naquadah)
+       dotspacemacs-mode-line-theme '(doom)
        dotspacemacs-colorize-cursor-according-to-state t
-       dotspacemacs-default-font '("Monospace" :size 12.0 :weight normal :width normal)
+       dotspacemacs-default-font '("Fira Code"
+                               :size 10.0
+                               :weight normal
+                               :width normal)
        dotspacemacs-default-icons-font 'all-the-icons
        dotspacemacs-leader-key "SPC"
        dotspacemacs-emacs-command-key "SPC"

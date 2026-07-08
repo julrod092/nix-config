@@ -50,7 +50,7 @@
       then "/Users/${userConfig.name}"
       else "/home/${userConfig.name}";
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "vim";
     };
   };
 

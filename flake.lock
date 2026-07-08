@@ -351,6 +351,30 @@
         "type": "github"
       }
     },
+    "nix-podman-stacks": {
+      "inputs": {
+        "home-manager": "home-manager_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "search": "search",
+        "sops-nix": "sops-nix"
+      },
+      "locked": {
+        "lastModified": 1783347597,
+        "narHash": "sha256-MPevFUj2WE0E0kIJFSoDrgXFU2dVq8y+RrFzt6PK+sw=",
+        "owner": "julrod092",
+        "repo": "nix-podman-stacks",
+        "rev": "3145f7646c3ea9782aac7d3d9486b8fa247bac2c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "julrod092",
+        "ref": "release/personal",
+        "repo": "nix-podman-stacks",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1767892417,

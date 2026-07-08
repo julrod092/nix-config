@@ -90,7 +90,7 @@
   environment = {
     localBinInPath = true;
     variables = {
-      EDITOR = "nvim";
+      EDITOR = "vim";
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
@@ -157,7 +157,7 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
-    nvim
+    vim
     alejandra
     gcc
     gnumake
