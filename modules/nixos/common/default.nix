@@ -6,7 +6,8 @@
   userConfig,
   pkgs,
   ...
-}: {
+}:
+{
   # Nixpkgs configuration
   nixpkgs = {
     overlays = [
@@ -19,7 +20,9 @@
   };
 
   # Register flake inputs for nix commands
-  nix.registry = lib.mapAttrs (_: flake: {inherit flake;}) (lib.filterAttrs (_: lib.isType "flake") inputs);
+  nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) (
+    lib.filterAttrs (_: lib.isType "flake") inputs
+  );
 
   # Add inputs to legacy channels
   # This allows nix-shell -p to work with flakes
@@ -27,12 +30,10 @@
     "/etc/nix/path"
     "nixpkgs=flake:nixpkgs"
   ];
-  environment.etc =
-    lib.mapAttrs' (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
+  environment.etc = lib.mapAttrs' (name: value: {
+    name = "nix/path/${name}";
+    value.source = value.flake;
+  }) config.nix.registry;
 
   # Nix settings
   nix.settings = {
@@ -42,7 +43,11 @@
 
   # Boot settings
   boot = {
-    kernelParams = ["quiet" "splash" "rd.udev.log_level=3"];
+    kernelParams = [
+      "quiet"
+      "splash"
+      "rd.udev.log_level=3"
+    ];
     initrd.verbose = false;
     loader = {
       timeout = 10;
@@ -84,7 +89,7 @@
 
   # Input settings
   services.libinput.enable = true;
-  services.xserver.excludePackages = with pkgs; [xterm];
+  services.xserver.excludePackages = with pkgs; [ xterm ];
 
   # PATH configuration
   environment = {
@@ -126,7 +131,7 @@
 
     # Enable PC/SC daemon for YubiKey support
     pcscd.enable = true;
-    udev.packages = [pkgs.yubikey-personalization];
+    udev.packages = [ pkgs.yubikey-personalization ];
 
     # OpenSSH daemon
     openssh.enable = true;
@@ -135,7 +140,12 @@
   # User configuration
   users.users.${userConfig.name} = {
     description = userConfig.fullName;
-    extraGroups = ["networkmanager" "wheel" "docker" "input"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "input"
+    ];
     isNormalUser = true;
     shell = pkgs.zsh;
   };
@@ -162,9 +172,6 @@
     gcc
     gnumake
     killall
-    # Libraries needed for Synergy Wayland support
-    libei
-    libportal
     # Libraries for stremio web
     ffmpeg
     #LLM
@@ -183,5 +190,6 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.meslo-lg
     roboto
+    fira-code
   ];
 }
