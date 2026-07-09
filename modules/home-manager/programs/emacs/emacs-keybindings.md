@@ -859,9 +859,9 @@ Haskell bindings cover navigation, formatting, Hoogle, REPL, Cabal, and refactor
 | Reformat imports | `SPC m r i` | Reformats imports. |
 | HLint suggestion | `SPC m r r` | Applies HLint suggestion at cursor. |
 
-## Themes, Tabs, And UI
+## Themes And UI
 
-UI bindings change themes, transparency, font size, tabs, and display toggles.
+UI bindings change themes, transparency, font size, and display toggles.
 
 | Name | Command | Description |
 |---|---|---|
@@ -873,8 +873,6 @@ UI bindings change themes, transparency, font size, tabs, and display toggles.
 | Toggle truncate lines | `SPC t l` | Toggles line truncation. |
 | Toggle whitespace | `SPC t w` | Toggles whitespace display. |
 | Toggle spell check | `SPC S .` | Opens spell-checking transient-state when available. |
-| Next workspace | `gt` | Moves to next workspace/tab. |
-| Previous workspace | `gT` | Moves to previous workspace/tab. |
 
 ## Multiple Cursors And Editing
 

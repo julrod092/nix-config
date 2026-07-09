@@ -179,7 +179,6 @@ in {
          treemacs
          tree-sitter
          themes-megapack
-         tabs
          version-control
          markdown
          toml
