@@ -8,6 +8,17 @@
     if pkgs ? unstable && pkgs.unstable ? go
     then pkgs.unstable.go
     else pkgs.go;
+  opencodePackage =
+    if pkgs ? unstable && pkgs.unstable ? opencode
+    then pkgs.unstable.opencode
+    else pkgs.opencode;
+  vtermModuleCmakeArgs =
+    if pkgs.stdenv.hostPlatform.isDarwin
+    then "-DUSE_SYSTEM_LIBVTERM=Off"
+    else "-DCMAKE_PREFIX_PATH=${pkgs.libvterm}";
+  glibtool = pkgs.writeShellScriptBin "glibtool" ''
+    exec ${pkgs.libtool}/bin/libtool "$@"
+  '';
 
   emacsEditor = pkgs.writeShellScriptBin "emacs-editor" ''
     set -e
@@ -60,6 +71,19 @@
     yamllint
   ];
 
+  vtermTools = with pkgs;
+    [
+      cmake
+      git
+      gnumake
+      libtool
+      pkg-config
+      zsh
+    ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [glibtool]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [pkgs.libvterm];
+  vtermToolPath = lib.makeBinPath vtermTools;
+
   goTools = with pkgs; [
     goPackage
     delve
@@ -102,14 +126,13 @@ in {
       emacsEditor
       metalsEmacs
       pkgs.metals
-      pkgs.cmake
-      pkgs.libtool
     ]
     ++ nixTools
     ++ scalaTools
     ++ javaTools
     ++ shellTools
     ++ dataTools
+    ++ vtermTools
     ++ goTools
     ++ haskellTools;
 
@@ -161,19 +184,17 @@ in {
          markdown
          toml
          llm-client
-         markdown
          mermaid
          multiple-cursors
          python
-         shell-scripts
          spacemacs-org
          (unicode-fonts :variables unicode-fonts-enable-ligatures t)
          (auto-completion :variables
-                      auto-completion-enable-help-tooltip 'manual)
+                          auto-completion-enable-help-tooltip 'manual)
          (org :variables
-          org-enable-verb-support t
-          org-enable-roam-support t
-          org-enable-roam-ui t)
+              org-enable-verb-support t
+              org-enable-roam-support t
+              org-enable-roam-ui t)
          (shell-scripts :variables
                         shell-scripts-backend 'lsp
                         shell-scripts-format-on-save t)
@@ -200,12 +221,12 @@ in {
              gofmt-command "goimports"
              go-use-golangci-lint t
              go-dap-mode 'dap-dlv-go)
-          (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom
-            shell-default-term-shell "/usr/bin/zsh"
-            shell-default-shell 'vterm
-            close-window-with-terminal t)
+         (shell :variables
+                shell-default-height 30
+                shell-default-position 'bottom
+                shell-default-term-shell "${lib.getExe pkgs.zsh}"
+                shell-default-shell 'vterm
+                shell-close-window-with-terminal t)
          (haskell :variables
                   haskell-completion-backend 'lsp))
        dotspacemacs-additional-packages '(beacon tmr logview smithy-mode exec-path-from-shell)
@@ -238,11 +259,11 @@ in {
                          naquadah)
        dotspacemacs-mode-line-theme '(doom)
        dotspacemacs-colorize-cursor-according-to-state t
-       dotspacemacs-default-font '("Fira Code"
-                               :size 10.0
+       dotspacemacs-default-font '("MesloLGS Nerd Font"
+                               :size 12.0
                                :weight normal
                                :width normal)
-       dotspacemacs-default-icons-font 'all-the-icons
+       dotspacemacs-default-icons-font 'nerd-icons
        dotspacemacs-leader-key "SPC"
        dotspacemacs-emacs-command-key "SPC"
        dotspacemacs-ex-command-key ":"
@@ -277,6 +298,13 @@ in {
     (defun dotspacemacs/user-init ()
       "Initialize user settings before packages load."
       (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+      (setenv "PATH" (concat "${vtermToolPath}:" (or (getenv "PATH") "")))
+      ${lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
+      (setenv "LIBTOOL" "${pkgs.libtool}/bin/libtool")
+    ''}
+      (setq vterm-always-compile-module t
+            vterm-module-cmake-args "${vtermModuleCmakeArgs}"
+            nerd-icons-font-family "Symbols Nerd Font Mono")
       (when (file-exists-p custom-file)
         (load custom-file)))
 
@@ -295,8 +323,69 @@ in {
         (require 'lsp-nix)
         (require 'lsp-toml)
         (require 'lsp-marksman))
+      (with-eval-after-load 'nerd-icons
+        (when (display-graphic-p)
+          (nerd-icons-set-font)))
       (add-hook 'toml-mode-hook #'lsp-deferred)
-      (add-hook 'markdown-mode-hook #'lsp-deferred))
+      (add-hook 'markdown-mode-hook #'lsp-deferred)
+      (defun julian/opencode--project-root ()
+        "Return the current project root, falling back to `default-directory'."
+        (require 'project)
+        (file-name-as-directory
+         (expand-file-name
+          (or (when-let ((project (project-current nil)))
+                (project-root project))
+              (locate-dominating-file default-directory ".git")
+              default-directory))))
+
+      (defun julian/opencode--buffer-name (root)
+        "Return the opencode buffer name for ROOT."
+        (let ((project-name (file-name-nondirectory (directory-file-name root))))
+          (format "*opencode:%s*"
+                  (if (string= project-name "") "root" project-name))))
+
+      (defun julian/opencode--right-window ()
+        "Return a normal right-side window for opencode."
+        (or (window-in-direction 'right)
+            (condition-case nil
+                (split-window (selected-window)
+                              (- (max 40 (floor (* (window-total-width) 0.38))))
+                              'right)
+              (error (condition-case nil
+                         (split-window-right)
+                       (error (selected-window)))))))
+
+      (defun julian/opencode--show-buffer (buffer)
+        "Show BUFFER in a right-side vertical window and select it."
+        (let ((window (or (get-buffer-window buffer)
+                          (julian/opencode--right-window))))
+          (select-window window)
+          (switch-to-buffer buffer)))
+
+      (defun julian/opencode-vterm ()
+        "Open opencode in a project-scoped right-side vterm buffer."
+        (interactive)
+        (require 'vterm)
+        (let* ((root (julian/opencode--project-root))
+               (buffer-name (julian/opencode--buffer-name root))
+               (buffer (get-buffer buffer-name)))
+          (if (and buffer (buffer-live-p buffer))
+              (julian/opencode--show-buffer buffer)
+            (select-window (julian/opencode--right-window))
+            (let ((default-directory root))
+              (vterm buffer-name)
+              (vterm-send-string "${lib.getExe opencodePackage}")
+              (vterm-send-return)))))
+
+      (defun julian/opencode-vterm-maximize ()
+        "Open opencode and toggle maximizing its window."
+        (interactive)
+        (julian/opencode-vterm)
+        (spacemacs/toggle-maximize-window))
+
+      (spacemacs/set-leader-keys
+        "ao" #'julian/opencode-vterm
+        "aO" #'julian/opencode-vterm-maximize))
 
     ;; Custom settings live in ~/.emacs.d/custom.el so this Nix-owned file stays immutable.
   '';

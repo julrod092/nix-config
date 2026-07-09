@@ -18,6 +18,7 @@
 
       env = {
         TERM = "xterm-256color";
+        COLORTERM = "truecolor";
       };
 
       window = {
