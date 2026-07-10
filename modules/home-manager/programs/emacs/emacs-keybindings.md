@@ -53,6 +53,7 @@ Buffer bindings move between open buffers, kill buffers, and switch workspaces b
 |---|---|---|
 | Last buffer | `SPC TAB` | Switches to the previously used buffer. |
 | Switch buffer | `SPC b b` | Searches open buffers and recent files. |
+| Ibuffer | `SPC b i` | Opens Ibuffer to mark and delete multiple buffers. |
 | Next buffer | `SPC b n` | Moves to the next buffer. |
 | Previous buffer | `SPC b p` | Moves to the previous buffer. |
 | Kill buffer | `SPC b d` | Kills the current buffer. |
