@@ -34,6 +34,10 @@
     exec ${lib.getExe pkgs.metals} "$@"
   '';
 
+  alejandraStdin = pkgs.writeShellScriptBin "alejandra-stdin" ''
+    exec ${lib.getExe pkgs.alejandra} -q - "$@"
+  '';
+
   nixTools = with pkgs; [
     alejandra
     deadnix
@@ -318,6 +322,8 @@ in {
             lsp-nix-nixd-formatting-command ["alejandra"]
             lsp-toml-command "taplo"
             lsp-marksman-server-command "marksman")
+      (with-eval-after-load 'nix-format
+        (setq nix-nixfmt-bin "${lib.getExe alejandraStdin}"))
       (with-eval-after-load 'lsp-mode
         (require 'lsp-nix)
         (require 'lsp-toml)

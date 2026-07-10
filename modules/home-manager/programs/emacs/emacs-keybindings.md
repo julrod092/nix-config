@@ -646,7 +646,7 @@ JSON, YAML, TOML, shell scripts, and Nix use LSP/formatting where configured.
 | JSON expand/collapse | `RET` | Expands or collapses JSON tree node. |
 | JSON next node | `TAB` | Selects next JSON tree node. |
 | Nix options | `SPC h >` | Calls `helm-nixos-options`. |
-| Nix format | `SPC m = =` | Formats Nix buffer using nixfmt/formatter. |
+| Nix format | `SPC m = =` | Formats Nix buffer using Alejandra. |
 | Nix flake transient | `SPC m f` | Opens Nix flake transient. |
 | TOML LSP format | `SPC m = b` | Formats TOML through LSP when available. |
 | YAML LSP format | `SPC m = b` | Formats YAML through LSP when available. |

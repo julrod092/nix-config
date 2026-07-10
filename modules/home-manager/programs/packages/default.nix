@@ -46,7 +46,7 @@ in {
       ]
       ++ lib.lists.optionals isDarwin [
         dockutil
-        unstable.colima
+        colima
         docker
         unstable.hidden-bar
         docker-compose
@@ -54,7 +54,7 @@ in {
         (expected-rev "8374ab2113c7522766acf5ab1af9d8c6824c06d4" "${pkgs.stdenv.hostPlatform.system}").haproxy
         (expected-rev "5d5288fa1b2665243a1fd5dd99703077d25d4218" "${pkgs.stdenv.hostPlatform.system}").nodejs_24
         charles4
-        unstable.synergy
+        synergy
         slack
         appcleaner
         unstable.zoom-us
