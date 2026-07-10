@@ -384,7 +384,8 @@ in {
 
       (spacemacs/set-leader-keys
         "ao" #'julian/opencode-vterm
-        "aO" #'julian/opencode-vterm-maximize))
+        "aO" #'julian/opencode-vterm-maximize
+        "bi" #'ibuffer))
 
     ;; Custom settings live in ~/.emacs.d/custom.el so this Nix-owned file stays immutable.
   '';
