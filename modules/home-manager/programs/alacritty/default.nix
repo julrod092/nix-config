@@ -44,7 +44,10 @@
       };
 
       font = {
-        size = 12;
+        size =
+          if pkgs.stdenv.isDarwin
+          then 12
+          else 9;
         normal = {
           family = "MesloLGS Nerd Font";
           style = "Regular";
