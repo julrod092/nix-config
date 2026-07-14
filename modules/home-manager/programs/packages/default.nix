@@ -34,7 +34,7 @@ in {
         sops
         vscode
         fzf
-        inputs.herdr.packages.${pkgs.system}.default
+        inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         # Nix servers
         nixd

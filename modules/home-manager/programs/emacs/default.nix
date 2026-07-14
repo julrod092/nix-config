@@ -66,8 +66,6 @@
   dataTools = with pkgs; [
     marksman
     markdownlint-cli
-    prettier
-    prettierd
     taplo
     vscode-langservers-extracted
     yaml-language-server
@@ -177,10 +175,9 @@ in {
               lsp-headerline-breadcrumb-enable nil)
          dap
          emacs-lisp
-         git
-         helm
-         prettier
-         treemacs
+          git
+          helm
+          treemacs
          tree-sitter
          themes-megapack
          version-control
@@ -203,10 +200,8 @@ in {
                         shell-scripts-format-on-save t)
          (yaml :variables
                yaml-enable-lsp t)
-         (json :variables
-               json-backend 'lsp
-               json-fmt-tool 'prettier
-               json-fmt-on-save t)
+          (json :variables
+                json-backend 'lsp)
          (nixos :variables
                 nix-backend 'lsp
                 nixos-format-on-save t)

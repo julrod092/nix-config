@@ -19,6 +19,7 @@ in {
     enable = true;
     viAlias = true;
     vimAlias = true;
+    nixpkgs.pkgs = pkgs;
 
     globals = {
       mapleader = " ";
@@ -65,7 +66,8 @@ in {
       alejandra
       shfmt
       shellcheck
-      prettier
+      yamlfmt
+      mdformat
       markdownlint-cli
       lazygit
     ];
@@ -267,9 +269,8 @@ in {
             java = ["google-java-format"];
             sh = ["shfmt"];
             bash = ["shfmt"];
-            yaml = ["prettier"];
-            json = ["prettier"];
-            markdown = ["prettier"];
+            yaml = ["yamlfmt"];
+            markdown = ["mdformat"];
             toml = ["taplo"];
           };
           format_on_save = {
