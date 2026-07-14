@@ -4,7 +4,8 @@
   userConfig,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ../programs/alacritty
     ../programs/bat
@@ -19,9 +20,11 @@
     ../programs/zen
     ../programs/gpg
     ../programs/fzf
+    ../programs/nvim
     ../programs/albert
     ../programs/opencode
     ../programs/emacs
+    ../programs/nvim
     ../programs/rust
     ../scripts
     ../services/ssh
@@ -46,9 +49,7 @@
   home = {
     username = "${userConfig.name}";
     homeDirectory =
-      if pkgs.stdenv.isDarwin
-      then "/Users/${userConfig.name}"
-      else "/home/${userConfig.name}";
+      if pkgs.stdenv.isDarwin then "/Users/${userConfig.name}" else "/home/${userConfig.name}";
     sessionVariables = {
       EDITOR = "vim";
     };

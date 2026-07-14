@@ -73,6 +73,15 @@
       url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Neovim configuration via Nix.
+    # Follows our nixpkgs so that plugins added through `extraPlugins`
+    # (from pkgs.vimPlugins) share the same luajit/lua as the neovim nixvim
+    # builds — otherwise buildEnv collides on two different luajit versions.
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
