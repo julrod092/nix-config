@@ -4,14 +4,12 @@
   inputs,
   ...
 }: let
-  # Python interpreter that carries debugpy, used by nvim-dap-python.
   pythonForDap = pkgs.python3.withPackages (ps: with ps; [debugpy]);
 in {
   imports = [inputs.nixvim.homeModules.nixvim];
 
   home.sessionVariables.EDITOR = lib.mkForce "nvim";
 
-  # Ensure the org directory and default notes file exist for orgmode.
   home.activation.bootstrapOrgDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
     mkdir -p "$HOME/org"
     [ -e "$HOME/org/refile.org" ] || touch "$HOME/org/refile.org"
@@ -50,34 +48,25 @@ in {
     };
 
     extraPackages = with pkgs; [
-      # Scala
       metals
       scalafmt
-      # Go
       gofumpt
-      gotools # goimports
+      gotools
       golangci-lint
       delve
-      # Python (debug adapter)
       pythonForDap
-      # Haskell
       haskell-language-server
       ormolu
       haskellPackages.fourmolu
       stylish-haskell
       hlint
-      # Java
       jdt-language-server
       google-java-format
-      # Nix
       alejandra
-      # Shell
       shfmt
       shellcheck
-      # Data / markup
       prettier
       markdownlint-cli
-      # Git UI
       lazygit
     ];
 
@@ -320,10 +309,11 @@ in {
       lazygit-nvim
       multicursor-nvim
       headlines-nvim
+      opencode-nvim
+      render-markdown-nvim
     ];
 
     extraConfigLua = ''
-      -- Scala: nvim-metals (metals binary provided via extraPackages).
       local metals_config = require("metals").bare_config()
       metals_config.settings = { showImplicitArguments = true, useGlobalExecutable = true }
       metals_config.init_options.statusBarProvider = "off"
@@ -336,7 +326,6 @@ in {
         group = metals_group,
       })
 
-      -- Java: nvim-jdtls (jdtls binary provided via extraPackages).
       local jdtls_group = vim.api.nvim_create_augroup("nvim-jdtls", { clear = true })
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "java" },
@@ -354,11 +343,6 @@ in {
         group = jdtls_group,
       })
 
-      -- Rust (rustaceanvim) and Haskell (haskell-tools.nvim) auto-attach on
-      -- their filetypes. rust-analyzer is provided by rustup (~/.cargo/bin on
-      -- PATH), HLS via extraPackages. No extra setup required.
-
-      -- DAP keymaps (LazyVim-style <leader>d group).
       local dap = require("dap")
       local dapui = require("dapui")
       local map = vim.keymap.set
@@ -375,7 +359,6 @@ in {
       map("n", "<F11>", dap.step_into, { desc = "Step into" })
       map("n", "<F12>", dap.step_out, { desc = "Step out" })
 
-      -- Multicursor (jake-stewart/multicursor.nvim)
       local mc = require("multicursor-nvim")
       mc.setup()
       vim.keymap.set({ "n", "x" }, "<C-n>", function()
@@ -390,7 +373,6 @@ in {
       vim.keymap.set({ "n", "x" }, "<leader>A", function()
         mc.matchAllAddCursors()
       end, { desc = "Multicursor: add cursors to all matches" })
-      -- Layer active only while extra cursors exist.
       mc.addKeymapLayer(function(layerSet)
         layerSet({ "n", "x" }, "<esc>", function()
           if not mc.cursorsEnabled() then
@@ -401,13 +383,21 @@ in {
         end)
       end)
 
-      -- project.nvim: expose its picker via <leader>fp (Telescope projects).
       pcall(function()
         require("telescope").load_extension("projects")
       end)
 
-      -- Org mode rendering niceties (heading highlights).
       require("headlines").setup()
+
+      require("render-markdown").setup({
+        anti_conceal = { enabled = false },
+        file_types = { "markdown", "opencode_output" },
+      })
+      require("opencode").setup({
+        keymap_prefix = "<leader>a",
+        preferred_picker = "telescope",
+        preferred_completion = "blink",
+      })
     '';
   };
 }

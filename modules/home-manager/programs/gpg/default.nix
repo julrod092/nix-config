@@ -69,7 +69,8 @@ in {
     enable = true;
     defaultCacheTtl = 60;
     enableSshSupport = true;
-    maxCacheTtlSsh = 120;
+    defaultCacheTtlSsh = 3600;
+    maxCacheTtlSsh = 7200;
     enableScDaemon = true;
     pinentry.package = pinentryPackage;
     grabKeyboardAndMouse = lib.mkIf isDarwin false;

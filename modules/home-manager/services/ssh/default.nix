@@ -12,6 +12,11 @@
         user = "git";
         identityFile = "~/.ssh/ncl-ssh";
       };
+      "github.com" = {
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519";
+        addKeysToAgent = "yes";
+      };
     };
   };
 }
