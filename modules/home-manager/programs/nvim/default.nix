@@ -394,24 +394,73 @@ in {
         anti_conceal = { enabled = false },
         file_types = { "markdown", "opencode_output" },
       })
-      -- opencode.nvim (NickvanDyke/opencode.nvim) has no setup(); it is
-      -- configured via vim.g.opencode_opts. The defaults are sensible, so keep
-      -- it empty and bind the actions manually under the <leader>a prefix.
-      vim.g.opencode_opts = {}
-      vim.o.autoread = true -- required for opencode's external-edit reload
 
-      vim.keymap.set({ "n", "x" }, "<leader>aa", function()
-        require("opencode").ask("@this: ", { submit = true })
-      end, { desc = "opencode: ask about this" })
-      vim.keymap.set("n", "<leader>aA", function()
-        require("opencode").ask()
-      end, { desc = "opencode: ask" })
-      vim.keymap.set({ "n", "x" }, "<leader>as", function()
-        require("opencode").select()
-      end, { desc = "opencode: select action" })
-      vim.keymap.set({ "n", "t" }, "<leader>at", function()
-        require("opencode").toggle()
-      end, { desc = "opencode: toggle" })
+      local function cargo_run()
+        local bufname = vim.api.nvim_buf_get_name(0)
+        local start_dir = bufname ~= "" and vim.fs.dirname(bufname) or vim.loop.cwd()
+        local found = vim.fs.find({ "Cargo.toml" }, { upward = true, path = start_dir })
+        if not found[1] then
+          vim.notify("cargo run: no Cargo.toml found upward from " .. start_dir, vim.log.levels.ERROR, { title = "cargo" })
+          return
+        end
+        local root = vim.fs.dirname(found[1])
+        local src_win = vim.api.nvim_get_current_win()
+
+        local width = math.floor(vim.o.columns * 0.8)
+        local height = math.floor(vim.o.lines * 0.7)
+        local buf = vim.api.nvim_create_buf(false, true)
+        local win = vim.api.nvim_open_win(buf, true, {
+          relative = "editor",
+          width = width,
+          height = height,
+          row = math.floor((vim.o.lines - height) / 2),
+          col = math.floor((vim.o.columns - width) / 2),
+          style = "minimal",
+          border = "rounded",
+          title = " cargo run ",
+          title_pos = "center",
+        })
+
+        local closed = false
+        local function close()
+          if closed then
+            return
+          end
+          closed = true
+          if vim.api.nvim_win_is_valid(win) then
+            vim.api.nvim_win_close(win, true)
+          end
+          if vim.api.nvim_buf_is_valid(buf) then
+            vim.api.nvim_buf_delete(buf, { force = true })
+          end
+          if vim.api.nvim_win_is_valid(src_win) then
+            vim.api.nvim_set_current_win(src_win)
+          end
+        end
+
+        local job = vim.fn.jobstart({ "cargo", "run" }, {
+          cwd = root,
+          term = true,
+          on_exit = function()
+            if vim.api.nvim_get_current_buf() == buf then
+              vim.cmd("stopinsert")
+            end
+            for _, mode in ipairs({ "n", "t" }) do
+              vim.keymap.set(mode, "q", close, { buffer = buf, nowait = true, desc = "cargo run: close output" })
+            end
+          end,
+        })
+
+        if job <= 0 then
+          vim.notify("cargo run: failed to start (is cargo on PATH?)", vim.log.levels.ERROR, { title = "cargo" })
+          close()
+          return
+        end
+
+        vim.cmd("startinsert")
+      end
+
+      vim.keymap.set("n", "<leader>rr", cargo_run, { desc = "Cargo run (floating)" })
     '';
   };
 }
