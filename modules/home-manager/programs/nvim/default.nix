@@ -394,11 +394,24 @@ in {
         anti_conceal = { enabled = false },
         file_types = { "markdown", "opencode_output" },
       })
-      require("opencode").setup({
-        keymap_prefix = "<leader>a",
-        preferred_picker = "telescope",
-        preferred_completion = "blink",
-      })
+      -- opencode.nvim (NickvanDyke/opencode.nvim) has no setup(); it is
+      -- configured via vim.g.opencode_opts. The defaults are sensible, so keep
+      -- it empty and bind the actions manually under the <leader>a prefix.
+      vim.g.opencode_opts = {}
+      vim.o.autoread = true -- required for opencode's external-edit reload
+
+      vim.keymap.set({ "n", "x" }, "<leader>aa", function()
+        require("opencode").ask("@this: ", { submit = true })
+      end, { desc = "opencode: ask about this" })
+      vim.keymap.set("n", "<leader>aA", function()
+        require("opencode").ask()
+      end, { desc = "opencode: ask" })
+      vim.keymap.set({ "n", "x" }, "<leader>as", function()
+        require("opencode").select()
+      end, { desc = "opencode: select action" })
+      vim.keymap.set({ "n", "t" }, "<leader>at", function()
+        require("opencode").toggle()
+      end, { desc = "opencode: toggle" })
     '';
   };
 }
