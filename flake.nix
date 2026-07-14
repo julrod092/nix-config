@@ -76,132 +76,126 @@
 
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-    {
-      self,
-      catppuccin,
-      darwin,
-      home-manager,
-      nixpkgs,
-      ...
-    }@inputs:
-    let
-      inherit (self) outputs;
+  outputs = {
+    self,
+    catppuccin,
+    darwin,
+    home-manager,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
 
-      # Nixpkgs configuration
-      nixpkgsConfig = {
-        allowUnfree = true;
-      };
-
-      nixCacheSettings = {
-        nix.settings = {
-          substituters = [
-            "https://nix-community.cachix.org"
-          ];
-          trusted-substituters = [
-            "https://nix-community.cachix.org"
-          ];
-          trusted-public-keys = [
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          ];
-        };
-      };
-
-      # Define user configurations
-      users = {
-        "julian" = {
-          inherit (users.julrod)
-            avatar
-            fullName
-            ;
-          email = "jandresrodriguez@nclcorp.com";
-          gitKey = "86D656A8DE022933";
-          name = "julian";
-        };
-        julrod = {
-          avatar = ./files/avatar;
-          wallpaper = ./files/wallpaper.jpg;
-          email = "jrodriguezrpo@pm.me";
-          fullName = "Julian Rodriguez";
-          gitKey = "BB07BC58D5058FD9";
-          name = "julrod";
-        };
-      };
-
-      # Function for NixOS system configuration
-      mkNixosConfiguration =
-        hostname: username:
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs hostname;
-            userConfig = users.${username};
-            nixosModules = "${self}/modules/nixos";
-          };
-          modules = [
-            { nixpkgs.config = nixpkgsConfig; }
-            nixCacheSettings
-            inputs.sops-nix.nixosModules.sops
-            inputs.arctis-sound-manager.nixosModules.default
-            ./hosts/${hostname}
-          ];
-        };
-
-      # Function for nix-darwin system configuration
-      mkDarwinConfiguration =
-        hostname: username:
-        darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = {
-            inherit inputs outputs hostname;
-            userConfig = users.${username};
-            darwinModules = "${self}/modules/darwin";
-          };
-          modules = [
-            { nixpkgs.config = nixpkgsConfig; }
-            nixCacheSettings
-            ./hosts/${hostname}
-          ];
-        };
-
-      # Function for Home Manager configuration
-      mkHomeConfiguration =
-        system: username: hostname:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            config = nixpkgsConfig;
-          };
-          extraSpecialArgs = {
-            inherit inputs outputs hostname;
-            userConfig = users.${username};
-            nhModules = "${self}/modules/home-manager";
-          };
-          modules = [
-            ./home/${username}/${hostname}
-            catppuccin.homeModules.catppuccin
-            inputs.sops-nix.homeManagerModules.sops
-            inputs.nix-podman-stacks.homeModules.nps
-          ];
-        };
-    in
-    {
-      nixosConfigurations = {
-        "nix-desktop" = mkNixosConfiguration "nix-desktop" "julrod";
-      };
-
-      darwinConfigurations = {
-        "nix-mac" = mkDarwinConfiguration "nix-mac" "julian";
-      };
-
-      homeConfigurations = {
-        "julian@nix-mac" = mkHomeConfiguration "aarch64-darwin" "julian" "nix-mac";
-        "julrod@nix-desktop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-desktop";
-      };
-
-      overlays = import ./overlays { inherit inputs; };
+    # Nixpkgs configuration
+    nixpkgsConfig = {
+      allowUnfree = true;
     };
+
+    nixCacheSettings = {
+      nix.settings = {
+        substituters = [
+          "https://nix-community.cachix.org"
+        ];
+        trusted-substituters = [
+          "https://nix-community.cachix.org"
+        ];
+        trusted-public-keys = [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        ];
+      };
+    };
+
+    # Define user configurations
+    users = {
+      "julian" = {
+        inherit
+          (users.julrod)
+          avatar
+          fullName
+          ;
+        email = "jandresrodriguez@nclcorp.com";
+        gitKey = "86D656A8DE022933";
+        name = "julian";
+      };
+      julrod = {
+        avatar = ./files/avatar;
+        wallpaper = ./files/wallpaper.jpg;
+        email = "jrodriguezrpo@pm.me";
+        fullName = "Julian Rodriguez";
+        gitKey = "BB07BC58D5058FD9";
+        name = "julrod";
+      };
+    };
+
+    # Function for NixOS system configuration
+    mkNixosConfiguration = hostname: username:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs hostname;
+          userConfig = users.${username};
+          nixosModules = "${self}/modules/nixos";
+        };
+        modules = [
+          {nixpkgs.config = nixpkgsConfig;}
+          nixCacheSettings
+          inputs.sops-nix.nixosModules.sops
+          inputs.arctis-sound-manager.nixosModules.default
+          ./hosts/${hostname}
+        ];
+      };
+
+    # Function for nix-darwin system configuration
+    mkDarwinConfiguration = hostname: username:
+      darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {
+          inherit inputs outputs hostname;
+          userConfig = users.${username};
+          darwinModules = "${self}/modules/darwin";
+        };
+        modules = [
+          {nixpkgs.config = nixpkgsConfig;}
+          nixCacheSettings
+          ./hosts/${hostname}
+        ];
+      };
+
+    # Function for Home Manager configuration
+    mkHomeConfiguration = system: username: hostname:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          config = nixpkgsConfig;
+        };
+        extraSpecialArgs = {
+          inherit inputs outputs hostname;
+          userConfig = users.${username};
+          nhModules = "${self}/modules/home-manager";
+        };
+        modules = [
+          ./home/${username}/${hostname}
+          catppuccin.homeModules.catppuccin
+          inputs.sops-nix.homeManagerModules.sops
+          inputs.nix-podman-stacks.homeModules.nps
+        ];
+      };
+  in {
+    nixosConfigurations = {
+      "nix-desktop" = mkNixosConfiguration "nix-desktop" "julrod";
+    };
+
+    darwinConfigurations = {
+      "nix-mac" = mkDarwinConfiguration "nix-mac" "julian";
+    };
+
+    homeConfigurations = {
+      "julian@nix-mac" = mkHomeConfiguration "aarch64-darwin" "julian" "nix-mac";
+      "julrod@nix-desktop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-desktop";
+    };
+
+    overlays = import ./overlays {inherit inputs;};
+  };
 }
