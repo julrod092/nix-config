@@ -267,6 +267,41 @@ In the capture buffer:
 | `<leader>or` | Refile the capture to a chosen destination |
 | `<leader>ok` | Abort the capture |
 
+## OpenCode (AI)
+
+opencode.nvim, using the `<leader>a` prefix (chosen to avoid orgmode's
+`<leader>o`). Backed by the opencode CLI, Telescope pickers and blink completion.
+
+Global:
+
+| Keys | Description |
+|---|---|
+| `<leader>ag` | Toggle the opencode panel |
+| `<leader>ai` / `<leader>aI` | Open input (current / new session) |
+| `<leader>ao` | Open the output window |
+| `<leader>at` | Toggle focus between opencode and your last window |
+| `<leader>aT` | Timeline (navigate / undo / fork messages) |
+| `<leader>aq` | Close the opencode windows |
+| `<leader>as` | Select and load a session |
+| `<leader>ap` | Configure provider / model |
+| `<leader>ay` / `<leader>aY` | (visual) Add selection to context / inline |
+| `<leader>a/` | Quick chat with selection or current line |
+| `<leader>ad` | Diff of files changed since the last prompt |
+| `<leader>a]` / `<leader>a[` | Next / previous file diff |
+| `<leader>ac` | Close the diff view |
+
+In the input / output windows:
+
+| Keys | Description |
+|---|---|
+| `<S-CR>` | Submit the prompt |
+| `@` / `~` | Mention (file/agent) / pick a file to add as context |
+| `/` / `#` | Slash commands / context items |
+| `<Tab>` | Toggle between input and output panes |
+| `]]` / `[[` | Next / previous message (output window) |
+| `gf` | Jump to the file under the cursor (output window) |
+| `<C-c>` | Cancel a running request |
+
 ## Language Notes
 
 | Language | Server / Tooling | Notes |
