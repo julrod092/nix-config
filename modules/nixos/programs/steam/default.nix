@@ -8,7 +8,6 @@
     protonup-qt
     protonup-ng
     unstable.lutris
-    unstable.bottles
     unstable.heroic
   ];
 
