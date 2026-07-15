@@ -310,7 +310,6 @@ in {
       lazygit-nvim
       multicursor-nvim
       headlines-nvim
-      opencode-nvim
       render-markdown-nvim
     ];
 
@@ -392,7 +391,7 @@ in {
 
       require("render-markdown").setup({
         anti_conceal = { enabled = false },
-        file_types = { "markdown", "opencode_output" },
+        file_types = { "markdown" },
       })
 
       local function cargo_run()
