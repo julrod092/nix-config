@@ -5,6 +5,8 @@
   ...
 }: let
   pythonForDap = pkgs.python3.withPackages (ps: with ps; [debugpy]);
+  metalsJdk = pkgs.zulu11;
+  metalsSbt = pkgs.sbt.override {jre = metalsJdk;};
 in {
   imports = [inputs.nixvim.homeModules.nixvim];
 
@@ -28,7 +30,7 @@ in {
 
     opts = {
       number = true;
-      relativenumber = true;
+      relativenumber = false;
       shiftwidth = 2;
       tabstop = 2;
       expandtab = true;
@@ -50,6 +52,7 @@ in {
 
     extraPackages = with pkgs; [
       metals
+      metalsSbt
       scalafmt
       gofumpt
       gotools
@@ -315,7 +318,12 @@ in {
 
     extraConfigLua = ''
       local metals_config = require("metals").bare_config()
-      metals_config.settings = { showImplicitArguments = true, useGlobalExecutable = true }
+      metals_config.settings = {
+        showImplicitArguments = true,
+        useGlobalExecutable = true,
+        javaHome = "${metalsJdk}",
+        sbtScript = "${metalsSbt}/bin/sbt",
+      }
       metals_config.init_options.statusBarProvider = "off"
       local metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
       vim.api.nvim_create_autocmd("FileType", {
@@ -460,6 +468,156 @@ in {
       end
 
       vim.keymap.set("n", "<leader>rr", cargo_run, { desc = "Cargo run (floating)" })
+
+      local sbt_clients = {}
+      local sbt_command = "${metalsSbt}/bin/sbt"
+
+      local function sbt_project_root()
+        local bufname = vim.api.nvim_buf_get_name(0)
+        local start_dir = bufname ~= "" and vim.fs.dirname(bufname) or vim.loop.cwd()
+        local found = vim.fs.find({ "build.sbt" }, { upward = true, path = start_dir })
+        if not found[1] then
+          vim.notify("sbt client: no build.sbt found upward from " .. start_dir, vim.log.levels.ERROR, { title = "sbt" })
+          return nil
+        end
+
+        local root = vim.fs.dirname(found[1])
+        return vim.uv.fs_realpath(root) or vim.fs.normalize(root)
+      end
+
+      local function sbt_client_is_running(state)
+        return state
+          and state.job
+          and vim.api.nvim_buf_is_valid(state.buf)
+          and vim.fn.jobwait({ state.job }, 0)[1] == -1
+      end
+
+      local function open_sbt_window(state)
+        if state.win and vim.api.nvim_win_is_valid(state.win) then
+          vim.api.nvim_set_current_win(state.win)
+          return
+        end
+
+        state.source_win = vim.api.nvim_get_current_win()
+        local width = math.floor(vim.o.columns * 0.8)
+        local height = math.floor(vim.o.lines * 0.7)
+        state.win = vim.api.nvim_open_win(state.buf, true, {
+          relative = "editor",
+          width = width,
+          height = height,
+          row = math.floor((vim.o.lines - height) / 2),
+          col = math.floor((vim.o.columns - width) / 2),
+          style = "minimal",
+          border = "rounded",
+          title = " sbt client ",
+          title_pos = "center",
+        })
+      end
+
+      local function hide_sbt_window(state)
+        if state.win and vim.api.nvim_win_is_valid(state.win) then
+          vim.api.nvim_win_close(state.win, true)
+        end
+        state.win = nil
+
+        if state.source_win and vim.api.nvim_win_is_valid(state.source_win) then
+          vim.api.nvim_set_current_win(state.source_win)
+        end
+      end
+
+      local function start_sbt_client(root)
+        local buf = vim.api.nvim_create_buf(false, true)
+        vim.bo[buf].bufhidden = "hide"
+        local state = { buf = buf, job = nil, win = nil, source_win = nil }
+        sbt_clients[root] = state
+        open_sbt_window(state)
+
+        local job
+        job = vim.fn.jobstart({ sbt_command, "--client" }, {
+          cwd = root,
+          term = true,
+          env = { JAVA_HOME = "${metalsJdk}" },
+          on_exit = function(_, exit_code)
+            vim.schedule(function()
+              if sbt_clients[root] ~= state then
+                return
+              end
+
+              if state.win and vim.api.nvim_win_is_valid(state.win) then
+                vim.api.nvim_win_close(state.win, true)
+              end
+              if vim.api.nvim_buf_is_valid(state.buf) then
+                vim.api.nvim_buf_delete(state.buf, { force = true })
+              end
+              sbt_clients[root] = nil
+
+              if exit_code ~= 0 then
+                vim.notify("sbt client exited with code " .. exit_code, vim.log.levels.ERROR, { title = "sbt" })
+              end
+            end)
+          end,
+        })
+        state.job = job
+
+        if job <= 0 then
+          sbt_clients[root] = nil
+          hide_sbt_window(state)
+          if vim.api.nvim_buf_is_valid(buf) then
+            vim.api.nvim_buf_delete(buf, { force = true })
+          end
+          vim.notify("sbt client: failed to start", vim.log.levels.ERROR, { title = "sbt" })
+          return
+        end
+
+        vim.keymap.set("n", "q", function()
+          hide_sbt_window(state)
+        end, { buffer = buf, nowait = true, desc = "sbt client: hide" })
+        vim.keymap.set("t", "<C-q>", function()
+          hide_sbt_window(state)
+        end, { buffer = buf, nowait = true, desc = "sbt client: hide" })
+        vim.cmd("startinsert")
+      end
+
+      local function open_sbt_client()
+        if mc.hasCursors() then
+          mc.clearCursors()
+        end
+
+        local root = sbt_project_root()
+        if not root then
+          return
+        end
+
+        local state = sbt_clients[root]
+        if sbt_client_is_running(state) then
+          open_sbt_window(state)
+          vim.cmd("startinsert")
+          return
+        end
+        if state then
+          hide_sbt_window(state)
+          if vim.api.nvim_buf_is_valid(state.buf) then
+            vim.api.nvim_buf_delete(state.buf, { force = true })
+          end
+        end
+        sbt_clients[root] = nil
+
+        local active_server = vim.fs.joinpath(root, "project", "target", "active.json")
+        if vim.uv.fs_stat(active_server) then
+          start_sbt_client(root)
+          return
+        end
+
+        vim.ui.select({ "Start sbt server", "Cancel" }, {
+          prompt = "No active sbt server for " .. vim.fs.basename(root),
+        }, function(choice)
+          if choice == "Start sbt server" then
+            start_sbt_client(root)
+          end
+        end)
+      end
+
+      vim.keymap.set("n", "<leader>rs", open_sbt_client, { desc = "sbt client (floating)" })
     '';
   };
 }

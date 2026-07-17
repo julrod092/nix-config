@@ -224,6 +224,15 @@ Debugging is wired for **Go** (delve), **Python** (debugpy) and **Scala**
 | Open REPL | `<leader>dr` | Opens the debug REPL. |
 | Toggle DAP UI | `<leader>du` | Shows/hides the debugger UI panels. |
 
+## Run And Build
+
+| Name | Keys | Description |
+|---|---|---|
+| Cargo run | `<leader>rr` | Runs the nearest Cargo project in a floating terminal. |
+| sbt client | `<leader>rs` | Opens or reopens the persistent sbt thin-client terminal for the nearest project. Active multicursors are cleared first. |
+| Hide sbt client | `q` | Hides the sbt float from terminal Normal mode without stopping the client or server. |
+| Hide sbt client | `<C-q>` | Hides the sbt float from Terminal mode without stopping the client or server. |
+
 ## Org mode
 
 Org files live in `~/org`; the agenda scans `~/org/**/*` and capture writes to
