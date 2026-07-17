@@ -31,11 +31,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1784178550,
-        "narHash": "sha256-mh/ESU1xGsYJGhLLb4xtTsx95jrkvvOs53W6FzwpjPA=",
+        "lastModified": 1784265159,
+        "narHash": "sha256-lQA50zUE2e5Tvl1WTttqrkteGYH3++7GOx9wePofUGo=",
         "owner": "loteran",
         "repo": "Arctis-Sound-Manager",
-        "rev": "7d1d6d5336e9cb75c3b9794d80636a351c7400a1",
+        "rev": "3b21521885cd4fa72ed26d968a5bed85b75504d0",
         "type": "github"
       },
       "original": {
@@ -210,11 +210,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1784161737,
-        "narHash": "sha256-ZMjbwQkE7fsn71uRM7tPDwwEb7PG0st9Xk8d2gN7Ts8=",
+        "lastModified": 1784247993,
+        "narHash": "sha256-MkJn9YvXpwNKwSgfAU15fuNXFrzYzyFEEX0m3woOe5E=",
         "owner": "ogulcancelik",
         "repo": "herdr",
-        "rev": "9c9490d764d306b6cc093b5b3de1ccd4e6467c94",
+        "rev": "8d2af4e046c2a95dfc54aafd6f88da12389d76e8",
         "type": "github"
       },
       "original": {
@@ -770,11 +770,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784180486,
-        "narHash": "sha256-WyEBfIw3m2qpb/dy63NIEe9tmC9a1YxIRcEjrD2e390=",
+        "lastModified": 1784287306,
+        "narHash": "sha256-N0uYliEuDJ7BCH9th1QKmlz1ddGjBwwL8LIvTpM/pt4=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "2c429687b07e5b08a22552e85802ede13d1761cc",
+        "rev": "b039696b48f7796a753f9848cf004dbe072541f5",
         "type": "github"
       },
       "original": {
