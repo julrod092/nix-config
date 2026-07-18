@@ -383,11 +383,11 @@
         "sops-nix": "sops-nix"
       },
       "locked": {
-        "lastModified": 1783347597,
-        "narHash": "sha256-MPevFUj2WE0E0kIJFSoDrgXFU2dVq8y+RrFzt6PK+sw=",
+        "lastModified": 1784383882,
+        "narHash": "sha256-uVfjPrEFvaEH8TirVRwG0nCJcppUWYduU9y42nLEhKY=",
         "owner": "julrod092",
         "repo": "nix-podman-stacks",
-        "rev": "3145f7646c3ea9782aac7d3d9486b8fa247bac2c",
+        "rev": "0ca1c5737b29559a7c4d5588cea0ed5d2e95b958",
         "type": "github"
       },
       "original": {
