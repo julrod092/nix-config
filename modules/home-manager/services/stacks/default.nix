@@ -27,7 +27,7 @@
     tandoor-db.dependsOn = ["sops-nix.service"];
     wallos.dependsOn = ["sops-nix.service"];
     freshrss.dependsOn = ["sops-nix.service"];
-    n8n.dependsOn = ["sops-nix.service"];
+    # n8n.dependsOn = ["sops-nix.service"];
     trek.dependsOn = ["sops-nix.service"];
   };
 
@@ -45,7 +45,7 @@
       homeassistant.enable = true;
       networking-toolbox.enable = true;
       it-tools.enable = true;
-      n8n.enable = true;
+      #n8n.enable = true;
       mazanoke.enable = true;
 
       authelia = {
@@ -185,8 +185,9 @@
       wallos = {
         enable = true;
         oidc = {
-          registerClient = true;
-          clientSecretHash = "$pbkdf2-sha512$310000$HbyoXa5PfRRiOMXny2Q03A$2PNmEypjh0KcPVewrFTSKkoHsyuK0rkLWSWrTeNkQRxU9tD2GeXjOlIjes9UbxOx85SaP9dzyivMC4u.BlBCfQ";
+          enable = true;
+          clientSecretHash = "$pbkdf2-sha512$310000$sNs.VYVB6Mgr2nQwxPONdg$WzeW3FFUE9eLlWUEMeqeHxvLTDTJRGyit4345Gc5MuNTzWRRdN9VephtWlmAzrf5TyJozP8ez3b/LTx0RmYExA";
+          clientSecretFile = config.sops.secrets."authelia/services/wallos".path;
         };
       };
 

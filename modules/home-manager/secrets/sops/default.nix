@@ -32,6 +32,7 @@
       "authelia/services/rx_resume"
       "authelia/services/paperless"
       "authelia/services/jotty"
+      "authelia/services/wallos"
       "aiostreams/secret_key"
       "lldap/key_seed"
       "lldap/jwt_secret"
