@@ -31,11 +31,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1784870322,
-        "narHash": "sha256-l/gUa6XTt9c+v1Ki7zhaFDfT5et86/Ajj7TrgM+dlDA=",
+        "lastModified": 1784956418,
+        "narHash": "sha256-LS+PYx2hHjkTnT05+xMMbjckodsArmy1kpYMuc6Tp+s=",
         "owner": "loteran",
         "repo": "Arctis-Sound-Manager",
-        "rev": "cc4e5fc840bd4f859a690754252f1bf20cbada58",
+        "rev": "4fe5b888d5c021f5918862d7e33d4dda7f077253",
         "type": "github"
       },
       "original": {
@@ -210,11 +210,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1784854813,
-        "narHash": "sha256-vhG8YWmGkKAps403O15qUc5swKinz7eJxhx/HHH4Ew0=",
+        "lastModified": 1784942815,
+        "narHash": "sha256-sSzijwp8RjM048EaWgRH1dP6oLLPz7jd3rNKaMbzVdk=",
         "owner": "ogulcancelik",
         "repo": "herdr",
-        "rev": "c0fb777ed7c7950c6a2f397113c1842c2e679306",
+        "rev": "d4e0dd3d903c50d2edb8c3cec71952a83989b310",
         "type": "github"
       },
       "original": {
@@ -444,11 +444,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1784707089,
-        "narHash": "sha256-2V/6imsUgB7mPZlHY54oeVBRDoZbPKnvzwkAHUSSufk=",
+        "lastModified": 1784856561,
+        "narHash": "sha256-J+Bx1Z6Oeoj2FgnBhRMKyUhhtDoOpTgXYaVLZpDjW4A=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b3fe9581c9061c749abef42b6d4ee7b7c05c33fa",
+        "rev": "597283ad8aa0b331c788e97c4c262d58877074ef",
         "type": "github"
       },
       "original": {
