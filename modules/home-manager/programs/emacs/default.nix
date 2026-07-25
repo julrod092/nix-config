@@ -84,7 +84,23 @@
     ]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [glibtool]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [pkgs.libvterm];
-  vtermToolPath = lib.makeBinPath vtermTools;
+  # Create a single directory with all vterm tools to reduce PATH length
+  vtermToolsWrapper = pkgs.symlinkJoin {
+    name = "vterm-tools-wrapper";
+    paths = vtermTools;
+    postBuild = ''
+      # Create a bin directory with symlinks to all tools
+      mkdir -p $out/bin
+      for pkg in ${lib.concatMapStringsSep " " (p: p.name) vtermTools}; do
+        if [ -d "$out/$pkg/bin" ]; then
+          for bin in "$out/$pkg/bin"/*; do
+            ln -sf "$bin" "$out/bin/$(basename "$bin")" 2>/dev/null || true
+          done
+        fi
+      done
+    '';
+  };
+  vtermToolPath = "${vtermToolsWrapper}/bin";
 
   goTools = with pkgs; [
     goPackage
@@ -176,7 +192,7 @@ in {
          dap
          emacs-lisp
           git
-          helm
+          compleseus
           treemacs
          tree-sitter
          themes-megapack
@@ -188,6 +204,7 @@ in {
          multiple-cursors
          python
          spacemacs-org
+         agent-shell
          (unicode-fonts :variables unicode-fonts-enable-ligatures t)
          (auto-completion :variables
                           auto-completion-enable-help-tooltip 'manual)
@@ -227,7 +244,7 @@ in {
                 shell-close-window-with-terminal t)
          (haskell :variables
                   haskell-completion-backend 'lsp))
-       dotspacemacs-additional-packages '(beacon tmr logview smithy-mode exec-path-from-shell)
+       dotspacemacs-additional-packages '(logview smithy-mode exec-path-from-shell)
        dotspacemacs-frozen-packages '()
        dotspacemacs-excluded-packages '()
        dotspacemacs-install-packages 'used-only))
@@ -236,7 +253,7 @@ in {
       "Initialize Spacemacs settings."
       (setq-default
        dotspacemacs-elpa-timeout 10
-       dotspacemacs-gc-cons '(100000000 0.1)
+       dotspacemacs-gc-cons '(20000000 0.1)
        dotspacemacs-read-process-output-max (* 1024 1024)
        dotspacemacs-use-spacelpa nil
        dotspacemacs-verify-spacelpa-archives t
@@ -258,7 +275,7 @@ in {
        dotspacemacs-mode-line-theme '(doom)
        dotspacemacs-colorize-cursor-according-to-state t
        dotspacemacs-default-font '("MesloLGS Nerd Font"
-                               :size 12.0
+                               :size 10.0
                                :weight normal
                                :width normal)
        dotspacemacs-default-icons-font 'nerd-icons
@@ -300,11 +317,15 @@ in {
       ${lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
       (setenv "LIBTOOL" "${pkgs.libtool}/bin/libtool")
     ''}
-      (setq vterm-always-compile-module t
+      (setq vterm-always-compile-module nil
             vterm-module-cmake-args "${vtermModuleCmakeArgs}"
             nerd-icons-font-family "Symbols Nerd Font Mono")
       (when (file-exists-p custom-file)
-        (load custom-file)))
+        (load custom-file))
+      ;; Disable scroll bars globally
+      (scroll-bar-mode -1)
+      (when (fboundp 'horizontal-scroll-bar-mode)
+        (horizontal-scroll-bar-mode -1)))
 
     (defun dotspacemacs/user-config ()
       "Configure user settings after packages load."
@@ -328,65 +349,27 @@ in {
           (nerd-icons-set-font)))
       (add-hook 'toml-mode-hook #'lsp-deferred)
       (add-hook 'markdown-mode-hook #'lsp-deferred)
-      (defun julian/opencode--project-root ()
-        "Return the current project root, falling back to `default-directory'."
-        (require 'project)
-        (file-name-as-directory
-         (expand-file-name
-          (or (when-let ((project (project-current nil)))
-                (project-root project))
-              (locate-dominating-file default-directory ".git")
-              default-directory))))
 
-      (defun julian/opencode--buffer-name (root)
-        "Return the opencode buffer name for ROOT."
-        (let ((project-name (file-name-nondirectory (directory-file-name root))))
-          (format "*opencode:%s*"
-                  (if (string= project-name "") "root" project-name))))
+      ;; Vterm configuration - fix cursor and keybinding issues
+      (with-eval-after-load 'vterm
+        ;; Enable char mode by default for better terminal interaction
+        (setq vterm-max-scrollback 10000)
+        (setq vterm-buffer-name-string "vterm %s")
 
-      (defun julian/opencode--right-window ()
-        "Return a normal right-side window for opencode."
-        (or (window-in-direction 'right)
-            (condition-case nil
-                (split-window (selected-window)
-                              (- (max 40 (floor (* (window-total-width) 0.38))))
-                              'right)
-              (error (condition-case nil
-                         (split-window-right)
-                       (error (selected-window)))))))
+        ;; Fix cursor display - use terminal cursor instead of evil's
+        (add-hook 'vterm-mode-hook
+                  (lambda ()
+                    (setq-local cursor-type 'box)
+                    (setq-local cursor-in-non-selected-windows 'box)))
 
-      (defun julian/opencode--show-buffer (buffer)
-        "Show BUFFER in a right-side vertical window and select it."
-        (let ((window (or (get-buffer-window buffer)
-                          (julian/opencode--right-window))))
-          (select-window window)
-          (switch-to-buffer buffer)))
+        ;; Copy/paste integration with system clipboard
+        (define-key vterm-mode-map (kbd "C-c C-y") #'vterm-yank)
+        (define-key vterm-mode-map (kbd "C-c C-c") #'vterm-send-C-c)
+        (define-key vterm-mode-map (kbd "C-c C-l") #'vterm-clear-scrollback))
 
-      (defun julian/opencode-vterm ()
-        "Open opencode in a project-scoped right-side vterm buffer."
-        (interactive)
-        (require 'vterm)
-        (let* ((root (julian/opencode--project-root))
-               (buffer-name (julian/opencode--buffer-name root))
-               (buffer (get-buffer buffer-name)))
-          (if (and buffer (buffer-live-p buffer))
-              (julian/opencode--show-buffer buffer)
-            (select-window (julian/opencode--right-window))
-            (let ((default-directory root))
-              (vterm buffer-name)
-              (vterm-send-string "${lib.getExe opencodePackage}")
-              (vterm-send-return)))))
-
-      (defun julian/opencode-vterm-maximize ()
-        "Open opencode and toggle maximizing its window."
-        (interactive)
-        (julian/opencode-vterm)
-        (spacemacs/toggle-maximize-window))
-
-      (spacemacs/set-leader-keys
-        "ao" #'julian/opencode-vterm
-        "aO" #'julian/opencode-vterm-maximize
-        "bi" #'ibuffer))
+      ;; Enable exec-path-from-shell for proper PATH in GUI Emacs
+      (when (and (display-graphic-p) (fboundp 'exec-path-from-shell-initialize))
+        (exec-path-from-shell-initialize)))
 
     ;; Custom settings live in ~/.emacs.d/custom.el so this Nix-owned file stays immutable.
   '';

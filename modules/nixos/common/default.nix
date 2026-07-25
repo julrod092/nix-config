@@ -41,6 +41,15 @@
     auto-optimise-store = true;
   };
 
+  # Swap and memory management settings
+  # Reduce swapping pressure and improve responsiveness
+  boot.kernel.sysctl = {
+    # Swap settings - use swap only when necessary
+    "vm.swappiness" = 10;  # Default is 60, lower = less swapping
+    "vm.dirty_ratio" = 10; # Start writing dirty pages earlier
+    "vm.dirty_background_ratio" = 5; # Start background writeback earlier
+  };
+
   # Boot settings
   boot = {
     kernelParams = [
