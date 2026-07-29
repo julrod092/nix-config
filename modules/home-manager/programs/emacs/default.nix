@@ -1,3 +1,6 @@
+Formatting stdin.
+Use --help to see all command line options.
+use --quiet to suppress this and other messages.
 {
   config,
   lib,
@@ -14,10 +17,6 @@
     then pkgs.unstable.go
     else pkgs.go;
 
-  metalsEmacs = pkgs.writeShellScriptBin "metals-emacs" ''
-    exec ${lib.getExe pkgs.metals} "$@"
-  '';
-
   agentShellSource = builtins.fetchGit {
     url = "https://github.com/kdoomsday/agent-shell.git";
     rev = "20faf1cd827bd48375bd7d6f6001257937d6e026";
@@ -28,8 +27,6 @@
     deadnix
     nil
     nixd
-    nixfmt
-    nixpkgs-fmt
     statix
     treefmt
   ];
@@ -109,7 +106,6 @@ in {
 
   home.packages =
     [
-      metalsEmacs
       pkgs.metals
     ]
     ++ nixTools
@@ -147,3 +143,7 @@ in {
     ".emacs.d/private/agent-shell".source = agentShellSource;
   };
 }
+
+Congratulations! Your code complies with the Alejandra style.
+
+👏 Special thanks to Guangtao Zhang for being a sponsor of Alejandra!
