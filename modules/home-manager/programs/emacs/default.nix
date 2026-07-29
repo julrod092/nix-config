@@ -4,40 +4,20 @@
   pkgs,
   ...
 }: let
-  emacsPackage = pkgs.emacs;
+  emacsPackage =
+    if pkgs.stdenv.hostPlatform.isLinux
+    then pkgs.emacs-pgtk
+    else pkgs.emacs;
+
   goPackage =
     if pkgs ? unstable && pkgs.unstable ? go
     then pkgs.unstable.go
     else pkgs.go;
-  opencodePackage =
-    if pkgs ? unstable && pkgs.unstable ? opencode
-    then pkgs.unstable.opencode
-    else pkgs.opencode;
-  vtermModuleCmakeArgs =
-    if pkgs.stdenv.hostPlatform.isDarwin
-    then "-DUSE_SYSTEM_LIBVTERM=Off"
-    else "-DCMAKE_PREFIX_PATH=${pkgs.libvterm}";
-  glibtool = pkgs.writeShellScriptBin "glibtool" ''
-    exec ${pkgs.libtool}/bin/libtool "$@"
-  '';
-
-  emacsEditor = pkgs.writeShellScriptBin "emacs-editor" ''
-    set -e
-
-    if ! ${emacsPackage}/bin/emacsclient --eval '(emacs-pid)' >/dev/null 2>&1; then
-      ${emacsPackage}/bin/emacs --daemon
-    fi
-
-    exec ${emacsPackage}/bin/emacsclient -t "$@"
-  '';
 
   metalsEmacs = pkgs.writeShellScriptBin "metals-emacs" ''
     exec ${lib.getExe pkgs.metals} "$@"
   '';
 
-  alejandraStdin = pkgs.writeShellScriptBin "alejandra-stdin" ''
-    exec ${lib.getExe pkgs.alejandra} -q - "$@"
-  '';
   agentShellSource = builtins.fetchGit {
     url = "https://github.com/kdoomsday/agent-shell.git";
     rev = "20faf1cd827bd48375bd7d6f6001257937d6e026";
@@ -89,23 +69,6 @@
     ]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [glibtool]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [pkgs.libvterm];
-  # Create a single directory with all vterm tools to reduce PATH length
-  vtermToolsWrapper = pkgs.symlinkJoin {
-    name = "vterm-tools-wrapper";
-    paths = vtermTools;
-    postBuild = ''
-      # Create a bin directory with symlinks to all tools
-      mkdir -p $out/bin
-      for pkg in ${lib.concatMapStringsSep " " (p: p.name) vtermTools}; do
-        if [ -d "$out/$pkg/bin" ]; then
-          for bin in "$out/$pkg/bin"/*; do
-            ln -sf "$bin" "$out/bin/$(basename "$bin")" 2>/dev/null || true
-          done
-        fi
-      done
-    '';
-  };
-  vtermToolPath = "${vtermToolsWrapper}/bin";
 
   goTools = with pkgs; [
     goPackage
@@ -146,7 +109,6 @@ in {
 
   home.packages =
     [
-      emacsEditor
       metalsEmacs
       pkgs.metals
     ]
@@ -160,7 +122,6 @@ in {
     ++ haskellTools;
 
   home.sessionPath = [
-    vtermToolPath
     "$HOME/.cabal/bin"
     "$HOME/.local/bin"
     "$HOME/go/bin"
@@ -168,7 +129,6 @@ in {
 
   home.sessionVariables = {
     SPACEMACS_SHELL = lib.getExe pkgs.zsh;
-    VTERM_MODULE_CMAKE_ARGS = vtermModuleCmakeArgs;
   };
 
   home.activation.bootstrapSpacemacs = lib.hm.dag.entryAfter ["writeBoundary"] ''
