@@ -13,7 +13,6 @@
     ../programs/fastfetch
     ../programs/git
     ../programs/lazygit
-    ../programs/starship
     ../programs/tmux
     ../programs/zsh
     ../programs/packages

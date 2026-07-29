@@ -117,6 +117,7 @@
    dotspacemacs-enable-paste-transient-state nil
    dotspacemacs-which-key-delay 0.4
    dotspacemacs-which-key-position 'bottom
+   dotspacemacs-scroll-bar-while-scrolling nil
    dotspacemacs-loading-progress-bar t
    dotspacemacs-maximized-at-startup t
    dotspacemacs-line-numbers 'relative
@@ -148,19 +149,13 @@
 (defun dotspacemacs/user-config ()
   "Configure user settings after packages load."
   (setq-default fill-column 100)
-  (setq lsp-metals-server-command "metals-emacs"
-        lsp-haskell-server-path "haskell-language-server-wrapper"
-        lsp-nix-nil-server-path "nil"
-        lsp-nix-nil-formatter ["alejandra"]
-        lsp-nix-nixd-server-path "nixd"
+  (setq lsp-nix-nil-formatter ["alejandra"]
         lsp-nix-nixd-formatting-command ["alejandra"]
-        lsp-toml-command "taplo"
-        lsp-marksman-server-command "marksman"
         vterm-always-compile-module nil
         vterm-module-cmake-args (or (getenv "VTERM_MODULE_CMAKE_ARGS") "")
         nerd-icons-font-family "Symbols Nerd Font Mono")
   (with-eval-after-load 'nix-format
-    (setq nix-nixfmt-bin "alejandra-stdin"))
+    (setq nix-nixfmt-bin "alejandra"))
   (with-eval-after-load 'lsp-mode
     (require 'lsp-nix)
     (require 'lsp-toml)
@@ -175,7 +170,6 @@
           vterm-buffer-name-string "vterm %s")
     (add-hook 'vterm-mode-hook
               (lambda ()
-                (face-remap-add-relative 'default :family "MesloLGS Nerd Font Mono")
                 (setq-local cursor-type 'box)
                 (setq-local cursor-in-non-selected-windows 'box)))
     (define-key vterm-mode-map (kbd "C-c C-y") #'vterm-yank)
