@@ -1,7 +1,5 @@
-Formatting stdin.
-Use --help to see all command line options.
-use --quiet to suppress this and other messages.
 {
+  agentShellSource,
   config,
   lib,
   pkgs,
@@ -17,10 +15,9 @@ use --quiet to suppress this and other messages.
     then pkgs.unstable.go
     else pkgs.go;
 
-  agentShellSource = builtins.fetchGit {
-    url = "https://github.com/kdoomsday/agent-shell.git";
-    rev = "20faf1cd827bd48375bd7d6f6001257937d6e026";
-  };
+  alejandraStdin = pkgs.writeShellScriptBin "alejandra-stdin" ''
+    exec ${lib.getExe pkgs.alejandra} --quiet - "$@"
+  '';
 
   nixTools = with pkgs; [
     alejandra
@@ -106,6 +103,7 @@ in {
 
   home.packages =
     [
+      alejandraStdin
       pkgs.metals
     ]
     ++ nixTools
@@ -143,7 +141,3 @@ in {
     ".emacs.d/private/agent-shell".source = agentShellSource;
   };
 }
-
-Congratulations! Your code complies with the Alejandra style.
-
-👏 Special thanks to Guangtao Zhang for being a sponsor of Alejandra!

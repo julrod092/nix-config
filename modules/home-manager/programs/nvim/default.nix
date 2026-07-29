@@ -229,8 +229,28 @@ in {
       lsp = {
         enable = true;
         servers = {
-          nil_ls.enable = true;
-          nixd.enable = true;
+          nil_ls = {
+            enable = true;
+            settings.nil.formatting.command = ["alejandra" "--quiet"];
+            onAttach.function = ''
+              client.server_capabilities.completionProvider = nil
+            '';
+          };
+          nixd = {
+            enable = true;
+            onAttach.function = ''
+              client.server_capabilities.codeActionProvider = nil
+              client.server_capabilities.definitionProvider = nil
+              client.server_capabilities.documentFormattingProvider = nil
+              client.server_capabilities.documentHighlightProvider = nil
+              client.server_capabilities.documentSymbolProvider = nil
+              client.server_capabilities.hoverProvider = nil
+              client.server_capabilities.implementationProvider = nil
+              client.server_capabilities.referencesProvider = nil
+              client.server_capabilities.renameProvider = nil
+              client.server_capabilities.typeDefinitionProvider = nil
+            '';
+          };
           gopls.enable = true;
           basedpyright.enable = true;
           ruff.enable = true;
@@ -278,7 +298,7 @@ in {
           };
           format_on_save = {
             timeout_ms = 3000;
-            lsp_format = "fallback";
+            lsp_format = "never";
           };
         };
       };
