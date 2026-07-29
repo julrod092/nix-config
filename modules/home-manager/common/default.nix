@@ -23,7 +23,6 @@
     ../programs/albert
     ../programs/opencode
     ../programs/emacs
-    ../programs/nvim
     ../programs/rust
     ../scripts
     ../services/ssh

@@ -149,17 +149,35 @@
 (defun dotspacemacs/user-config ()
   "Configure user settings after packages load."
   (setq-default fill-column 100)
-  (setq lsp-nix-nil-formatter ["alejandra"]
-        lsp-nix-nixd-formatting-command ["alejandra"]
+  (setq lsp-nix-nil-formatter ["alejandra-stdin"]
+        lsp-nix-nixd-formatting-command ["alejandra-stdin"]
         vterm-always-compile-module nil
         vterm-module-cmake-args (or (getenv "VTERM_MODULE_CMAKE_ARGS") "")
         nerd-icons-font-family "Symbols Nerd Font Mono")
   (with-eval-after-load 'nix-format
-    (setq nix-nixfmt-bin "alejandra"))
+    (setq nix-nixfmt-bin "alejandra-stdin"))
   (with-eval-after-load 'lsp-mode
     (require 'lsp-nix)
     (require 'lsp-toml)
-    (require 'lsp-marksman))
+    (require 'lsp-marksman)
+    (advice-add 'lsp-completion-at-point :around
+                (lambda (original &rest args)
+                  (let ((lsp-completion-provider
+                         (if (lsp-find-workspace 'nil nil)
+                             nil
+                           lsp-completion-provider)))
+                    (apply original args)))))
+    (with-eval-after-load 'lsp-nix
+      (lsp-register-client
+       (make-lsp-client
+        :new-connection (lsp-stdio-connection '("nixd"))
+        :activation-fn (lsp-activate-on "nix")
+        :server-id 'nixd-completion
+        :initialized-fn
+        (lambda (workspace)
+          (with-lsp-workspace workspace
+            (lsp--set-configuration
+             '(:nixd (:formatting (:command nil))))))))))
   (with-eval-after-load 'nerd-icons
     (when (display-graphic-p)
       (nerd-icons-set-font)))

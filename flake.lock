@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "agent-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778843946,
+        "narHash": "sha256-yNnlU3t2isGbojovRvnLiQ5cbcZaqBT3rGTQtkNZs9w=",
+        "owner": "kdoomsday",
+        "repo": "agent-shell",
+        "rev": "20faf1cd827bd48375bd7d6f6001257937d6e026",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kdoomsday",
+        "repo": "agent-shell",
+        "rev": "20faf1cd827bd48375bd7d6f6001257937d6e026",
+        "type": "github"
+      }
+    },
     "alejandra": {
       "inputs": {
         "fenix": "fenix",
@@ -542,6 +559,7 @@
     },
     "root": {
       "inputs": {
+        "agent-shell": "agent-shell",
         "alejandra": "alejandra",
         "arctis-sound-manager": "arctis-sound-manager",
         "catppuccin": "catppuccin",
