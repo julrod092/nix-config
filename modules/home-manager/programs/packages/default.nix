@@ -1,3 +1,6 @@
+Formatting stdin.
+Use --help to see all command line options.
+use --quiet to suppress this and other messages.
 {
   pkgs,
   lib,
@@ -43,6 +46,7 @@ in {
         # Security
         sops
         age
+        smithy-cli
       ]
       ++ lib.lists.optionals isDarwin [
         dockutil
@@ -80,3 +84,7 @@ in {
       ];
   };
 }
+
+Congratulations! Your code complies with the Alejandra style.
+
+👏 Special thanks to https://mercury.com for being a sponsor of Alejandra!
