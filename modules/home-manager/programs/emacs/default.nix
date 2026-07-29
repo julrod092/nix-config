@@ -99,6 +99,9 @@ in {
   programs.emacs = {
     enable = true;
     package = emacsPackage;
+    extraPackages = epkgs: [
+      epkgs.lsp-mode
+    ];
   };
 
   home.packages =

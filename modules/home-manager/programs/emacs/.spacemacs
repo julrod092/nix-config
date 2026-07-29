@@ -157,27 +157,9 @@
   (with-eval-after-load 'nix-format
     (setq nix-nixfmt-bin "alejandra-stdin"))
   (with-eval-after-load 'lsp-mode
-    (require 'lsp-nix)
+    (require 'lsp-nix nil t)
     (require 'lsp-toml)
-    (require 'lsp-marksman)
-    (advice-add 'lsp-completion-at-point :around
-                (lambda (original &rest args)
-                  (let ((lsp-completion-provider
-                         (if (lsp-find-workspace 'nil nil)
-                             nil
-                           lsp-completion-provider)))
-                    (apply original args)))))
-    (with-eval-after-load 'lsp-nix
-      (lsp-register-client
-       (make-lsp-client
-        :new-connection (lsp-stdio-connection '("nixd"))
-        :activation-fn (lsp-activate-on "nix")
-        :server-id 'nixd-completion
-        :initialized-fn
-        (lambda (workspace)
-          (with-lsp-workspace workspace
-            (lsp--set-configuration
-             '(:nixd (:formatting (:command nil))))))))))
+    (require 'lsp-marksman))
   (with-eval-after-load 'nerd-icons
     (when (display-graphic-p)
       (nerd-icons-set-font)))
