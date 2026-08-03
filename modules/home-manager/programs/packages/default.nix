@@ -4,7 +4,6 @@
   inputs,
   ...
 }: let
-  mainJdk = pkgs.zulu21;
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 in {
   home = {
@@ -23,25 +22,11 @@ in {
         lazydocker
         nh
         ripgrep
-        mainJdk
-        (sbt.override {jre = mainJdk;})
-        maven
-        unstable.devenv
-        scala-cli
         openssl
-        unstable.jetbrains.idea
-        unstable.jetbrains.rust-rover
         sops
-        vscode
-        fzf
         inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-        # Nix servers
-        nixd
-        nil
-
         # Security
-        sops
         age
         smithy-cli
       ]
@@ -61,7 +46,6 @@ in {
         unstable.zoom-us
         unstable.google-chrome
         unstable.awscli2
-        unstable.go
       ]
       ++ lib.lists.optionals (!isDarwin) [
         pavucontrol
