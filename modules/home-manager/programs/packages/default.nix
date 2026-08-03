@@ -29,6 +29,7 @@ in {
         # Security
         age
         smithy-cli
+        unstable.localstack
       ]
       ++ lib.lists.optionals isDarwin [
         dockutil
