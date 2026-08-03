@@ -19,11 +19,9 @@
     ../programs/zen
     ../programs/gpg
     ../programs/fzf
-    ../programs/nvim
     ../programs/albert
     ../programs/opencode
-    ../programs/emacs
-    ../programs/rust
+    ../programming
     ../scripts
     ../services/ssh
   ];
