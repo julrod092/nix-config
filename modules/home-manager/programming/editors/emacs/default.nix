@@ -1,4 +1,10 @@
-{config, lib, pkgs, agentShellSource, ...}: let
+{
+  config,
+  lib,
+  pkgs,
+  agentShellSource,
+  ...
+}: let
   cfg = config.nh.programming;
   emacsPackage =
     if pkgs.stdenv.hostPlatform.isLinux
@@ -14,6 +20,7 @@ in {
       package = emacsPackage;
       extraPackages = epkgs: [
         epkgs.lsp-mode
+        epkgs.popper
         epkgs.vterm
       ];
     };

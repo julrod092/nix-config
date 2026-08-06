@@ -60,13 +60,10 @@
          gofmt-command "gofumpt"
          go-use-golangci-lint t
          go-dap-mode 'dap-dlv-go)
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom
-            shell-default-term-shell (or (getenv "SPACEMACS_SHELL") (getenv "SHELL"))
-            shell-default-shell 'vterm
-            shell-close-window-with-terminal t))
-   dotspacemacs-additional-packages '(logview smithy-mode exec-path-from-shell)
+      (shell :variables
+             shell-default-term-shell (or (getenv "SPACEMACS_SHELL") (getenv "SHELL"))
+             shell-default-shell 'vterm))
+   dotspacemacs-additional-packages '(logview smithy-mode exec-path-from-shell popper sops)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
    dotspacemacs-install-packages 'used-only))
@@ -134,6 +131,214 @@
   (when (fboundp 'horizontal-scroll-bar-mode)
     (horizontal-scroll-bar-mode -1)))
 
+(defvar-local julrod/vterm-project-root nil)
+(defvar-local julrod/vterm-owner-frame nil)
+
+(defun julrod/vterm-parent-frame (&optional frame)
+  "Return the top-level parent of FRAME."
+  (let ((frame (or frame (selected-frame))))
+    (while (frame-parent frame)
+      (setq frame (frame-parent frame)))
+    frame))
+
+(defun julrod/vterm-project-root ()
+  "Return the current project root, or the home directory."
+  (file-truename
+   (or (when-let* ((project (project-current nil)))
+         (project-root project))
+       (expand-file-name "~"))))
+
+(defun julrod/vterm-project-name (root)
+  "Return a short display name for project ROOT."
+  (if (equal root (file-truename (expand-file-name "~")))
+      "~"
+    (file-name-nondirectory (directory-file-name root))))
+
+(defun julrod/vterm-managed-p (buffer)
+  "Return non-nil when BUFFER is a managed floating VTerm."
+  (and (buffer-live-p buffer)
+       (buffer-local-value 'julrod/vterm-project-root buffer)
+       (frame-live-p (buffer-local-value 'julrod/vterm-owner-frame buffer))))
+
+(defun julrod/vterm-buffers-for-frame (&optional frame)
+  "Return managed VTerms owned by top-level FRAME."
+  (let ((owner (julrod/vterm-parent-frame frame)))
+    (seq-filter
+     (lambda (buffer)
+       (and (julrod/vterm-managed-p buffer)
+            (eq (buffer-local-value 'julrod/vterm-owner-frame buffer) owner)))
+     (buffer-list))))
+
+(defun julrod/vterm-buffer-for-project (root &optional frame)
+  "Return the managed VTerm for ROOT and top-level FRAME."
+  (seq-find
+   (lambda (buffer)
+     (equal (buffer-local-value 'julrod/vterm-project-root buffer) root))
+   (julrod/vterm-buffers-for-frame frame)))
+
+(defun julrod/vterm-current-directory (buffer)
+  "Return BUFFER's tracked directory, falling back to its project root."
+  (with-current-buffer buffer
+    (or (and (stringp default-directory) default-directory)
+        julrod/vterm-project-root)))
+
+(defun julrod/vterm-frame-title (buffer)
+  "Return the child-frame title for managed VTerm BUFFER."
+  (format "VTerm: %s - %s"
+          (julrod/vterm-project-name
+           (buffer-local-value 'julrod/vterm-project-root buffer))
+          (abbreviate-file-name (julrod/vterm-current-directory buffer))))
+
+(defun julrod/vterm-update-frame-title (&optional buffer)
+  "Update the visible child-frame title for BUFFER."
+  (let* ((buffer (or buffer (current-buffer)))
+         (window (get-buffer-window buffer t))
+         (frame (and window (window-frame window))))
+    (when (and frame (frame-parent frame))
+      (set-frame-parameter frame 'name (julrod/vterm-frame-title buffer)))))
+
+(defun julrod/vterm-display (buffer &optional alist)
+  "Display managed VTerm BUFFER in a centered child frame.
+ALIST is the display action alist supplied by Popper."
+  (let* ((parent (julrod/vterm-parent-frame))
+         (parent-width (frame-pixel-width parent))
+         (parent-height (frame-pixel-height parent))
+         (width (floor (* parent-width 0.8)))
+         (height (floor (* parent-height 0.7)))
+         (parameters `((parent-frame . ,parent)
+                       (minibuffer . nil)
+                       (unsplittable . t)
+                       (no-other-frame . t)
+                       (undecorated . nil)
+                       (accept-focus . t)
+                       (width . (text-pixels . ,width))
+                       (height . (text-pixels . ,height))
+                       (left . ,(floor (/ (- parent-width width) 2)))
+                       (top . ,(floor (/ (- parent-height height) 2)))
+                       (name . ,(julrod/vterm-frame-title buffer))))
+         (window (display-buffer-in-child-frame
+                  buffer (append alist `((child-frame-parameters . ,parameters))))))
+    (when (window-live-p window)
+      (select-frame-set-input-focus (window-frame window))
+      (select-window window))
+    window))
+
+(defun julrod/vterm-visible-window (&optional frame)
+  "Return the visible managed VTerm window owned by FRAME."
+  (seq-some
+   (lambda (buffer)
+     (get-buffer-window buffer t))
+   (julrod/vterm-buffers-for-frame frame)))
+
+(defun julrod/vterm-remember-editor ()
+  "Remember where focus should return after hiding the VTerm."
+  (let ((frame (julrod/vterm-parent-frame)))
+    (set-frame-parameter frame 'julrod/vterm-return-frame frame)
+    (set-frame-parameter frame 'julrod/vterm-return-window (selected-window))
+    (set-frame-parameter frame 'julrod/vterm-return-buffer (current-buffer))))
+
+(defun julrod/vterm-restore-editor (&optional frame)
+  "Restore the editor focus recorded for FRAME."
+  (let* ((frame (julrod/vterm-parent-frame frame))
+         (window (frame-parameter frame 'julrod/vterm-return-window))
+         (buffer (frame-parameter frame 'julrod/vterm-return-buffer)))
+    (when (frame-live-p frame)
+      (select-frame-set-input-focus frame)
+      (cond
+       ((window-live-p window)
+        (select-window window))
+       ((buffer-live-p buffer)
+        (switch-to-buffer buffer))))))
+
+(defun julrod/vterm-get-or-create (root frame)
+  "Return the managed VTerm for ROOT and FRAME, creating it if needed."
+  (require 'vterm)
+  (or (julrod/vterm-buffer-for-project root frame)
+      (let* ((default-directory root)
+             (name (format "*vterm:%s*" (julrod/vterm-project-name root)))
+             (buffer (generate-new-buffer name)))
+        (with-current-buffer buffer
+          (vterm-mode)
+          (setq-local julrod/vterm-project-root root
+                      julrod/vterm-owner-frame frame
+                      popper-popup-status 'popup))
+        buffer)))
+
+(defun julrod/vterm-show (buffer)
+  "Show managed VTerm BUFFER and enter Evil insert state."
+  (julrod/vterm-display buffer)
+  (when-let* ((window (get-buffer-window buffer t)))
+    (select-frame-set-input-focus (window-frame window))
+    (select-window window)
+    (julrod/vterm-update-frame-title buffer)
+    (when (fboundp 'evil-insert-state)
+      (evil-insert-state))))
+
+(defun julrod/vterm-hide ()
+  "Hide the floating VTerm without killing its buffer or process."
+  (interactive)
+  (when-let* ((child (and (frame-parent) (selected-frame)))
+              (parent (frame-parent child)))
+    (delete-frame child)
+    (julrod/vterm-restore-editor parent)))
+
+(defun julrod/vterm-toggle (&optional _prefix)
+  "Toggle the current project's persistent floating VTerm."
+  (interactive "P")
+  (when (display-graphic-p)
+    (let* ((parent (julrod/vterm-parent-frame))
+           (visible (julrod/vterm-visible-window parent)))
+      (if visible
+          (with-selected-window visible
+            (julrod/vterm-hide))
+        (let ((root (julrod/vterm-project-root)))
+          (julrod/vterm-remember-editor)
+          (julrod/vterm-show (julrod/vterm-get-or-create root parent)))))))
+
+(defun julrod/vterm-cycle (step)
+  "Cycle STEP positions through VTerms owned by the current parent frame."
+  (let* ((buffers (julrod/vterm-buffers-for-frame))
+         (count (length buffers)))
+    (when (> count 0)
+      (let* ((current (current-buffer))
+             (index (or (seq-position buffers current) 0))
+             (next (nth (mod (+ index step) count) buffers)))
+        (set-window-buffer (selected-window) next)
+        (julrod/vterm-update-frame-title next)
+        (when (fboundp 'evil-insert-state)
+          (evil-insert-state))))))
+
+(defun julrod/vterm-next ()
+  "Show the next managed VTerm for this parent frame."
+  (interactive)
+  (julrod/vterm-cycle 1))
+
+(defun julrod/vterm-previous ()
+  "Show the previous managed VTerm for this parent frame."
+  (interactive)
+  (julrod/vterm-cycle -1))
+
+(defun julrod/vterm-kill ()
+  "Kill the current managed VTerm and show the next one, if any."
+  (interactive)
+  (let* ((child (selected-frame))
+         (parent (julrod/vterm-parent-frame child))
+         (current (current-buffer))
+         (buffers (julrod/vterm-buffers-for-frame parent))
+         (index (or (seq-position buffers current) 0))
+         (remaining (delq current (copy-sequence buffers))))
+    (if remaining
+        (let ((next (nth (mod index (length remaining)) remaining)))
+          (set-window-buffer (selected-window) next)
+          (kill-buffer current)
+          (julrod/vterm-update-frame-title next)
+          (when (fboundp 'evil-insert-state)
+            (evil-insert-state)))
+      (kill-buffer current)
+      (when (and (frame-live-p child) (frame-parent child))
+        (delete-frame child))
+      (julrod/vterm-restore-editor parent))))
+
 (defun dotspacemacs/user-config ()
   "Configure user settings after packages load."
   (setq-default fill-column 100)
@@ -155,13 +360,32 @@
   (add-hook 'markdown-mode-hook #'lsp-deferred)
   (with-eval-after-load 'vterm
     (setq vterm-max-scrollback 10000
-          vterm-buffer-name-string "vterm %s")
+          vterm-buffer-name-string nil)
     (add-hook 'vterm-mode-hook
               (lambda ()
                 (setq-local cursor-type 'box)
                 (setq-local cursor-in-non-selected-windows 'box)))
     (define-key vterm-mode-map (kbd "C-c C-y") #'vterm-yank)
     (define-key vterm-mode-map (kbd "C-c C-c") #'vterm-send-C-c)
-    (define-key vterm-mode-map (kbd "C-c C-l") #'vterm-clear-scrollback))
+    (define-key vterm-mode-map (kbd "C-c C-l") #'vterm-clear-scrollback)
+    (evil-define-key 'normal vterm-mode-map
+      (kbd "q") #'julrod/vterm-hide
+      (kbd "K") #'julrod/vterm-kill
+      (kbd "]") #'julrod/vterm-next
+      (kbd "[") #'julrod/vterm-previous))
+  (use-package popper
+    :demand t
+    :init
+    (setq popper-reference-buffers (list #'julrod/vterm-managed-p)
+          popper-display-control t
+          popper-display-function #'julrod/vterm-display
+          popper-mode-line nil)
+    :config
+    (popper-mode +1))
+  (spacemacs/set-leader-keys "'" #'julrod/vterm-toggle)
   (when (and (display-graphic-p) (fboundp 'exec-path-from-shell-initialize))
-    (exec-path-from-shell-initialize)))
+    (exec-path-from-shell-initialize))
+  (use-package sops
+    :demand t
+    :config
+    (global-sops-mode +1)))
