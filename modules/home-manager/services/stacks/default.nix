@@ -81,6 +81,7 @@
                 wallos.oidc.userGroup
                 trek.oidc.userGroup
                 jotty.oidc.userGroup
+                homelable.oidc.userGroup
               ];
             };
             cpuerta = {
@@ -206,6 +207,16 @@
           enable = true;
           clientSecretFile = config.sops.secrets."authelia/services/jotty".path;
           clientSecretHash = "$pbkdf2-sha512$310000$LLzzqfk2YcLNvTtTbCYq7g$JHSQ0Dm5KAutsAHI8BhjM1BLmtrOMnL39Z8NF0DHDvXK8tdhzOdDBuF35hMWWZktEs0AGW9y.o2iQQhX.tBv/A";
+        };
+      };
+
+      homelable = {
+        enable = true;
+        secretKeyFile = config.sops.secrets."homelable/secret_key".path;
+        oidc = {
+          enable = true;
+          clientSecretHash = "$pbkdf2-sha512$310000$2kzMZv2.mous3ZoRLP0nbA$4Ua5S4qJT.aeqXdpwpf6XVdD/MWIcwZOaqKnKj9x68WfjrVRpSCvGiwAjIIELBFFE620enObj.Gpvgy6wY/9bw";
+          clientSecretFile = config.sops.secrets."authelia/services/homelable".path;
         };
       };
     };

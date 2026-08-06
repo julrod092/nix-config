@@ -20,36 +20,43 @@
   };
 
   desktop = {
-    secrets = { "gpg-ssh-key" = { path = "${config.home.homeDirectory}/.ssh/id_rsa.pub"; }; } // lib.genAttrs [
-      "authelia/jwt_secret"
-      "authelia/session_secret"
-      "authelia/encryption_key"
-      "authelia/oidc_hmac_secret"
-      "authelia/oidc_rsa_pk"
-      "authelia/services/trek"
-      "authelia/services/tandoor"
-      "authelia/services/freshrss"
-      "authelia/services/rx_resume"
-      "authelia/services/paperless"
-      "authelia/services/jotty"
-      "authelia/services/wallos"
-      "aiostreams/secret_key"
-      "lldap/key_seed"
-      "lldap/jwt_secret"
-      "lldap/admin_password"
-      "lldap/julian_password"
-      "lldap/cpuerta_password"
-      "paperless/admin_password"
-      "paperless/secret_key"
-      "paperless/db_password"
-      "traefik/cf_api_token"
-      "rx_resume/auth_secret"
-      "rx_resume/db_password"
-      "job-ops/rx_resume_api_key"
-      "freshrss/authelia_crypto_key"
-      "tandoor/secret_key"
-      "tandoor/db_password"
-    ] (s: {});
+    secrets =
+      {
+        "gpg-ssh-key" = {path = "${config.home.homeDirectory}/.ssh/id_rsa.pub";};
+        "localstack" = {};
+      }
+      // lib.genAttrs [
+        "authelia/jwt_secret"
+        "authelia/session_secret"
+        "authelia/encryption_key"
+        "authelia/oidc_hmac_secret"
+        "authelia/oidc_rsa_pk"
+        "authelia/services/trek"
+        "authelia/services/tandoor"
+        "authelia/services/freshrss"
+        "authelia/services/rx_resume"
+        "authelia/services/paperless"
+        "authelia/services/jotty"
+        "authelia/services/wallos"
+        "authelia/services/homelable"
+        "aiostreams/secret_key"
+        "lldap/key_seed"
+        "lldap/jwt_secret"
+        "lldap/admin_password"
+        "lldap/julian_password"
+        "lldap/cpuerta_password"
+        "paperless/admin_password"
+        "paperless/secret_key"
+        "paperless/db_password"
+        "traefik/cf_api_token"
+        "rx_resume/auth_secret"
+        "rx_resume/db_password"
+        "job-ops/rx_resume_api_key"
+        "freshrss/authelia_crypto_key"
+        "tandoor/secret_key"
+        "tandoor/db_password"
+        "homelable/secret_key"
+      ] (s: {});
     templates = {};
   };
 in {
