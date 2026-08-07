@@ -19,6 +19,7 @@ in {
       enable = true;
       package = emacsPackage;
       extraPackages = epkgs: [
+        epkgs.envrc
         epkgs.lsp-mode
         epkgs.popper
         epkgs.vterm

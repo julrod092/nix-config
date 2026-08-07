@@ -1,4 +1,4 @@
-{lib, config, ...}: let
+{lib, ...}: let
   nixLanguage = import ./languages/nix.nix;
   scalaLanguage = import ./languages/scala.nix;
   rustLanguage = import ./languages/rust.nix;
