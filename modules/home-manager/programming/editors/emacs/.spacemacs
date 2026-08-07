@@ -63,7 +63,7 @@
       (shell :variables
              shell-default-term-shell (or (getenv "SPACEMACS_SHELL") (getenv "SHELL"))
              shell-default-shell 'vterm))
-   dotspacemacs-additional-packages '(logview smithy-mode exec-path-from-shell popper sops)
+   dotspacemacs-additional-packages '(envrc logview smithy-mode exec-path-from-shell popper sops)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
    dotspacemacs-install-packages 'used-only))
@@ -206,6 +206,7 @@ ALIST is the display action alist supplied by Popper."
          (width (floor (* parent-width 0.8)))
          (height (floor (* parent-height 0.7)))
          (parameters `((parent-frame . ,parent)
+                       (julrod/vterm-frame . t)
                        (minibuffer . nil)
                        (unsplittable . t)
                        (no-other-frame . t)
@@ -219,6 +220,11 @@ ALIST is the display action alist supplied by Popper."
          (window (display-buffer-in-child-frame
                   buffer (append alist `((child-frame-parameters . ,parameters))))))
     (when (window-live-p window)
+      (dolist (other-window (window-list (window-frame window) 'no-minibuffer))
+        (when (and (not (eq other-window window))
+                   (with-current-buffer (window-buffer other-window)
+                     (derived-mode-p 'treemacs-mode)))
+          (delete-window other-window)))
       (select-frame-set-input-focus (window-frame window))
       (select-window window))
     window))
@@ -243,12 +249,23 @@ ALIST is the display action alist supplied by Popper."
          (window (frame-parameter frame 'julrod/vterm-return-window))
          (buffer (frame-parameter frame 'julrod/vterm-return-buffer)))
     (when (frame-live-p frame)
-      (select-frame-set-input-focus frame)
       (cond
        ((window-live-p window)
+        (select-frame frame)
         (select-window window))
        ((buffer-live-p buffer)
-        (switch-to-buffer buffer))))))
+        (select-frame frame)
+        (switch-to-buffer buffer)))
+      ;; Let the window system finish deleting the child frame before
+      ;; transferring keyboard focus back to its parent.
+      (run-at-time
+       0 nil
+       (lambda (target-frame target-window)
+         (when (frame-live-p target-frame)
+           (select-frame-set-input-focus target-frame)
+           (when (window-live-p target-window)
+             (select-window target-window))))
+       frame window))))
 
 (defun julrod/vterm-get-or-create (root frame)
   "Return the managed VTerm for ROOT and FRAME, creating it if needed."
@@ -353,6 +370,13 @@ ALIST is the display action alist supplied by Popper."
     (setq lsp-disabled-clients (cons 'nixd-lsp (remove 'nixd-lsp lsp-disabled-clients)))
     (require 'lsp-toml)
     (require 'lsp-marksman))
+  (use-package envrc
+    :demand t
+    :config
+    (envrc-global-mode +1))
+  (with-eval-after-load 'scala-mode
+    (remove-hook 'scala-mode-hook #'lsp)
+    (add-hook 'scala-mode-hook #'lsp-deferred t))
   (with-eval-after-load 'nerd-icons
     (when (display-graphic-p)
       (nerd-icons-set-font)))

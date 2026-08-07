@@ -4,8 +4,7 @@
   userConfig,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ../programs/alacritty
     ../programs/bat
@@ -41,11 +40,18 @@
   # Nicely reload system units when changing configs
   systemd.user.startServices = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "sd-switch";
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   # Home-Manager configuration for the user's home environment
   home = {
     username = "${userConfig.name}";
     homeDirectory =
-      if pkgs.stdenv.isDarwin then "/Users/${userConfig.name}" else "/home/${userConfig.name}";
+      if pkgs.stdenv.isDarwin
+      then "/Users/${userConfig.name}"
+      else "/home/${userConfig.name}";
     sessionVariables = {
       EDITOR = "vim";
     };
