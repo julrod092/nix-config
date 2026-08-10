@@ -800,7 +800,7 @@
         "repo": "zen-browser-flake",
         "type": "github"
       }
-    }
+
   },
   "root": "root",
   "version": 7
