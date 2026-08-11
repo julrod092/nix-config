@@ -31,6 +31,7 @@
      python
      spacemacs-org
      agent-shell
+     restclient
      (unicode-fonts :variables unicode-fonts-enable-ligatures t)
      (auto-completion :variables
                       auto-completion-enable-help-tooltip 'manual)
@@ -60,9 +61,9 @@
          gofmt-command "gofumpt"
          go-use-golangci-lint t
          go-dap-mode 'dap-dlv-go)
-      (shell :variables
-             shell-default-term-shell (or (getenv "SPACEMACS_SHELL") (getenv "SHELL"))
-             shell-default-shell 'vterm))
+     (shell :variables
+            shell-default-term-shell (or (getenv "SPACEMACS_SHELL") (getenv "SHELL"))
+            shell-default-shell 'vterm))
    dotspacemacs-additional-packages '(envrc logview smithy-mode exec-path-from-shell popper sops)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
