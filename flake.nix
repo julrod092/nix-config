@@ -122,7 +122,7 @@
           fullName
           ;
         email = "jandresrodriguez@nclcorp.com";
-        gitKey = "86D656A8DE022933";
+        gitKey = "";
         name = "julian";
       };
       julrod = {
@@ -212,20 +212,21 @@
 
     overlays = import ./overlays {inherit inputs;};
 
-    devShells = nixpkgs.lib.genAttrs [
-      "x86_64-linux"
-      "aarch64-darwin"
-    ] (system: let
-      pkgs = mkPkgs system;
-      nixLanguage = import ./modules/home-manager/programming/languages/nix.nix;
-      scalaLanguage = import ./modules/home-manager/programming/languages/scala.nix;
-      rustLanguage = import ./modules/home-manager/programming/languages/rust.nix;
-      goLanguage = import ./modules/home-manager/programming/languages/go.nix;
-    in {
-      nix = nixLanguage.devShell pkgs;
-      scala = scalaLanguage.devShell pkgs;
-      rust = rustLanguage.devShell pkgs;
-      go = goLanguage.devShell pkgs;
-    });
+    devShells =
+      nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ] (system: let
+        pkgs = mkPkgs system;
+        nixLanguage = import ./modules/home-manager/programming/languages/nix.nix;
+        scalaLanguage = import ./modules/home-manager/programming/languages/scala.nix;
+        rustLanguage = import ./modules/home-manager/programming/languages/rust.nix;
+        goLanguage = import ./modules/home-manager/programming/languages/go.nix;
+      in {
+        nix = nixLanguage.devShell pkgs;
+        scala = scalaLanguage.devShell pkgs;
+        rust = rustLanguage.devShell pkgs;
+        go = goLanguage.devShell pkgs;
+      });
   };
 }
