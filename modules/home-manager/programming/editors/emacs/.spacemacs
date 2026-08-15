@@ -9,7 +9,7 @@
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path '()
    dotspacemacs-configuration-layers
-   '(
+   '(typescript
      better-defaults
      syntax-checking
      (lsp :variables
