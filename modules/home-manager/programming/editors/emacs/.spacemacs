@@ -64,7 +64,7 @@
      (shell :variables
             shell-default-term-shell (or (getenv "SPACEMACS_SHELL") (getenv "SHELL"))
             shell-default-shell 'vterm))
-   dotspacemacs-additional-packages '(envrc logview smithy-mode exec-path-from-shell popper sops)
+   dotspacemacs-additional-packages '(envrc logview smithy-mode exec-path-from-shell popper)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
    dotspacemacs-install-packages 'used-only))
@@ -412,8 +412,4 @@ ALIST is the display action alist supplied by Popper."
     (popper-mode +1))
   (spacemacs/set-leader-keys "'" #'julrod/vterm-toggle)
   (when (and (display-graphic-p) (fboundp 'exec-path-from-shell-initialize))
-    (exec-path-from-shell-initialize))
-  (use-package sops
-    :demand t
-    :config
-    (global-sops-mode +1)))
+    (exec-path-from-shell-initialize)))
