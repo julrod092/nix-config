@@ -26,7 +26,10 @@ in {
       ];
     };
 
-    home.packages = [alejandraStdin];
+    home.packages = [
+      alejandraStdin
+      pkgs.typescript-language-server
+    ];
 
     home.sessionVariables.SPACEMACS_SHELL = lib.getExe pkgs.zsh;
 
