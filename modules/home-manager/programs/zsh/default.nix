@@ -1,7 +1,6 @@
 {
   pkgs,
   hostname,
-  userConfig,
   ...
 }: let
   systemRebuild =
