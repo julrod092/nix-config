@@ -9,15 +9,28 @@ on:
 
 jobs:
   evaluate:
-    runs-on: ubuntu-latest
+    name: evaluate ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: nix-desktop
+            runner: ubuntu-24.04
+            attribute: checks.x86_64-linux.nix-desktop
+          - name: prime-mini
+            runner: ubuntu-24.04-arm
+            attribute: checks.aarch64-linux.prime-mini
+          - name: nix-mac
+            runner: macos-15
+            attribute: checks.aarch64-darwin.nix-mac
+          - name: home-julian
+            runner: macos-15
+            attribute: checks.aarch64-darwin.home-julian
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v6
-      - uses: docker/setup-qemu-action@v4
-        with:
-          platforms: arm64
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes pipe-operators
-            extra-platforms = aarch64-linux
-      - run: nix flake check --no-build --all-systems
+      - run: nix eval --raw ".#${{ matrix.attribute }}.drvPath"
