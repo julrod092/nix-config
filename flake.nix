@@ -7,6 +7,15 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
 
+    colmena = {
+      url = "github:zhaofengli/colmena";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-apple-silicon = {
+      url = "github:nix-community/nixos-apple-silicon/release-2026-07-30";
+    };
+
     # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -85,9 +94,6 @@
 
   outputs = {
     self,
-    catppuccin,
-    darwin,
-    home-manager,
     nixpkgs,
     ...
   } @ inputs: let
@@ -112,120 +118,48 @@
       };
     };
 
-    # Define user configurations
-    users = {
-      "julian" = {
-        inherit
-          (users.julrod)
-          avatar
-          fullName
-          ;
-        email = "jandresrodriguez@nclcorp.com";
-        gitKey = "";
-        name = "julian";
-      };
-      julrod = {
-        avatar = ./files/avatar;
-        wallpaper = ./files/wallpaper.jpg;
-        email = "jrodriguezrpo@pm.me";
-        fullName = "Julian Rodriguez";
-        gitKey = "BB07BC58D5058FD9";
-        name = "julrod";
-      };
+    fleet = import ./fleet/constructors.nix {
+      inherit self inputs outputs nixpkgsConfig nixCacheSettings;
     };
-
-    # Function for NixOS system configuration
-    mkNixosConfiguration = hostname: username:
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs hostname;
-          userConfig = users.${username};
-          nixosModules = "${self}/modules/nixos";
-        };
-        modules = [
-          {nixpkgs.config = nixpkgsConfig;}
-          nixCacheSettings
-          inputs.sops-nix.nixosModules.sops
-          inputs.arctis-sound-manager.nixosModules.default
-          ./hosts/${hostname}
-        ];
-      };
-
-    # Function for nix-darwin system configuration
-    mkDarwinConfiguration = hostname: username:
-      darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {
-          inherit inputs outputs hostname;
-          userConfig = users.${username};
-          darwinModules = "${self}/modules/darwin";
-        };
-        modules = [
-          {nixpkgs.config = nixpkgsConfig;}
-          nixCacheSettings
-          ./hosts/${hostname}
-        ];
-      };
-
-    # Function for Home Manager configuration
-    mkHomeConfiguration = system: username: hostname:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config = nixpkgsConfig;
-        };
-        extraSpecialArgs = {
-          inherit inputs outputs hostname;
-          userConfig = users.${username};
-          nhModules = "${self}/modules/home-manager";
-          agentShellSource = inputs.agent-shell;
-        };
-        modules = [
-          ./home/${username}/${hostname}
-          catppuccin.homeModules.catppuccin
-          inputs.sops-nix.homeManagerModules.sops
-          inputs.nix-podman-stacks.homeModules.nps
-        ];
-      };
-    mkPkgs = system:
-      import nixpkgs {
-        inherit system;
-        config = nixpkgsConfig;
-        overlays = [
-          outputs.overlays.unstable-packages
-        ];
-      };
+    inherit (fleet) mkPkgs;
+    supportedSystems = [
+      "x86_64-linux"
+      "aarch64-linux"
+      "aarch64-darwin"
+    ];
   in {
-    nixosConfigurations = {
-      "nix-desktop" = mkNixosConfiguration "nix-desktop" "julrod";
-    };
+    inherit (fleet) nixosConfigurations darwinConfigurations homeConfigurations colmena;
 
-    darwinConfigurations = {
-      "nix-mac" = mkDarwinConfiguration "nix-mac" "julian";
-    };
-
-    homeConfigurations = {
-      "julian@nix-mac" = mkHomeConfiguration "aarch64-darwin" "julian" "nix-mac";
-      "julrod@nix-desktop" = mkHomeConfiguration "x86_64-linux" "julrod" "nix-desktop";
-    };
+    colmenaHive = inputs.colmena.lib.makeHive self.outputs.colmena;
 
     overlays = import ./overlays {inherit inputs;};
 
-    devShells =
-      nixpkgs.lib.genAttrs [
-        "x86_64-linux"
-        "aarch64-darwin"
-      ] (system: let
-        pkgs = mkPkgs system;
-        nixLanguage = import ./modules/home-manager/programming/languages/nix.nix;
-        scalaLanguage = import ./modules/home-manager/programming/languages/scala.nix;
-        rustLanguage = import ./modules/home-manager/programming/languages/rust.nix;
-        goLanguage = import ./modules/home-manager/programming/languages/go.nix;
-      in {
-        nix = nixLanguage.devShell pkgs;
-        scala = scalaLanguage.devShell pkgs;
-        rust = rustLanguage.devShell pkgs;
-        go = goLanguage.devShell pkgs;
-      });
+    formatter = nixpkgs.lib.genAttrs supportedSystems (system: (mkPkgs system).alejandra);
+
+    checks = {
+      x86_64-linux.nix-desktop = fleet.nixosConfigurations.nix-desktop.config.system.build.toplevel;
+      aarch64-linux.prime-mini = fleet.nixosConfigurations.prime-mini.config.system.build.toplevel;
+      aarch64-darwin.nix-mac = fleet.darwinConfigurations.nix-mac.system;
+      aarch64-darwin.home-julian = fleet.homeConfigurations."julian@nix-mac".activationPackage;
+    };
+
+    apps.x86_64-linux.colmena = {
+      type = "app";
+      program = "${inputs.colmena.packages.x86_64-linux.colmena}/bin/colmena";
+      meta.description = "Deploy the NixOS fleet with Colmena";
+    };
+
+    devShells = nixpkgs.lib.genAttrs supportedSystems (system: let
+      pkgs = mkPkgs system;
+      nixLanguage = import ./modules/home-manager/programming/languages/nix.nix;
+      scalaLanguage = import ./modules/home-manager/programming/languages/scala.nix;
+      rustLanguage = import ./modules/home-manager/programming/languages/rust.nix;
+      goLanguage = import ./modules/home-manager/programming/languages/go.nix;
+    in {
+      nix = nixLanguage.devShell pkgs;
+      scala = scalaLanguage.devShell pkgs;
+      rust = rustLanguage.devShell pkgs;
+      go = goLanguage.devShell pkgs;
+    });
   };
 }

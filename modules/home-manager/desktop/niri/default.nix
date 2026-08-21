@@ -1,6 +1,8 @@
 {
   inputs,
+  lib,
   nhModules,
+  osConfig ? null,
   pkgs,
   ...
 }: let
@@ -16,14 +18,9 @@
     proportion = 1.0;
   };
 in {
-  imports = [
-    inputs.niri.homeModules.config
-    "${nhModules}/desktop/wayland-common"
-  ];
-
-  nixpkgs.overlays = [
-    inputs.niri.overlays.niri
-  ];
+  imports =
+    lib.optional (osConfig == null) inputs.niri.homeModules.config
+    ++ ["${nhModules}/desktop/wayland-common"];
 
   programs.niri = {
     package = pkgs.niri-stable;

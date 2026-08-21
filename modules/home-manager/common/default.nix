@@ -1,6 +1,5 @@
 {
   lib,
-  outputs,
   userConfig,
   pkgs,
   ...
@@ -24,18 +23,6 @@
     ../scripts
     ../services/ssh
   ];
-
-  # Nixpkgs configuration
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.unstable-packages
-      outputs.overlays.expected-package-revision
-    ];
-
-    config = {
-      allowUnfree = true;
-    };
-  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "sd-switch";

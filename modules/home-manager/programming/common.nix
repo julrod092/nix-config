@@ -1,4 +1,9 @@
-{pkgs, lib, config, ...}: let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   cfg = config.nh.programming;
 in {
   config = lib.mkIf (cfg.enable && cfg.common.enable) {

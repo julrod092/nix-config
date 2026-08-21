@@ -1,6 +1,6 @@
 {nhModules, ...}: {
   imports = [
-    "${nhModules}/common"
+    "${nhModules}/roles/workstation"
     "${nhModules}/secrets/sops"
   ];
 

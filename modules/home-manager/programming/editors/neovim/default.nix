@@ -56,20 +56,90 @@ in {
       extraPackages = [pythonForDap];
 
       keymaps = [
-        {mode = "n"; key = "<leader>w"; action = "<cmd>w<cr>"; options.desc = "Save file";}
-        {mode = "n"; key = "<leader>q"; action = "<cmd>q<cr>"; options.desc = "Quit window";}
-        {mode = "n"; key = "<leader>e"; action = "<cmd>Neotree focus<cr>"; options.desc = "Focus explorer (neo-tree)";}
-        {mode = "n"; key = "<leader>E"; action = "<cmd>Neotree reveal<cr>"; options.desc = "Reveal current file";}
-        {mode = "n"; key = "<leader>fp"; action = "<cmd>Telescope projects<cr>"; options.desc = "Projects";}
-        {mode = "n"; key = "<S-h>"; action = "<cmd>bprevious<cr>"; options.desc = "Previous buffer";}
-        {mode = "n"; key = "<S-l>"; action = "<cmd>bnext<cr>"; options.desc = "Next buffer";}
-        {mode = "n"; key = "<leader>bd"; action = "<cmd>bdelete<cr>"; options.desc = "Delete buffer";}
-        {mode = "n"; key = "<C-h>"; action = "<C-w>h"; options.desc = "Go to left window";}
-        {mode = "n"; key = "<C-j>"; action = "<C-w>j"; options.desc = "Go to lower window";}
-        {mode = "n"; key = "<C-k>"; action = "<C-w>k"; options.desc = "Go to upper window";}
-        {mode = "n"; key = "<C-l>"; action = "<C-w>l"; options.desc = "Go to right window";}
-        {mode = "n"; key = "<leader>gg"; action = "<cmd>LazyGit<cr>"; options.desc = "LazyGit";}
-        {mode = "n"; key = "<leader>cf"; action.__raw = "function() require('conform').format({ async = true, lsp_format = 'fallback' }) end"; options.desc = "Format buffer";}
+        {
+          mode = "n";
+          key = "<leader>w";
+          action = "<cmd>w<cr>";
+          options.desc = "Save file";
+        }
+        {
+          mode = "n";
+          key = "<leader>q";
+          action = "<cmd>q<cr>";
+          options.desc = "Quit window";
+        }
+        {
+          mode = "n";
+          key = "<leader>e";
+          action = "<cmd>Neotree focus<cr>";
+          options.desc = "Focus explorer (neo-tree)";
+        }
+        {
+          mode = "n";
+          key = "<leader>E";
+          action = "<cmd>Neotree reveal<cr>";
+          options.desc = "Reveal current file";
+        }
+        {
+          mode = "n";
+          key = "<leader>fp";
+          action = "<cmd>Telescope projects<cr>";
+          options.desc = "Projects";
+        }
+        {
+          mode = "n";
+          key = "<S-h>";
+          action = "<cmd>bprevious<cr>";
+          options.desc = "Previous buffer";
+        }
+        {
+          mode = "n";
+          key = "<S-l>";
+          action = "<cmd>bnext<cr>";
+          options.desc = "Next buffer";
+        }
+        {
+          mode = "n";
+          key = "<leader>bd";
+          action = "<cmd>bdelete<cr>";
+          options.desc = "Delete buffer";
+        }
+        {
+          mode = "n";
+          key = "<C-h>";
+          action = "<C-w>h";
+          options.desc = "Go to left window";
+        }
+        {
+          mode = "n";
+          key = "<C-j>";
+          action = "<C-w>j";
+          options.desc = "Go to lower window";
+        }
+        {
+          mode = "n";
+          key = "<C-k>";
+          action = "<C-w>k";
+          options.desc = "Go to upper window";
+        }
+        {
+          mode = "n";
+          key = "<C-l>";
+          action = "<C-w>l";
+          options.desc = "Go to right window";
+        }
+        {
+          mode = "n";
+          key = "<leader>gg";
+          action = "<cmd>LazyGit<cr>";
+          options.desc = "LazyGit";
+        }
+        {
+          mode = "n";
+          key = "<leader>cf";
+          action.__raw = "function() require('conform').format({ async = true, lsp_format = 'fallback' }) end";
+          options.desc = "Format buffer";
+        }
       ];
 
       plugins = {

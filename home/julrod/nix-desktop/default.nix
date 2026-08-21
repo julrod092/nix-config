@@ -1,9 +1,9 @@
 {nhModules, ...}: {
   imports = [
-    "${nhModules}/common"
+    "${nhModules}/roles/workstation"
     "${nhModules}/desktop/niri"
     "${nhModules}/secrets/sops"
-    "${nhModules}/services/stacks"
+   # "${nhModules}/services/stacks"
   ];
 
   # Enable home-manager

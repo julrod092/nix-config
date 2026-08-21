@@ -1,5 +1,8 @@
-{ nixosModules, pkgs, ... }:
 {
+  nixosModules,
+  pkgs,
+  ...
+}: {
   imports = [
     "${nixosModules}/desktop/wayland-common"
   ];

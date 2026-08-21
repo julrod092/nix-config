@@ -27,14 +27,16 @@
   };
 
   # Set necessary environment variables
-  environment.sessionVariables = {
-    # Add variables to help with EGL/OpenGL issues
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    LIBVA_DRIVER_NAME = "nvidia";
-    # WLR_NO_HARDWARE_CURSORS is for wlroots compositors (Hyprland/Sway)
-    # Not needed for GNOME/Mutter and can cause cursor rendering issues
-  } // lib.optionalAttrs (!config.services.desktopManager.gnome.enable) {
-    WLR_NO_HARDWARE_CURSORS = "1";
-  };
+  environment.sessionVariables =
+    {
+      # Add variables to help with EGL/OpenGL issues
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia";
+      # WLR_NO_HARDWARE_CURSORS is for wlroots compositors (Hyprland/Sway)
+      # Not needed for GNOME/Mutter and can cause cursor rendering issues
+    }
+    // lib.optionalAttrs (!config.services.desktopManager.gnome.enable) {
+      WLR_NO_HARDWARE_CURSORS = "1";
+    };
 }

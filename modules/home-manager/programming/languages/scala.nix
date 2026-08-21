@@ -1,5 +1,10 @@
 {
-  module = {pkgs, lib, config, ...}: let
+  module = {
+    pkgs,
+    lib,
+    config,
+    ...
+  }: let
     cfg = config.nh.programming;
   in {
     config = lib.mkIf (cfg.enable && cfg.languages.scala.enable) {
