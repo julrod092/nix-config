@@ -4,10 +4,10 @@
   userConfig,
   ...
 }: let
-  system-rebuild =
+  systemRebuild =
     if pkgs.stdenv.isDarwin
-    then "darwin-rebuild"
-    else "nixos-rebuild";
+    then "sudo darwin-rebuild switch --flake ~/.nix-config#${hostname}"
+    else "nix run ~/.nix-config#colmena -- apply-local --sudo";
 in {
   programs.zsh = {
     enable = true;
@@ -16,10 +16,9 @@ in {
     shellAliases = {
       ff = "fastfetch";
       nix-clean = "sudo nix-env --delete-generations old && nix-env --delete-generations old && sudo  nix-collect-garbage -d && nix-collect-garbage -d";
-      nix-update = "sudo ${system-rebuild} switch --flake ~/.nix-config#${hostname}";
-      hm-update = "home-manager switch --flake ~/.nix-config#${userConfig.name}@${hostname}";
+      nix-update = systemRebuild;
       flake-update = "nix flake update --flake ~/.nix-config";
-      nix-full-update = "flake-update && nix-update && hm-update && nix-clean";
+      nix-full-update = "flake-update && nix-update && nix-clean";
     };
 
     oh-my-zsh = {

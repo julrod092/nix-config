@@ -2,11 +2,10 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   config = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
     # Albert package
-    home.packages = [ pkgs.albert ];
+    home.packages = [pkgs.albert];
 
     # Source albert configuration from the home-manager store
     xdg.configFile."albert/config".text = ''
@@ -49,7 +48,7 @@
     systemd.user.services.albert = {
       Unit = {
         Description = "Albert Launcher";
-        After = [ "graphical-session.target" ];
+        After = ["graphical-session.target"];
       };
       Service = {
         ExecStart = "${pkgs.albert}/bin/albert";
@@ -57,7 +56,7 @@
         RestartSec = "0s";
       };
       Install = {
-        WantedBy = [ "graphical-session.target" ];
+        WantedBy = ["graphical-session.target"];
       };
     };
   };

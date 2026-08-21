@@ -1,5 +1,4 @@
-{ nhModules, ... }:
-{
+{nhModules, ...}: {
   imports = [
     "${nhModules}/desktop/wayland-common"
   ];

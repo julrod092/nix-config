@@ -1,6 +1,6 @@
 {darwinModules, ...}: {
   imports = [
-    "${darwinModules}/common"
+    "${darwinModules}/roles/workstation"
   ];
 
   # Used for backwards compatibility, please read the changelog before changing.

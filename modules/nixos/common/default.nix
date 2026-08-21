@@ -6,8 +6,7 @@
   userConfig,
   pkgs,
   ...
-}:
-{
+}: {
   # Nixpkgs configuration
   nixpkgs = {
     overlays = [
@@ -20,7 +19,7 @@
   };
 
   # Register flake inputs for nix commands
-  nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) (
+  nix.registry = lib.mapAttrs (_: flake: {inherit flake;}) (
     lib.filterAttrs (_: lib.isType "flake") inputs
   );
 
@@ -30,10 +29,12 @@
     "/etc/nix/path"
     "nixpkgs=flake:nixpkgs"
   ];
-  environment.etc = lib.mapAttrs' (name: value: {
-    name = "nix/path/${name}";
-    value.source = value.flake;
-  }) config.nix.registry;
+  environment.etc =
+    lib.mapAttrs' (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    })
+    config.nix.registry;
 
   # Nix settings
   nix.settings = {
@@ -45,7 +46,7 @@
   # Reduce swapping pressure and improve responsiveness
   boot.kernel.sysctl = {
     # Swap settings - use swap only when necessary
-    "vm.swappiness" = 10;  # Default is 60, lower = less swapping
+    "vm.swappiness" = 10; # Default is 60, lower = less swapping
     "vm.dirty_ratio" = 10; # Start writing dirty pages earlier
     "vm.dirty_background_ratio" = 5; # Start background writeback earlier
   };
@@ -98,7 +99,7 @@
 
   # Input settings
   services.libinput.enable = true;
-  services.xserver.excludePackages = with pkgs; [ xterm ];
+  services.xserver.excludePackages = with pkgs; [xterm];
 
   # PATH configuration
   environment = {
@@ -140,7 +141,7 @@
 
     # Enable PC/SC daemon for YubiKey support
     pcscd.enable = true;
-    udev.packages = [ pkgs.yubikey-personalization ];
+    udev.packages = [pkgs.yubikey-personalization];
 
     # OpenSSH daemon
     openssh.enable = true;

@@ -1,0 +1,3 @@
+{darwinModules, ...}: {
+  imports = ["${darwinModules}/common"];
+}

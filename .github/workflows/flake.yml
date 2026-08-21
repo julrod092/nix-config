@@ -1,6 +1,9 @@
 ---
 # inspo: https://github.com/reckenrode/nixos-configs/blob/main/.github/workflows/main.yml
 name: Bump flake.lock
+permissions:
+  contents: write
+  pull-requests: write
 on:
   schedule:
     - cron: 0 10 * * *
@@ -17,13 +20,13 @@ jobs:
 
       - run: nix flake update
 
-      - uses: stefanzweifel/git-auto-commit-action@v7
+      - run: nix flake check --no-build --all-systems
+
+      - uses: peter-evans/create-pull-request@v8
         with:
-          commit_message: "chore(deps): bump flake.lock"
-          commit_user_name: Flake Bot
-          commit_options: --no-verify --signoff
-          commit_author: Flake Bot <actions@github.com>
-          branch: master
-          file_pattern: flake.lock
-          skip_dirty_check: false
-          skip_fetch: true
+          branch: automation/flake-update
+          delete-branch: true
+          commit-message: "chore(deps): bump flake.lock"
+          title: "chore(deps): bump flake.lock"
+          body: "Automated flake input update. All configuration evaluations passed."
+          add-paths: flake.lock

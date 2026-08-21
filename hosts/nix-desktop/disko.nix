@@ -32,7 +32,7 @@
             };
 
             swap = {
-              uuid   = "a7818b25-b04d-4c76-b1ab-9282521d2dc3";
+              uuid = "a7818b25-b04d-4c76-b1ab-9282521d2dc3";
               start = "396813153s";
               end = "468862061s";
               content = {

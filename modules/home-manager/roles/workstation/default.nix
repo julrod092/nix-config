@@ -1,0 +1,3 @@
+{nhModules, ...}: {
+  imports = ["${nhModules}/common"];
+}

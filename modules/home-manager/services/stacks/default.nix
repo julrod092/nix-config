@@ -1,224 +1,290 @@
 {
   config,
   lib,
+  pkgs,
   ...
-}: {
-  xdg.configFile."containers/storage.conf" = lib.mkForce {
-    text = ''
-      [storage]
-      driver = "overlay"
-      graphroot = "${config.home.homeDirectory}/m2/Podman"
-      runroot = "/run/user/1000/containers"
-    '';
+}: let
+  cfg = config.nh.primeMiniStack;
+  secretRoot = "/var/lib/nix-fleet/secrets";
+  keyPath = service: name: "${secretRoot}/${service}/${name}";
+  qualifiedImages = {
+    adguard = "docker.io/adguard/adguardhome:v0.107.79@sha256:aba9e3bf0613be3ba3755e1fc311b126e2c24bec25e18b6483894a88283074f0";
+    aiostreams = "ghcr.io/viren070/aiostreams:v2.33.2@sha256:b169ccfb2b6f351f1bc5a8a460e4e102db77a11fb4fc58222e411d96b3adb85b";
+    authelia = "ghcr.io/authelia/authelia:4.39.20@sha256:1b363e9279e742397966333f364e0876ae02bf5c876de73e83af6d48c57ff51b";
+    docker-socket-proxy = "ghcr.io/tecnativa/docker-socket-proxy:v0.5.0@sha256:1f5038b54f06c3e18422902cf00ba21803d1c97805aae032e5e6673d532d3459";
+    grafana = "docker.io/grafana/grafana:13.2.0@sha256:3fd54ae1214669f8355f065ec9f6445d5279a3d77095ab048ca045685272429b";
+    homepage = "ghcr.io/gethomepage/homepage:v2.1.0@sha256:d0aeae2e24387af7267d38c8573692b61e0543aa083c689ad04f32267fe6706a";
+    job-ops = "ghcr.io/dakheera47/job-ops:v0.11.0@sha256:37b11b43f2e88b034a3b64066cedd530687e7f280d5a980b60af1714434ef43d";
+    lldap = "ghcr.io/lldap/lldap:2026-08-10-alpine-rootless@sha256:ef56e5717738734cedc41bef70c6ece5fb79531322cf58016d015acd99ca1b09";
+    memos = "ghcr.io/usememos/memos:0.30.0@sha256:71a5b4738d1bed96e92112004054f0888e92791b64eb78afd79077c96e6f9327";
+    memos-db = "docker.io/postgres:17@sha256:e38411452a464af89e5adadb8d223bf53b898d47d6ef918b2d58c08707350449";
+    norish = "docker.io/norishapp/norish:v0.20.0-beta@sha256:a289b81273dac3b7e7a17fd2a8a2c313d5edc673e5ba42781dc155196b38b6e8";
+    norish-browser = "docker.io/zenika/alpine-chrome:124@sha256:e3048875b6f75d0332085b093d55a82009fb8e688a1394106800397b534b9b23";
+    norish-db = "docker.io/postgres:18@sha256:06cad38a5d9f5d24b4d83d86def30795d5e4b757fedbf5281172b576dedcd941";
+    norish-redis = "docker.io/redis:8@sha256:691577adaf11927f4bb8871d40a5dd69a5c300d4453b742e8f6383c3e6e8d2e1";
+    ntfy = "docker.io/binwiederhier/ntfy:v2.27.0@sha256:f2419f405127afa868f10985c1a41449e673477cee1eb19994339a5ae8b592e7";
+    outline = "docker.io/outlinewiki/outline:1.9.2@sha256:32d76719c378931dd65d93945930ca380d8376a0337d98a991fcc12b266f33cf";
+    outline-db = "docker.io/postgres:17@sha256:e38411452a464af89e5adadb8d223bf53b898d47d6ef918b2d58c08707350449";
+    outline-redis = "docker.io/redis:8.2@sha256:69549d08c5a19b8c28214dea5dfe3b6afa7ac1ad7ea61d66c29a8454b875df40";
+    prometheus = "docker.io/prom/prometheus:v3.14.0@sha256:5ce7540c3c00ef4ab0c9d2c995c6a5b9c421f44b4a115d97a2c7af3b1c21cbb0";
+    traefik = "docker.io/traefik:v3.7.11@sha256:5203c3f39ca70de6790d964624e042463ffbd57715bc82be155cf224c0dd5144";
   };
+  forwardAuthContainers = [
+    "adguard"
+    "homepage"
+    "job-ops"
+    "lldap"
+    "prometheus"
+    "traefik"
+    "networking-toolbox"
+    "it-tools"
+    "stirling-pdf"
+  ];
+in {
+  options.nh.primeMiniStack.enable = lib.mkEnableOption "the prime-mini homelab stack";
 
-  services.podman.containers = {
-    # These containers mount sops-nix secrets at startup.
-    aiostreams.dependsOn = ["sops-nix.service"];
-    authelia.dependsOn = ["sops-nix.service"];
-    lldap.dependsOn = ["sops-nix.service"];
-    paperless.dependsOn = ["sops-nix.service"];
-    paperless-db.dependsOn = ["sops-nix.service"];
-    traefik.dependsOn = ["sops-nix.service"];
-    stirling-pdf.dependsOn = ["sops-nix.service"];
-    reactive-resume.dependsOn = ["sops-nix.service"];
-    job-ops.dependsOn = ["sops-nix.service"];
-    tandoor.dependsOn = ["sops-nix.service"];
-    tandoor-db.dependsOn = ["sops-nix.service"];
-    wallos.dependsOn = ["sops-nix.service"];
-    freshrss.dependsOn = ["sops-nix.service"];
-    # n8n.dependsOn = ["sops-nix.service"];
-    trek.dependsOn = ["sops-nix.service"];
-  };
-
-  nps = {
-    defaultTz = "America/Bogota";
-    hostIP4Address = "192.168.68.58";
-    storageBaseDir = "${config.home.homeDirectory}/m2/stacks/volumes";
-    externalStorageBaseDir = "${config.home.homeDirectory}/m2/stacks";
-
-    stacks = {
-      homepage.enable = true;
-      docker-socket-proxy.enable = true;
-      monitoring.enable = true;
-      adguard.enable = true;
-      homeassistant.enable = true;
-      networking-toolbox.enable = true;
-      it-tools.enable = true;
-      #n8n.enable = true;
-      mazanoke.enable = true;
-
-      authelia = {
-        enable = true;
-        jwtSecretFile = config.sops.secrets."authelia/jwt_secret".path;
-        sessionSecretFile = config.sops.secrets."authelia/session_secret".path;
-        storageEncryptionKeyFile = config.sops.secrets."authelia/encryption_key".path;
+  config = {
+    nps.stacks = {
+      adguard.enable = cfg.enable;
+      aiostreams = {
+        enable = cfg.enable;
+        secretKeyFile = keyPath "aiostreams" "aiostreams-secret-key";
+      };
+      memos = {
+        enable = cfg.enable;
+        db = {
+          type = "postgres";
+          passwordFile = keyPath "memos" "memos-db-password";
+        };
         oidc = {
-          enable = true;
-          hmacSecretFile = config.sops.secrets."authelia/oidc_hmac_secret".path;
-          jwksRsaKeyFile = config.sops.secrets."authelia/oidc_rsa_pk".path;
+          registerClient = true;
+          clientSecretHash.toHash = keyPath "memos" "memos-oidc-client-secret";
         };
       };
+      norish = {
+        enable = cfg.enable;
+        masterKeyFile = keyPath "norish" "norish-master-key";
+        db.passwordFile = keyPath "norish" "norish-db-password";
+        oidc = {
+          enable = true;
+          clientSecretFile = keyPath "norish" "norish-oidc-client-secret";
+        };
+      };
+      outline = {
+        enable = cfg.enable;
+        secretKeyFile = keyPath "outline" "outline-secret-key";
+        utilsSecretFile = keyPath "outline" "outline-utils-secret";
+        db.passwordFile = keyPath "outline" "outline-db-password";
+        oidc = {
+          enable = true;
+          clientSecretFile = keyPath "outline" "outline-oidc-client-secret";
+        };
+      };
+      docker-socket-proxy.enable = cfg.enable;
+      homepage.enable = cfg.enable;
+      job-ops.enable = cfg.enable;
+      networking-toolbox.enable = cfg.enable;
+      it-tools.enable = cfg.enable;
+      stirling-pdf.enable = cfg.enable;
+      mazanoke.enable = cfg.enable;
 
       lldap = {
-        enable = true;
+        enable = cfg.enable;
         baseDn = "DC=estudioochosiete,DC=xyz";
-        jwtSecretFile = config.sops.secrets."lldap/jwt_secret".path;
-        keySeedFile = config.sops.secrets."lldap/key_seed".path;
-        adminPasswordFile = config.sops.secrets."lldap/admin_password".path;
+        jwtSecretFile = keyPath "lldap" "lldap-jwt-secret";
+        keySeedFile = keyPath "lldap" "lldap-key-seed";
+        adminPasswordFile = keyPath "lldap" "lldap-admin-password";
         bootstrap = {
-          cleanUp = true;
+          cleanUp = false;
           users = {
             julrod = {
               email = "julianrodriguez@estudioochosiete.xyz";
               displayName = "Julian Rodriguez";
-              password_file = config.sops.secrets."lldap/julian_password".path;
-              groups = with config.nps.stacks; [
-                paperless.oidc.userGroup
-                reactive-resume.oidc.userGroup
-                freshrss.oidc.userGroup
-                tandoor.oidc.userGroup
-                wallos.oidc.userGroup
-                trek.oidc.userGroup
-                jotty.oidc.userGroup
-                homelable.oidc.userGroup
+              password_file = keyPath "lldap" "lldap-julian-password";
+              groups = [
+                config.nps.stacks.monitoring.grafana.oidc.adminGroup
+                config.nps.stacks.memos.oidc.userGroup
+                config.nps.stacks.norish.oidc.adminGroup
+                config.nps.stacks.outline.oidc.userGroup
               ];
             };
             cpuerta = {
               email = "cpuerta@estudioochosiete.xyz";
               displayName = "Cristina Puerta";
-              password_file = config.sops.secrets."lldap/cpuerta_password".path;
-              groups = with config.nps.stacks; [
-                homebox.oidc.userGroup
-                tandoor.oidc.userGroup
-                wallos.oidc.userGroup
-                trek.oidc.userGroup
-                jotty.oidc.userGroup
+              password_file = keyPath "lldap" "lldap-cpuerta-password";
+              groups = [
+                config.nps.stacks.monitoring.grafana.oidc.userGroup
+                config.nps.stacks.memos.oidc.userGroup
+                config.nps.stacks.norish.oidc.userGroup
+                config.nps.stacks.outline.oidc.userGroup
               ];
             };
           };
         };
       };
 
-      traefik = {
-        enable = true;
-        domain = "estudioochosiete.xyz";
-        extraEnv = {
-          CF_DNS_API_TOKEN.fromFile = config.sops.secrets."traefik/cf_api_token".path;
+      authelia = {
+        enable = cfg.enable;
+        jwtSecretFile = keyPath "authelia" "authelia-jwt-secret";
+        sessionSecretFile = keyPath "authelia" "authelia-session-secret";
+        storageEncryptionKeyFile = keyPath "authelia" "authelia-storage-encryption-key";
+        oidc = {
+          enable = true;
+          hmacSecretFile = keyPath "authelia" "authelia-oidc-hmac-secret";
+          jwksRsaKeyFile = keyPath "authelia" "authelia-oidc-rsa-key";
         };
+        settings.notifier = lib.mkForce {
+          smtp = {
+            address = "smtp://ntfy:25";
+            sender = "Authelia <authelia@estudioochosiete.xyz>";
+            startup_check_address = "julianrodriguez@estudioochosiete.xyz";
+            disable_require_tls = true;
+          };
+        };
+      };
+
+      ntfy = {
+        enable = cfg.enable;
+        settings = {
+          enable-login = true;
+          auth-default-access = "deny-all";
+          cache-duration = "15m";
+          smtp-server-listen = ":25";
+          smtp-server-domain = "estudioochosiete.xyz";
+          auth-users = [
+            ''julrod:{{ file.Read `${keyPath "ntfy" "ntfy-julrod-password-bcrypt"}` }}:user''
+            ''cpuerta:{{ file.Read `${keyPath "ntfy" "ntfy-cpuerta-password-bcrypt"}` }}:user''
+          ];
+          auth-access = [
+            "julrod:julianrodriguez:read-only"
+            "cpuerta:cpuerta:read-only"
+            "julrod:cpuerta:deny"
+            "cpuerta:julianrodriguez:deny"
+            "*:julianrodriguez:write-only"
+            "*:cpuerta:write-only"
+          ];
+        };
+      };
+
+      traefik = {
+        enable = cfg.enable;
+        domain = "estudioochosiete.xyz";
+        extraEnv.CF_DNS_API_TOKEN.fromFile = keyPath "traefik" "traefik-cloudflare-token";
         geoblock.allowedCountries = ["CO"];
+        dynamicConfig.http.middlewares.lan.ipAllowList.sourceRange = ["192.168.68.0/22"];
         enablePrometheusExport = true;
         enableGrafanaMetricsDashboard = true;
-        enableGrafanaAccessLogDashboard = true;
+        enableGrafanaAccessLogDashboard = false;
       };
 
-      # Media
-
-      aiostreams = {
-        enable = true;
-        secretKeyFile = config.sops.secrets."aiostreams/secret_key".path;
-      };
-
-      paperless = {
-        enable = true;
-        adminProvisioning = {
-          username = "admin";
-          email = "admin@estudioochosiete.xyz";
-          passwordFile = config.sops.secrets."paperless/admin_password".path;
-        };
-        oidc = {
+      monitoring = {
+        enable = cfg.enable;
+        loki.enable = false;
+        alloy.enable = false;
+        podmanExporter.enable = false;
+        alertmanager.enable = false;
+        grafana = {
           enable = true;
-          clientSecretFile = config.sops.secrets."authelia/services/paperless".path;
+          oidc = {
+            enable = true;
+            clientSecretFile = keyPath "authelia" "authelia-grafana-client-secret";
+          };
+          datasources = lib.mkForce {
+            apiVersion = 1;
+            datasources = [
+              {
+                name = "Prometheus";
+                type = "prometheus";
+                access = "proxy";
+                url = "http://prometheus:9090";
+                isDefault = true;
+              }
+            ];
+          };
         };
-        secretKeyFile = config.sops.secrets."paperless/secret_key".path;
-        db.passwordFile = config.sops.secrets."paperless/db_password".path;
+        prometheus.enable = true;
       };
+    };
 
-      stirling-pdf = {
-        enable = true;
-      };
+    services.podman.containers = lib.mkIf cfg.enable (lib.mkMerge [
+      {
+        prometheus = {
+          exec = lib.mkForce ''--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.retention.time=30d --storage.tsdb.retention.size=100GB'';
+          volumeMap.data = lib.mkForce "/srv/homelab/prometheus:/prometheus";
+          extraConfig = {
+            Unit.ConditionPathIsMountPoint = "/srv/homelab";
+            Service.ExecStartPre = lib.mkForce [
+              "${lib.getExe' pkgs.util-linux "mountpoint"} --quiet /srv/homelab"
+            ];
+          };
+        };
 
-      reactive-resume = {
-        enable = true;
-        authSecretFile = config.sops.secrets."rx_resume/auth_secret".path;
-        db.passwordFile = config.sops.secrets."rx_resume/db_password".path;
-        oidc = {
+        aiostreams.extraConfig.Unit.ConditionPathExists = keyPath "aiostreams" "aiostreams-secret-key";
+        memos.extraConfig.Unit.ConditionPathExists = [
+          (keyPath "memos" "memos-db-password")
+          (keyPath "memos" "memos-oidc-client-secret")
+        ];
+        memos.extraEnv.MEMOS_DSN.fromTemplate = lib.mkForce "postgres://memos:{{ file.Read `${keyPath "memos" "memos-db-password"}` | urlquery }}@memos-db/memos?sslmode=disable";
+        memos-db.extraConfig.Unit.ConditionPathExists = keyPath "memos" "memos-db-password";
+        norish.extraConfig.Unit.ConditionPathExists = [
+          (keyPath "norish" "norish-master-key")
+          (keyPath "norish" "norish-db-password")
+          (keyPath "norish" "norish-oidc-client-secret")
+        ];
+        norish.extraEnv.DATABASE_URL.fromTemplate = lib.mkForce "postgres://norish:{{ file.Read `${keyPath "norish" "norish-db-password"}` | urlquery }}@norish-db/norish?sslmode=disable";
+        norish-db.extraConfig.Unit.ConditionPathExists = keyPath "norish" "norish-db-password";
+        outline = {
+          dependsOnContainer = [
+            "outline-db"
+            "outline-redis"
+          ];
+          extraConfig.Unit.ConditionPathExists = [
+            (keyPath "outline" "outline-secret-key")
+            (keyPath "outline" "outline-utils-secret")
+            (keyPath "outline" "outline-db-password")
+            (keyPath "outline" "outline-oidc-client-secret")
+          ];
+          extraEnv.DATABASE_URL.fromTemplate = lib.mkForce "postgres://outline:{{ file.Read `${keyPath "outline" "outline-db-password"}` | urlquery }}@outline-db/outline";
+        };
+        outline-db.extraConfig.Unit.ConditionPathExists = keyPath "outline" "outline-db-password";
+        traefik.extraConfig.Unit.ConditionPathExists = keyPath "traefik" "traefik-cloudflare-token";
+        grafana.extraConfig.Unit.ConditionPathExists = keyPath "authelia" "authelia-grafana-client-secret";
+        docker-socket-proxy = {
+          network = lib.mkAfter [config.nps.stacks.traefik.network.name];
+          ports = lib.mkForce [];
+          traefik.name = lib.mkForce null;
+        };
+
+        # Authelia already starts after its LLDAP backend; the reverse edge from ForwardAuth is cyclic.
+        lldap.wantsContainer = lib.mkForce [];
+        authelia.wantsContainer = lib.mkAfter ["ntfy"];
+        ntfy = {
+          environment.NTFY_UPSTREAM_BASE_URL = lib.mkForce null;
+          extraConfig.Unit.ConditionPathExists = [
+            (keyPath "ntfy" "ntfy-julrod-password-bcrypt")
+            (keyPath "ntfy" "ntfy-cpuerta-password-bcrypt")
+          ];
+        };
+      }
+      (lib.mapAttrs (_: image: {
+          autoUpdate = lib.mkForce null;
+          image = lib.mkForce image;
+        })
+        qualifiedImages)
+      (lib.genAttrs forwardAuthContainers (_: {
+        forwardAuth = {
           enable = true;
-          clientSecretFile = config.sops.secrets."authelia/services/rx_resume".path;
-          clientSecretHash = "$pbkdf2-sha512$310000$H9WV2/FSER7SUdTJltfkpQ$F7mBoFWFi7WI6S85ri1ror/M1wkT4/H/c6g5QFQiDGhk7At0friRXgK8py4iRqED5wadtCTq5.5cVPagsPzFHQ";
+          rules = [{policy = "two_factor";}];
         };
-      };
+      }))
+      {
+        aiostreams.traefik.middleware.lan.enable = true;
+      }
+    ]);
 
-      job-ops = {
-        enable = true;
-        rxResumeApiKeyFile = config.sops.secrets."job-ops/rx_resume_api_key".path;
-      };
-
-      freshrss = {
-        enable = true;
-        oidc = {
-          enable = true;
-          clientSecretHash = "$pbkdf2-sha512$310000$eKZ0sl3s01gm7gJPXpaqpA$J5rQMe2Km8/1BSiilSteLS8QqJg2EqPQnCq450JZLobZIUWF0F.L4nek0nMlTTcLf/LrPDk1/AUJ.Th3dKecEg";
-          clientSecretFile = config.sops.secrets."authelia/services/freshrss".path;
-          cryptoKeyFile = config.sops.secrets."freshrss/authelia_crypto_key".path;
-        };
-      };
-
-      tandoor = {
-        enable = true;
-
-        secretKeyFile = config.sops.secrets."tandoor/secret_key".path;
-        db.passwordFile = config.sops.secrets."tandoor/db_password".path;
-
-        oidc = {
-          enable = true;
-          clientSecretFile = config.sops.secrets."authelia/services/tandoor".path;
-          clientSecretHash = "$pbkdf2-sha512$310000$Jn3mVBKwxGdVO0SwnnB7tQ$xw0Irb7RnbCE1PcC28TUAnl.2lLuLSCjemGZJeRbCBViz3qwtbwoBDn3a1QtQPKgnxb50QFY8yZodvDnsp4nrw";
-        };
-
-        containers.tandoor.extraEnv = {
-          # https://docs.tandoor.dev/system/configuration/#default-permissions
-          SOCIAL_DEFAULT_ACCESS = 1;
-          SOCIAL_DEFAULT_GROUP = "user";
-        };
-      };
-
-      wallos = {
-        enable = true;
-        oidc = {
-          enable = true;
-          clientSecretHash = "$pbkdf2-sha512$310000$sNs.VYVB6Mgr2nQwxPONdg$WzeW3FFUE9eLlWUEMeqeHxvLTDTJRGyit4345Gc5MuNTzWRRdN9VephtWlmAzrf5TyJozP8ez3b/LTx0RmYExA";
-          clientSecretFile = config.sops.secrets."authelia/services/wallos".path;
-        };
-      };
-
-      trek = {
-        enable = true;
-        oidc = {
-          enable = true;
-          clientSecretHash = "$pbkdf2-sha512$310000$Y1/SmpPFGRxuxsuw5jZAjw$BRty46BFUPnnC/eSd/fBW6YKTe3m5x0Uv8tI3TfNlJok19Nev1WINfYwdPrMa40uQerDw8pYSborlkoIpaWzGw";
-          clientSecretFile = config.sops.secrets."authelia/services/trek".path;
-        };
-      };
-
-      jotty = {
-        enable = true;
-        oidc = {
-          enable = true;
-          clientSecretFile = config.sops.secrets."authelia/services/jotty".path;
-          clientSecretHash = "$pbkdf2-sha512$310000$LLzzqfk2YcLNvTtTbCYq7g$JHSQ0Dm5KAutsAHI8BhjM1BLmtrOMnL39Z8NF0DHDvXK8tdhzOdDBuF35hMWWZktEs0AGW9y.o2iQQhX.tBv/A";
-        };
-      };
-
-      homelable = {
-        enable = true;
-        secretKeyFile = config.sops.secrets."homelable/secret_key".path;
-        oidc = {
-          enable = true;
-          clientSecretHash = "$pbkdf2-sha512$310000$2kzMZv2.mous3ZoRLP0nbA$4Ua5S4qJT.aeqXdpwpf6XVdD/MWIcwZOaqKnKj9x68WfjrVRpSCvGiwAjIIELBFFE620enObj.Gpvgy6wY/9bw";
-          clientSecretFile = config.sops.secrets."authelia/services/homelable".path;
-        };
-      };
+    systemd.user.sockets = lib.mkIf cfg.enable {
+      podman-traefik-80.Socket.ListenDatagram = lib.mkForce [];
+      podman-traefik-443.Socket.ListenDatagram = lib.mkForce [];
     };
   };
 }

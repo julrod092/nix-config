@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+  printf '%s\n' "Usage: deploy-prime-mini {build|test|boot|switch}" >&2
+  exit 1
+fi
+
+action="$1"
+case "$action" in
+  build | test | boot | switch) ;;
+  *)
+    printf 'Unsupported deployment action: %s\n' "$action" >&2
+    exit 1
+    ;;
+esac
+
+target="deploy@192.168.68.56"
+remoteStore="ssh-ng://$target"
+flakeTarget=".#checks.aarch64-linux.prime-mini"
+sshOptions=(
+  -o ControlMaster=auto
+  -o ControlPersist=10m
+  -o ControlPath=/tmp/colmena-%C
+)
+export NIX_SSHOPTS="${sshOptions[*]}"
+
+buildOutput="$(
+  nix build \
+    --store "$remoteStore" \
+    "$flakeTarget" \
+    --no-link \
+    --print-out-paths
+)"
+mapfile -t profiles <<<"$buildOutput"
+
+if [[ ${#profiles[@]} -ne 1 || "${profiles[0]}" != /nix/store/*-nixos-system-prime-mini-* ]]; then
+  printf '%s\n' "Remote build did not return exactly one prime-mini system closure." >&2
+  exit 1
+fi
+profile="${profiles[0]}"
+
+if [[ "$action" == "build" ]]; then
+  printf '%s\n' "$profile"
+  exit 0
+fi
+
+nix run .#colmena -- upload-keys --on prime-mini
+
+if [[ "$action" != "test" ]]; then
+  ssh "${sshOptions[@]}" "$target" \
+    sudo -H -- nix-env --profile /nix/var/nix/profiles/system --set "$profile"
+fi
+
+ssh "${sshOptions[@]}" "$target" \
+  sudo -H -- "$profile/bin/switch-to-configuration" "$action"

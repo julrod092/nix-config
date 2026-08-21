@@ -14,7 +14,7 @@ in {
 
     ./disko.nix
     ./hardware-configuration.nix
-    "${nixosModules}/common"
+    "${nixosModules}/roles/workstation"
     "${nixosModules}/desktop/gnome"
     "${nixosModules}/desktop/niri"
     "${nixosModules}/services/nvidia"
