@@ -6,10 +6,7 @@
   lib,
   ...
 }: let
-  secretsPath =
-    if pkgs.stdenv.isDarwin
-    then "${config.home.homeDirectory}/.config/sops/secrets"
-    else "/run/user/1000/secrets";
+  secretsPath = "${config.home.homeDirectory}/.config/sops/secrets";
 
   macos = {
     secrets = lib.genAttrs [
