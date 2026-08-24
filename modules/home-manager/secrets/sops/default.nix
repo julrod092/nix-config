@@ -71,4 +71,16 @@ in {
       lib.optionalAttrs pkgs.stdenv.isDarwin macos.templates
       // (lib.optionalAttrs (hostname == "nix-desktop") desktop.templates);
   };
+
+  systemd.user.services.sops-nix =
+    lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      Unit.After = [
+        "graphical-session-pre.target"
+        "gpg-agent.socket"
+      ];
+
+      Install.WantedBy = lib.mkForce [
+        "graphical-session.target"
+      ];
+    };
 }
