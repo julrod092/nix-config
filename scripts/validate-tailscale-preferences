@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 2 ]]; then
+  printf '%s\n' "Usage: validate-tailscale-preferences desktop FILE" >&2
+  exit 64
+fi
+
+scope=$1
+file=$2
+
+nodeSchema='def node:
+  type == "object" and
+  (keys == ["accept-dns", "accept-routes", "advertise-routes", "exit-node", "exit-node-allow-lan-access", "report-posture", "shields-up", "ssh"]) and
+  (."accept-dns" | type == "boolean") and
+  (."accept-routes" | type == "boolean") and
+  (."advertise-routes" | type == "array" and all(.[]; type == "string")) and
+  (."exit-node" | type == "string") and
+  (."exit-node-allow-lan-access" | type == "boolean") and
+  (."report-posture" | type == "boolean") and
+  (."shields-up" | type == "boolean") and
+  (.ssh | type == "boolean");'
+
+case "$scope" in
+  desktop)
+    jq --exit-status "$nodeSchema
+      type == \"object\" and
+      (keys == [\"desired\", \"rollback\", \"version\"]) and
+      .version == 1 and
+      (.desired | node) and
+      (.rollback | node) and
+      .desired.ssh == false and
+      .rollback.ssh == false" "$file" >/dev/null
+    ;;
+  *)
+    printf 'Unsupported Tailscale preference scope: %s\n' "$scope" >&2
+    exit 64
+    ;;
+esac

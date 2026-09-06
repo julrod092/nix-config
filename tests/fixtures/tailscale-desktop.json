@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "desired": {
+    "accept-dns": true,
+    "accept-routes": true,
+    "advertise-routes": [],
+    "ssh": false,
+    "exit-node": "",
+    "exit-node-allow-lan-access": false,
+    "shields-up": false,
+    "report-posture": false
+  },
+  "rollback": {
+    "accept-dns": false,
+    "accept-routes": false,
+    "advertise-routes": [],
+    "ssh": false,
+    "exit-node": "",
+    "exit-node-allow-lan-access": false,
+    "shields-up": false,
+    "report-posture": false
+  }
+}

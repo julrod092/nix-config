@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 2 ]]; then
+  printf '%s\n' "Usage: render-tailscale-flags {desired|rollback} FILE" >&2
+  exit 64
+fi
+
+mode=$1
+file=$2
+root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+
+case "$mode" in
+  desired | rollback) ;;
+  *)
+    printf 'Unsupported preference set: %s\n' "$mode" >&2
+    exit 64
+    ;;
+esac
+
+"$root/scripts/validate-tailscale-preferences" desktop "$file"
+
+for key in accept-dns accept-routes ssh exit-node-allow-lan-access shields-up report-posture; do
+  value=$(jq --raw-output --arg mode "$mode" --arg key "$key" '.[$mode][$key] | tostring' "$file")
+  printf -- '--%s=%s\n' "$key" "$value"
+done
+
+routes=$(jq --raw-output --arg mode "$mode" '.[$mode]["advertise-routes"] | join(",")' "$file")
+exitNode=$(jq --raw-output --arg mode "$mode" '.[$mode]["exit-node"]' "$file")
+printf -- '--advertise-routes=%s\n' "$routes"
+printf -- '--exit-node=%s\n' "$exitNode"

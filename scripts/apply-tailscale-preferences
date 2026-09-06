@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 2 ]]; then
+  printf '%s\n' "Usage: apply-tailscale-preferences {desired|rollback} DECRYPTED_JSON" >&2
+  exit 64
+fi
+
+mode=$1
+file=$2
+root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+
+if [[ $(hostname) != "nix-desktop" ]]; then
+  printf '%s\n' "Tailscale preferences may only be applied on nix-desktop." >&2
+  exit 1
+fi
+
+"$root/scripts/validate-tailscale-preferences" desktop "$file"
+mapfile -t flags < <("$root/scripts/render-tailscale-flags" "$mode" "$file")
+
+printf 'Preference fields to apply (%s):\n' "$mode"
+jq --raw-output --arg mode "$mode" '.[$mode] | keys[]' "$file"
+printf '%s' "Type APPLY to continue: "
+read -r confirmation
+if [[ "$confirmation" != "APPLY" ]]; then
+  printf '%s\n' "No changes applied."
+  exit 1
+fi
+
+sudo tailscale set "${flags[@]}"
