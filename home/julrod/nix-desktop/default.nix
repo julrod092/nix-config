@@ -3,7 +3,7 @@
     "${nhModules}/roles/workstation"
     "${nhModules}/desktop/niri"
     "${nhModules}/secrets/sops"
-   # "${nhModules}/services/stacks"
+    ../../../hosts/nix-desktop/secrets.nix
   ];
 
   # Enable home-manager

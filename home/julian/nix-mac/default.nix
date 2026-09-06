@@ -2,6 +2,7 @@
   imports = [
     "${nhModules}/roles/workstation"
     "${nhModules}/secrets/sops"
+    ../../../hosts/nix-mac/secrets.nix
   ];
 
   # Enable home-manager

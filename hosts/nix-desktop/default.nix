@@ -14,17 +14,23 @@ in {
 
     ./disko.nix
     ./hardware-configuration.nix
+    ./network.nix
     "${nixosModules}/roles/workstation"
     "${nixosModules}/desktop/gnome"
     "${nixosModules}/desktop/niri"
     "${nixosModules}/services/nvidia"
-    "${nixosModules}/services/network"
     "${nixosModules}/services/podman"
     "${nixosModules}/programs/steam"
   ];
 
   # Set hostname
   networking.hostName = hostname;
+
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+    useRoutingFeatures = "client";
+  };
 
   systemd.tmpfiles.rules = [
     "d ${homeDir}/m2 0775 ${userConfig.name} users - -"

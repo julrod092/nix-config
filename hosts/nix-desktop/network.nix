@@ -12,7 +12,7 @@
     '';
     networkmanager = {
       enable = true;
-      insertNameservers = ["192.168.68.58"];
+      insertNameservers = ["192.168.68.56"];
     };
     firewall = {
       enable = true;

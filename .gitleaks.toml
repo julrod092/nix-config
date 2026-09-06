@@ -1,0 +1,4 @@
+title = "Public workstation Gitleaks configuration"
+
+[extend]
+useDefault = true

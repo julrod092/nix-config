@@ -1,13 +1,15 @@
 ---
-# inspo: https://github.com/reckenrode/nixos-configs/blob/main/.github/workflows/main.yml
-name: Bump flake.lock
+name: Bump flake lock
+
 permissions:
   contents: write
   pull-requests: write
+
 on:
   schedule:
     - cron: 0 10 * * *
   workflow_dispatch: null
+
 jobs:
   update:
     runs-on: ubuntu-24.04
@@ -15,70 +17,23 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes pipe-operators
-
       - run: nix flake update
-
-      - uses: actions/upload-artifact@v7
-        with:
-          name: flake-lock
-          path: flake.lock
-
-  evaluate:
-    name: evaluate ${{ matrix.name }}
-    needs: update
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: nix-desktop
-            runner: ubuntu-24.04
-            attribute: checks.x86_64-linux.nix-desktop
-          - name: prime-mini
-            runner: ubuntu-24.04-arm
-            attribute: checks.aarch64-linux.prime-mini
-          - name: nix-mac
-            runner: macos-15
-            attribute: checks.aarch64-darwin.nix-mac
-          - name: home-julian
-            runner: macos-15
-            attribute: checks.aarch64-darwin.home-julian
-    runs-on: ${{ matrix.runner }}
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/download-artifact@v8
-        with:
-          name: flake-lock
-
-      - uses: cachix/install-nix-action@v31
-        with:
-          extra_nix_config: |
-            experimental-features = nix-command flakes pipe-operators
-
-      - run: nix eval --raw ".#${{ matrix.attribute }}.drvPath"
-
-  pull-request:
-    needs: evaluate
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - uses: actions/download-artifact@v8
-        with:
-          name: flake-lock
-
+      - run: nix develop .#ci --command make format-check
+      - run: nix develop .#ci --command make lint
+      - run: nix develop .#ci --command make test
+      - run: nix develop .#ci --command make secret-check
+      - run: nix flake check --no-build --all-systems
+      - run: nix develop .#ci --command make build-linux
+      - run: nix run .#gitleaks -- git --redact --no-banner .
       - uses: peter-evans/create-pull-request@v8
         with:
           branch: automation/flake-update
           delete-branch: true
           commit-message: "chore(deps): bump flake.lock"
           title: "chore(deps): bump flake.lock"
-          body: "Automated flake input update. All configuration evaluations passed."
+          body: "Automated workstation input update. All checks passed."
           add-paths: flake.lock

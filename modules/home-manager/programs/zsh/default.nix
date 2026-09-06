@@ -6,7 +6,7 @@
   systemRebuild =
     if pkgs.stdenv.isDarwin
     then "sudo darwin-rebuild switch --flake ~/.nix-config#${hostname}"
-    else "nix run ~/.nix-config#colmena -- apply-local --sudo";
+    else "sudo nixos-rebuild switch --flake ~/.nix-config#${hostname}";
 in {
   programs.zsh = {
     enable = true;
