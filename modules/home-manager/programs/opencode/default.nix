@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
   skillsCliPackage = "skills@1.5.10";
@@ -383,7 +384,29 @@ in {
 
     extraPackages = [pkgs.nodejs_26];
 
-    skills = {};
+    settings = lib.mkIf (pkgs.stdenv.hostPlatform.isDarwin) {
+      provider = {
+        "tfy-gateway" = {
+          npm = "@ai-sdk/openai-compatible";
+          name = "truefoundry";
+          options = {
+            baseURL = "https://gateway.truefoundry.ai";
+            apiKey = "{env:TF_GATEWAY_API_KEY}";
+            headers = {
+              application = "opencode";
+            };
+          };
+          models = {
+            "anthropic-tfy/claude-sonnet-5" = {
+              name = "tfy-claude-sonnet-5";
+            };
+            "anthropic-tfy/claude-fable-5-1" = {
+              name = "tfy-claude-fable-5-1";
+            };
+          };
+        };
+      };
+    };
 
     tui = {
       theme = "tokyonight";
