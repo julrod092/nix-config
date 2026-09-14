@@ -1,7 +1,6 @@
 {
   pkgs,
   hostname,
-  config,
   ...
 }: let
   systemRebuild =
@@ -34,8 +33,6 @@ in {
           prompt_segment black default "%(!.%{%F{yellow}%}.) λ "
         fi
       }
-
-      export TF_GATEWAY_API_KEY=$(cat ${config.sops.secrets.tf_gateway_api_key.path})
     '';
   };
 }
