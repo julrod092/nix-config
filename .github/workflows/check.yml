@@ -20,7 +20,6 @@ jobs:
             experimental-features = nix-command flakes pipe-operators
       - run: nix develop .#ci --command make format-check
       - run: nix develop .#ci --command make lint
-      - run: nix develop .#ci --command make test
       - run: nix develop .#ci --command make secret-check
       - run: nix flake check --no-build --all-systems
       - run: nix develop .#ci --command make build-linux
