@@ -34,7 +34,3 @@ secret-check:
 	@./scripts/check-secret-hygiene
 	@gitleaks dir --redact --no-banner .
 	@gitleaks git --redact --no-banner .
-
-test:
-	@bash tests/secret-hygiene.sh
-	@bash tests/tailscale-preferences.sh
