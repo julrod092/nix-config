@@ -31,5 +31,5 @@ lint:
 
 secret-check:
 	@./scripts/check-secret-hygiene
-	@gitleaks dir --redact --no-banner .
-	@gitleaks git --redact --no-banner .
+	@gitleaks dir --redact --no-banner --verbose .
+	@gitleaks git --redact --no-banner --verbose .
