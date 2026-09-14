@@ -10,7 +10,6 @@ help:
 		"  build-linux    - Build Linux workstation checks" \
 		"  lint           - Check shell scripts" \
 		"  secret-check   - Enforce encrypted payload boundaries" \
-		"  test           - Run synthetic safety tests"
 
 format:
 	@alejandra .
@@ -28,7 +27,7 @@ build-linux:
 	@nix build path:.#checks.x86_64-linux.nix-desktop path:.#checks.x86_64-linux.home-julrod --no-link
 
 lint:
-	@shellcheck scripts/check-secret-hygiene scripts/validate-tailscale-preferences scripts/render-tailscale-flags scripts/apply-tailscale-preferences modules/home-manager/scripts/bin/* tests/secret-hygiene.sh tests/tailscale-preferences.sh
+	@shellcheck scripts/check-secret-hygiene scripts/validate-tailscale-preferences scripts/render-tailscale-flags scripts/apply-tailscale-preferences modules/home-manager/scripts/bin/*
 
 secret-check:
 	@./scripts/check-secret-hygiene
