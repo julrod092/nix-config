@@ -8,6 +8,7 @@ in {
     ./common.nix
     ./editors/emacs
     ./editors/neovim
+    ./coding-agents/opencode
     nixLanguage.module
     scalaLanguage.module
     rustLanguage.module

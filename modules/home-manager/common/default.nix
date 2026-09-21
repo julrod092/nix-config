@@ -18,7 +18,6 @@
     ../programs/gpg
     ../programs/fzf
     ../programs/albert
-    ../programs/opencode
     ../programming
     ../scripts
     ../services/ssh

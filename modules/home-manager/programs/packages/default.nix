@@ -7,10 +7,6 @@
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 in {
   home = {
-    file = lib.mkIf isDarwin {
-      "jdks/zulu8".source = pkgs.zulu8;
-      "jdks/zulu11".source = pkgs.zulu11;
-    };
     packages = with pkgs;
       [
         dig
@@ -28,23 +24,16 @@ in {
 
         # Security
         age
-        smithy-cli
-        unstable.localstack
       ]
       ++ lib.lists.optionals isDarwin [
         dockutil
-        colima
-        docker
         unstable.hidden-bar
-        docker-compose
         unstable.raycast
-        (expected-rev "5d5288fa1b2665243a1fd5dd99703077d25d4218" "${pkgs.stdenv.hostPlatform.system}").nodejs_24
         synergy
         slack
         appcleaner
         unstable.zoom-us
         unstable.google-chrome
-        unstable.awscli2
       ]
       ++ lib.lists.optionals (!isDarwin) [
         pavucontrol
@@ -57,10 +46,8 @@ in {
         obsidian
         libheif
         unstable.deskflow
-        unstable.prismlauncher
         unstable.deluge
         unstable.xclip
-        python314
         unstable.vlc
       ];
   };
