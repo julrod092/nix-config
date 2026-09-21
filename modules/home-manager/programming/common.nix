@@ -42,7 +42,6 @@ in {
         python314
       ];
 
-
     home.file = {
       "jdks/zulu8".source = pkgs.zulu8;
       "jdks/zulu11".source = pkgs.zulu11;
