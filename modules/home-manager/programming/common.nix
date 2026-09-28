@@ -29,6 +29,8 @@ in {
         unstable.localstack
         unstable.vscode
         unstable.pi-coding-agent
+        unstable.opencode
+        gentle-ai
       ]
       ++ lib.lists.optionals isDarwin [
         colima
@@ -39,6 +41,7 @@ in {
       ]
       ++ lib.lists.optionals (!isDarwin) [
         codecrafters-cli
+        nodejs_26
         python314
       ];
 
@@ -46,8 +49,19 @@ in {
       "jdks/zulu8".source = pkgs.zulu8;
       "jdks/zulu11".source = pkgs.zulu11;
       "jdks/zulu21".source = pkgs.zulu21;
+      ".npmrc".text = "prefix=${config.home.homeDirectory}/.local\n";
     };
 
-    home.sessionVariables.JAVA_HOME = "${pkgs.zulu21}";
+    home.sessionPath = ["${config.home.homeDirectory}/.local/bin"];
+
+    home.sessionVariables = {
+      JAVA_HOME = "${pkgs.zulu21}";
+      # Nix's Node.js installation is immutable, so npm globals belong in the user profile.
+      NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.local";
+      # gentle-pi's private installer only trusts /usr/bin/tar or /bin/tar, neither of
+      # which NixOS provides. Use the Nix-pinned binary through its supported override.
+      GENTLE_PI_SKIP_GENTLE_AI_INSTALL = "1";
+      GENTLE_PI_GENTLE_AI_DEV_BINARY = "${pkgs.gentle-ai}/bin/gentle-ai";
+    };
   };
 }

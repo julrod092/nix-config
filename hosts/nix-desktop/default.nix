@@ -26,6 +26,8 @@ in {
   # Set hostname
   networking.hostName = hostname;
 
+  programs.nix-ld.enable = true;
+
   services.tailscale = {
     enable = true;
     openFirewall = true;
