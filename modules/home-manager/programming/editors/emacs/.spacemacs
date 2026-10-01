@@ -23,6 +23,9 @@
                                 lsp-nix lsp-pylsp lsp-pyright lsp-python-ty
                                 lsp-rust lsp-toml lsp-yaml)
           lsp-enable-file-watchers nil
+          ;; Nix supplies language servers. The built-in downloader uses Lisp
+          ;; threads and can deadlock Cocoa while fetching a missing server.
+          lsp-enable-suggest-server-download nil
           lsp-headerline-breadcrumb-enable nil)
      dap
      emacs-lisp
@@ -130,7 +133,8 @@
 
 (defun dotspacemacs/user-env ()
   "Load shell environment for Emacs."
-  (spacemacs/load-spacemacs-env))
+  (spacemacs/load-spacemacs-env)
+  (load (expand-file-name "nix-lsp.el" user-emacs-directory) t t))
 
 (defun dotspacemacs/user-init ()
   "Initialize user settings before packages load."

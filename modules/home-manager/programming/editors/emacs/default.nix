@@ -13,6 +13,11 @@
   alejandraStdin = pkgs.writeShellScriptBin "alejandra-stdin" ''
     exec ${lib.getExe pkgs.alejandra} --quiet - "$@"
   '';
+  agentShellLayer = pkgs.applyPatches {
+    name = "spacemacs-agent-shell-layer";
+    src = agentShellSource;
+    patches = [./agent-shell-package-list.patch];
+  };
 in {
   config = lib.mkIf (cfg.enable && cfg.editors.emacs.enable) {
     programs.emacs = {
@@ -45,7 +50,13 @@ in {
 
     home.file = {
       ".spacemacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix-config/modules/home-manager/programming/editors/emacs/.spacemacs";
-      ".emacs.d/private/agent-shell".source = agentShellSource;
+      ".emacs.d/private/agent-shell".source = agentShellLayer;
+      ".emacs.d/nix-lsp.el".text = lib.optionalString cfg.languages.scala.enable ''
+        ;; Managed by Home Manager: keep Metals independent of buffer-local PATH.
+        (with-eval-after-load 'lsp-metals
+          (setq lsp-metals-server-command "${lib.getExe pkgs.metals}")
+          (lsp-dependency 'metals '(:system "${lib.getExe pkgs.metals}")))
+      '';
     };
   };
 }
