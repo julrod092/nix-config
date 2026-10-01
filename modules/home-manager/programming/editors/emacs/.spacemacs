@@ -16,6 +16,12 @@
      better-defaults
      syntax-checking
      (lsp :variables
+          ;; Avoid loading every bundled language client on the first LSP
+          ;; buffer: native library loading blocks the macOS GUI thread.
+          lsp-client-packages '(lsp-bash lsp-css lsp-eslint lsp-go lsp-golangci-lint
+                                lsp-javascript lsp-json lsp-marksman lsp-metals
+                                lsp-nix lsp-pylsp lsp-pyright lsp-python-ty
+                                lsp-rust lsp-toml lsp-yaml)
           lsp-enable-file-watchers nil
           lsp-headerline-breadcrumb-enable nil)
      dap
@@ -128,6 +134,13 @@
 
 (defun dotspacemacs/user-init ()
   "Initialize user settings before packages load."
+  (when (eq system-type 'darwin)
+    ;; The default uses half the CPU cores; package loading otherwise starts
+    ;; several native-compilation workers at once, including when opening files.
+    (setq native-comp-async-jobs-number 1)
+    ;; A login shell supplies the Nix PATH without interactive Zsh plugins,
+    ;; completion initialization, and gpg-agent startup blocking the GUI.
+    (setq exec-path-from-shell-arguments '("-l")))
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (when (file-exists-p custom-file)
     (load custom-file))
