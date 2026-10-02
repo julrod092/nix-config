@@ -40,7 +40,7 @@
      llm-client
      mermaid
      multiple-cursors
-     python
+     (python :variables python-lsp-server 'pylsp)
      spacemacs-org
      agent-shell
      restclient
@@ -79,7 +79,8 @@
    dotspacemacs-additional-packages '(envrc logview smithy-mode exec-path-from-shell popper)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
-   dotspacemacs-install-packages 'used-only))
+   dotspacemacs-install-packages 'used-only)
+  (nh/emacs-apply-nix-package-policy))
 
 (defun dotspacemacs/init ()
   "Initialize Spacemacs settings."
@@ -132,12 +133,13 @@
    dotspacemacs-byte-compile nil))
 
 (defun dotspacemacs/user-env ()
-  "Load shell environment for Emacs."
-  (spacemacs/load-spacemacs-env)
-  (load (expand-file-name "nix-lsp.el" user-emacs-directory) t t))
+  "Global environment is established before envrc in user-config."
+  nil)
 
 (defun dotspacemacs/user-init ()
   "Initialize user settings before packages load."
+  (load (expand-file-name "nix-packages.el" user-emacs-directory) nil t)
+  (load (expand-file-name "nix-lsp.el" user-emacs-directory) nil t)
   (when (eq system-type 'darwin)
     ;; The default uses half the CPU cores; package loading otherwise starts
     ;; several native-compilation workers at once, including when opening files.
@@ -152,8 +154,55 @@
   (when (fboundp 'horizontal-scroll-bar-mode)
     (horizontal-scroll-bar-mode -1)))
 
+(defvar exec-path-from-shell-arguments)
+(defvar exec-path-from-shell-shell-name)
+
+(defun nh/emacs-initialize-environment ()
+  "Import a global GUI environment without overwriting project-local values."
+  (when (display-graphic-p)
+    (require 'exec-path-from-shell)
+    (let* ((process-environment (default-value 'process-environment))
+           (exec-path (default-value 'exec-path))
+           (exec-path-from-shell-arguments '("-l"))
+           (exec-path-from-shell-shell-name (getenv "SPACEMACS_SHELL")))
+      (exec-path-from-shell-initialize)
+      (setq-default process-environment process-environment exec-path exec-path))))
+
+(defvar-local nh/emacs-go-diagnostics-state nil)
+
+(defun nh/emacs-go-lint-availability ()
+  "Use golangci-lint only when the current project's environment supplies it."
+  (setq-local go-use-golangci-lint (and (executable-find "golangci-lint") t))
+  (when (eq (bound-and-true-p go-backend) 'lsp)
+    (require 'lsp-diagnostics)
+    (let ((previous lsp-diagnostics-provider))
+      (cond
+       (go-use-golangci-lint
+        (unless nh/emacs-go-diagnostics-state
+          (setq-local nh/emacs-go-diagnostics-state
+                      (cons (local-variable-p 'lsp-diagnostics-provider)
+                            lsp-diagnostics-provider)))
+        (setq-local lsp-diagnostics-provider :none))
+       (nh/emacs-go-diagnostics-state
+        (if (car nh/emacs-go-diagnostics-state)
+            (setq-local lsp-diagnostics-provider (cdr nh/emacs-go-diagnostics-state))
+          (kill-local-variable 'lsp-diagnostics-provider))
+        (setq-local nh/emacs-go-diagnostics-state nil)))
+      (when (and (not (eq previous lsp-diagnostics-provider))
+                 (bound-and-true-p lsp-diagnostics-mode))
+        (lsp-diagnostics-mode -1)
+        (lsp-diagnostics-mode +1)))))
+
+(defun nh/emacs-envrc-updated (buffer _result)
+  "Recheck Go tooling after envrc applies or removes a buffer's environment."
+  (when (buffer-live-p buffer)
+    (with-current-buffer buffer
+      (when (derived-mode-p 'go-mode)
+        (nh/emacs-go-lint-availability)))))
+
 (defun dotspacemacs/user-config ()
   "Configure user settings after packages load."
+  (nh/emacs-initialize-environment)
   (setq-default fill-column 100)
   (setq lsp-nix-nil-formatter ["alejandra-stdin"]
         lsp-nix-nil-auto-eval-inputs nil
@@ -169,6 +218,7 @@
   (use-package envrc
     :demand t
     :config
+    (advice-add 'envrc--apply :after #'nh/emacs-envrc-updated)
     (envrc-global-mode +1))
   (with-eval-after-load 'scala-mode
     (remove-hook 'scala-mode-hook #'lsp)
@@ -178,6 +228,7 @@
       (nerd-icons-set-font)))
   (add-hook 'toml-mode-hook #'lsp-deferred)
   (add-hook 'markdown-mode-hook #'lsp-deferred)
+  (add-hook 'go-mode-local-vars-hook #'nh/emacs-go-lint-availability)
   (with-eval-after-load 'vterm
     (setq vterm-max-scrollback 10000
           vterm-buffer-name-string "vterm %s")
@@ -187,6 +238,4 @@
                 (setq-local cursor-in-non-selected-windows 'box)))
     (define-key vterm-mode-map (kbd "C-c C-y") #'vterm-yank)
     (define-key vterm-mode-map (kbd "C-c C-c") #'vterm-send-C-c)
-    (define-key vterm-mode-map (kbd "C-c C-l") #'vterm-clear-scrollback))
-  (when (and (display-graphic-p) (fboundp 'exec-path-from-shell-initialize))
-    (exec-path-from-shell-initialize)))
+    (define-key vterm-mode-map (kbd "C-c C-l") #'vterm-clear-scrollback)))

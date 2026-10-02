@@ -21,6 +21,7 @@ in {
         taplo
         vscode-langservers-extracted
         yaml-language-server
+        python3Packages.python-lsp-server
         yamlfmt
         yamllint
         treefmt
