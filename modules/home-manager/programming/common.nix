@@ -32,6 +32,7 @@ in {
         unstable.pi-coding-agent
         unstable.opencode
         gentle-ai
+        unstable.kubectl
       ]
       ++ lib.lists.optionals isDarwin [
         colima

@@ -14,7 +14,6 @@ in {
         eza
         fd
         jq
-        kubectl
         lazydocker
         nh
         ripgrep
@@ -27,7 +26,6 @@ in {
       ]
       ++ lib.lists.optionals isDarwin [
         dockutil
-        unstable.hidden-bar
         unstable.raycast
         synergy
         slack
@@ -43,12 +41,11 @@ in {
         baobab
         codecrafters-cli
         unstable.discord
-        obsidian
         libheif
         unstable.deskflow
         unstable.deluge
         unstable.xclip
-        unstable.vlc
+        unstable.gale
       ];
   };
 }

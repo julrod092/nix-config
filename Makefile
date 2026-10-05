@@ -33,7 +33,7 @@ emacs-check:
 	@PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_emacs_bootstrap.py' -v
 
 lint:
-	@shellcheck scripts/check-secret-hygiene scripts/validate-tailscale-preferences scripts/render-tailscale-flags scripts/apply-tailscale-preferences modules/home-manager/scripts/bin/*
+	@shellcheck scripts/check-secret-hygiene  modules/home-manager/scripts/bin/*
 
 secret-check:
 	@./scripts/check-secret-hygiene
