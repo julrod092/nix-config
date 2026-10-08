@@ -9,6 +9,8 @@
     protonup-ng
     unstable.lutris
     unstable.heroic
+    unstable.shadps4
+    unstable.shadps4-qtlauncher
   ];
 
   programs.gamemode.enable = true;
@@ -16,4 +18,5 @@
     enable = true;
     gamescopeSession.enable = true;
   };
+
 }

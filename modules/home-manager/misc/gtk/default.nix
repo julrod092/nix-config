@@ -18,7 +18,9 @@
     };
     iconTheme = {
       name = "Tela-circle-dark";
-      package = pkgs.tela-circle-icon-theme;
+      package = pkgs.tela-circle-icon-theme.overrideAttrs {
+        dontCheckForBrokenSymlinks = true;
+      };
     };
     cursorTheme = {
       name = "Yaru";
