@@ -6,7 +6,6 @@
       system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
     };
-    gentle-ai = final.callPackage ../packages/gentle-ai {};
   };
 
   # If a version is needed, this function here can take the revision number of the version
