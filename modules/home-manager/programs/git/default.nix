@@ -34,6 +34,13 @@
 
         # Local configs
         "local*"
+
+        # MCPs
+        ".codegraph/"
+
+        # Scala specifics
+        ".metals/"
+        ".bloop/"
       ];
     };
 
