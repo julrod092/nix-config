@@ -35,12 +35,12 @@
         # Local configs
         "local*"
 
-        # MCPs
-        ".codegraph/"
+        # Scala metals
+        "sbt-launch.jar"
+        "project/project/"
 
-        # Scala specifics
-        ".metals/"
-        ".bloop/"
+        # Misc
+        ".codegraph/"
       ];
     };
 
