@@ -38,6 +38,7 @@
         # Scala metals
         "sbt-launch.jar"
         "project/project/"
+        ".bloop/"
 
         # Misc
         ".codegraph/"
