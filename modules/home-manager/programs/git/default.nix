@@ -42,6 +42,7 @@
 
         # Misc
         ".codegraph/"
+        ".claude/"
       ];
     };
 
