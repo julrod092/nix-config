@@ -43,7 +43,7 @@ in {
       ++ lib.lists.optionals (!isDarwin) [
         codecrafters-cli
         nodejs_26
-        python314
+        python315
       ];
 
     home.file = {

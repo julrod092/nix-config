@@ -56,7 +56,7 @@
     nixvim.url = "github:nix-community/nixvim/nixos-26.05";
 
     agent-shell = {
-      url = "github:kdoomsday/agent-shell/20faf1cd827bd48375bd7d6f6001257937d6e026";
+      url = "github:kdoomsday/agent-shell/959ba6ce3866d90c10423a6e9998ea630f446183";
       flake = false;
     };
   };
