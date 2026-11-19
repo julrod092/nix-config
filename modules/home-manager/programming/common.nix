@@ -27,7 +27,6 @@ in {
         treefmt
         unstable.devenv
         smithy-cli
-        localstack
         unstable.vscode
         unstable.pi-coding-agent
         unstable.opencode
