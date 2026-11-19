@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }: {
@@ -9,8 +8,6 @@
     protonup-ng
     unstable.lutris
     unstable.heroic
-    unstable.shadps4
-    unstable.shadps4-qtlauncher
   ];
 
   programs.gamemode.enable = true;
