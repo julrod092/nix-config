@@ -1,15 +1,17 @@
 diff --git a/packages.el b/packages.el
 --- a/packages.el
 +++ b/packages.el
-@@ -41,11 +41,7 @@
+@@ -41,13 +41,7 @@
  ;;; Code:
  
  (defconst agent-shell-packages
--  '(agent-shell (recipe (use-package agent-shell
--                          :ensure t
--                          :ensure-system-package
--                          ;; Add agent installation configs here
--                          )))
+-  '(
+-    (agent-shell (recipe (use-package agent-shell
+-                           :ensure t
+-                           :ensure-system-package
+-                           ;; Add agent installation configs here
+-                           )))
+-    )
 +  '(agent-shell)
    "The list of Lisp packages required by the agent-shell layer.
  
